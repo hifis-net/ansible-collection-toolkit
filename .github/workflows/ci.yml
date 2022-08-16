@@ -1,0 +1,74 @@
+---
+name: "CI"
+on:
+  pull_request:
+  push:
+    branches:
+      - "main"
+    tags:
+      - "v*.*.*"
+  schedule:
+    - cron: '0 0 * * *'
+
+env:
+  PY_COLORS: 1
+  ANSIBLE_FORCE_COLOR: 1
+
+jobs:
+
+  lint:
+    name: "Lint"
+    runs-on: "ubuntu-22.04"
+    steps:
+      - name: "Check out the codebase."
+        uses: "actions/checkout@v3"
+
+      - name: "Prepare the job environment."
+        uses: "./.github/workflows/prepare-action"
+
+      - name: "Lint code."
+        run: "pipenv run molecule lint"
+
+  test:
+    name: "Run Molecule tests."
+    runs-on: "ubuntu-22.04"
+    strategy:
+      fail-fast: true
+      matrix:
+        image:
+          - "ghcr.io/hifis-net/ubuntu-systemd:22.04"
+          - "ghcr.io/hifis-net/ubuntu-systemd:20.04"
+          - "ghcr.io/hifis-net/ubuntu-systemd:18.04"
+          - "ghcr.io/hifis-net/debian-systemd:11"
+          - "ghcr.io/hifis-net/debian-systemd:10"
+
+    steps:
+      - name: "Check out the codebase."
+        uses: "actions/checkout@v3"
+
+      - name: "Enable lingering required for podman and systemd in GH Actions."
+        run: |  # Compare with https://github.com/eriksjolund/user-systemd-service-actions-workflow/blob/efe872924fd2dd35bb482544126ce751303e14c2/README.md
+          sudo loginctl enable-linger $UID
+          sleep 1
+
+      - name: "Prepare the job environment."
+        uses: "./.github/workflows/prepare-action"
+
+      - name: "Run Molecule tests."
+        run: "pipenv run molecule test"
+        env:
+          MOLECULE_IMAGE: "${{ matrix.image }}"
+
+  release:
+    name: "Release new version on Ansible Galaxy"
+    runs-on: "ubuntu-22.04"
+    if: "startsWith(github.ref, 'refs/tags/v')"
+    needs: ["lint", "test"]
+    steps:
+      - name: "checkout"
+        uses: "actions/checkout@v3"
+      - name: "galaxy"
+        uses: "robertdebock/galaxy-action@1.2.1"
+        with:
+          galaxy_api_key: "${{ secrets.galaxy_api_key }}"
+          git_branch: "main"

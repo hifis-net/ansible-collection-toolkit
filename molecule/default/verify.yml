@@ -1,0 +1,8 @@
+---
+- name: "Verify unattended upgrades installation"
+  hosts: "all"
+  tasks:
+    - ansible.builtin.debug:
+        msg: "The verification step needs to be implemented still."
+
+...

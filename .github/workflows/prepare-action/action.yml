@@ -1,0 +1,20 @@
+---
+name: "Install dependencies and prepare the environment."
+description: "Install the necessary dependencies for jobs."
+runs:
+  using: "composite"
+  steps:
+    - name: "Install pipenv."
+      run: "pipx install pipenv"
+      shell: "bash"
+
+    - name: "Set up Python 3."
+      uses: "actions/setup-python@v3"
+      id: "setup-python"
+      with:
+        python-version: "3.10"
+        cache: "pipenv"
+
+    - name: "Install dependencies via pipenv."
+      run: "pipenv install --dev"
+      shell: "bash"

@@ -1,0 +1,47 @@
+---
+dependency:
+  name: "galaxy"
+driver:
+  name: "podman"
+platforms:
+  - name: "instance"
+    image: "${MOLECULE_IMAGE:-ghcr.io/hifis-net/ubuntu-systemd:22.04}"
+    pre_build_image: true
+    privileged: true
+    override_command: false
+    systemd: true
+    tty: true
+lint: |
+  set -e &&
+  yamllint --strict --format colored . &&
+  ansible-lint -v --force-color --offline --exclude .pipenv/ .
+provisioner:
+  name: "ansible"
+  inventory:
+    hosts:
+      all:
+  playbooks:
+    prepare: "prepare.yml"
+    check: "converge.yml"
+    converge: "converge.yml"
+    verify: "verify.yml"
+verifier:
+  name: "ansible"
+scenario:
+  name: "default"
+  test_sequence:
+    - "lint"
+    - "destroy"
+    - "dependency"
+    - "syntax"
+    - "create"
+    - "prepare"
+    - "check"
+    - "converge"
+    - "idempotence"
+    - "check"
+    - "side_effect"
+    - "verify"
+    - "destroy"
+
+...
