@@ -13,5 +13,3 @@ jobs:
 
     - name: "Lint Ansible Playbook"
       uses: "ansible/ansible-lint-action@v6.3.0"
-      with:
-        targets: "."
