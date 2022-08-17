@@ -13,11 +13,11 @@ Install and setup [unattended-upgrades](https://launchpad.net/unattended-upgrade
 
 ## Requirements
 
-The role uses [apt module](http://docs.ansible.com/apt_repository_module.html) which has additional dependencies.
+The role uses [apt module](https://docs.ansible.com/ansible/latest/collections/ansible/builtin/apt_module.html) which has additional dependencies.
 
 If you set `unattended_mail` to an e-mail address, make sure `mailx` command is available and your system is able to send e-mails.
 
-The role requires unattended-upgrades version 0.70 and newer, which is available since Debian Wheezy and Ubuntu 12.04 respectively. This is due to [Origins Patterns](#origins-patterns) usage; if this is not available on your system, you may use [the first version of the role](https://github.com/jnv/ansible-role-unattended-upgrades/tree/v0.1).
+The role requires unattended-upgrades version 0.70 and newer, which is available since Debian Wheezy and Ubuntu 12.04 respectively. This is due to [Origins Patterns](#origins-patterns) usage; if this is not available on your system, you may use [the first version of the role](https://github.com/hifis-net/ansible-role-unattended-upgrades/tree/v0.1).
 
 ### Automatic Reboot
 
@@ -27,72 +27,98 @@ This feature was broken in Debian Jessie, but eventually was rolled into the una
 
 ## Disabled Cron Jobs
 
-On some hosts you may find that the unattended-upgrade's cronfile `/etc/cron.daily/apt` file has been renamed to `apt.disabled`. This is possibly provider's decision, to save some CPU cycles. Use [enable-standard-cronjobs](https://github.com/Yannik/ansible-role-enable-standard-cronjobs) role to reenable unattended-upgrades. See also discussion in [#9](https://github.com/jnv/ansible-role-unattended-upgrades/issues/9).
+On some hosts you may find that the unattended-upgrade's cron file `/etc/cron.daily/apt` file has been renamed to `apt.disabled`. This is possibly provider's decision, to save some CPU cycles. Use [enable-standard-cronjobs](https://github.com/Yannik/ansible-role-enable-standard-cronjobs) role to re-enable unattended-upgrades. See also discussion in [#9](https://github.com/jnv/ansible-role-unattended-upgrades/issues/9).
 
 ## Role Variables
 
-* `unattended_cache_valid_time`: Update the apt cache if its older than the given time in seconds; passed to the [apt module](https://docs.ansible.com/ansible/latest/apt_module.html) during package installation.
-    * Default: `3600`
-* `unattended_origins_patterns`: array of origins patterns to determine whether the package can be automatically installed, for more details see [Origins Patterns](#origins-patterns) below.
-    * Default for Debian: `['origin=Debian,codename=${distro_codename},label=Debian-Security']`
-    * Default for Ubuntu: `['origin=Ubuntu,archive=${distro_codename}-security,label=Ubuntu']`
-* `unattended_package_blacklist`: packages which won't be automatically upgraded
-    * Default: `[]`
-* `unattended_autofix_interrupted_dpkg`: whether on unclean dpkg exit to run `dpkg --force-confold --configure -a`
-    * Default: `true`
-* `unattended_minimal_steps`: split the upgrade into the smallest possible chunks so that they can be interrupted with SIGUSR1.
-    * Default: `true`
-* `unattended_install_on_shutdown`: install all unattended-upgrades when the machine is shuting down.
-    * Default: `false`
-* `unattended_mail`: e-mail address to send information about upgrades or problems with unattended upgrades
-    * Default: `false` (don't send any e-mail)
-* `unattended_mail_only_on_error`: send e-mail only on errors, otherwise e-mail will be sent every time there's a package upgrade.
-    * Default: `false`
-* `unattended_remove_unused_dependencies`: do automatic removal of all unused dependencies after the upgrade.
-    * Default: `false`
-* `unattended_remove_new_unused_dependencies`: do automatic removal of new unused dependencies after the upgrade.
-    * Default: `true`
-* `unattended_automatic_reboot`: Automatically reboot system if any upgraded package requires it, immediately after the upgrade.
-    * Default: `false`
-* `unattended_automatic_reboot_time`: Automatically reboot system if any upgraded package requires it, at the specific time (_HH:MM_) instead of immediately after the upgrade.
-    * Default: `false`
-* `unattended_update_days`: Set the days of the week that updates should be applied. The days can be specified as localized abbreviated or full names. Or as integers where "0" is Sunday, "1" is Monday etc. Example: `{"Mon";"Fri"};`
-    * Default: disabled
-* `unattended_ignore_apps_require_restart`: unattended-upgrades won't automatically upgrade some critical packages requiring restart after an upgrade (i.e. there is `XB-Upgrade-Requires: app-restart` directive in their debian/control file). With this option set to `true`, unattended-upgrades will upgrade these packages regardless of the directive.
-    * Default: `false`
-* `unattended_syslog_enable`: Write events to syslog, which is useful in environments where syslog messages are sent to a central store.
-    * Default: `false`
-* `unattended_syslog_facility`: Write events to the specified syslog facility, or the daemon facility if not specified. Will only have affect if `unattended_syslog_enable` is set to `true`.
-    * Default: `daemon`
-* `unattended_verbose`: Define verbosity level of APT for periodic runs. The output will be sent to root.
+* `unattended_cache_valid_time`:
+  * Description: Update the apt cache if it's older than the given time in seconds; passed to the [apt module](https://docs.ansible.com/ansible/latest/collections/ansible/builtin/apt_module.html) during package installation.
+  * Default: `3600`
+* `unattended_origins_patterns`:
+  * Description: Array of origins patterns to determine whether the package can be automatically installed, for more details see [Origins Patterns](#origins-patterns) below.
+  * Default:
+    * Debian: `['origin=Debian,codename=${distro_codename},label=Debian-Security']`
+    * Ubuntu: `['origin=Ubuntu,archive=${distro_codename}-security,label=Ubuntu']`
+* `unattended_package_blacklist`:
+  * Description: Packages which won't be automatically upgraded.
+  * Default: `[]`
+* `unattended_autofix_interrupted_dpkg`:
+  * Description: Whether on unclean dpkg exit to run `dpkg --force-confold --configure -a`.
+  * Default: `true`
+* `unattended_minimal_steps`:
+  * Description: Split the upgrade into the smallest possible chunks so that they can be interrupted with SIGUSR1.
+  * Default: `true`
+* `unattended_install_on_shutdown`:
+  * Description: Install all unattended-upgrades when the machine is shutting down.
+  * Default: `false`
+* `unattended_mail`:
+  * Description: E-mail address to send information about upgrades or problems with unattended upgrades.
+  * Default: `false` (don't send any e-mail)
+* `unattended_mail_only_on_error`:
+  * Description: Send e-mail only on errors, otherwise e-mail will be sent every time there's a package upgrade.
+  * Default: `false`
+* `unattended_remove_unused_dependencies`:
+  * Description: Do automatic removal of all unused dependencies after the upgrade.
+  * Default: `false`
+* `unattended_remove_new_unused_dependencies`:
+  * Description: Do automatic removal of new unused dependencies after the upgrade.
+  * Default: `true`
+* `unattended_automatic_reboot`:
+  * Description: Automatically reboot system if any upgraded package requires it, immediately after the upgrade.
+  * Default: `false`
+* `unattended_automatic_reboot_time`:
+  * Description: Automatically reboot system if any upgraded package requires it, at the specific time (_HH:MM_) instead of immediately after the upgrade.
+  * Default: `false`
+* `unattended_update_days`:
+  * Description: Set the days of the week that updates should be applied. The days can be specified as localized abbreviated or full names. Or as integers where "0" is Sunday, "1" is Monday etc. Example: `{"Mon";"Fri"};`
+  * Default: `None`
+* `unattended_ignore_apps_require_restart`:
+  * Description: Unattended-upgrades won't automatically upgrade some critical packages requiring restart after an upgrade (i.e. there is `XB-Upgrade-Requires: app-restart` directive in their debian/control file). With this option set to `true`, unattended-upgrades will upgrade these packages regardless of the directive.
+  * Default: `false`
+* `unattended_syslog_enable`:
+  * Description: Write events to syslog, which is useful in environments where syslog messages are sent to a central store.
+  * Default: `false`
+* `unattended_syslog_facility`:
+  * Description: Write events to the specified syslog facility, or the daemon facility if not specified. Will only have affect if `unattended_syslog_enable` is set to `true`.
+  * Default: `None`
+* `unattended_verbose`:
+  * Description: Define verbosity level of APT for periodic runs. The output will be sent to root.
     * Possible options:
       * `0`: no report
       * `1`: progress report
       * `2`: + command outputs
       * `3`: + trace on
-    * Default: `0` (no report)
-* `unattended_update_package_list`: Do "apt-get update" automatically every n-days (0=disable)
-    * Default: `1`
-* `unattended_download_upgradeable`: Do "apt-get upgrade --download-only" every n-days (0=disable)
-    * Default: `0`
-* `unattended_autoclean_interval`: Do "apt-get autoclean" every n-days (0=disable)
-    * Default: `7`
-* `unattended_clean_interval`: Do "apt-get clean" every n-days (0=disable)
-    * Default: `0`
-* `unattended_random_sleep`: Define maximum for a random interval in seconds after which the apt job starts (only for systems without systemd)
-    * Default: `1800` (30 minutes)
-* `unattended_dpkg_options`: Array of dpkg command-line options used during unattended-upgrades runs, e.g. `["--force-confdef"]`, `["--force-confold"]`
-    * Default: `[]`
-* `unattended_dl_limit`: Limit the download speed in kb/sec using apt bandwidth limit feature.
-    * Default: disabled
-* `unattended_only_on_ac_power`: Download and install upgrades only on AC power. It will also install the debian package `powermgmt-base`.
-    * Default: false
+  * Default: `0` (no report)
+* `unattended_update_package_list`:
+  * Description: Do "apt-get update" automatically every n-days (0=disable).
+  * Default: `1`
+* `unattended_download_upgradeable`:
+  * Description: Do "apt-get upgrade --download-only" every n-days (0=disable).
+  * Default: `0`
+* `unattended_autoclean_interval`:
+  * Description: Do "apt-get autoclean" every n-days (0=disable).
+  * Default: `7`
+* `unattended_clean_interval`:
+  * Description: Do "apt-get clean" every n-days (0=disable).
+  * Default: `0`
+* `unattended_random_sleep`:
+  * Description: Define maximum for a random interval in seconds after which the apt job starts (only for systems without systemd).
+  * Default: `1800` (30 minutes)
+* `unattended_dpkg_options`:
+  * Description: Array of dpkg command-line options used during unattended-upgrades runs, e.g. `["--force-confdef"]`, `["--force-confold"]`.
+  * Default: `[]`
+* `unattended_dl_limit`:
+  * Description: Limit the download speed in kb/sec using apt bandwidth limit feature.
+  * Default: `None`
+* `unattended_only_on_ac_power`:
+  * Description: Download and install upgrades only on AC power. It will also install the debian package `powermgmt-base`.
+  * Default: `false`
 
 ## Origins Patterns
 
 Origins Pattern is a more powerful alternative to the Allowed Origins option used in previous versions of unattended-upgrade.
 
-Pattern is composed from specific keywords:
+Pattern is composed of specific keywords:
 
 * `a`,`archive`,`suite` – e.g. `stable`, `trusty-security` (`archive=stable`)
 * `c`,`component`   – e.g. `main`, `crontrib`, `non-free` (`component=main`)
@@ -103,10 +129,10 @@ Pattern is composed from specific keywords:
 
 You can review the available repositories using `apt-cache policy` and debug your choice using `unattended-upgrades -d` command on a target system.
 
-Additionally unattended-upgrades support two macros (variables), derived from `/etc/debian_version`:
+Additionally, unattended-upgrades support two macros (variables), derived from `/etc/debian_version`:
 
 * `${distro_id}` – Installed distribution name, e.g. `Debian` or `Ubuntu`.
-* `${distro_codename}` – Installed codename, e.g. `jessie` or `trusty`.
+* `${distro_codename}` – Installed codename, e.g. `bullseye` or `jammy`.
 
 Using `${distro_codename}` should be preferred over using `stable` or `oldstable` as a selected, as once `stable` moves to `oldstable`, no security updates will be installed at all, or worse, package from a newer distro release will be installed by accident. The same goes for upgrading your installation from `oldstable` to `stable`, if you forget to change this in your origin patterns, you may not receive the security updates for your newer distro release. With `${distro_codename}`, both cases can never happen.
 
@@ -178,7 +204,6 @@ unattended_origins_patterns:
   - 'o=Ubuntu,a=${distro_codename}-proposed-updates'
 ```
 
-
 #### For Raspbian
 
 In Raspbian, it is only possible to update all packages from the default repository, including non-security updates, or updating none.
@@ -197,10 +222,10 @@ To not install any updates on a raspbian host, just set `unattended_origins_patt
 unattended_origins_patterns: []
 ```
 
-
 ## License
 
-GPLv2
+GPL-2.0-or-later
 
 ## Author
+
 This role was originally created by [Jan Vlnas](https://github.com/jnv).
