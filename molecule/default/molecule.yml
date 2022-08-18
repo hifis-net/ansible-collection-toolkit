@@ -20,6 +20,12 @@ provisioner:
   inventory:
     hosts:
       all:
+        vars:
+          unattended_autofix_interrupted_dpkg: false
+          unattended_minimal_steps: true
+          unattended_install_on_shutdown: true
+          unattended_automatic_reboot: true
+          unattended_update_days: '{"Sat"}'
   playbooks:
     prepare: "prepare.yml"
     check: "converge.yml"
