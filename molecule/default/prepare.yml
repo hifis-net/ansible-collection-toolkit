@@ -1,0 +1,10 @@
+---
+# Play to install dependencies.
+- name: "Prepare"
+  hosts: "all"
+  tasks:
+    - name: "Install dependencies"
+      ansible.builtin.apt:
+        update_cache: yes
+
+...
