@@ -1,6 +1,6 @@
 # Unattended-Upgrades Role for Ansible
 
-[![Build status of branch master](https://github.com/hifis-net/ansible-role-unattended-upgrades/actions/workflows/ansible-linting-check.yml/badge.svg?branch=master)](https://github.com/hifis-net/ansible-role-unattended-upgrades/actions/workflows/ansible-linting-check.yml)
+[![Build status of branch master](https://github.com/hifis-net/ansible-role-unattended-upgrades/actions/workflows/ci.yml/badge.svg?branch=master)](https://github.com/hifis-net/ansible-role-unattended-upgrades/actions/workflows/ci.yml)
 [![Ansible Role: hifis.unattended_upgrades](https://img.shields.io/ansible/role/59313)](https://galaxy.ansible.com/hifis/unattended_upgrades)
 [![Ansible Quality Score](https://img.shields.io/ansible/quality/59313)](https://galaxy.ansible.com/hifis/unattended_upgrades)
 [![Ansible Role Downloads](https://img.shields.io/ansible/role/d/59313)](https://galaxy.ansible.com/hifis/unattended_upgrades)
