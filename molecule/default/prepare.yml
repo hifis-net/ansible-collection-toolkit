@@ -5,10 +5,6 @@
   tasks:
     - name: "Install dependencies"
       ansible.builtin.apt:
-        name:
-          - "sudo"      # for `become` privilege escalation
-          - "iproute2"  # for gathering network facts
         update_cache: yes
-        state: "present"
 
 ...

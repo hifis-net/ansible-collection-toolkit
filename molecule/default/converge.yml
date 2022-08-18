@@ -3,7 +3,7 @@
 - name: "Converge"
   hosts: "all"
   tasks:
-    - name: "Include unattend_upgrades role"
+    - name: "Include unattended_upgrades role"
       ansible.builtin.include_role:
         name: "{{ lookup('env', 'MOLECULE_PROJECT_DIRECTORY') | basename }}"
 
