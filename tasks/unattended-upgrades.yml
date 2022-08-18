@@ -30,7 +30,7 @@
     update_cache: "yes"
 
 - name: "install reboot dependencies"
-  ansible.builtin.include: "reboot.yml"
+  ansible.builtin.import_tasks: "reboot.yml"
   when: "unattended_automatic_reboot | bool"
 
 - name: "create APT auto-upgrades configuration"

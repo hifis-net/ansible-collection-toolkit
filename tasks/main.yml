@@ -1,2 +1,2 @@
- - ansible.builtin.include: "unattended-upgrades.yml"
+ - ansible.builtin.import_tasks: "unattended-upgrades.yml"
    tags: "unattended"
