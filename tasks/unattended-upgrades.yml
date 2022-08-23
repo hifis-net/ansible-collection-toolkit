@@ -1,20 +1,20 @@
 ---
-- name: "add distribution-specific variables"
+- name: "Add distribution-specific variables"
   ansible.builtin.include_vars: "{{ ansible_distribution }}.yml"
 
-- name: "add Debian Wheezy workaround"
+- name: "Add Debian Wheezy workaround"
   ansible.builtin.include_vars: "{{ ansible_distribution }}-{{ ansible_distribution_release }}.yml"
   when:
     - "ansible_distribution == 'Debian'"
     - "ansible_distribution_release == 'wheezy'"
 
-- name: "add Debian Bullseye workaround"
+- name: "Add Debian Bullseye workaround"
   ansible.builtin.include_vars: "{{ ansible_distribution }}-{{ ansible_distribution_release }}.yml"
   when:
     - "ansible_distribution == 'Debian'"
     - "ansible_distribution_release == 'bullseye'"
 
-- name: "install powermgmt-base"
+- name: "Install powermgmt-base"
   ansible.builtin.apt:
     pkg:
     state: "present"
@@ -22,18 +22,18 @@
     update_cache: "yes"
   when: "unattended_only_on_ac_power"
 
-- name: "install unattended-upgrades"
+- name: "Install unattended-upgrades"
   ansible.builtin.apt:
     pkg: "unattended-upgrades"
     state: "present"
     cache_valid_time: "{{ unattended_cache_valid_time }}"
     update_cache: "yes"
 
-- name: "install reboot dependencies"
+- name: "Install reboot dependencies"
   ansible.builtin.import_tasks: "reboot.yml"
   when: "unattended_automatic_reboot | bool"
 
-- name: "create APT auto-upgrades configuration"
+- name: "Create APT auto-upgrades configuration"
   ansible.builtin.template:
     src: "auto-upgrades.j2"
     dest: "/etc/apt/apt.conf.d/20auto-upgrades"
@@ -41,7 +41,7 @@
     group: "root"
     mode: "0644"
 
-- name: "create unattended-upgrades configuration"
+- name: "Create unattended-upgrades configuration"
   ansible.builtin.template:
     src: "unattended-upgrades.j2"
     dest: "/etc/apt/apt.conf.d/50unattended-upgrades"
