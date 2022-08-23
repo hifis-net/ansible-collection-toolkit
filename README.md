@@ -32,87 +32,87 @@ On some hosts you may find that the unattended-upgrade's cron file `/etc/cron.da
 ## Role Variables
 
 * `unattended_cache_valid_time`:
-  * Description: Update the apt cache if it's older than the given time in seconds; passed to the [apt module](https://docs.ansible.com/ansible/latest/collections/ansible/builtin/apt_module.html) during package installation.
   * Default: `3600`
+  * Description: Update the apt cache if it's older than the given time in seconds; passed to the [apt module](https://docs.ansible.com/ansible/latest/collections/ansible/builtin/apt_module.html) during package installation.
 * `unattended_origins_patterns`:
-  * Description: Array of origins patterns to determine whether the package can be automatically installed, for more details see [Origins Patterns](#origins-patterns) below.
   * Default:
     * Debian: `['origin=Debian,codename=${distro_codename},label=Debian-Security']`
     * Ubuntu: `['origin=Ubuntu,archive=${distro_codename}-security,label=Ubuntu']`
+  * Description: Array of origins patterns to determine whether the package can be automatically installed, for more details see [Origins Patterns](#origins-patterns) below.
 * `unattended_package_blacklist`:
-  * Description: Packages which won't be automatically upgraded.
   * Default: `[]`
+  * Description: Packages which won't be automatically upgraded.
 * `unattended_autofix_interrupted_dpkg`:
+  * Default: `true`
   * Description: Whether on unclean dpkg exit to run `dpkg --force-confold --configure -a`.
-  * Default: `true`
 * `unattended_minimal_steps`:
+  * Default: `true`
   * Description: Split the upgrade into the smallest possible chunks so that they can be interrupted with SIGUSR1.
-  * Default: `true`
 * `unattended_install_on_shutdown`:
+  * Default: `false`
   * Description: Install all unattended-upgrades when the machine is shutting down.
-  * Default: `false`
 * `unattended_mail`:
-  * Description: E-mail address to send information about upgrades or problems with unattended upgrades.
   * Default: `false` (don't send any e-mail)
+  * Description: E-mail address to send information about upgrades or problems with unattended upgrades.
 * `unattended_mail_only_on_error`:
+  * Default: `false`
   * Description: Send e-mail only on errors, otherwise e-mail will be sent every time there's a package upgrade.
-  * Default: `false`
 * `unattended_remove_unused_dependencies`:
+  * Default: `false`
   * Description: Do automatic removal of all unused dependencies after the upgrade.
-  * Default: `false`
 * `unattended_remove_new_unused_dependencies`:
-  * Description: Do automatic removal of new unused dependencies after the upgrade.
   * Default: `true`
+  * Description: Do automatic removal of new unused dependencies after the upgrade.
 * `unattended_automatic_reboot`:
+  * Default: `false`
   * Description: Automatically reboot system if any upgraded package requires it, immediately after the upgrade.
-  * Default: `false`
 * `unattended_automatic_reboot_time`:
+  * Default: `false`
   * Description: Automatically reboot system if any upgraded package requires it, at the specific time (_HH:MM_) instead of immediately after the upgrade.
-  * Default: `false`
 * `unattended_update_days`:
+  * Default: `None`
   * Description: Set the days of the week that updates should be applied. The days can be specified as localized abbreviated or full names. Or as integers where "0" is Sunday, "1" is Monday etc. Example: `{"Mon";"Fri"};`
-  * Default: `None`
 * `unattended_ignore_apps_require_restart`:
+  * Default: `false`
   * Description: Unattended-upgrades won't automatically upgrade some critical packages requiring restart after an upgrade (i.e. there is `XB-Upgrade-Requires: app-restart` directive in their debian/control file). With this option set to `true`, unattended-upgrades will upgrade these packages regardless of the directive.
-  * Default: `false`
 * `unattended_syslog_enable`:
-  * Description: Write events to syslog, which is useful in environments where syslog messages are sent to a central store.
   * Default: `false`
+  * Description: Write events to syslog, which is useful in environments where syslog messages are sent to a central store.
 * `unattended_syslog_facility`:
-  * Description: Write events to the specified syslog facility, or the daemon facility if not specified. Will only have affect if `unattended_syslog_enable` is set to `true`.
   * Default: `None`
+  * Description: Write events to the specified syslog facility, or the daemon facility if not specified. Will only have affect if `unattended_syslog_enable` is set to `true`.
 * `unattended_verbose`:
+  * Default: `0` (no report)
   * Description: Define verbosity level of APT for periodic runs. The output will be sent to root.
     * Possible options:
       * `0`: no report
       * `1`: progress report
       * `2`: + command outputs
       * `3`: + trace on
-  * Default: `0` (no report)
 * `unattended_update_package_list`:
-  * Description: Do "apt-get update" automatically every n-days (0=disable).
   * Default: `1`
+  * Description: Do "apt-get update" automatically every n-days (0=disable).
 * `unattended_download_upgradeable`:
+  * Default: `0`
   * Description: Do "apt-get upgrade --download-only" every n-days (0=disable).
-  * Default: `0`
 * `unattended_autoclean_interval`:
-  * Description: Do "apt-get autoclean" every n-days (0=disable).
   * Default: `7`
+  * Description: Do "apt-get autoclean" every n-days (0=disable).
 * `unattended_clean_interval`:
-  * Description: Do "apt-get clean" every n-days (0=disable).
   * Default: `0`
+  * Description: Do "apt-get clean" every n-days (0=disable).
 * `unattended_random_sleep`:
-  * Description: Define maximum for a random interval in seconds after which the apt job starts (only for systems without systemd).
   * Default: `1800` (30 minutes)
+  * Description: Define maximum for a random interval in seconds after which the apt job starts (only for systems without systemd).
 * `unattended_dpkg_options`:
-  * Description: Array of dpkg command-line options used during unattended-upgrades runs, e.g. `["--force-confdef"]`, `["--force-confold"]`.
   * Default: `[]`
+  * Description: Array of dpkg command-line options used during unattended-upgrades runs, e.g. `["--force-confdef"]`, `["--force-confold"]`.
 * `unattended_dl_limit`:
-  * Description: Limit the download speed in kb/sec using apt bandwidth limit feature.
   * Default: `None`
+  * Description: Limit the download speed in kb/sec using apt bandwidth limit feature.
 * `unattended_only_on_ac_power`:
-  * Description: Download and install upgrades only on AC power. It will also install the debian package `powermgmt-base`.
   * Default: `false`
+  * Description: Download and install upgrades only on AC power. It will also install the debian package `powermgmt-base`.
 
 ## Origins Patterns
 
@@ -228,4 +228,5 @@ GPL-2.0-or-later
 
 ## Author
 
-This role was originally created by [Jan Vlnas](https://github.com/jnv).
+This role is maintained by [HIFIS Software Services](https://www.hifis.net/)
+and was originally created by [Jan Vlnas](https://github.com/jnv).
