@@ -230,3 +230,10 @@ GPL-2.0-or-later
 
 This role is maintained by [HIFIS Software Services](https://www.hifis.net/)
 and was originally created by [Jan Vlnas](https://github.com/jnv).
+
+## Contributors
+
+We would like to thank and give credits to the following contributors of this
+project:
+
+* Be the first to be named here!
