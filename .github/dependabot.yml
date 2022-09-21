@@ -1,0 +1,19 @@
+---
+version: 2
+updates:
+
+  - package-ecosystem: "github-actions"
+    directory: "/"
+    schedule:
+      # Check for updates to GitHub Actions every weekday
+      interval: "daily"
+
+  - package-ecosystem: "pip"
+    directory: "/"
+    schedule:
+      # Check for updates to pip packages every weekday
+      interval: "daily"
+    ignore:
+      - dependency-name: "python"
+        update-types: ["version-update:semver-major"]
+...

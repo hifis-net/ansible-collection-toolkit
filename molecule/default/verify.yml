@@ -1,0 +1,29 @@
+---
+- name: "Verify unattended upgrades installation"
+  hosts: "all"
+  tasks:
+    - name: "Get apt-config variables"
+      command: "apt-config dump"
+      register: "aptconfig"
+      changed_when: false
+
+    - name: "Check for registered variables"
+      assert:
+        that: "item in aptconfig.stdout"
+      with_items:
+        - 'APT::Periodic::Unattended-Upgrade "1"'
+        - 'Unattended-Upgrade::AutoFixInterruptedDpkg "false"'
+        - 'Unattended-Upgrade::MinimalSteps "true"'
+        - 'Unattended-Upgrade::InstallOnShutdown "true"'
+        - 'Unattended-Upgrade::Automatic-Reboot "true"'
+        # NOTE: this uses the array syntax, which requires one
+        # top-level record, then one item per line
+        - 'Unattended-Upgrade::Update-Days "";'
+        - 'Unattended-Upgrade::Update-Days:: "Sat";'
+
+    - name: "Dry run unattended-upgrades"
+      command: "/usr/bin/unattended-upgrades --dry-run"
+      register: "dry_run"
+      failed_when: "dry_run.rc != 0"
+
+...

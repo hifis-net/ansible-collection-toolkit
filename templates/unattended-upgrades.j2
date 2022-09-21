@@ -1,4 +1,4 @@
-// {{ ansible_managed }}
+{{ ansible_managed | comment('c') }}
 
 // Overrides for `20auto-upgrades`. //////////////////////////////////////////
 
@@ -126,6 +126,18 @@ Unattended-Upgrade::Update-Days {{ unattended_update_days }};
 Unattended-Upgrade::IgnoreAppsRequireRestart "true";
 {% endif %}
 
+{% if unattended_syslog_enable %}
+// Write events to syslog, which is useful in environments where syslog
+// messages are sent to a central store.
+Unattended-Upgrade::SyslogEnable "{{ unattended_syslog_enable }}";
+{% if unattended_syslog_facility is defined %}
+// Write events to the specified syslog facility, or the daemon facility
+// if not specified. Requires the Unattended-Upgrade::SyslogEnable option
+// to be set to true.
+Unattended-Upgrade::SyslogFacility "{{ unattended_syslog_facility }}";
+{% endif %}
+{% endif %}
+
 {% if unattended_dpkg_options %}
 // Append options for governing dpkg behavior, e.g. --force-confdef.
 Dpkg::Options {
@@ -140,3 +152,7 @@ Dpkg::Options {
 // speed to 70kb/sec
 Acquire::http::Dl-Limit "{{ unattended_dl_limit }}";
 {% endif %}
+
+// Download and install upgrades only on AC power
+// (i.e. skip or gracefully stop updates on battery)
+Unattended-Upgrade::OnlyOnACPower "{{ unattended_only_on_ac_power }}";

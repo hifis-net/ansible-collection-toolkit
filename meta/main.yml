@@ -1,38 +1,22 @@
 ---
 galaxy_info:
-  author: Jan Vlnas
-  description: Setup unattended-upgrades on Debian-based systems
-  license: GPLv2
-  min_ansible_version: 1.4
+  role_name: "unattended_upgrades"
+  author: "hifis"
+  description: "Setup unattended-upgrades on Debian-based systems"
+  license: "GPLv2"
+  min_ansible_version: "1.4"
   platforms:
-  - name: Ubuntu
+  - name: "Ubuntu"
     versions:
-    - precise
-    - raring
-    - saucy
-    - trusty
-    - utopic
-  - name: Debian
+    - "jammy"
+    - "focal"
+    - "bionic"
+  - name: "Debian"
     versions:
-     - wheezy
-     - jessie
-  #
-  # Below are all categories currently available. Just as with
-  # the platforms above, uncomment those that apply to your role.
-  #
-  galaxy_tags:
-  #- cloud
-  #- cloud:ec2
-  #- cloud:gce
-  #- cloud:rax
-  #- database
-  #- database:nosql
-  #- database:sql
-  #- development
-  #- monitoring
-  #- networking
-  #- packaging
-  - system
-  #- web
-dependencies: []
+     - "buster"
+     - "bullseye"
 
+  galaxy_tags:
+  - "system"
+
+dependencies: []

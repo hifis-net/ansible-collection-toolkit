@@ -1,0 +1,10 @@
+---
+# Play to create and provision instance.
+- name: "Converge"
+  hosts: "all"
+  tasks:
+    - name: "Include unattended_upgrades role"
+      ansible.builtin.include_role:
+        name: "{{ lookup('env', 'MOLECULE_PROJECT_DIRECTORY') | basename }}"
+
+...
