@@ -34,7 +34,7 @@
   when: "unattended_automatic_reboot | bool"
 
 - name: "Create Apt auto-upgrades & unattended-upgrades configuration"
-  template:
+  ansible.builtin.template:
     src: "unattended-upgrades.j2"
     dest: "/etc/apt/apt.conf.d/90-ansible-unattended-upgrades"
     owner: "root"
