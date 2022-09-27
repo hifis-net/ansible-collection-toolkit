@@ -5,6 +5,7 @@
   tasks:
     - name: "Install dependencies"
       ansible.builtin.apt:
-        update_cache: yes
+        update_cache: "yes"
+        force_apt_get: "yes"
 
 ...
