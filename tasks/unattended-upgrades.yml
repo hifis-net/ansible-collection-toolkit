@@ -16,7 +16,7 @@
 
 - name: "Install powermgmt-base"
   ansible.builtin.apt:
-    pkg:
+    pkg: "powermgmt-base"
     state: "present"
     cache_valid_time: "{{ unattended_cache_valid_time }}"
     update_cache: "yes"
