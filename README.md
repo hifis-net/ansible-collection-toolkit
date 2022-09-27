@@ -65,6 +65,9 @@ On some hosts you may find that the unattended-upgrade's cron file `/etc/cron.da
 * `unattended_remove_new_unused_dependencies`:
   * Default: `true`
   * Description: Do automatic removal of new unused dependencies after the upgrade.
+* `unattended_remove_unused_kernel_packages`:
+  * Default: `false`
+  * Description: Remove unused automatically installed kernel-related packages (kernel images, kernel headers and kernel version locked tools)
 * `unattended_automatic_reboot`:
   * Default: `false`
   * Description: Automatically reboot system if any upgraded package requires it, immediately after the upgrade.

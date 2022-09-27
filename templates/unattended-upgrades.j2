@@ -98,6 +98,12 @@ Unattended-Upgrade::Remove-Unused-Dependencies "true";
 Unattended-Upgrade::Remove-New-Unused-Dependencies "false";
 {% endif %}
 
+{% if unattended_remove_unused_kernel_packages %}
+// Remove unused automatically installed kernel-related packages
+// (kernel images, kernel headers and kernel version locked tools).
+Unattended-Upgrade::Remove-Unused-Kernel-Packages "true";
+{% endif %}
+
 {% if unattended_automatic_reboot %}
 // Automatically reboot *WITHOUT CONFIRMATION* if a
 // the file /var/run/reboot-required is found after the upgrade

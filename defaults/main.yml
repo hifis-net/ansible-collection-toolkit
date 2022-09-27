@@ -56,6 +56,11 @@ unattended_remove_unused_dependencies: false
 # Remove any new unused dependencies after the upgrade
 unattended_remove_new_unused_dependencies: true
 
+#Unattended-Upgrade::Remove-Unused-Kernel-Packages
+# Remove unused automatically installed kernel-related packages
+# (kernel images, kernel headers and kernel version locked tools)
+unattended_remove_unused_kernel_packages: false
+
 #Unattended-Upgrade::Automatic-Reboot
 # Automatically reboot *WITHOUT CONFIRMATION* if a
 # the file /var/run/reboot-required is found after the upgrade
