@@ -21,6 +21,7 @@
         - 'Unattended-Upgrade::Update-Days "";'
         - 'Unattended-Upgrade::Update-Days:: "Sat";'
         - 'Unattended-Upgrade::Remove-Unused-Kernel-Packages "true";'
+        - 'Unattended-Upgrade::OnlyOnACPower "true";'
 
     - name: "Dry run unattended-upgrades"
       command: "/usr/bin/unattended-upgrades --dry-run"

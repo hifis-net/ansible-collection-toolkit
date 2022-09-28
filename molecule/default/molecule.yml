@@ -27,6 +27,7 @@ provisioner:
           unattended_automatic_reboot: true
           unattended_update_days: '{"Sat"}'
           unattended_remove_unused_kernel_packages: true
+          unattended_only_on_ac_power: true
   playbooks:
     prepare: "prepare.yml"
     check: "converge.yml"

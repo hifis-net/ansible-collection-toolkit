@@ -161,4 +161,4 @@ Acquire::http::Dl-Limit "{{ unattended_dl_limit }}";
 
 // Download and install upgrades only on AC power
 // (i.e. skip or gracefully stop updates on battery)
-Unattended-Upgrade::OnlyOnACPower "{{ unattended_only_on_ac_power }}";
+Unattended-Upgrade::OnlyOnACPower "{{ unattended_only_on_ac_power | to_json }}";
