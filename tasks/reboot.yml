@@ -5,4 +5,5 @@
   ansible.builtin.apt:
     pkg: "update-notifier-common"
     state: "present"
+    force_apt_get: "yes"
   failed_when: false
