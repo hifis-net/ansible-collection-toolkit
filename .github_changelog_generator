@@ -1,0 +1,3 @@
+user=hifis-net
+project=ansible-role-unattended-upgrades
+since-tag=v1.12.2
