@@ -2,12 +2,6 @@
 - name: "Add distribution-specific variables"
   ansible.builtin.include_vars: "{{ ansible_distribution }}.yml"
 
-- name: "Add Debian Wheezy workaround"
-  ansible.builtin.include_vars: "{{ ansible_distribution }}-{{ ansible_distribution_release }}.yml"
-  when:
-    - "ansible_distribution == 'Debian'"
-    - "ansible_distribution_release == 'wheezy'"
-
 - name: "Add Debian Bullseye workaround"
   ansible.builtin.include_vars: "{{ ansible_distribution }}-{{ ansible_distribution_release }}.yml"
   when:
