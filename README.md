@@ -148,7 +148,7 @@ Example for Ubuntu, with custom [origins patterns](#patterns-examples), blacklis
 ```yaml
 - hosts: all
   roles:
-  - role: hifis.unattended-upgrades
+  - role: hifis.unattended_upgrades
     unattended_origins_patterns:
     - 'origin=Ubuntu,archive=${distro_codename}-security'
     - 'o=Ubuntu,a=${distro_codename}-updates'
@@ -165,7 +165,7 @@ If you manage multiple distribution with the same playbook, you may want to skip
 ```yaml
 - hosts: all
   roles:
-     - role: hifis.unattended-upgrades
+     - role: hifis.unattended_upgrades
        when: ansible_facts['os_family'] == 'Debian'
 ```
 
