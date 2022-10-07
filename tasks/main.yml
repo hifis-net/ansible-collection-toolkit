@@ -1,3 +1,4 @@
 ---
-- ansible.builtin.import_tasks: "unattended-upgrades.yml"
+- name: "Import tasks from the unattended-upgrades playbook"
+  ansible.builtin.import_tasks: "unattended-upgrades.yml"
   tags: "unattended"
