@@ -47,6 +47,13 @@ unattended_mail: false
 # is to always send a mail if Unattended-Upgrade::Mail is set
 unattended_mail_only_on_error: false
 
+#Unattended-Upgrade::MailReport 
+# Set this value to one of:
+#    "always", "only-on-error" or "on-change"
+# If this is not set, then any legacy MailOnlyOnError (boolean) value
+# is used to chose between "only-on-error" and "on-change"
+unattended_mail_report: false
+
 #Unattended-Upgrade::Remove-Unused-Dependencies
 # Do automatic removal of all unused dependencies after the upgrade
 # (equivalent to apt-get autoremove)
