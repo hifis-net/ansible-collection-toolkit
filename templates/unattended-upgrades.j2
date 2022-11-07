@@ -87,6 +87,14 @@ Unattended-Upgrade::Mail "{{unattended_mail}}";
 Unattended-Upgrade::MailOnlyOnError "true";
 {% endif %}
 
+{% if unattended_mail_report %}
+// Set this value to one of:
+//    "always", "only-on-error" or "on-change"
+// If this is not set, then any legacy MailOnlyOnError (boolean) value
+// is used to chose between "only-on-error" and "on-change"
+Unattended-Upgrade::MailReport "{{ unattended_mail_report }}";
+{% endif %}
+
 {% if unattended_remove_unused_dependencies %}
 // Do automatic removal of all unused dependencies after the upgrade
 // (equivalent to apt-get autoremove)
