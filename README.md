@@ -59,6 +59,9 @@ On some hosts you may find that the unattended-upgrade's cron file `/etc/cron.da
 * `unattended_mail_only_on_error`:
   * Default: `false`
   * Description: Send e-mail only on errors, otherwise e-mail will be sent every time there's a package upgrade.
+* `unattended_mail_report`:
+  * Default: `false`
+  * Description: Choose on what event to send an email : always, on change or on error.
 * `unattended_remove_unused_dependencies`:
   * Default: `false`
   * Description: Do automatic removal of all unused dependencies after the upgrade.
