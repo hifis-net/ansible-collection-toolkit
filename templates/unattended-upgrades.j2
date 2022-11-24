@@ -36,7 +36,7 @@ APT::Periodic::RandomSleep "{{unattended_random_sleep}}";
 Unattended-Upgrade::Origins-Pattern {
 {% if unattended_origins_patterns is defined %}
   {% for origin in unattended_origins_patterns %}
-    "{{ origin }}";
+   "{{ origin }}";
   {% endfor %}
 {% else %}
   {% for origin in __unattended_origins_patterns %}
