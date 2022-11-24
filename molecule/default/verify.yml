@@ -3,12 +3,12 @@
   hosts: "all"
   tasks:
     - name: "Get apt-config variables"
-      command: "apt-config dump"
+      ansible.builtin.command: "apt-config dump"
       register: "aptconfig"
       changed_when: false
 
     - name: "Check for registered variables"
-      assert:
+      ansible.builtin.assert:
         that: "item in aptconfig.stdout"
       with_items:
         - 'APT::Periodic::Unattended-Upgrade "1"'
@@ -24,8 +24,9 @@
         - 'Unattended-Upgrade::OnlyOnACPower "true";'
 
     - name: "Dry run unattended-upgrades"
-      command: "/usr/bin/unattended-upgrades --dry-run"
+      ansible.builtin.command: "/usr/bin/unattended-upgrades --dry-run"
       register: "dry_run"
       failed_when: "dry_run.rc != 0"
+      changed_when: false
 
 ...
