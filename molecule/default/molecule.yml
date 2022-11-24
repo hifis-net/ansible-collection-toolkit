@@ -14,7 +14,7 @@ platforms:
 lint: |
   set -e &&
   yamllint --strict --format colored . &&
-  ansible-lint -v --force-color --offline --exclude .pipenv/ .
+  ansible-lint -v --force-color --offline --exclude .pipenv/ . ./molecule
 provisioner:
   name: "ansible"
   inventory:
