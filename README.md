@@ -229,4 +229,7 @@ and was originally created by [Jan Vlnas](https://github.com/jnv).
 We would like to thank and give credits to the following contributors of this
 project:
 
-* Be the first to be named here!
+* [alpha0010](https://github.com/alpha0010)
+* [gcotelli](https://github.com/gcotelli)
+* [lukashass](https://github.com/lukashass)
+* [nono-lqdn](https://github.com/nono-lqdn)

@@ -1,8 +1,8 @@
 # Changelog
 
-## [Unreleased](https://github.com/hifis-net/ansible-role-unattended-upgrades/tree/HEAD)
+## [v2.0.0](https://github.com/hifis-net/ansible-role-unattended-upgrades/tree/v2.0.0) (2022-12-02)
 
-[Full Changelog](https://github.com/hifis-net/ansible-role-unattended-upgrades/compare/v1.12.2...HEAD)
+[Full Changelog](https://github.com/hifis-net/ansible-role-unattended-upgrades/compare/v1.12.2...v2.0.0)
 
 **Implemented enhancements:**
 
@@ -10,16 +10,48 @@
 - Override configuration in a separate apt.conf.d file [\#10](https://github.com/hifis-net/ansible-role-unattended-upgrades/issues/10)
 - Test role via Molecule [\#8](https://github.com/hifis-net/ansible-role-unattended-upgrades/issues/8)
 
+**Fixed bugs:**
+
+- Change caused by indentation [\#53](https://github.com/hifis-net/ansible-role-unattended-upgrades/issues/53)
+- Molecule folder not linted by molecule [\#48](https://github.com/hifis-net/ansible-role-unattended-upgrades/issues/48)
+- Fix installation of powermgmt-base package [\#35](https://github.com/hifis-net/ansible-role-unattended-upgrades/issues/35)
+
 **Closed issues:**
 
+- Some configurations options are missing [\#56](https://github.com/hifis-net/ansible-role-unattended-upgrades/issues/56)
+- Documentation role name mismatch [\#41](https://github.com/hifis-net/ansible-role-unattended-upgrades/issues/41)
+- Remove support for OS that reached EOL [\#38](https://github.com/hifis-net/ansible-role-unattended-upgrades/issues/38)
+- Add changelog [\#33](https://github.com/hifis-net/ansible-role-unattended-upgrades/issues/33)
 - Add contribution guide [\#16](https://github.com/hifis-net/ansible-role-unattended-upgrades/issues/16)
+- Rename default branch to `main` [\#13](https://github.com/hifis-net/ansible-role-unattended-upgrades/issues/13)
 
 **Merged pull requests:**
 
+- Add codeowners to autoassign reviewers [\#65](https://github.com/hifis-net/ansible-role-unattended-upgrades/pull/65) ([Normo](https://github.com/Normo))
+- Ensure new default branch main is used by Galaxy [\#64](https://github.com/hifis-net/ansible-role-unattended-upgrades/pull/64) ([Normo](https://github.com/Normo))
+- Lint molecule folder [\#63](https://github.com/hifis-net/ansible-role-unattended-upgrades/pull/63) ([Normo](https://github.com/Normo))
+- Bump ansible-lint from 6.8.6 to 6.9.0 [\#62](https://github.com/hifis-net/ansible-role-unattended-upgrades/pull/62) ([dependabot[bot]](https://github.com/apps/dependabot))
+- Fix indentation for unattended\_origins\_patterns in template file [\#61](https://github.com/hifis-net/ansible-role-unattended-upgrades/pull/61) ([Normo](https://github.com/Normo))
+- Bump ansible from 6.5.0 to 7.0.0 [\#60](https://github.com/hifis-net/ansible-role-unattended-upgrades/pull/60) ([dependabot[bot]](https://github.com/apps/dependabot))
+- Add missing option Unattended-Upgrade::MailReport [\#57](https://github.com/hifis-net/ansible-role-unattended-upgrades/pull/57) ([nono-lqdn](https://github.com/nono-lqdn))
+- Bump ansible-lint from 6.8.2 to 6.8.6 [\#54](https://github.com/hifis-net/ansible-role-unattended-upgrades/pull/54) ([dependabot[bot]](https://github.com/apps/dependabot))
+- Bump molecule from 4.0.2 to 4.0.3 [\#49](https://github.com/hifis-net/ansible-role-unattended-upgrades/pull/49) ([dependabot[bot]](https://github.com/apps/dependabot))
+- Bump molecule from 4.0.1 to 4.0.2 [\#47](https://github.com/hifis-net/ansible-role-unattended-upgrades/pull/47) ([dependabot[bot]](https://github.com/apps/dependabot))
+- Bump ansible-lint from 6.8.1 to 6.8.2 [\#46](https://github.com/hifis-net/ansible-role-unattended-upgrades/pull/46) ([dependabot[bot]](https://github.com/apps/dependabot))
+- Bump ansible from 6.4.0 to 6.5.0 [\#45](https://github.com/hifis-net/ansible-role-unattended-upgrades/pull/45) ([dependabot[bot]](https://github.com/apps/dependabot))
+- Bump ansible-lint from 6.8.0 to 6.8.1 [\#44](https://github.com/hifis-net/ansible-role-unattended-upgrades/pull/44) ([dependabot[bot]](https://github.com/apps/dependabot))
+- Bump ansible-lint from 6.5.0 to 6.8.0 [\#43](https://github.com/hifis-net/ansible-role-unattended-upgrades/pull/43) ([dependabot[bot]](https://github.com/apps/dependabot))
+- Fix role name in README [\#42](https://github.com/hifis-net/ansible-role-unattended-upgrades/pull/42) ([lukashass](https://github.com/lukashass))
+- Bump molecule-podman from 2.0.2 to 2.0.3 [\#40](https://github.com/hifis-net/ansible-role-unattended-upgrades/pull/40) ([dependabot[bot]](https://github.com/apps/dependabot))
+- Remove support for OS that reached EOL [\#39](https://github.com/hifis-net/ansible-role-unattended-upgrades/pull/39) ([Normo](https://github.com/Normo))
+- Add changelog [\#37](https://github.com/hifis-net/ansible-role-unattended-upgrades/pull/37) ([Normo](https://github.com/Normo))
+- Fix installation of powermgmt-base [\#36](https://github.com/hifis-net/ansible-role-unattended-upgrades/pull/36) ([Normo](https://github.com/Normo))
 - Force usage of apt-get instead of aptitude [\#34](https://github.com/hifis-net/ansible-role-unattended-upgrades/pull/34) ([Normo](https://github.com/Normo))
 - Test Remove-Unused-Kernel-Packages option [\#31](https://github.com/hifis-net/ansible-role-unattended-upgrades/pull/31) ([Normo](https://github.com/Normo))
 - Add options for controlling the removal of unused kernel packages [\#29](https://github.com/hifis-net/ansible-role-unattended-upgrades/pull/29) ([gcotelli](https://github.com/gcotelli))
 - Stop overwriting default config [\#28](https://github.com/hifis-net/ansible-role-unattended-upgrades/pull/28) ([alpha0010](https://github.com/alpha0010))
+- Bump ansible from 6.2.0 to 6.4.0 [\#25](https://github.com/hifis-net/ansible-role-unattended-upgrades/pull/25) ([dependabot[bot]](https://github.com/apps/dependabot))
+- Bump yamllint from 1.27.1 to 1.28.0 [\#24](https://github.com/hifis-net/ansible-role-unattended-upgrades/pull/24) ([dependabot[bot]](https://github.com/apps/dependabot))
 - Add contribution guide [\#22](https://github.com/hifis-net/ansible-role-unattended-upgrades/pull/22) ([Normo](https://github.com/Normo))
 - Update README.md [\#19](https://github.com/hifis-net/ansible-role-unattended-upgrades/pull/19) ([Normo](https://github.com/Normo))
 - Remove custom ansible-lint config [\#18](https://github.com/hifis-net/ansible-role-unattended-upgrades/pull/18) ([Normo](https://github.com/Normo))
