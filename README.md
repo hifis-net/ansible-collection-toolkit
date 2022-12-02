@@ -222,7 +222,8 @@ GPL-2.0-or-later
 ## Author
 
 This role is maintained by [HIFIS Software Services](https://www.hifis.net/)
-and was originally created by [Jan Vlnas](https://github.com/jnv).
+and was originally forked from [jnv/ansible-role-unattended-upgrades](https://github.com/jnv/ansible-role-unattended-upgrades),
+created by [Jan Vlnas](https://github.com/jnv).
 
 ## Contributors
 
