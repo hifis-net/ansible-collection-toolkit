@@ -27,6 +27,7 @@
 
 **Merged pull requests:**
 
+- Prepare release version 2.0.0 [\#67](https://github.com/hifis-net/ansible-role-unattended-upgrades/pull/67) ([Normo](https://github.com/Normo))
 - Add codeowners to autoassign reviewers [\#65](https://github.com/hifis-net/ansible-role-unattended-upgrades/pull/65) ([Normo](https://github.com/Normo))
 - Ensure new default branch main is used by Galaxy [\#64](https://github.com/hifis-net/ansible-role-unattended-upgrades/pull/64) ([Normo](https://github.com/Normo))
 - Lint molecule folder [\#63](https://github.com/hifis-net/ansible-role-unattended-upgrades/pull/63) ([Normo](https://github.com/Normo))
