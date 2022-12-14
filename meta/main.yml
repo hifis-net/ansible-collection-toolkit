@@ -5,7 +5,7 @@ galaxy_info:
   author: "hifis"
   description: "Setup unattended-upgrades on Debian-based systems"
   license: "GPLv2"
-  min_ansible_version: "1.4"
+  min_ansible_version: "2.12"
   platforms:
   - name: "Ubuntu"
     versions:
