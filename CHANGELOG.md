@@ -17,6 +17,7 @@
 **Merged pull requests:**
 
 - Bump ansible-lint from 6.9.1 to 6.10.0 [\#79](https://github.com/hifis-net/ansible-role-unattended-upgrades/pull/79) ([dependabot[bot]](https://github.com/apps/dependabot))
+- Prepare release v2.0.1 [\#78](https://github.com/hifis-net/ansible-role-unattended-upgrades/pull/78) ([Normo](https://github.com/Normo))
 - Bump ansible from 7.0.0 to 7.1.0 [\#74](https://github.com/hifis-net/ansible-role-unattended-upgrades/pull/74) ([dependabot[bot]](https://github.com/apps/dependabot))
 - Bump molecule from 4.0.3 to 4.0.4 [\#73](https://github.com/hifis-net/ansible-role-unattended-upgrades/pull/73) ([dependabot[bot]](https://github.com/apps/dependabot))
 - Bump ansible-lint from 6.9.0 to 6.9.1 [\#72](https://github.com/hifis-net/ansible-role-unattended-upgrades/pull/72) ([dependabot[bot]](https://github.com/apps/dependabot))
