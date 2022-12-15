@@ -4,6 +4,7 @@
 [![Ansible Role: hifis.unattended_upgrades](https://img.shields.io/ansible/role/59313)](https://galaxy.ansible.com/hifis/unattended_upgrades)
 [![Ansible Quality Score](https://img.shields.io/ansible/quality/59313)](https://galaxy.ansible.com/hifis/unattended_upgrades)
 [![Ansible Role Downloads](https://img.shields.io/ansible/role/d/59313)](https://galaxy.ansible.com/hifis/unattended_upgrades)
+[![Latest release](https://img.shields.io/github/v/release/hifis-net/ansible-role-unattended-upgrades)](https://github.com/hifis-net/ansible-role-unattended-upgrades/releases)
 
 Install and setup [unattended-upgrades](https://launchpad.net/unattended-upgrades) for Ubuntu and Debian, to periodically install security upgrades.
 
