@@ -33,7 +33,7 @@ jobs:
     name: "Run Molecule tests."
     runs-on: "ubuntu-22.04"
     strategy:
-      fail-fast: true
+      fail-fast: false
       matrix:
         image:
           - "ghcr.io/hifis-net/ubuntu-systemd:22.04"
