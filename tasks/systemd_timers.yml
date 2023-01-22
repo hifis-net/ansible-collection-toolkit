@@ -1,0 +1,37 @@
+---
+
+- name: 'Test apt-daily timer'
+  ansible.builtin.command:
+    cmd: 'systemd-analyze calendar "{{ unattended_apt_daily_oncalendar }}"'
+  register: 'apt_daily'
+  changed_when: 'apt_daily.rc != 0'
+  check_mode: 'no'
+
+- name: 'Test apt-daily-upgrade timer'
+  ansible.builtin.command:
+    cmd: 'systemd-analyze calendar "{{ unattended_apt_daily_upgrade_oncalendar }}"'
+  register: 'apt_daily_upgrade'
+  changed_when: 'apt_daily_upgrade.rc != 0'
+  check_mode: 'no'
+
+- name: 'Deploy apt-daily timer'
+  ansible.builtin.template:
+    src: 'apt_daily_override.conf.j2'
+    dest: '/etc/systemd/system/apt-daily.timer.d/override.conf'
+    mode: 0644
+  when:
+    - 'apt_daily.rc == 0'
+  notify:
+    - 'Restart apt-daily timer'
+
+- name: 'Deploy apt-daily-upgrade timer'
+  ansible.builtin.template:
+    src: 'apt_daily_upgrade_override.conf.j2'
+    dest: '/etc/systemd/system/apt-daily-upgrade.timer.d/override.conf'
+    mode: 0644
+  when:
+    - 'apt_daily_upgrade.rc == "0"'
+  notify:
+    - 'Restart apt-daily-upgrade timer'
+
+...
