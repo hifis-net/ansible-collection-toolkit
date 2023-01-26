@@ -16,16 +16,16 @@
 
 - name: 'Ensure apt-daily.timer.d exist'
   ansible.builtin.file:
-    path: /etc/systemd/system/apt-daily.timer.d
+    path: '/etc/systemd/system/apt-daily.timer.d'
     mode: '0755'
-    state: directory
+    state: 'directory'
   register: 'apt_daily_timer_d'
 
 - name: 'Ensure apt-daily-upgrade.timer.d'
   ansible.builtin.file:
-    path: /etc/systemd/system/apt-daily-upgrade.timer.d
+    path: '/etc/systemd/system/apt-daily-upgrade.timer.d'
     mode: '0755'
-    state: directory
+    state: 'directory'
   register: 'apt_daily_upgrade_timer_d'
 
 - name: 'Deploy apt-daily timer'
@@ -45,7 +45,7 @@
     dest: '/etc/systemd/system/apt-daily-upgrade.timer.d/override.conf'
     mode: 0644
   when:
-    - 'apt_daily_upgrade.rc == "0"'
+    - 'apt_daily_upgrade.rc == 0'
     - 'apt_daily_upgrade_timer_d'
   notify:
     - 'Restart apt-daily-upgrade timer'
