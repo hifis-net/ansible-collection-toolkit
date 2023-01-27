@@ -147,7 +147,7 @@ Using `${distro_codename}` should be preferred over using `stable` or `oldstable
 
 ## Systemd timers
 
-Debian default configuration
+### Debian Default Configuration
 
 Donwload 7/7 between at 6am AND 6pm
 
