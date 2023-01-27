@@ -161,7 +161,7 @@ Install 7/7 between 5am - 7pm
 unattended_apt_daily_upgrade_oncalendar: "*-*-* 6:00"
 unattended_apt_daily_upgrade_randomizeddelaysec: "60m"
 
-Exemples :
+Examples:
 
 Download is between 12:20am - 12:40am
 
