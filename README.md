@@ -170,7 +170,7 @@ Documentation at https://wiki.archlinux.org/title/systemd/Timers
 unattended_apt_daily_oncalendar: "*-*-* 12:30"
 unattended_apt_daily_randomizeddelaysec: "10m"
 
-Instalation is between 12:50am - 13:10
+Installation is between 12:50am - 13:10
 
 * apt-daily-upgrade timer
 Documentation at https://wiki.archlinux.org/title/systemd/Timers
