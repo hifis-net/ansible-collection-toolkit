@@ -152,7 +152,7 @@ Using `${distro_codename}` should be preferred over using `stable` or `oldstable
 
 ### Debian Default Configuration
 
-Donwload 7/7 between at 6am AND 6pm
+Download 7/7 between at 6am AND 6pm
 
 * apt-daily timer
 unattended_apt_daily_oncalendar: "*-*-* 6,18:00"
