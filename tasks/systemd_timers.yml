@@ -1,6 +1,6 @@
 ---
 
-- name: 'Test apt-daily timer'
+- name: 'Test apt-daily timer expression'
   ansible.builtin.command:
     cmd: 'systemd-analyze calendar "{{ unattended_apt_daily_oncalendar }}"'
   register: 'apt_daily'
