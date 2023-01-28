@@ -14,7 +14,7 @@
   changed_when: 'apt_daily_upgrade.rc != 0'
   check_mode: 'no'
 
-- name: 'Ensure apt-daily.timer.d exist'
+- name: 'Ensure directory apt-daily.timer.d exists'
   ansible.builtin.file:
     path: '/etc/systemd/system/apt-daily.timer.d'
     mode: '0755'
