@@ -7,7 +7,7 @@
   changed_when: 'apt_daily.rc != 0'
   check_mode: 'no'
 
-- name: 'Test apt-daily-upgrade timer'
+- name: 'Test apt-daily-upgrade timer expression'
   ansible.builtin.command:
     cmd: 'systemd-analyze calendar "{{ unattended_apt_daily_upgrade_oncalendar }}"'
   register: 'apt_daily_upgrade'
