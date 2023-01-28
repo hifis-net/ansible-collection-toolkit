@@ -21,7 +21,7 @@
     state: 'directory'
   register: 'apt_daily_timer_d'
 
-- name: 'Ensure apt-daily-upgrade.timer.d'
+- name: 'Ensure directory apt-daily-upgrade.timer.d exists'
   ansible.builtin.file:
     path: '/etc/systemd/system/apt-daily-upgrade.timer.d'
     mode: '0755'
