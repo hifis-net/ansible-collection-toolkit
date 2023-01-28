@@ -2,3 +2,10 @@
 - name: "Import tasks from the unattended-upgrades playbook"
   ansible.builtin.import_tasks: "unattended-upgrades.yml"
   tags: "unattended"
+
+- name: "Import tasks from the systemd_timers playbook"
+  ansible.builtin.import_tasks: "systemd_timers.yml"
+  tags: "unattended_systemd_timers"
+  when:
+    - 'ansible_facts["os_family"] == "Debian"'
+    - 'ansible_facts["distribution_major_version"] | int >= 8'

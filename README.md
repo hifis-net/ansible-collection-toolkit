@@ -145,6 +145,38 @@ Additionally, unattended-upgrades support two macros (variables), derived from `
 
 Using `${distro_codename}` should be preferred over using `stable` or `oldstable` as a selected, as once `stable` moves to `oldstable`, no security updates will be installed at all, or worse, package from a newer distro release will be installed by accident. The same goes for upgrading your installation from `oldstable` to `stable`, if you forget to change this in your origin patterns, you may not receive the security updates for your newer distro release. With `${distro_codename}`, both cases can never happen.
 
+## Systemd timers
+
+### Debian Default Configuration
+
+Download 7/7 between at 6am AND 6pm
+
+* apt-daily timer
+unattended_apt_daily_oncalendar: "*-*-* 6,18:00"
+unattended_apt_daily_randomizeddelaysec: "12h"
+
+Install 7/7 between 5am - 7pm
+
+* apt-daily-upgrade timer
+unattended_apt_daily_upgrade_oncalendar: "*-*-* 6:00"
+unattended_apt_daily_upgrade_randomizeddelaysec: "60m"
+
+Examples:
+
+Download is between 12:20am - 12:40am
+
+* apt-daily timer
+Documentation at https://wiki.archlinux.org/title/systemd/Timers
+unattended_apt_daily_oncalendar: "*-*-* 12:30"
+unattended_apt_daily_randomizeddelaysec: "10m"
+
+Installation is between 12:50am - 13:10
+
+* apt-daily-upgrade timer
+Documentation at https://wiki.archlinux.org/title/systemd/Timers
+unattended_apt_daily_upgrade_oncalendar: "*-*-* 13:00"
+unattended_apt_daily_upgrade_randomizeddelaysec: "10m"
+
 ## Role Usage Examples
 
 Example for Ubuntu, with custom [origins patterns](#patterns-examples), blacklisted packages and e-mail notification:
@@ -235,3 +267,4 @@ project:
 * [gcotelli](https://github.com/gcotelli)
 * [lukashass](https://github.com/lukashass)
 * [nono-lqdn](https://github.com/nono-lqdn)
+* [mabed](https://github.com/mabed-fr)
