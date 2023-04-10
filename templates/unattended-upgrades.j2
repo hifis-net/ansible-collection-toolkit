@@ -81,6 +81,10 @@ Unattended-Upgrade::InstallOnShutdown "true";
 Unattended-Upgrade::Mail "{{unattended_mail}}";
 {% endif %}
 
+{% if unattended_mail_sender %}
+Unattended-Upgrade::Sender "{{unattended_mail_sender}}";
+{% endif %}
+
 {% if unattended_mail_only_on_error %}
 // Set this value to "true" to get emails only on errors. Default
 // is to always send a mail if Unattended-Upgrade::Mail is set
