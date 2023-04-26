@@ -28,6 +28,7 @@ provisioner:
           unattended_update_days: '{"Sat"}'
           unattended_remove_unused_kernel_packages: true
           unattended_only_on_ac_power: true
+          unattended_mail_sender: "jane@example.org"
   playbooks:
     prepare: "prepare.yml"
     check: "converge.yml"

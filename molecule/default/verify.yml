@@ -22,6 +22,7 @@
         - 'Unattended-Upgrade::Update-Days:: "Sat";'
         - 'Unattended-Upgrade::Remove-Unused-Kernel-Packages "true";'
         - 'Unattended-Upgrade::OnlyOnACPower "true";'
+        - 'Unattended-Upgrade::Sender "jane@example.org"'
 
     - name: "Dry run unattended-upgrades"
       ansible.builtin.command: "/usr/bin/unattended-upgrades --dry-run"
