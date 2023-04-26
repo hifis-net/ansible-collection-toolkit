@@ -1,5 +1,16 @@
 # Changelog
 
+## [Unreleased](https://github.com/hifis-net/ansible-role-unattended-upgrades/tree/HEAD)
+
+[Full Changelog](https://github.com/hifis-net/ansible-role-unattended-upgrades/compare/v2.0.1...HEAD)
+
+**Merged pull requests:**
+
+- Add test for Unattended-Upgrade::Sender [\#103](https://github.com/hifis-net/ansible-role-unattended-upgrades/pull/103) ([Normo](https://github.com/Normo))
+- Unattended-Upgrade::Sender support [\#101](https://github.com/hifis-net/ansible-role-unattended-upgrades/pull/101) ([turikhay](https://github.com/turikhay))
+- Bump ansible-lint from 6.10.0 to 6.10.2 [\#82](https://github.com/hifis-net/ansible-role-unattended-upgrades/pull/82) ([dependabot[bot]](https://github.com/apps/dependabot))
+- Do not cancel ci jobs if one ci job in the matrix fails [\#81](https://github.com/hifis-net/ansible-role-unattended-upgrades/pull/81) ([Normo](https://github.com/Normo))
+
 ## [v2.0.1](https://github.com/hifis-net/ansible-role-unattended-upgrades/tree/v2.0.1) (2022-12-15)
 
 [Full Changelog](https://github.com/hifis-net/ansible-role-unattended-upgrades/compare/v2.0.0...v2.0.1)
@@ -17,13 +28,13 @@
 **Merged pull requests:**
 
 - Bump ansible-lint from 6.9.1 to 6.10.0 [\#79](https://github.com/hifis-net/ansible-role-unattended-upgrades/pull/79) ([dependabot[bot]](https://github.com/apps/dependabot))
-- Prepare release v2.0.1 [\#78](https://github.com/hifis-net/ansible-role-unattended-upgrades/pull/78) ([Normo](https://github.com/Normo))
 - Bump ansible from 7.0.0 to 7.1.0 [\#74](https://github.com/hifis-net/ansible-role-unattended-upgrades/pull/74) ([dependabot[bot]](https://github.com/apps/dependabot))
 - Bump molecule from 4.0.3 to 4.0.4 [\#73](https://github.com/hifis-net/ansible-role-unattended-upgrades/pull/73) ([dependabot[bot]](https://github.com/apps/dependabot))
 - Bump ansible-lint from 6.9.0 to 6.9.1 [\#72](https://github.com/hifis-net/ansible-role-unattended-upgrades/pull/72) ([dependabot[bot]](https://github.com/apps/dependabot))
-- Leave a hint about the original fork [\#71](https://github.com/hifis-net/ansible-role-unattended-upgrades/pull/71) ([Normo](https://github.com/Normo))
 - Make sure GitHub Actions runs on the main branch [\#70](https://github.com/hifis-net/ansible-role-unattended-upgrades/pull/70) ([tobiashuste](https://github.com/tobiashuste))
 - Fix deprecation warning in GitHub Actions [\#69](https://github.com/hifis-net/ansible-role-unattended-upgrades/pull/69) ([tobiashuste](https://github.com/tobiashuste))
+- Prepare release v2.0.1 [\#78](https://github.com/hifis-net/ansible-role-unattended-upgrades/pull/78) ([Normo](https://github.com/Normo))
+- Leave a hint about the original fork [\#71](https://github.com/hifis-net/ansible-role-unattended-upgrades/pull/71) ([Normo](https://github.com/Normo))
 
 ## [v2.0.0](https://github.com/hifis-net/ansible-role-unattended-upgrades/tree/v2.0.0) (2022-12-02)
 
