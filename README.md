@@ -238,3 +238,4 @@ project:
 * [gcotelli](https://github.com/gcotelli)
 * [lukashass](https://github.com/lukashass)
 * [nono-lqdn](https://github.com/nono-lqdn)
+* [turikhay](https://github.com/turikhay)
