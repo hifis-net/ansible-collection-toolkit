@@ -57,6 +57,9 @@ On some hosts you may find that the unattended-upgrade's cron file `/etc/cron.da
 * `unattended_mail`:
   * Default: `false` (don't send any e-mail)
   * Description: E-mail address to send information about upgrades or problems with unattended upgrades.
+* `unattended_mail_sender`:
+  * Default: `false` (same as `root`)
+  * Description: Use the specified value in the "From" field of outgoing mails
 * `unattended_mail_only_on_error`:
   * Default: `false`
   * Description: Send e-mail only on errors, otherwise e-mail will be sent every time there's a package upgrade.

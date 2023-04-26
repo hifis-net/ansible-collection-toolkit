@@ -42,6 +42,10 @@ unattended_install_on_shutdown: false
 # 'mailx' must be installed.
 unattended_mail: false
 
+# Unattended-Upgrade::Sender
+# Use the specified value in the "From" field of outgoing mails.
+unattended_mail_sender: false
+
 #Unattended-Upgrade::MailOnlyOnError
 # Set this value to "true" to get emails only on errors. Default
 # is to always send a mail if Unattended-Upgrade::Mail is set
