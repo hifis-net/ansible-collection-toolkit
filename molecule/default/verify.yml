@@ -1,6 +1,15 @@
 ---
 - name: "Verify unattended upgrades installation"
   hosts: "all"
+  vars:
+    ubuntu_defaults:
+      - 'Unattended-Upgrade::Allowed-Origins:: "${distro_id}:${distro_codename}";'
+      - 'Unattended-Upgrade::Allowed-Origins:: "${distro_id}:${distro_codename}-security";'
+      - 'Unattended-Upgrade::Allowed-Origins:: "${distro_id}ESMApps:${distro_codename}-apps-security";'
+      - 'Unattended-Upgrade::Allowed-Origins:: "${distro_id}ESM:${distro_codename}-infra-security";'
+    debian_defaults:
+      - 'Unattended-Upgrade::Origins-Pattern:: "origin=Debian,codename=${distro_codename},label=Debian";'
+
   tasks:
     - name: "Get apt-config variables"
       ansible.builtin.command: "apt-config dump"
@@ -12,6 +21,7 @@
         that: "item in aptconfig.stdout"
       with_items:
         - 'APT::Periodic::Unattended-Upgrade "1"'
+        - 'Unattended-Upgrade::Origins-Pattern "";'
         - 'Unattended-Upgrade::AutoFixInterruptedDpkg "false"'
         - 'Unattended-Upgrade::MinimalSteps "true"'
         - 'Unattended-Upgrade::InstallOnShutdown "true"'
@@ -23,6 +33,34 @@
         - 'Unattended-Upgrade::Remove-Unused-Kernel-Packages "true";'
         - 'Unattended-Upgrade::OnlyOnACPower "true";'
         - 'Unattended-Upgrade::Sender "jane@example.org"'
+
+    - name: "Ubuntu specific verification"
+      when: "ansible_distribution == 'Ubuntu'"
+      block:
+      - name: "Check for registered variables on Ubuntu"
+        ansible.builtin.assert:
+          that: "item in aptconfig.stdout"
+        with_items:
+          - 'Unattended-Upgrade::Origins-Pattern:: "origin=Ubuntu,archive=${distro_codename}-security,label=Ubuntu";'
+
+      - name: "Check absence of Ubuntu defaults"
+        ansible.builtin.assert:
+          that: "item not in aptconfig.stdout"
+        with_items: "{{ ubuntu_defaults }}"
+
+    - name: "Debian specific verification"
+      when: "ansible_distribution == 'Debian'"
+      block:
+        - name: "Check for registered variables on Debian"
+          ansible.builtin.assert:
+            that: "item in aptconfig.stdout"
+          with_items:
+            - 'Unattended-Upgrade::Origins-Pattern:: "origin=Debian,codename=${distro_codename},label=Debian-Security";'
+
+        - name: "Check absence of Debian defaults"
+          ansible.builtin.assert:
+            that: "item not in aptconfig.stdout"
+          with_items: "{{ debian_defaults }}"
 
     - name: "Dry run unattended-upgrades"
       ansible.builtin.command: "/usr/bin/unattended-upgrades --dry-run"
