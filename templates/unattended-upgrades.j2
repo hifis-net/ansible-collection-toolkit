@@ -1,5 +1,10 @@
 {{ ansible_managed | comment('c') }}
 
+// Erase unattended-upgrades configuration tree
+{% for option in __clear_options %}
+#clear {{ option }};
+{% endfor %}
+
 // Overrides for `20auto-upgrades`. //////////////////////////////////////////
 
 APT::Periodic::Unattended-Upgrade "1";
