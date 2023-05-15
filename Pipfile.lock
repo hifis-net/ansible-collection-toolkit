@@ -1,7 +1,7 @@
 {
     "_meta": {
         "hash": {
-            "sha256": "bfef85e2860f61b301ce0155cfbc4de0430455d1a3c38e61aab149128514b3c8"
+            "sha256": "146417f6ce791533b0f7332811e0686d60be97235151344353e6ace47b84d66a"
         },
         "pipfile-spec": 6,
         "requires": {
@@ -509,7 +509,7 @@
                 "sha256:f8303414c7b03f794347ad062c0516cee0e15f7a612abd0ce1e25caf6ceb47df",
                 "sha256:fca62a8301b605b954ad2e9c3666f9d97f63872aa4efcae5492baca2056b74ab"
             ],
-            "markers": "python_version >= '3.7'",
+            "markers": "python_full_version >= '3.7.0'",
             "version": "==3.1.0"
         },
         "click": {
@@ -559,14 +559,6 @@
             ],
             "markers": "python_version >= '3.6'",
             "version": "==40.0.2"
-        },
-        "distro": {
-            "hashes": [
-                "sha256:02e111d1dc6a50abb8eed6bf31c3e48ed8b0830d1ea2a1b78c61765c2513fdd8",
-                "sha256:99522ca3e365cac527b44bde033f64c6945d90eb9f769703caaec52b09bbd3ff"
-            ],
-            "markers": "python_version >= '3.6'",
-            "version": "==1.8.0"
         },
         "enrich": {
             "hashes": [
@@ -688,9 +680,6 @@
             "version": "==0.1.2"
         },
         "molecule": {
-            "extras": [
-                "podman"
-            ],
             "hashes": [
                 "sha256:15a4c89e82ec1319bb1b36430061a103b91f1eb6d000b54330a161f4c8ee62d7",
                 "sha256:d02384a95188120ddfb4beb15ee0d9ea8b261825e37b36ef7d3fbdd63bd15806"
@@ -698,13 +687,16 @@
             "index": "pypi",
             "version": "==5.0.1"
         },
-        "molecule-podman": {
+        "molecule-plugins": {
+            "extras": [
+                "podman"
+            ],
             "hashes": [
-                "sha256:85d928ab36ab0a2fae57e03eb549dd523c9be36b4b904d050748c27ca72ac07f",
-                "sha256:cea2eacac54f129824530d35469ddd7bff109a94ebcd8408828af8c0dabf5c7a"
+                "sha256:34c47ee2c11c35ba30ca84ea684c1ee1669cf7e58d2197ac9dbfcbf42d0a1b7b",
+                "sha256:6734e11fa36b1ee3f1f80feaaa4eb703eae17f9117abe53dc5af6f3f093c0a63"
             ],
             "index": "pypi",
-            "version": "==2.0.3"
+            "version": "==23.4.1"
         },
         "mypy-extensions": {
             "hashes": [
@@ -732,11 +724,11 @@
         },
         "platformdirs": {
             "hashes": [
-                "sha256:47692bc24c1958e8b0f13dd727307cff1db103fca36399f457da8e05f222fdc4",
-                "sha256:7954a68d0ba23558d753f73437c55f89027cf8f5108c19844d4b82e5af396335"
+                "sha256:412dae91f52a6f84830f39a8078cecd0e866cb72294a5c66808e74d5e88d251f",
+                "sha256:e2378146f1964972c03c085bb5662ae80b2b8c06226c54b2ff4aa9483e8a13a5"
             ],
             "markers": "python_version >= '3.7'",
-            "version": "==3.5.0"
+            "version": "==3.5.1"
         },
         "pluggy": {
             "hashes": [
@@ -876,7 +868,7 @@
                 "sha256:2d11b9b8dd03868f09b4fffadc84a6a8cda574e40dc90821bd845720ebb8e89c",
                 "sha256:69cdf53799e63f38b95b9bf9c875f8c90e78dd62b2f00c13a911c7a3b9fa4704"
             ],
-            "markers": "python_version >= '3.7'",
+            "markers": "python_full_version >= '3.7.0'",
             "version": "==13.3.5"
         },
         "ruamel.yaml": {
@@ -928,14 +920,6 @@
             ],
             "markers": "python_version < '3.12' and platform_python_implementation == 'CPython'",
             "version": "==0.2.7"
-        },
-        "selinux": {
-            "hashes": [
-                "sha256:2a88b337ac46ad0f06f557b2806c3df62421972f766673dd8bf26732fb75a9ea",
-                "sha256:ecf7add45c939e9dda682c390a2cd0a845c94a4793a2cce9e8870d4ee9501f99"
-            ],
-            "markers": "sys_platform == 'linux'",
-            "version": "==0.3.0"
         },
         "setuptools": {
             "hashes": [
