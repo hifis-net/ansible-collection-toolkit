@@ -29,7 +29,7 @@ jobs:
       - name: "Lint code."
         run: |
           pipenv run yamllint --strict --format colored .
-          pipenv run ansible-lint -v --force-color --offline --exclude .pipenv/ . ./molecule
+          pipenv run ansible-lint -v --force-color --offline
 
   test:
     name: "Run Molecule tests."
