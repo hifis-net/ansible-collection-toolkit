@@ -11,10 +11,6 @@ platforms:
     override_command: false
     systemd: true
     tty: true
-lint: |
-  set -e &&
-  yamllint --strict --format colored . &&
-  ansible-lint -v --force-color --offline --exclude .pipenv/ . ./molecule
 provisioner:
   name: "ansible"
   inventory:
@@ -39,7 +35,6 @@ verifier:
 scenario:
   name: "default"
   test_sequence:
-    - "lint"
     - "destroy"
     - "dependency"
     - "syntax"
