@@ -8,28 +8,28 @@
 // Overrides for `20auto-upgrades`. //////////////////////////////////////////
 
 APT::Periodic::Unattended-Upgrade "1";
-
 {% if unattended_update_package_list is defined %}
+
 APT::Periodic::Update-Package-Lists "{{unattended_update_package_list}}";
 {% endif %}
-
 {% if unattended_download_upgradeable is defined %}
+
 APT::Periodic::Download-Upgradeable-Packages "{{unattended_download_upgradeable}}";
 {% endif %}
-
 {% if unattended_autoclean_interval is defined %}
+
 APT::Periodic::AutocleanInterval "{{unattended_autoclean_interval}}";
 {% endif %}
-
 {% if unattended_clean_interval is defined %}
+
 APT::Periodic::CleanInterval "{{unattended_clean_interval}}";
 {% endif %}
-
 {% if unattended_verbose is defined %}
+
 APT::Periodic::Verbose "{{unattended_verbose}}";
 {% endif %}
-
 {% if unattended_random_sleep is defined %}
+
 APT::Periodic::RandomSleep "{{unattended_random_sleep}}";
 {% endif %}
 
@@ -40,24 +40,25 @@ APT::Periodic::RandomSleep "{{unattended_random_sleep}}";
 // upgraded.
 Unattended-Upgrade::Origins-Pattern {
 {% if unattended_origins_patterns is defined %}
-  {% for origin in unattended_origins_patterns %}
-   "{{ origin }}";
-  {% endfor %}
+  {%- for origin in unattended_origins_patterns %}
+    "{{ origin }}";
+  {%- endfor %}
 {% else %}
-  {% for origin in __unattended_origins_patterns %}
-   "{{ origin }}";
-  {% endfor %}
+  {%- for origin in __unattended_origins_patterns %}
+    "{{ origin }}";
+  {%- endfor %}
 {% endif %}
+
 };
 
 // List of packages to not update (regexp are supported)
 Unattended-Upgrade::Package-Blacklist {
 {% for package in unattended_package_blacklist %}
-      "{{package}}";
+    "{{package}}";
 {% endfor %}
 };
-
 {% if not unattended_autofix_interrupted_dpkg %}
+
 // This option allows you to control if on a unclean dpkg exit
 // unattended-upgrades will automatically run
 //   dpkg --force-confold --configure -a
@@ -70,71 +71,71 @@ Unattended-Upgrade::AutoFixInterruptedDpkg "false";
 // a bit slower but it has the benefit that shutdown while a upgrade
 // is running is possible (with a small delay)
 Unattended-Upgrade::MinimalSteps "{{ unattended_minimal_steps | lower }}";
-
 {% if unattended_install_on_shutdown %}
+
 // Install all unattended-upgrades when the machine is shuting down
 // instead of doing it in the background while the machine is running
 // This will (obviously) make shutdown slower
 Unattended-Upgrade::InstallOnShutdown "true";
 {% endif %}
-
 {% if unattended_mail %}
+
 // Send email to this address for problems or packages upgrades
 // If empty or unset then no email is sent, make sure that you
 // have a working mail setup on your system. A package that provides
 // 'mailx' must be installed.
 Unattended-Upgrade::Mail "{{unattended_mail}}";
 {% endif %}
-
 {% if unattended_mail_sender %}
+
 Unattended-Upgrade::Sender "{{unattended_mail_sender}}";
 {% endif %}
-
 {% if unattended_mail_only_on_error %}
+
 // Set this value to "true" to get emails only on errors. Default
 // is to always send a mail if Unattended-Upgrade::Mail is set
 Unattended-Upgrade::MailOnlyOnError "true";
 {% endif %}
-
 {% if unattended_mail_report %}
+
 // Set this value to one of:
 //    "always", "only-on-error" or "on-change"
 // If this is not set, then any legacy MailOnlyOnError (boolean) value
 // is used to chose between "only-on-error" and "on-change"
 Unattended-Upgrade::MailReport "{{ unattended_mail_report }}";
 {% endif %}
-
 {% if unattended_remove_unused_dependencies %}
+
 // Do automatic removal of all unused dependencies after the upgrade
 // (equivalent to apt-get autoremove)
 Unattended-Upgrade::Remove-Unused-Dependencies "true";
 {% endif %}
-
 {% if not unattended_remove_new_unused_dependencies %}
+
 // Do automatic removal of new unused dependencies after the upgrade
 Unattended-Upgrade::Remove-New-Unused-Dependencies "false";
 {% endif %}
-
 {% if unattended_remove_unused_kernel_packages %}
+
 // Remove unused automatically installed kernel-related packages
 // (kernel images, kernel headers and kernel version locked tools).
 Unattended-Upgrade::Remove-Unused-Kernel-Packages "true";
 {% endif %}
-
 {% if unattended_automatic_reboot %}
+
 // Automatically reboot *WITHOUT CONFIRMATION* if a
 // the file /var/run/reboot-required is found after the upgrade
 Unattended-Upgrade::Automatic-Reboot "true";
 {% endif %}
-
 {% if unattended_automatic_reboot_time %}
+
 // If automatic reboot is enabled and needed, reboot at the specific
 // time instead of immediately
 //  Default: "now"
 Unattended-Upgrade::Automatic-Reboot-Time "{{ unattended_automatic_reboot_time }}";
 {% endif %}
-
 {% if unattended_update_days is defined %}
+
 // Set the days of the week that updates should be applied. The days can be specified
 // as localized abbreviated or full names. Or as integers where "0" is Sunday, "1" is
 // Monday etc.
@@ -142,14 +143,14 @@ Unattended-Upgrade::Automatic-Reboot-Time "{{ unattended_automatic_reboot_time }
 // {"Mon";"Fri"};
 Unattended-Upgrade::Update-Days {{ unattended_update_days }};
 {% endif %}
-
 {% if unattended_ignore_apps_require_restart %}
+
 // Do upgrade application even if it requires restart after upgrade
 // I.e. "XB-Upgrade-Requires: app-restart" is set in the debian/control file
 Unattended-Upgrade::IgnoreAppsRequireRestart "true";
 {% endif %}
-
 {% if unattended_syslog_enable %}
+
 // Write events to syslog, which is useful in environments where syslog
 // messages are sent to a central store.
 Unattended-Upgrade::SyslogEnable "{{ unattended_syslog_enable }}";
@@ -160,8 +161,8 @@ Unattended-Upgrade::SyslogEnable "{{ unattended_syslog_enable }}";
 Unattended-Upgrade::SyslogFacility "{{ unattended_syslog_facility }}";
 {% endif %}
 {% endif %}
-
 {% if unattended_dpkg_options %}
+
 // Append options for governing dpkg behavior, e.g. --force-confdef.
 Dpkg::Options {
 {% for dpkg_option in unattended_dpkg_options %}
@@ -169,8 +170,8 @@ Dpkg::Options {
 {% endfor %}
 };
 {% endif %}
-
 {% if unattended_dl_limit is defined %}
+
 // Use apt bandwidth limit feature, this example limits the download
 // speed to 70kb/sec
 Acquire::http::Dl-Limit "{{ unattended_dl_limit }}";
