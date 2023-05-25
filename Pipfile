@@ -10,7 +10,7 @@ molecule = "~=5.0.1"
 molecule-plugins = {extras = ["podman"], version = "~=23.4.1"}
 
 [packages]
-ansible = "~=7.5.0"
+ansible = "~=7.6.0"
 
 [requires]
 python_version = "3.10"
