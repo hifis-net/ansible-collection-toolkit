@@ -1,6 +1,6 @@
 # Changelog
 
-## [v3.0.0](https://github.com/hifis-net/ansible-role-unattended-upgrades/tree/v3.0.0) (2023-05-25)
+## [v3.0.0](https://github.com/hifis-net/ansible-role-unattended-upgrades/tree/v3.0.0) (2023-05-26)
 
 [Full Changelog](https://github.com/hifis-net/ansible-role-unattended-upgrades/compare/v2.0.1...v3.0.0)
 
@@ -12,8 +12,13 @@ As of this release, all Apt options for `unattended-upgrades` made in the defaul
 
 - apt options are not overridden but merged [\#94](https://github.com/hifis-net/ansible-role-unattended-upgrades/issues/94)
 
+**Closed issues:**
+
+- ValueError: not enough values to unpack \(expected 2, got 1\) on Ubuntu Jammy [\#55](https://github.com/hifis-net/ansible-role-unattended-upgrades/issues/55)
+
 **Merged pull requests:**
 
+- Prepare release version 3.0.0 [\#117](https://github.com/hifis-net/ansible-role-unattended-upgrades/pull/117) ([Normo](https://github.com/Normo))
 - Bump ansible from 7.5.0 to 7.6.0 [\#115](https://github.com/hifis-net/ansible-role-unattended-upgrades/pull/115) ([dependabot[bot]](https://github.com/apps/dependabot))
 - Bump yamllint from 1.31.0 to 1.32.0 [\#114](https://github.com/hifis-net/ansible-role-unattended-upgrades/pull/114) ([dependabot[bot]](https://github.com/apps/dependabot))
 - Bump ansible-lint from 6.16.1 to 6.16.2 [\#113](https://github.com/hifis-net/ansible-role-unattended-upgrades/pull/113) ([dependabot[bot]](https://github.com/apps/dependabot))
