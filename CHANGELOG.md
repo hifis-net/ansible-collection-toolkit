@@ -1,13 +1,32 @@
 # Changelog
 
-## [Unreleased](https://github.com/hifis-net/ansible-role-unattended-upgrades/tree/HEAD)
+## [v3.0.0](https://github.com/hifis-net/ansible-role-unattended-upgrades/tree/v3.0.0) (2023-05-25)
 
-[Full Changelog](https://github.com/hifis-net/ansible-role-unattended-upgrades/compare/v2.0.1...HEAD)
+[Full Changelog](https://github.com/hifis-net/ansible-role-unattended-upgrades/compare/v2.0.1...v3.0.0)
+
+**UPGRADE NOTES AND BREAKING CHANGES:**
+
+As of this release, all Apt options for `unattended-upgrades` made in the default OS configuration files `/etc/apt/apt.conf.d/20auto-upgrades` and `/etc/apt/apt.conf.d/50unattended-upgrades` are now completely overwritten instead of being merged. This means that from now on only the options set by this role are active.
+
+**Fixed bugs:**
+
+- apt options are not overridden but merged [\#94](https://github.com/hifis-net/ansible-role-unattended-upgrades/issues/94)
 
 **Merged pull requests:**
 
+- Bump ansible from 7.5.0 to 7.6.0 [\#115](https://github.com/hifis-net/ansible-role-unattended-upgrades/pull/115) ([dependabot[bot]](https://github.com/apps/dependabot))
+- Bump yamllint from 1.31.0 to 1.32.0 [\#114](https://github.com/hifis-net/ansible-role-unattended-upgrades/pull/114) ([dependabot[bot]](https://github.com/apps/dependabot))
+- Bump ansible-lint from 6.16.1 to 6.16.2 [\#113](https://github.com/hifis-net/ansible-role-unattended-upgrades/pull/113) ([dependabot[bot]](https://github.com/apps/dependabot))
+- Bump ansible-lint from 6.16.0 to 6.16.1 [\#112](https://github.com/hifis-net/ansible-role-unattended-upgrades/pull/112) ([dependabot[bot]](https://github.com/apps/dependabot))
+- fix: reformat config template [\#111](https://github.com/hifis-net/ansible-role-unattended-upgrades/pull/111) ([Normo](https://github.com/Normo))
+- Bump ansible-lint from 6.14.3 to 6.16.0 [\#109](https://github.com/hifis-net/ansible-role-unattended-upgrades/pull/109) ([dependabot[bot]](https://github.com/apps/dependabot))
+- Erase all unattended-upgrades options first [\#107](https://github.com/hifis-net/ansible-role-unattended-upgrades/pull/107) ([Normo](https://github.com/Normo))
+- Bump yamllint from 1.28.0 to 1.31.0 [\#106](https://github.com/hifis-net/ansible-role-unattended-upgrades/pull/106) ([dependabot[bot]](https://github.com/apps/dependabot))
+- Bump ansible from 7.1.0 to 7.5.0 [\#105](https://github.com/hifis-net/ansible-role-unattended-upgrades/pull/105) ([dependabot[bot]](https://github.com/apps/dependabot))
+- Bump molecule from 4.0.4 to 5.0.1 [\#104](https://github.com/hifis-net/ansible-role-unattended-upgrades/pull/104) ([dependabot[bot]](https://github.com/apps/dependabot))
 - Add test for Unattended-Upgrade::Sender [\#103](https://github.com/hifis-net/ansible-role-unattended-upgrades/pull/103) ([Normo](https://github.com/Normo))
 - Unattended-Upgrade::Sender support [\#101](https://github.com/hifis-net/ansible-role-unattended-upgrades/pull/101) ([turikhay](https://github.com/turikhay))
+- Bump ansible-lint from 6.10.2 to 6.14.3 [\#99](https://github.com/hifis-net/ansible-role-unattended-upgrades/pull/99) ([dependabot[bot]](https://github.com/apps/dependabot))
 - Bump ansible-lint from 6.10.0 to 6.10.2 [\#82](https://github.com/hifis-net/ansible-role-unattended-upgrades/pull/82) ([dependabot[bot]](https://github.com/apps/dependabot))
 - Do not cancel ci jobs if one ci job in the matrix fails [\#81](https://github.com/hifis-net/ansible-role-unattended-upgrades/pull/81) ([Normo](https://github.com/Normo))
 
