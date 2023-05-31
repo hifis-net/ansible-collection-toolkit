@@ -1,0 +1,16 @@
+---
+
+- name: 'Remove apt-daily timer override'
+  ansible.builtin.file:
+    path: '/etc/systemd/system/apt-daily.timer.d/schedule_override.conf'
+    state: 'absent'
+  notify:
+    - 'Restart apt-daily timer'
+
+- name: 'Remove apt-daily-upgrade timer override'
+  ansible.builtin.file:
+    path: '/etc/systemd/system/apt-daily-upgrade.timer.d/schedule_override.conf'
+    state: 'absent'
+  notify:
+    - 'Restart apt-daily-upgrade timer'
+...

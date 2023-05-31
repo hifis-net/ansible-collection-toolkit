@@ -125,6 +125,21 @@ On some hosts you may find that the unattended-upgrade's cron file `/etc/cron.da
 * `unattended_only_on_ac_power`:
   * Default: `false`
   * Description: Download and install upgrades only on AC power. It will also install the debian package `powermgmt-base`.
+* `unattended_systemd_timer_override`
+  * Default: `false`
+  * Description: Deploy/Remove timer overrides.
+* `unattended_apt_daily_oncalendar`
+  * Default: `"*-*-* 6,18:00"`
+  * Description: Apt daily schedule (download updates).
+* `unattended_apt_daily_randomizeddelaysec`
+  * Default: `"12h"`
+  * Description: Apt daily randomized delay.
+* `unattended_apt_daily_upgrade_oncalendar`
+  * Default: `"*-*-* 6:00"`
+  * Description: Apt daily upgrade schedule (install updates).
+* `unattended_apt_daily_upgrade_randomizeddelaysec`
+  * Default: `"60m"`
+  * Description: Apt daily upgrade randomized delay.
 
 ## Origins Patterns
 
@@ -150,35 +165,38 @@ Using `${distro_codename}` should be preferred over using `stable` or `oldstable
 
 ## Systemd timers
 
+Documentation for systemd/Timers: <https://wiki.archlinux.org/title/systemd/Timers>
+
 ### Debian Default Configuration
 
-Download 7/7 between at 6am AND 6pm
+* Download daily between at 6am AND 6pm
+* Install daily between 5am - 7pm
 
-* apt-daily timer
-unattended_apt_daily_oncalendar: "*-*-* 6,18:00"
-unattended_apt_daily_randomizeddelaysec: "12h"
+```yaml
+unattended_systemd_timer_override: False # (default)
+# apt-daily timer
+unattended_apt_daily_oncalendar: "*-*-* 6,18:00" # (default)
+unattended_apt_daily_randomizeddelaysec: "12h" # (default)
+# apt-daily-upgrade timer
+unattended_apt_daily_upgrade_oncalendar: "*-*-* 6:00" # (default)
+unattended_apt_daily_upgrade_randomizeddelaysec: "60m" # (default)
+```
 
-Install 7/7 between 5am - 7pm
+### Override Example
 
-* apt-daily-upgrade timer
-unattended_apt_daily_upgrade_oncalendar: "*-*-* 6:00"
-unattended_apt_daily_upgrade_randomizeddelaysec: "60m"
+* Download is between 12:20am - 12:40am
+* Installation is between 12:50am - 13:10
 
-Examples:
-
-Download is between 12:20am - 12:40am
-
-* apt-daily timer
-Documentation at https://wiki.archlinux.org/title/systemd/Timers
+```yaml
+unattended_systemd_timer_override: True
+# apt-daily timer
 unattended_apt_daily_oncalendar: "*-*-* 12:30"
 unattended_apt_daily_randomizeddelaysec: "10m"
 
-Installation is between 12:50am - 13:10
-
-* apt-daily-upgrade timer
-Documentation at https://wiki.archlinux.org/title/systemd/Timers
+# apt-daily-upgrade timer
 unattended_apt_daily_upgrade_oncalendar: "*-*-* 13:00"
 unattended_apt_daily_upgrade_randomizeddelaysec: "10m"
+```
 
 ## Role Usage Examples
 
@@ -247,7 +265,8 @@ unattended_origins_patterns:
 ```
 
 To not install any updates on a raspbian host, just set `unattended_origins_patterns` to an empty list:
-```
+
+```yaml
 unattended_origins_patterns: []
 ```
 
@@ -272,3 +291,4 @@ project:
 * [nono-lqdn](https://github.com/nono-lqdn)
 * [turikhay](https://github.com/turikhay)
 * [mabed](https://github.com/mabed-fr)
+* [pgassmann](https://github.com/pgassmann)

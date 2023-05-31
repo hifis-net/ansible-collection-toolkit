@@ -3,9 +3,18 @@
   ansible.builtin.import_tasks: "unattended-upgrades.yml"
   tags: "unattended"
 
-- name: "Import tasks from the systemd_timers playbook"
+- name: "Import tasks to install systemd timer schedule overrides"
   ansible.builtin.import_tasks: "systemd_timers.yml"
   tags: "unattended_systemd_timers"
   when:
     - 'ansible_facts["os_family"] == "Debian"'
     - 'ansible_facts["distribution_major_version"] | int >= 8'
+    - 'unattended_systemd_timer_override'
+
+- name: "Import tasks to remove systemd timer schedule overrides"
+  ansible.builtin.import_tasks: "systemd_timers_remove.yml"
+  tags: "unattended_systemd_timers"
+  when:
+    - 'ansible_facts["os_family"] == "Debian"'
+    - 'ansible_facts["distribution_major_version"] | int >= 8'
+    - 'not unattended_systemd_timer_override'

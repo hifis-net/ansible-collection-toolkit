@@ -157,6 +157,9 @@ unattended_dpkg_options: []
 # (i.e. skip or gracefully stop updates on battery)
 unattended_only_on_ac_power: false
 
+# Customize systemd timers for apt-daily and apt-daily-upgrade
+unattended_systemd_timer_override: False
+
 # apt-daily timer
 # Documentation at https://wiki.archlinux.org/title/systemd/Timers
 unattended_apt_daily_oncalendar: "*-*-* 6,18:00"
