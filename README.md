@@ -12,7 +12,7 @@ Install and setup [unattended-upgrades](https://launchpad.net/unattended-upgrade
 
 1. If you have used version `0.0.1` of the role, you can delete the file `/etc/apt/apt.conf.d/10periodic` as it is not needed anymore. You can use the following one-shot command:
     * `ansible -m file -a "state=absent path=/etc/apt/apt.conf.d/10periodic" <host-pattern>`
-1. If you have used this role before version `2.0.0`, the files `20auto-upgrades` and `50unattended-upgrades` will differ from the system defaults (instead of configuration being placed in a separate file, as we do now).  These can be left as-is as they will be overridden.  During OS upgrades, when asked if these files should be overwritten by the maintainer's package, say yes.  They will then be reset to their default states, and you won't be asked these questions again.
+2. If you have used this role before version `2.0.0`, the files `20auto-upgrades` and `50unattended-upgrades` will differ from the system defaults (instead of configuration being placed in a separate file, as we do now). These can be left as-is as they will be overridden. During OS upgrades, when asked if these files should be overwritten by the maintainer's package, say yes. They will then be reset to their default states, and you won't be asked these questions again.
 
 ## Requirements
 
@@ -173,7 +173,7 @@ Documentation for systemd/Timers: <https://wiki.archlinux.org/title/systemd/Time
 * Install daily between 5am - 7pm
 
 ```yaml
-unattended_systemd_timer_override: False # (default)
+unattended_systemd_timer_override: false # (default)
 # apt-daily timer
 unattended_apt_daily_oncalendar: "*-*-* 6,18:00" # (default)
 unattended_apt_daily_randomizeddelaysec: "12h" # (default)
@@ -188,7 +188,7 @@ unattended_apt_daily_upgrade_randomizeddelaysec: "60m" # (default)
 * Installation is between 12:50am - 13:10
 
 ```yaml
-unattended_systemd_timer_override: True
+unattended_systemd_timer_override: true
 # apt-daily timer
 unattended_apt_daily_oncalendar: "*-*-* 12:30"
 unattended_apt_daily_randomizeddelaysec: "10m"
