@@ -169,8 +169,8 @@ Documentation for systemd/Timers: <https://wiki.archlinux.org/title/systemd/Time
 
 ### Debian Default Configuration
 
-* Download daily between at 6am AND 6pm
-* Install daily between 5am - 7pm
+* Download daily between at random times during the entire day.
+* Install daily between 6am - 7am
 
 ```yaml
 unattended_systemd_timer_override: false # (default)
@@ -182,20 +182,20 @@ unattended_apt_daily_upgrade_oncalendar: "*-*-* 6:00" # (default)
 unattended_apt_daily_upgrade_randomizeddelaysec: "60m" # (default)
 ```
 
-### Override Example
+### Customized download and update timers
 
-* Download is between 12:20am - 12:40am
-* Installation is between 12:50am - 13:10
+* Download starts between 00:30am - 01:30am
+* Installation starts between 04:00am - 05:30am
 
 ```yaml
 unattended_systemd_timer_override: true
 # apt-daily timer
-unattended_apt_daily_oncalendar: "*-*-* 12:30"
-unattended_apt_daily_randomizeddelaysec: "10m"
+unattended_apt_daily_oncalendar: "*-*-* 00:30"
+unattended_apt_daily_randomizeddelaysec: "60m"
 
 # apt-daily-upgrade timer
-unattended_apt_daily_upgrade_oncalendar: "*-*-* 13:00"
-unattended_apt_daily_upgrade_randomizeddelaysec: "10m"
+unattended_apt_daily_upgrade_oncalendar: "*-*-* 4:00"
+unattended_apt_daily_upgrade_randomizeddelaysec: "90m"
 ```
 
 ## Role Usage Examples
