@@ -1,0 +1,60 @@
+---
+
+- name: 'Test apt-daily timer expression'
+  ansible.builtin.command:
+    cmd: 'systemd-analyze calendar "{{ unattended_apt_daily_oncalendar }}"'
+  register: '_apt_daily'
+  changed_when: '_apt_daily.rc != 0'
+  check_mode: false
+
+- name: 'Test apt-daily-upgrade timer expression'
+  ansible.builtin.command:
+    cmd: 'systemd-analyze calendar "{{ unattended_apt_daily_upgrade_oncalendar }}"'
+  register: '_apt_daily_upgrade'
+  changed_when: '_apt_daily_upgrade.rc != 0'
+  check_mode: false
+
+- name: 'Ensure directory apt-daily.timer.d exists'
+  ansible.builtin.file:
+    path: '/etc/systemd/system/apt-daily.timer.d'
+    mode: '0755'
+    state: 'directory'
+    owner: 'root'
+    group: 'root'
+  register: '_apt_daily_timer_d'
+
+- name: 'Ensure directory apt-daily-upgrade.timer.d exists'
+  ansible.builtin.file:
+    path: '/etc/systemd/system/apt-daily-upgrade.timer.d'
+    mode: '0755'
+    state: 'directory'
+    owner: 'root'
+    group: 'root'
+  register: '_apt_daily_upgrade_timer_d'
+
+- name: 'Deploy apt-daily timer'
+  ansible.builtin.template:
+    src: 'apt_daily_override.conf.j2'
+    dest: '/etc/systemd/system/apt-daily.timer.d/schedule_override.conf'
+    mode: '0644'
+    owner: 'root'
+    group: 'root'
+  when:
+    - '_apt_daily.rc == 0'
+    - '_apt_daily_timer_d' # skip if run for the first time in check mode
+  notify:
+    - 'Restart apt-daily timer'
+
+- name: 'Deploy apt-daily-upgrade timer'
+  ansible.builtin.template:
+    src: 'apt_daily_upgrade_override.conf.j2'
+    dest: '/etc/systemd/system/apt-daily-upgrade.timer.d/schedule_override.conf'
+    mode: '0644'
+    owner: 'root'
+    group: 'root'
+  when:
+    - '_apt_daily_upgrade.rc == 0'
+    - '_apt_daily_upgrade_timer_d' # skip if run for the first time in check mode
+  notify:
+    - 'Restart apt-daily-upgrade timer'
+...

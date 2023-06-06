@@ -12,7 +12,7 @@ Install and setup [unattended-upgrades](https://launchpad.net/unattended-upgrade
 
 1. If you have used version `0.0.1` of the role, you can delete the file `/etc/apt/apt.conf.d/10periodic` as it is not needed anymore. You can use the following one-shot command:
     * `ansible -m file -a "state=absent path=/etc/apt/apt.conf.d/10periodic" <host-pattern>`
-1. If you have used this role before version `2.0.0`, the files `20auto-upgrades` and `50unattended-upgrades` will differ from the system defaults (instead of configuration being placed in a separate file, as we do now).  These can be left as-is as they will be overridden.  During OS upgrades, when asked if these files should be overwritten by the maintainer's package, say yes.  They will then be reset to their default states, and you won't be asked these questions again.
+2. If you have used this role before version `2.0.0`, the files `20auto-upgrades` and `50unattended-upgrades` will differ from the system defaults (instead of configuration being placed in a separate file, as we do now). These can be left as-is as they will be overridden. During OS upgrades, when asked if these files should be overwritten by the maintainer's package, say yes. They will then be reset to their default states, and you won't be asked these questions again.
 
 ## Requirements
 
@@ -125,6 +125,21 @@ On some hosts you may find that the unattended-upgrade's cron file `/etc/cron.da
 * `unattended_only_on_ac_power`:
   * Default: `false`
   * Description: Download and install upgrades only on AC power. It will also install the debian package `powermgmt-base`.
+* `unattended_systemd_timer_override`
+  * Default: `false`
+  * Description: Deploy/Remove timer overrides.
+* `unattended_apt_daily_oncalendar`
+  * Default: `"*-*-* 6,18:00"`
+  * Description: Apt daily schedule (download updates).
+* `unattended_apt_daily_randomizeddelaysec`
+  * Default: `"12h"`
+  * Description: Apt daily randomized delay.
+* `unattended_apt_daily_upgrade_oncalendar`
+  * Default: `"*-*-* 6:00"`
+  * Description: Apt daily upgrade schedule (install updates).
+* `unattended_apt_daily_upgrade_randomizeddelaysec`
+  * Default: `"60m"`
+  * Description: Apt daily upgrade randomized delay.
 
 ## Origins Patterns
 
@@ -147,6 +162,41 @@ Additionally, unattended-upgrades support two macros (variables), derived from `
 * `${distro_codename}` – Installed codename, e.g. `bullseye` or `jammy`.
 
 Using `${distro_codename}` should be preferred over using `stable` or `oldstable` as a selected, as once `stable` moves to `oldstable`, no security updates will be installed at all, or worse, package from a newer distro release will be installed by accident. The same goes for upgrading your installation from `oldstable` to `stable`, if you forget to change this in your origin patterns, you may not receive the security updates for your newer distro release. With `${distro_codename}`, both cases can never happen.
+
+## Systemd timers
+
+Documentation for systemd/Timers: <https://wiki.archlinux.org/title/systemd/Timers>
+
+### Debian Default Configuration
+
+* Download daily at random times during the entire day.
+* Install daily between 6am - 7am
+
+```yaml
+unattended_systemd_timer_override: false # (default)
+# apt-daily timer
+unattended_apt_daily_oncalendar: "*-*-* 6,18:00" # (default)
+unattended_apt_daily_randomizeddelaysec: "12h" # (default)
+# apt-daily-upgrade timer
+unattended_apt_daily_upgrade_oncalendar: "*-*-* 6:00" # (default)
+unattended_apt_daily_upgrade_randomizeddelaysec: "60m" # (default)
+```
+
+### Customized download and update timers
+
+* Download starts between 00:30am - 01:30am
+* Installation starts between 04:00am - 05:30am
+
+```yaml
+unattended_systemd_timer_override: true
+# apt-daily timer
+unattended_apt_daily_oncalendar: "*-*-* 00:30"
+unattended_apt_daily_randomizeddelaysec: "60m"
+
+# apt-daily-upgrade timer
+unattended_apt_daily_upgrade_oncalendar: "*-*-* 4:00"
+unattended_apt_daily_upgrade_randomizeddelaysec: "90m"
+```
 
 ## Role Usage Examples
 
@@ -215,7 +265,8 @@ unattended_origins_patterns:
 ```
 
 To not install any updates on a raspbian host, just set `unattended_origins_patterns` to an empty list:
-```
+
+```yaml
 unattended_origins_patterns: []
 ```
 
@@ -239,3 +290,5 @@ project:
 * [lukashass](https://github.com/lukashass)
 * [nono-lqdn](https://github.com/nono-lqdn)
 * [turikhay](https://github.com/turikhay)
+* [mabed](https://github.com/mabed-fr)
+* [pgassmann](https://github.com/pgassmann)

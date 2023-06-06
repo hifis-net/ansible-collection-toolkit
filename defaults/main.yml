@@ -119,10 +119,10 @@ unattended_autoclean_interval: 7
 
 #APT::Periodic::Verbose "0";
 # - Send report mail to root
-#     0:  no report             (or null string)
-#     1:  progress report       (actually any string)
-#     2:  + command outputs     (remove -qq, remove 2>/dev/null, add -d)
-#     3:  + trace on
+#     0: no report             (or null string)
+#     1: progress report       (actually any string)
+#     2: + command outputs     (remove -qq, remove 2>/dev/null, add -d)
+#     3: + trace on
 #unattended_verbose: 0
 
 ## Cron systems only
@@ -156,3 +156,16 @@ unattended_dpkg_options: []
 # Download and install upgrades only on AC power
 # (i.e. skip or gracefully stop updates on battery)
 unattended_only_on_ac_power: false
+
+# Customize systemd timers for apt-daily and apt-daily-upgrade
+unattended_systemd_timer_override: false
+
+# apt-daily timer
+# Documentation at https://wiki.archlinux.org/title/systemd/Timers
+unattended_apt_daily_oncalendar: "*-*-* 6,18:00"
+unattended_apt_daily_randomizeddelaysec: "12h"
+
+# apt-daily-upgrade timer
+# Documentation at https://wiki.archlinux.org/title/systemd/Timers
+unattended_apt_daily_upgrade_oncalendar: "*-*-* 6:00"
+unattended_apt_daily_upgrade_randomizeddelaysec: "60m"
