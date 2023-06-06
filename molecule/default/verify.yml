@@ -68,4 +68,12 @@
       failed_when: "dry_run.rc != 0"
       changed_when: false
 
+    - name: "Verify custom apt-daily timers"  # noqa command-instead-of-shell
+      ansible.builtin.shell:
+        cmd: "{{ item }}"
+      changed_when: false
+      loop:
+        - 'systemctl list-timers apt-daily* | grep apt-daily.service | grep "11:08:00"'
+        - 'systemctl list-timers apt-daily* | grep apt-daily-upgrade.service | grep "11:31:00"'
+
 ...
