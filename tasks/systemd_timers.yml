@@ -19,6 +19,8 @@
     path: '/etc/systemd/system/apt-daily.timer.d'
     mode: '0755'
     state: 'directory'
+    owner: 'root'
+    group: 'root'
   register: '_apt_daily_timer_d'
 
 - name: 'Ensure directory apt-daily-upgrade.timer.d exists'
@@ -26,6 +28,8 @@
     path: '/etc/systemd/system/apt-daily-upgrade.timer.d'
     mode: '0755'
     state: 'directory'
+    owner: 'root'
+    group: 'root'
   register: '_apt_daily_upgrade_timer_d'
 
 - name: 'Deploy apt-daily timer'
@@ -33,6 +37,8 @@
     src: 'apt_daily_override.conf.j2'
     dest: '/etc/systemd/system/apt-daily.timer.d/schedule_override.conf'
     mode: '0644'
+    owner: 'root'
+    group: 'root'
   when:
     - '_apt_daily.rc == 0'
     - '_apt_daily_timer_d' # skip if run for the first time in check mode
@@ -44,6 +50,8 @@
     src: 'apt_daily_upgrade_override.conf.j2'
     dest: '/etc/systemd/system/apt-daily-upgrade.timer.d/schedule_override.conf'
     mode: '0644'
+    owner: 'root'
+    group: 'root'
   when:
     - '_apt_daily_upgrade.rc == 0'
     - '_apt_daily_upgrade_timer_d' # skip if run for the first time in check mode
