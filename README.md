@@ -169,7 +169,7 @@ Documentation for systemd/Timers: <https://wiki.archlinux.org/title/systemd/Time
 
 ### Debian Default Configuration
 
-* Download daily between at random times during the entire day.
+* Download daily at random times during the entire day.
 * Install daily between 6am - 7am
 
 ```yaml
