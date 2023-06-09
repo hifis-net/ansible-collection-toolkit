@@ -15,6 +15,7 @@
 
 **Merged pull requests:**
 
+- Prepare release version 3.1.0 [\#127](https://github.com/hifis-net/ansible-role-unattended-upgrades/pull/127) ([Normo](https://github.com/Normo))
 - Update minimum ansible version to 2.13 [\#125](https://github.com/hifis-net/ansible-role-unattended-upgrades/pull/125) ([Normo](https://github.com/Normo))
 - Add support for custom apt-daily and apt-daily-upgrade timers [\#120](https://github.com/hifis-net/ansible-role-unattended-upgrades/pull/120) ([pgassmann](https://github.com/pgassmann))
 - Bump ansible from 7.6.0 to 8.0.0 [\#119](https://github.com/hifis-net/ansible-role-unattended-upgrades/pull/119) ([dependabot[bot]](https://github.com/apps/dependabot))
