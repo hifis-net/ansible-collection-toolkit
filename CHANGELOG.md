@@ -1,5 +1,24 @@
 # Changelog
 
+## [v3.1.0](https://github.com/hifis-net/ansible-role-unattended-upgrades/tree/v3.1.0) (2023-06-09)
+
+[Full Changelog](https://github.com/hifis-net/ansible-role-unattended-upgrades/compare/v3.0.0...v3.1.0)
+
+**Implemented enhancements:**
+
+- Added custom of apt-daily timers apt-daily-upgrade [\#85](https://github.com/hifis-net/ansible-role-unattended-upgrades/issues/85)
+- Test custom apt-daily timers [\#121](https://github.com/hifis-net/ansible-role-unattended-upgrades/pull/121) ([Normo](https://github.com/Normo))
+
+**Closed issues:**
+
+- Remove support for ansible-core 2.12 [\#124](https://github.com/hifis-net/ansible-role-unattended-upgrades/issues/124)
+
+**Merged pull requests:**
+
+- Update minimum ansible version to 2.13 [\#125](https://github.com/hifis-net/ansible-role-unattended-upgrades/pull/125) ([Normo](https://github.com/Normo))
+- Add support for custom apt-daily and apt-daily-upgrade timers [\#120](https://github.com/hifis-net/ansible-role-unattended-upgrades/pull/120) ([pgassmann](https://github.com/pgassmann))
+- Bump ansible from 7.6.0 to 8.0.0 [\#119](https://github.com/hifis-net/ansible-role-unattended-upgrades/pull/119) ([dependabot[bot]](https://github.com/apps/dependabot))
+
 ## [v3.0.0](https://github.com/hifis-net/ansible-role-unattended-upgrades/tree/v3.0.0) (2023-05-26)
 
 [Full Changelog](https://github.com/hifis-net/ansible-role-unattended-upgrades/compare/v2.0.1...v3.0.0)
@@ -18,7 +37,6 @@ As of this release, all Apt options for `unattended-upgrades` made in the defaul
 
 **Merged pull requests:**
 
-- Prepare release version 3.0.0 [\#117](https://github.com/hifis-net/ansible-role-unattended-upgrades/pull/117) ([Normo](https://github.com/Normo))
 - Bump ansible from 7.5.0 to 7.6.0 [\#115](https://github.com/hifis-net/ansible-role-unattended-upgrades/pull/115) ([dependabot[bot]](https://github.com/apps/dependabot))
 - Bump yamllint from 1.31.0 to 1.32.0 [\#114](https://github.com/hifis-net/ansible-role-unattended-upgrades/pull/114) ([dependabot[bot]](https://github.com/apps/dependabot))
 - Bump ansible-lint from 6.16.1 to 6.16.2 [\#113](https://github.com/hifis-net/ansible-role-unattended-upgrades/pull/113) ([dependabot[bot]](https://github.com/apps/dependabot))
@@ -34,6 +52,7 @@ As of this release, all Apt options for `unattended-upgrades` made in the defaul
 - Bump ansible-lint from 6.10.2 to 6.14.3 [\#99](https://github.com/hifis-net/ansible-role-unattended-upgrades/pull/99) ([dependabot[bot]](https://github.com/apps/dependabot))
 - Bump ansible-lint from 6.10.0 to 6.10.2 [\#82](https://github.com/hifis-net/ansible-role-unattended-upgrades/pull/82) ([dependabot[bot]](https://github.com/apps/dependabot))
 - Do not cancel ci jobs if one ci job in the matrix fails [\#81](https://github.com/hifis-net/ansible-role-unattended-upgrades/pull/81) ([Normo](https://github.com/Normo))
+- Prepare release version 3.0.0 [\#117](https://github.com/hifis-net/ansible-role-unattended-upgrades/pull/117) ([Normo](https://github.com/Normo))
 
 ## [v2.0.1](https://github.com/hifis-net/ansible-role-unattended-upgrades/tree/v2.0.1) (2022-12-15)
 
@@ -63,6 +82,13 @@ As of this release, all Apt options for `unattended-upgrades` made in the defaul
 ## [v2.0.0](https://github.com/hifis-net/ansible-role-unattended-upgrades/tree/v2.0.0) (2022-12-02)
 
 [Full Changelog](https://github.com/hifis-net/ansible-role-unattended-upgrades/compare/v1.12.2...v2.0.0)
+
+**UPGRADE NOTES AND BREAKING CHANGES:**
+
+If you have used this role before version 2.0.0, the files `20auto-upgrades` and `50unattended-upgrades` will differ from the system defaults (instead of the configuration being placed in a separate file, as we do now).
+These can be left as-is as they will be overridden.
+During OS upgrades, when asked if these files should be overwritten by the maintainer's package, say yes.
+They will then be reset to their default states, and you won't be asked these questions again.
 
 **Implemented enhancements:**
 
