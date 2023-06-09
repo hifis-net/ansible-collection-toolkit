@@ -8,12 +8,6 @@
 
 Install and setup [unattended-upgrades](https://launchpad.net/unattended-upgrades) for Ubuntu and Debian, to periodically install security upgrades.
 
-### Notes
-
-1. If you have used version `0.0.1` of the role, you can delete the file `/etc/apt/apt.conf.d/10periodic` as it is not needed anymore. You can use the following one-shot command:
-    * `ansible -m file -a "state=absent path=/etc/apt/apt.conf.d/10periodic" <host-pattern>`
-2. If you have used this role before version `2.0.0`, the files `20auto-upgrades` and `50unattended-upgrades` will differ from the system defaults (instead of configuration being placed in a separate file, as we do now). These can be left as-is as they will be overridden. During OS upgrades, when asked if these files should be overwritten by the maintainer's package, say yes. They will then be reset to their default states, and you won't be asked these questions again.
-
 ## Requirements
 
 The role uses [apt module](https://docs.ansible.com/ansible/latest/collections/ansible/builtin/apt_module.html) which has additional dependencies.
@@ -25,12 +19,6 @@ The role requires unattended-upgrades version 0.70 and newer, which is available
 ### Automatic Reboot
 
 If you enable automatic reboot feature (`unattended_automatic_reboot`), the role will attempt to install `update-notifier-common` package, which is required on some systems for detecting and executing reboot after the upgrade. You may optionally define a specific time for rebooting (`unattended_automatic_reboot_time`).
-
-This feature was broken in Debian Jessie, but eventually was rolled into the unattended-upgrades package; see [the discussion in #6](https://github.com/jnv/ansible-role-unattended-upgrades/issues/6) for more details.
-
-## Disabled Cron Jobs
-
-On some hosts you may find that the unattended-upgrade's cron file `/etc/cron.daily/apt` file has been renamed to `apt.disabled`. This is possibly provider's decision, to save some CPU cycles. Use [enable-standard-cronjobs](https://github.com/Yannik/ansible-role-enable-standard-cronjobs) role to re-enable unattended-upgrades. See also discussion in [#9](https://github.com/jnv/ansible-role-unattended-upgrades/issues/9).
 
 ## Role Variables
 
