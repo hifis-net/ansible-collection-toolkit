@@ -1,5 +1,29 @@
 # Changelog
 
+## [v3.2.0](https://github.com/hifis-net/ansible-role-unattended-upgrades/tree/v3.2.0) (2023-08-25)
+
+[Full Changelog](https://github.com/hifis-net/ansible-role-unattended-upgrades/compare/v3.1.0...v3.2.0)
+
+**Implemented enhancements:**
+
+- Add support for Debian Bookworm [\#134](https://github.com/hifis-net/ansible-role-unattended-upgrades/issues/134)
+
+**Closed issues:**
+
+- Remove official support for EOL Ubuntu 18.04 [\#139](https://github.com/hifis-net/ansible-role-unattended-upgrades/issues/139)
+
+**Merged pull requests:**
+
+- fix: remove official support for EOL Ubuntu 18.04 [\#141](https://github.com/hifis-net/ansible-role-unattended-upgrades/pull/141) ([tobiashuste](https://github.com/tobiashuste))
+- feat: add support for Debian 12 bookworm [\#140](https://github.com/hifis-net/ansible-role-unattended-upgrades/pull/140) ([tobiashuste](https://github.com/tobiashuste))
+- Bump ansible-lint from 6.17.2 to 6.18.0 [\#138](https://github.com/hifis-net/ansible-role-unattended-upgrades/pull/138) ([dependabot[bot]](https://github.com/apps/dependabot))
+- Bump molecule from 5.1.0 to 6.0.1 [\#137](https://github.com/hifis-net/ansible-role-unattended-upgrades/pull/137) ([dependabot[bot]](https://github.com/apps/dependabot))
+- Bump ansible from 8.1.0 to 8.3.0 [\#136](https://github.com/hifis-net/ansible-role-unattended-upgrades/pull/136) ([dependabot[bot]](https://github.com/apps/dependabot))
+- Bump molecule-plugins from 23.4.1 to 23.5.0 [\#133](https://github.com/hifis-net/ansible-role-unattended-upgrades/pull/133) ([dependabot[bot]](https://github.com/apps/dependabot))
+- Bump ansible-lint from 6.16.2 to 6.17.2 [\#131](https://github.com/hifis-net/ansible-role-unattended-upgrades/pull/131) ([dependabot[bot]](https://github.com/apps/dependabot))
+- Bump molecule from 5.0.1 to 5.1.0 [\#130](https://github.com/hifis-net/ansible-role-unattended-upgrades/pull/130) ([dependabot[bot]](https://github.com/apps/dependabot))
+- Bump ansible from 8.0.0 to 8.1.0 [\#129](https://github.com/hifis-net/ansible-role-unattended-upgrades/pull/129) ([dependabot[bot]](https://github.com/apps/dependabot))
+
 ## [v3.1.0](https://github.com/hifis-net/ansible-role-unattended-upgrades/tree/v3.1.0) (2023-06-09)
 
 [Full Changelog](https://github.com/hifis-net/ansible-role-unattended-upgrades/compare/v3.0.0...v3.1.0)
