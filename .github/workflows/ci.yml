@@ -21,7 +21,7 @@ jobs:
     runs-on: "ubuntu-22.04"
     steps:
       - name: "Check out the codebase."
-        uses: "actions/checkout@v3"
+        uses: "actions/checkout@v4"
 
       - name: "Prepare the job environment."
         uses: "./.github/workflows/prepare-action"
@@ -46,7 +46,7 @@ jobs:
 
     steps:
       - name: "Check out the codebase."
-        uses: "actions/checkout@v3"
+        uses: "actions/checkout@v4"
 
       - name: "Enable lingering required for podman and systemd in GH Actions."
         run: |  # Compare with https://github.com/eriksjolund/user-systemd-service-actions-workflow/blob/efe872924fd2dd35bb482544126ce751303e14c2/README.md
@@ -68,7 +68,7 @@ jobs:
     needs: ["lint", "test"]
     steps:
       - name: "checkout"
-        uses: "actions/checkout@v3"
+        uses: "actions/checkout@v4"
       - name: "galaxy"
         uses: "robertdebock/galaxy-action@1.2.1"
         with:
