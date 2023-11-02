@@ -1,12 +1,13 @@
 ---
 - name: "Add distribution-specific variables"
-  ansible.builtin.include_vars: "{{ ansible_distribution }}.yml"
-
-- name: "Add Debian Bullseye workaround"
-  ansible.builtin.include_vars: "{{ ansible_distribution }}-{{ ansible_distribution_release }}.yml"
-  when:
-    - "ansible_distribution == 'Debian'"
-    - "ansible_distribution_release == 'bullseye'"
+  ansible.builtin.include_vars: "{{ lookup('ansible.builtin.first_found', params) }}"
+  vars:
+    params:
+      files:
+        - "{{ ansible_distribution }}-{{ ansible_distribution_release }}.yml"
+        - "{{ ansible_distribution }}.yml"
+      paths:
+        - 'vars'
 
 - name: "Install powermgmt-base"
   ansible.builtin.apt:
