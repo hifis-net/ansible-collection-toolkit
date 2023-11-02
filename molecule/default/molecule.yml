@@ -13,6 +13,8 @@ platforms:
     tty: true
 provisioner:
   name: "ansible"
+  options:
+    diff: True
   inventory:
     hosts:
       all:
