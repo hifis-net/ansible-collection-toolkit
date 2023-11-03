@@ -1,5 +1,26 @@
 # Changelog
 
+## [v3.2.1](https://github.com/hifis-net/ansible-role-unattended-upgrades/tree/v3.2.1) (2023-11-03)
+
+[Full Changelog](https://github.com/hifis-net/ansible-role-unattended-upgrades/compare/v3.2.0...v3.2.1)
+
+**Fixed bugs:**
+
+- "Bullseye-Workaround" needs to be applied to bookworm and later as well [\#146](https://github.com/hifis-net/ansible-role-unattended-upgrades/issues/146)
+
+**Closed issues:**
+
+- Unattended-Upgrade::Origins-Pattern from 50unattended-upgrades apparently can't be "overruled" [\#145](https://github.com/hifis-net/ansible-role-unattended-upgrades/issues/145)
+
+**Merged pull requests:**
+
+- fix: reformat allowed origins pattern [\#160](https://github.com/hifis-net/ansible-role-unattended-upgrades/pull/160) ([Normo](https://github.com/Normo))
+- fix: allow ${distro\_codename}-security on Debian bookworm [\#159](https://github.com/hifis-net/ansible-role-unattended-upgrades/pull/159) ([Normo](https://github.com/Normo))
+- chore\(deps-dev\): bump ansible-lint from 6.18.0 to 6.21.1 [\#157](https://github.com/hifis-net/ansible-role-unattended-upgrades/pull/157) ([dependabot[bot]](https://github.com/apps/dependabot))
+- Bump ansible from 8.3.0 to 8.5.0 [\#155](https://github.com/hifis-net/ansible-role-unattended-upgrades/pull/155) ([dependabot[bot]](https://github.com/apps/dependabot))
+- Bump actions/checkout from 3 to 4 [\#147](https://github.com/hifis-net/ansible-role-unattended-upgrades/pull/147) ([dependabot[bot]](https://github.com/apps/dependabot))
+- Bump molecule from 6.0.1 to 6.0.2 [\#144](https://github.com/hifis-net/ansible-role-unattended-upgrades/pull/144) ([dependabot[bot]](https://github.com/apps/dependabot))
+
 ## [v3.2.0](https://github.com/hifis-net/ansible-role-unattended-upgrades/tree/v3.2.0) (2023-08-25)
 
 [Full Changelog](https://github.com/hifis-net/ansible-role-unattended-upgrades/compare/v3.1.0...v3.2.0)
@@ -14,6 +35,7 @@
 
 **Merged pull requests:**
 
+- chore: prepare release of version 3.2.0 [\#142](https://github.com/hifis-net/ansible-role-unattended-upgrades/pull/142) ([tobiashuste](https://github.com/tobiashuste))
 - fix: remove official support for EOL Ubuntu 18.04 [\#141](https://github.com/hifis-net/ansible-role-unattended-upgrades/pull/141) ([tobiashuste](https://github.com/tobiashuste))
 - feat: add support for Debian 12 bookworm [\#140](https://github.com/hifis-net/ansible-role-unattended-upgrades/pull/140) ([tobiashuste](https://github.com/tobiashuste))
 - Bump ansible-lint from 6.17.2 to 6.18.0 [\#138](https://github.com/hifis-net/ansible-role-unattended-upgrades/pull/138) ([dependabot[bot]](https://github.com/apps/dependabot))
