@@ -1,6 +1,5 @@
 ---
 galaxy_info:
-  standalone: true
   role_name: "unattended_upgrades"
   author: "hifis"
   description: "Setup unattended-upgrades on Debian-based systems"
