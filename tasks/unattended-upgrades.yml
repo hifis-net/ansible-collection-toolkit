@@ -4,8 +4,8 @@
   vars:
     params:
       files:
-        - "{{ ansible_distribution }}-{{ ansible_distribution_release }}.yml"
-        - "{{ ansible_distribution }}.yml"
+        - "{{ ansible_facts.distribution }}-{{ ansible_facts.distribution_release }}.yml"
+        - "{{ ansible_facts.distribution }}.yml"
       paths:
         - 'vars'
 
