@@ -35,7 +35,7 @@
         - 'Unattended-Upgrade::Sender "jane@example.org"'
 
     - name: "Ubuntu specific verification"
-      when: "ansible_distribution == 'Ubuntu'"
+      when: "ansible_facts.distribution == 'Ubuntu'"
       block:
       - name: "Check for registered variables on Ubuntu"
         ansible.builtin.assert:
@@ -49,7 +49,7 @@
         with_items: "{{ ubuntu_defaults }}"
 
     - name: "Debian specific verification"
-      when: "ansible_distribution == 'Debian'"
+      when: "ansible_facts.distribution == 'Debian'"
       block:
         - name: "Check for registered variables on Debian"
           ansible.builtin.assert:
