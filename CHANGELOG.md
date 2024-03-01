@@ -14,6 +14,7 @@
 
 - ci: install a recent podman version [\#190](https://github.com/hifis-net/ansible-role-unattended-upgrades/pull/190) ([Normo](https://github.com/Normo))
 - chore\(deps\): bump ansible from 9.2.0 to 9.3.0 [\#189](https://github.com/hifis-net/ansible-role-unattended-upgrades/pull/189) ([dependabot[bot]](https://github.com/apps/dependabot))
+- Prepare release v3.3.0 [\#188](https://github.com/hifis-net/ansible-role-unattended-upgrades/pull/188) ([Normo](https://github.com/Normo))
 - refactor: refer to ansible facts through ansible\_facts.\* namespace [\#187](https://github.com/hifis-net/ansible-role-unattended-upgrades/pull/187) ([Normo](https://github.com/Normo))
 - Allow roles to run with INJECT\_FACTS\_AS\_VARS set to false [\#186](https://github.com/hifis-net/ansible-role-unattended-upgrades/pull/186) ([kennethso168](https://github.com/kennethso168))
 - chore\(deps-dev\): bump yamllint from 1.34.0 to 1.35.1 [\#184](https://github.com/hifis-net/ansible-role-unattended-upgrades/pull/184) ([dependabot[bot]](https://github.com/apps/dependabot))
