@@ -48,13 +48,21 @@ jobs:
       - name: "Check out the codebase."
         uses: "actions/checkout@v4"
 
-      - name: "Enable lingering required for podman and systemd in GH Actions."
-        run: |  # Compare with https://github.com/eriksjolund/user-systemd-service-actions-workflow/blob/efe872924fd2dd35bb482544126ce751303e14c2/README.md
-          sudo loginctl enable-linger $UID
-          sleep 1
-
       - name: "Prepare the job environment."
         uses: "./.github/workflows/prepare-action"
+
+      - name: "Install modern podman"
+        run: |
+          sudo mkdir -p /etc/apt/keyrings
+          curl -fsSL https://download.opensuse.org/repositories/devel:kubic:libcontainers:unstable/xUbuntu_$(lsb_release -rs)/Release.key \
+            | gpg --dearmor \
+            | sudo tee /etc/apt/keyrings/devel_kubic_libcontainers_unstable.gpg > /dev/null
+          echo \
+            "deb [arch=$(dpkg --print-architecture) signed-by=/etc/apt/keyrings/devel_kubic_libcontainers_unstable.gpg]\
+              https://download.opensuse.org/repositories/devel:kubic:libcontainers:unstable/xUbuntu_$(lsb_release -rs)/ /" \
+            | sudo tee /etc/apt/sources.list.d/devel:kubic:libcontainers:unstable.list > /dev/null
+          sudo apt-get update -qq
+          sudo apt-get -qq -y install podman
 
       - name: "Run Molecule tests."
         run: "pipenv run molecule test"
