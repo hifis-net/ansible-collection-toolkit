@@ -1,5 +1,35 @@
 # Changelog
 
+## [v3.3.0](https://github.com/hifis-net/ansible-role-unattended-upgrades/tree/v3.3.0) (2024-03-01)
+
+[Full Changelog](https://github.com/hifis-net/ansible-role-unattended-upgrades/compare/v3.2.1...v3.3.0)
+
+**Closed issues:**
+
+- Allow roles to run with INJECT\_FACTS\_AS\_VARS set to false [\#185](https://github.com/hifis-net/ansible-role-unattended-upgrades/issues/185)
+- Fix badges with Ansible Galaxy NG [\#174](https://github.com/hifis-net/ansible-role-unattended-upgrades/issues/174)
+- Version 3.2.1 doesn't seem to be available on ansible galaxy [\#169](https://github.com/hifis-net/ansible-role-unattended-upgrades/issues/169)
+
+**Merged pull requests:**
+
+- ci: install a recent podman version [\#190](https://github.com/hifis-net/ansible-role-unattended-upgrades/pull/190) ([Normo](https://github.com/Normo))
+- chore\(deps\): bump ansible from 9.2.0 to 9.3.0 [\#189](https://github.com/hifis-net/ansible-role-unattended-upgrades/pull/189) ([dependabot[bot]](https://github.com/apps/dependabot))
+- refactor: refer to ansible facts through ansible\_facts.\* namespace [\#187](https://github.com/hifis-net/ansible-role-unattended-upgrades/pull/187) ([Normo](https://github.com/Normo))
+- Allow roles to run with INJECT\_FACTS\_AS\_VARS set to false [\#186](https://github.com/hifis-net/ansible-role-unattended-upgrades/pull/186) ([kennethso168](https://github.com/kennethso168))
+- chore\(deps-dev\): bump yamllint from 1.34.0 to 1.35.1 [\#184](https://github.com/hifis-net/ansible-role-unattended-upgrades/pull/184) ([dependabot[bot]](https://github.com/apps/dependabot))
+- chore\(deps-dev\): bump molecule from 6.0.3 to 24.2.0 [\#182](https://github.com/hifis-net/ansible-role-unattended-upgrades/pull/182) ([dependabot[bot]](https://github.com/apps/dependabot))
+- chore\(deps-dev\): bump molecule-plugins from 23.5.0 to 23.5.3 [\#181](https://github.com/hifis-net/ansible-role-unattended-upgrades/pull/181) ([dependabot[bot]](https://github.com/apps/dependabot))
+- chore\(deps-dev\): bump ansible-lint from 6.22.2 to 24.2.0 [\#180](https://github.com/hifis-net/ansible-role-unattended-upgrades/pull/180) ([dependabot[bot]](https://github.com/apps/dependabot))
+- chore\(deps-dev\): bump yamllint from 1.33.0 to 1.34.0 [\#179](https://github.com/hifis-net/ansible-role-unattended-upgrades/pull/179) ([dependabot[bot]](https://github.com/apps/dependabot))
+- chore\(deps\): bump ansible from 9.1.0 to 9.2.0 [\#178](https://github.com/hifis-net/ansible-role-unattended-upgrades/pull/178) ([dependabot[bot]](https://github.com/apps/dependabot))
+- chore\(deps-dev\): bump ansible-lint from 6.22.1 to 6.22.2 [\#177](https://github.com/hifis-net/ansible-role-unattended-upgrades/pull/177) ([dependabot[bot]](https://github.com/apps/dependabot))
+- chore\(deps-dev\): bump molecule from 6.0.2 to 6.0.3 [\#176](https://github.com/hifis-net/ansible-role-unattended-upgrades/pull/176) ([dependabot[bot]](https://github.com/apps/dependabot))
+- fix: make ansible galaxy badges work again [\#175](https://github.com/hifis-net/ansible-role-unattended-upgrades/pull/175) ([tobiashuste](https://github.com/tobiashuste))
+- chore\(deps\): bump ansible from 8.6.0 to 9.1.0 [\#172](https://github.com/hifis-net/ansible-role-unattended-upgrades/pull/172) ([dependabot[bot]](https://github.com/apps/dependabot))
+- chore\(deps-dev\): bump ansible-lint from 6.21.1 to 6.22.1 [\#171](https://github.com/hifis-net/ansible-role-unattended-upgrades/pull/171) ([dependabot[bot]](https://github.com/apps/dependabot))
+- chore\(deps-dev\): bump yamllint from 1.32.0 to 1.33.0 [\#167](https://github.com/hifis-net/ansible-role-unattended-upgrades/pull/167) ([dependabot[bot]](https://github.com/apps/dependabot))
+- chore\(deps\): bump ansible from 8.5.0 to 8.6.0 [\#164](https://github.com/hifis-net/ansible-role-unattended-upgrades/pull/164) ([dependabot[bot]](https://github.com/apps/dependabot))
+
 ## [v3.2.1](https://github.com/hifis-net/ansible-role-unattended-upgrades/tree/v3.2.1) (2023-11-03)
 
 [Full Changelog](https://github.com/hifis-net/ansible-role-unattended-upgrades/compare/v3.2.0...v3.2.1)
@@ -14,6 +44,7 @@
 
 **Merged pull requests:**
 
+- chore: prepare changelog for version 3.2.1 [\#161](https://github.com/hifis-net/ansible-role-unattended-upgrades/pull/161) ([tobiashuste](https://github.com/tobiashuste))
 - fix: reformat allowed origins pattern [\#160](https://github.com/hifis-net/ansible-role-unattended-upgrades/pull/160) ([Normo](https://github.com/Normo))
 - fix: allow ${distro\_codename}-security on Debian bookworm [\#159](https://github.com/hifis-net/ansible-role-unattended-upgrades/pull/159) ([Normo](https://github.com/Normo))
 - chore\(deps-dev\): bump ansible-lint from 6.18.0 to 6.21.1 [\#157](https://github.com/hifis-net/ansible-role-unattended-upgrades/pull/157) ([dependabot[bot]](https://github.com/apps/dependabot))

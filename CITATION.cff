@@ -1,0 +1,40 @@
+# SPDX-FileCopyrightText: 2024 Helmholtz Centre for Environmental Research (UFZ)
+# SPDX-FileCopyrightText: 2024 Helmholtz-Zentrum Dresden - Rossendorf (HZDR)
+
+# SPDX-License-Identifier: GPL-2.0-or-later
+
+cff-version: '1.2.0'
+title: 'hifis.unattended_upgrades Ansible role'
+message: >-
+  "If you use this Ansible role, please cite it as
+  below."
+abstract: >-
+  Ansible role to install and setup unattended-upgrades for
+  Ubuntu and Debian, to periodically install security upgrades.
+type: 'software'
+authors:
+  - given-names: 'Norman'
+    family-names: 'Ziegner'
+    email: 'norman.ziegner@ufz.de'
+    affiliation: >-
+      Helmholtz Centre for Environmental Research
+      GmbH - UFZ
+    orcid: 'https://orcid.org/0000-0001-7579-216X'
+  - given-names: 'Tobias'
+    family-names: 'Huste'
+    email: 't.huste@hzdr.de'
+    affiliation: >-
+      Helmholtz-Zentrum Dresden-Rossendorf e. V.
+      (HZDR)
+    orcid: 'https://orcid.org/0000-0002-5590-7473'
+  - given-names: 'Christian'
+    family-names: 'Hüser'
+    email: 'c.hueser@hzdr.de'
+    affiliation: >-
+      Helmholtz-Zentrum Dresden-Rossendorf e. V.
+      (HZDR)
+    orcid: 'https://orcid.org/0000-0002-5028-6663'
+repository-code: 'https://github.com/hifis-net/ansible-role-unattended-upgrades'
+repository-artifact: 'https://galaxy.ansible.com/hifis/unattended_upgrades'
+version: 'v3.3.0'
+date-released: '2024-03-01'
