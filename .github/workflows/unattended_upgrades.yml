@@ -1,5 +1,6 @@
 ---
-name: "CI"
+name: "hifis.unattended_upgrades"
+
 on:
   pull_request:
   push:
@@ -7,33 +8,23 @@ on:
       - "main"
     tags:
       - "v*.*.*"
+    paths:
+      - '.github/workflows/unattended_upgrades.yml'
+      - 'roles/unattended_upgrades/**'
+      - 'molecule/unattended_upgrades/**'
+      - 'Pipfile'
+      - 'Pipfile.lock'
   schedule:
     - cron: '0 0 * * *'
 
-env:
-  PY_COLORS: 1
-  ANSIBLE_FORCE_COLOR: 1
-
 jobs:
-
-  lint:
-    name: "Lint"
-    runs-on: "ubuntu-22.04"
-    steps:
-      - name: "Check out the codebase."
-        uses: "actions/checkout@v4"
-
-      - name: "Prepare the job environment."
-        uses: "./.github/workflows/prepare-action"
-
-      - name: "Lint code."
-        run: |
-          pipenv run yamllint --strict --format colored .
-          pipenv run ansible-lint -v --force-color --offline
 
   test:
     name: "Run Molecule tests."
     runs-on: "ubuntu-22.04"
+    env:
+      PY_COLORS: 1
+      ANSIBLE_FORCE_COLOR: 1
     strategy:
       fail-fast: false
       matrix:
@@ -47,9 +38,11 @@ jobs:
     steps:
       - name: "Check out the codebase."
         uses: "actions/checkout@v4"
+        with:
+          path: "ansible_collections/hifis/software_services"
 
       - name: "Prepare the job environment."
-        uses: "./.github/workflows/prepare-action"
+        uses: "./ansible_collections/hifis/software_services/.github/workflows/prepare-action"
 
       - name: "Install modern podman"
         run: |
@@ -65,20 +58,7 @@ jobs:
           sudo apt-get -qq -y install podman
 
       - name: "Run Molecule tests."
-        run: "pipenv run molecule test"
+        run: "pipenv run molecule test -s unattended_upgrades"
         env:
           MOLECULE_IMAGE: "${{ matrix.image }}"
-
-  release:
-    name: "Release new version on Ansible Galaxy"
-    runs-on: "ubuntu-22.04"
-    if: "startsWith(github.ref, 'refs/tags/v')"
-    needs: ["lint", "test"]
-    steps:
-      - name: "checkout"
-        uses: "actions/checkout@v4"
-      - name: "galaxy"
-        uses: "robertdebock/galaxy-action@1.2.1"
-        with:
-          galaxy_api_key: "${{ secrets.galaxy_api_key }}"
-          git_branch: "main"
+        working-directory: "ansible_collections/hifis/software_services"

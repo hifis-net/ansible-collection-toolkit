@@ -6,12 +6,12 @@
     daemon_reload: true
     name: 'apt-daily.timer'
     state: 'restarted'
-    enabled: yes
+    enabled: true
 
 - name: 'Restart apt-daily-upgrade timer'
   ansible.builtin.systemd:
     daemon_reload: true
     name: 'apt-daily-upgrade.timer'
     state: 'restarted'
-    enabled: yes
+    enabled: true
 ...

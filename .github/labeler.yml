@@ -1,0 +1,7 @@
+---
+unattended_upgrades:
+  - changed-files:
+      - any-glob-to-any-file:
+          - "roles/unattended_upgrades/**"
+          - "molecule/unattended_upgrades/**"
+          - ".github/workflows/unattended_upgrades.yml"

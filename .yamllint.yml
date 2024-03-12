@@ -19,23 +19,23 @@ rules:
     max-spaces-after: -1
     level: "error"
   comments: "disable"
-  comments-indentation: "disable"
+  comments-indentation: "enable"
   document-start: "disable"
   empty-lines:
     max: 3
     level: "error"
   hyphens:
     level: "error"
-  indentation: "disable"
+  indentation: "enable"
   key-duplicates: "enable"
   line-length: "disable"
-  new-line-at-end-of-file: "disable"
+  new-line-at-end-of-file: "enable"
   new-lines:
     type: "unix"
   quoted-strings:
     quote-type: "any"
-    required: True
+    required: true
     extra-required: [ ]
     extra-allowed: [ ]
-  trailing-spaces: "disable"
-  truthy: "disable"
+  trailing-spaces: "enable"
+  truthy: "enable"
