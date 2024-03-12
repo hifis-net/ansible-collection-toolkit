@@ -37,16 +37,16 @@
     - name: "Ubuntu specific verification"
       when: "ansible_facts.distribution == 'Ubuntu'"
       block:
-      - name: "Check for registered variables on Ubuntu"
-        ansible.builtin.assert:
-          that: "item in aptconfig.stdout"
-        with_items:
-          - 'Unattended-Upgrade::Origins-Pattern:: "origin=Ubuntu,archive=${distro_codename}-security,label=Ubuntu";'
+        - name: "Check for registered variables on Ubuntu"
+          ansible.builtin.assert:
+            that: "item in aptconfig.stdout"
+          with_items:
+            - 'Unattended-Upgrade::Origins-Pattern:: "origin=Ubuntu,archive=${distro_codename}-security,label=Ubuntu";'
 
-      - name: "Check absence of Ubuntu defaults"
-        ansible.builtin.assert:
-          that: "item not in aptconfig.stdout"
-        with_items: "{{ ubuntu_defaults }}"
+        - name: "Check absence of Ubuntu defaults"
+          ansible.builtin.assert:
+            that: "item not in aptconfig.stdout"
+          with_items: "{{ ubuntu_defaults }}"
 
     - name: "Debian specific verification"
       when: "ansible_facts.distribution == 'Debian'"

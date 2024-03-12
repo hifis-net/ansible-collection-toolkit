@@ -5,6 +5,6 @@
   tasks:
     - name: "Include unattended_upgrades role"
       ansible.builtin.include_role:
-        name: "{{ lookup('env', 'MOLECULE_PROJECT_DIRECTORY') | basename }}"
+        name: "hifis.software_services.unattended_upgrades"
 
 ...

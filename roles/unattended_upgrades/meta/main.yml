@@ -6,17 +6,17 @@ galaxy_info:
   license: "GPLv2"
   min_ansible_version: "2.14"
   platforms:
-  - name: "Ubuntu"
-    versions:
-    - "jammy"
-    - "focal"
-  - name: "Debian"
-    versions:
-     - "buster"
-     - "bullseye"
-     - "bookworm"
+    - name: "Ubuntu"
+      versions:
+        - "jammy"
+        - "focal"
+    - name: "Debian"
+      versions:
+        - "buster"
+        - "bullseye"
+        - "bookworm"
 
   galaxy_tags:
-  - "system"
+    - "system"
 
 dependencies: []
