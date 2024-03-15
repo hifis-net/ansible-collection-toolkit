@@ -11,7 +11,9 @@ authors:
   - 'HIFIS Software Services <support@hifis.net>'
 description: 'This collection provides production-ready Ansible roles used for providing services used in research and by research software engineers, but not exclusively.'
 license:
+  - 'Apache-2.0'
   - 'GPL-2.0-or-later'
+  - 'MIT'
 tags:
   - 'hifis'
   - 'ubuntu'

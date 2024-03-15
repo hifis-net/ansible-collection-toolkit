@@ -1,0 +1,67 @@
+# SPDX-FileCopyrightText: Helmholtz Centre for Environmental Research (UFZ)
+# SPDX-FileCopyrightText: Helmholtz-Zentrum Dresden-Rossendorf (HZDR)
+#
+# SPDX-License-Identifier: MIT
+
+---
+
+- name: "Configure Zammad repository for Centos-like"
+  when: "ansible_distribution | lower == 'centos'"
+  block:
+
+    - name: "Install | Install EPEL repo"
+      ansible.builtin.yum:
+        name: "epel-release"
+        state: "present"
+
+    - name: "Install | Add Zammad yum repository"
+      ansible.builtin.yum_repository:
+        name: "zammad"
+        state: "present"
+        description: "Repository for zammad/zammad ({{ zammad_release_channel }}) packages."
+        baseurl: "https://dl.packager.io/srv/rpm/zammad/zammad/{{ zammad_release_channel }}/el/7/$basearch"
+        enabled: true
+        gpgcheck: false
+        repo_gpgcheck: true
+        gpgkey: "https://dl.packager.io/srv/zammad/zammad/key"
+        mode: "0644"
+
+- name: "Configure Zammad repository for Ubuntu"
+  when: "ansible_distribution | lower == 'ubuntu'"
+  block:
+
+    - name: "Install | Add Zammad apt key"
+      ansible.builtin.apt_key:
+        url: "https://dl.packager.io/srv/zammad/zammad/key"
+        state: "present"
+
+    - name: "Install | Add Zammad DEB repository"
+      ansible.builtin.apt_repository:
+        repo: "deb https://dl.packager.io/srv/deb/zammad/zammad/{{ zammad_release_channel }}/ubuntu {{ ansible_distribution_version }} main"
+        state: "present"
+        filename: "zammad"
+        update_cache: true
+        mode: "0644"
+
+- name: "Install | Install Zammad package"
+  ansible.builtin.package:
+    name: "zammad={{ zammad_version }}*"
+    state: "present"
+    force: true
+  notify:
+    - "Set Elasticsearch server address"
+    - "Build search index"
+
+- name: "Install | Start and enable services"
+  ansible.builtin.service:
+    name: "{{ item }}"
+    state: "started"
+    enabled: true
+  loop:
+    - "zammad"
+    - "zammad-web"
+    - "zammad-worker"
+    - "zammad-websocket"
+  notify: "Build search index"
+
+...

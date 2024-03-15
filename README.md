@@ -9,17 +9,19 @@ SPDX-License-Identifier: Apache-2.0
 
 [![Latest release](https://img.shields.io/github/v/release/hifis-net/ansible-role-unattended-upgrades)](https://github.com/hifis-net/ansible-role-unattended-upgrades/releases)
 [![hifis.unattended_upgrades](https://github.com/hifis-net/ansible-role-unattended-upgrades/actions/workflows/unattended_upgrades.yml/badge.svg)](https://github.com/hifis-net/ansible-role-unattended-upgrades/actions/workflows/unattended_upgrades.yml)
+[![hifis.zammad](https://github.com/hifis-net/ansible-role-unattended-upgrades/actions/workflows/zammad.yml/badge.svg)](https://github.com/hifis-net/ansible-role-unattended-upgrades/actions/workflows/zammad.yml)
 
 ## Description
 
 This collection provides production-ready Ansible roles used for providing services used in research and by research
 software engineers, but not exclusively. The following use cases are supported:
-* DevOps platform
+
+* DevOps platform:
   * GitLab (coming soon!)
   * GitLab-Runner (coming soon!)
   * Redis (coming soon!)
 * Help desk:
-  * Zammad (coming soon!)
+  * [**Zammad**](roles/zammad)
 * High Availability (HA) / Load Balancing:
   * HAProxy (coming soon!)
   * Keepalived (coming soon!)
@@ -33,6 +35,7 @@ software engineers, but not exclusively. The following use cases are supported:
 * Ansible >= 2.14
 
 ## Installation
+
 Install the collection via ansible-galaxy:
 
 ```shell
