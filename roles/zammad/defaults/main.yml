@@ -1,0 +1,19 @@
+# SPDX-FileCopyrightText: Helmholtz Centre for Environmental Research (UFZ)
+# SPDX-FileCopyrightText: Helmholtz-Zentrum Dresden-Rossendorf (HZDR)
+#
+# SPDX-License-Identifier: MIT
+
+---
+zammad_version: "6.2.0"
+zammad_release_channel: "stable"
+zammad_domain_name: "{{ ansible_fqdn }}"
+
+zammad_nginx_config_path: "/etc/nginx/sites-available/zammad.conf"
+zammad_ssl_cert_path: "/etc/ssl/certs/zammad_cert.pem"
+zammad_ssl_key_path: "/etc/ssl/private/zammad_key.pem"
+
+zammad_nginx_additional_server_configs: []
+zammad_nginx_server_tokens: "off"
+
+elasticsearch_url: "http://localhost:9200"
+...

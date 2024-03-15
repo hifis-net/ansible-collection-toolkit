@@ -1,0 +1,30 @@
+# SPDX-FileCopyrightText: Helmholtz Centre for Environmental Research (UFZ)
+# SPDX-FileCopyrightText: Helmholtz-Zentrum Dresden-Rossendorf (HZDR)
+#
+# SPDX-License-Identifier: MIT
+
+---
+dependency:
+  name: "galaxy"
+  options:
+    requirements-file: "molecule/zammad/requirements.yml"
+driver:
+  name: "podman"
+platforms:
+  - name: "instance"
+    image: "${MOLECULE_IMAGE:-ghcr.io/hifis-net/ubuntu-systemd:22.04}"
+    pre_build_image: true
+    privileged: true
+    override_command: false
+    systemd: true
+    tty: true
+    published_ports:
+      - "0.0.0.0:8080:80"
+      - "0.0.0.0:8443:443"
+provisioner:
+  name: "ansible"
+  playbooks:
+    prepare: "prepare.yml"
+    converge: "converge.yml"
+verifier:
+  name: "ansible"

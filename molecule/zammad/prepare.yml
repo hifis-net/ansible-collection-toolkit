@@ -1,0 +1,41 @@
+# SPDX-FileCopyrightText: Helmholtz Centre for Environmental Research (UFZ)
+# SPDX-FileCopyrightText: Helmholtz-Zentrum Dresden-Rossendorf (HZDR)
+#
+# SPDX-License-Identifier: MIT
+
+---
+- name: "Prepare"
+  hosts: "all"
+  vars:
+    # Apply suggested Elasticsearch configuration
+    elasticsearch_version: "8.x"
+    elasticsearch_package: "elasticsearch=8.8.1"
+    elasticsearch_heap_size_min: "256m"
+    elasticsearch_heap_size_max: "256m"
+    elasticsearch_extra_options: |
+      xpack.security.enabled: false
+      xpack.security.http.ssl.enabled: false
+      xpack.security.transport.ssl.enabled: false
+      http.max_content_length: 400mb
+      indices.query.bool.max_clause_count: 2000
+
+  tasks:
+
+    - name: "Install required packages"
+      ansible.builtin.apt:
+        name:
+          - "sudo"
+          - "gpg"
+          - "ca-certificates"
+          - "python3-cryptography"
+          - "ssl-cert"
+        state: "present"
+        update_cache: true
+
+    - name: "Include geerlingguy.elasticsearch"
+      ansible.builtin.include_role:
+        name: "geerlingguy.elasticsearch"
+
+    - name: "Include geerlingguy.postgresql"
+      ansible.builtin.include_role:
+        name: "geerlingguy.postgresql"

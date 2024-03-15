@@ -1,0 +1,26 @@
+# SPDX-FileCopyrightText: Helmholtz Centre for Environmental Research (UFZ)
+# SPDX-FileCopyrightText: Helmholtz-Zentrum Dresden-Rossendorf (HZDR)
+#
+# SPDX-License-Identifier: MIT
+
+
+galaxy_info:
+  role_name: "zammad"
+  namespace: "hifis"
+  description: "Install Zammad helpdesk on Linux."
+  author: "HIFIS Software Services"
+  company: "Helmholtz Association of German Research Centres"
+  license: "MIT"
+  issue_tracker_url: "https://github.com/hifis-net/ansible-role-unattended-upgrades/issues"
+  min_ansible_version: "2.14"
+
+  platforms:
+    - name: "Ubuntu"
+      versions:
+        - "focal"
+        - "jammy"
+
+  galaxy_tags:
+    - "zammad"
+
+dependencies: []
