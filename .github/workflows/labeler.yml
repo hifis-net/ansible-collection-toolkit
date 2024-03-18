@@ -1,0 +1,19 @@
+---
+name: "Pull Request Labeler"
+
+on:
+  pull_request_target:
+    types:
+      - "labeled"
+      - "unlabeled"
+      - "opened"
+      - "edited"
+      - "synchronize"
+
+jobs:
+  labeler:
+    runs-on: "ubuntu-22.04"
+    steps:
+      - uses: "actions/labeler@v5"
+        with:
+          repo-token: "${{ secrets.GITHUB_TOKEN }}"

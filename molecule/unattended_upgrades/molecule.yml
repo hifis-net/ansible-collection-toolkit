@@ -14,7 +14,7 @@ platforms:
 provisioner:
   name: "ansible"
   options:
-    diff: True
+    diff: true
   inventory:
     hosts:
       all:
@@ -40,7 +40,6 @@ provisioner:
 verifier:
   name: "ansible"
 scenario:
-  name: "default"
   test_sequence:
     - "destroy"
     - "dependency"
