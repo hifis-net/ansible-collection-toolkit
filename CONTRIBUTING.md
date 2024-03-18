@@ -2,12 +2,12 @@
 SPDX-FileCopyrightText: 2022 Helmholtz Centre for Environmental Research (UFZ)
 SPDX-FileCopyrightText: 2022 Helmholtz-Zentrum Dresden-Rossendorf (HZDR)
 
-SPDX-License-Identifier: Apache-2.0
+SPDX-License-Identifier: GPL-2.0-or-later
 -->
 
 # Contributing
 
-## Please Help to Improve this Project 
+## Please Help to Improve this Project
 
 You would like to contribute to this project and want to know how to do that?
 Let me tell you first that you are awesome because you take care!
@@ -44,11 +44,11 @@ There are different ways to contribute to this project:
 
 Before you start contributing and create issues and pull requests we ask you
 to first check whether an issue or pull request already exists for the error,
-enhancement, feature or test case you have in mind. 
+enhancement, feature or test case you have in mind.
 
 ###  Discuss Issues and Pull Requests
 
-You can contribute by participating in discussions you find in issues and 
+You can contribute by participating in discussions you find in issues and
 pull requests or by starting your own discussions.
 
 ### Submit Bug Reports or Contribute New Feature Proposals
@@ -144,7 +144,7 @@ $ pipenv run molecule lint
 ### REUSE Specification Compliance
 
 Each file in this project needs to have a proper license and copyright header.
-Please check that each file you add to the project contains license and 
+Please check that each file you add to the project contains license and
 copyright information and that it thereby meets the
 [REUSE Specification](https://reuse.software/spec/):
 
@@ -166,13 +166,13 @@ $ pipenv run molecule test
 
 ## How are Contributors Given Credit for Their Valuable Work?
 
-Please add yourself to the list of contributors in file 
-[README.md](README.md#contributors) 
+Please add yourself to the list of contributors in file
+[README.md](README.md#contributors)
 via a pull request if you made significant contributions to this role.
 Significant contributions are done by suggesting pull requests that fix
 bugs or add features or test cases to the project.
-Since all other contributions are welcome and may be significant as well 
-you can request to be added as a contributor which is then decided on a 
+Since all other contributions are welcome and may be significant as well
+you can request to be added as a contributor which is then decided on a
 case-by-case basis.
 
 ## Ground Rules and Contributions We are Not Looking For
