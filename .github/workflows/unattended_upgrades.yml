@@ -3,6 +3,12 @@ name: "hifis.unattended_upgrades"
 
 on:
   pull_request:
+    paths:
+      - '.github/workflows/unattended_upgrades.yml'
+      - 'roles/unattended_upgrades/**'
+      - 'molecule/unattended_upgrades/**'
+      - 'Pipfile'
+      - 'Pipfile.lock'
   push:
     branches:
       - "main"
