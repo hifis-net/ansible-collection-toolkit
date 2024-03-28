@@ -1,7 +1,7 @@
 {
     "_meta": {
         "hash": {
-            "sha256": "8d48fa7b9b3084eb4eae7b383c6a7917cdccc7bf2605428220f9f123aeed6d8f"
+            "sha256": "e46c18b99d75431709c8a44b31d498c63f056324f1e8afaec109cf2896ff2879"
         },
         "pipfile-spec": 6,
         "requires": {
@@ -18,20 +18,20 @@
     "default": {
         "ansible": {
             "hashes": [
-                "sha256:471993dd239611b4b6134e46911612f85639035f10d82b6c888528b5ffb3b16a",
-                "sha256:7f4ea0e4d065538879b3e11e81e85eed4d802d1940f6564ad950e9d11a31b03c"
+                "sha256:dd431c63380e18c3faca3288ebde8ce2f4f992363ab558a3c11c8f2032d90867",
+                "sha256:f1d67a2c21dbed3fee4fe579f750e5d20b5a5f13f4399f256a8a70f0505e62f7"
             ],
             "index": "pypi",
             "markers": "python_version >= '3.10'",
-            "version": "==9.3.0"
+            "version": "==9.4.0"
         },
         "ansible-core": {
             "hashes": [
-                "sha256:2cd208b0915948c88bffad331e5d07097b6edca1872cb53375e51b6719e6a060",
-                "sha256:c55d9a5f55651eb6c7f004ca9a9ed854d8cc310e6b438d96cea051cf3d2b2710"
+                "sha256:371b0bb11d109a58982684307c18cc44ff8d408b1b3350c0c5c78d9f096ee1f1",
+                "sha256:cdd29b0ec3f20c35657355a2f6a9c1d0cf1131da99cc9a4a3401801b0ab36d6d"
             ],
             "markers": "python_version >= '3.10'",
-            "version": "==2.16.4"
+            "version": "==2.16.5"
         },
         "cffi": {
             "hashes": [
@@ -205,11 +205,11 @@
         },
         "packaging": {
             "hashes": [
-                "sha256:048fb0e9405036518eaaf48a55953c750c11e1a1b68e0dd1a9d62ed0c092cfc5",
-                "sha256:8c491190033a9af7e1d931d0b5dacc2ef47509b34dd0de67ed209b5203fc88c7"
+                "sha256:2ddfb553fdf02fb784c234c7ba6ccc288296ceabec964ad2eae3777778130bc5",
+                "sha256:eb82c5e3e56209074766e6885bb04b8c38a0c015d0a30036ebe7ece34c9989e9"
             ],
             "markers": "python_version >= '3.7'",
-            "version": "==23.2"
+            "version": "==24.0"
         },
         "pycparser": {
             "hashes": [
