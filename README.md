@@ -1,3 +1,10 @@
+<!--
+SPDX-FileCopyrightText: 2024 Helmholtz Centre for Environmental Research (UFZ)
+SPDX-FileCopyrightText: 2024 Helmholtz-Zentrum Dresden-Rossendorf (HZDR)
+
+SPDX-License-Identifier: Apache-2.0
+-->
+
 # Ansible Collection - hifis.software_services
 
 [![Latest release](https://img.shields.io/github/v/release/hifis-net/ansible-role-unattended-upgrades)](https://github.com/hifis-net/ansible-role-unattended-upgrades/releases)
@@ -34,7 +41,7 @@ ansible-galaxy collection install hifis.software_services
 
 ## License
 
-GPL-2.0-or-later
+Apache-2.0
 
 ## Author
 
