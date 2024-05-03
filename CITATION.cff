@@ -1,7 +1,7 @@
 # SPDX-FileCopyrightText: 2024 Helmholtz Centre for Environmental Research (UFZ)
-# SPDX-FileCopyrightText: 2024 Helmholtz-Zentrum Dresden - Rossendorf (HZDR)
-
-# SPDX-License-Identifier: GPL-2.0-or-later
+# SPDX-FileCopyrightText: 2024 Helmholtz-Zentrum Dresden-Rossendorf (HZDR)
+#
+# SPDX-License-Identifier: Apache-2.0
 
 cff-version: '1.2.0'
 title: 'hifis.unattended_upgrades Ansible role'

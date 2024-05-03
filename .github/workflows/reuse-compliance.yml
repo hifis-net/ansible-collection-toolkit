@@ -1,3 +1,8 @@
+# SPDX-FileCopyrightText: 2024 Helmholtz Centre for Environmental Research (UFZ)
+# SPDX-FileCopyrightText: 2024 Helmholtz-Zentrum Dresden-Rossendorf (HZDR)
+#
+# SPDX-License-Identifier: Apache-2.0
+
 ---
 name: "Check compliance with the RUSE specification"
 

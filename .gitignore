@@ -1,3 +1,9 @@
+# SPDX-FileCopyrightText: 2023 Helmholtz Centre for Environmental Research (UFZ)
+# SPDX-FileCopyrightText: 2023 Helmholtz-Zentrum Dresden-Rossendorf (HZDR)
+# SPDX-FileCopyrightText: 2014 Jan Vlnas
+#
+# SPDX-License-Identifier: GPL-2.0-or-later
+
 .vagrant/
 *~
 *.log
