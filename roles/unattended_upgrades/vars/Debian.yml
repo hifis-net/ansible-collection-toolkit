@@ -1,3 +1,9 @@
+# SPDX-FileCopyrightText: Helmholtz Centre for Environmental Research (UFZ)
+# SPDX-FileCopyrightText: Helmholtz-Zentrum Dresden-Rossendorf (HZDR)
+# SPDX-FileCopyrightText: Jan Vlnas
+#
+# SPDX-License-Identifier: GPL-2.0-or-later
+
 ---
 # From https://metadata.ftp-master.debian.org/changelogs//main/u/unattended-upgrades/unattended-upgrades_2.8_changelog
 #  Allow both ${distro_codename} or ${distro_codename}-security on Debian

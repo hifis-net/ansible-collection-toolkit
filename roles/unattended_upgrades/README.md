@@ -1,3 +1,11 @@
+<!--
+SPDX-FileCopyrightText: Helmholtz Centre for Environmental Research (UFZ)
+SPDX-FileCopyrightText: Helmholtz-Zentrum Dresden-Rossendorf (HZDR)
+SPDX-FileCopyrightText: Jan Vlnas
+
+SPDX-License-Identifier: GPL-2.0-or-later
+-->
+
 # hifis.unattended_upgrades Ansible Role
 
 [![CI status](https://github.com/hifis-net/ansible-role-unattended-upgrades/actions/workflows/unattended_upgrades.yml/badge.svg)](https://github.com/hifis-net/ansible-role-unattended-upgrades/actions/workflows/unattended_upgrades.yml)

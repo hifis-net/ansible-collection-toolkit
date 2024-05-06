@@ -1,3 +1,8 @@
+# SPDX-FileCopyrightText: Helmholtz Centre for Environmental Research (UFZ)
+# SPDX-FileCopyrightText: Helmholtz-Zentrum Dresden-Rossendorf (HZDR)
+#
+# SPDX-License-Identifier: GPL-2.0-or-later
+
 ---
 
 - name: 'Test apt-daily timer expression'

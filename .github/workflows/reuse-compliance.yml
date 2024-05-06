@@ -4,32 +4,19 @@
 # SPDX-License-Identifier: Apache-2.0
 
 ---
-name: "Ansible Lint"
+name: "Check compliance with the RUSE specification"
 
 on:
-  pull_request:
-    paths:
-      - 'roles/**'
   push:
-    branches:
-      - "main"
-    tags:
-      - "v*.*.*"
-    paths:
-      - 'roles/**'
-
-env:
-  PY_COLORS: 1
-  ANSIBLE_FORCE_COLOR: 1
+  pull_request:
 
 jobs:
-
-  ansible-lint:
-    name: "Ansible Lint"
+  reuse-lint:
+    name: "REUSE compliance check"
     runs-on: "ubuntu-22.04"
     steps:
       - name: "Check out the codebase."
         uses: "actions/checkout@v4"
 
-      - name: "Lint code."
-        uses: "ansible/ansible-lint@v24.2.1"
+      - name: "REUSE lint"
+        uses: "fsfe/reuse-action@v3.0.0"

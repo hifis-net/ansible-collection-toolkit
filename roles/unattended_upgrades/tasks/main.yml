@@ -1,3 +1,9 @@
+# SPDX-FileCopyrightText: Helmholtz Centre for Environmental Research (UFZ)
+# SPDX-FileCopyrightText: Helmholtz-Zentrum Dresden-Rossendorf (HZDR)
+# SPDX-FileCopyrightText: Jan Vlnas
+#
+# SPDX-License-Identifier: GPL-2.0-or-later
+
 ---
 - name: "Import tasks from the unattended-upgrades playbook"
   ansible.builtin.import_tasks: "unattended-upgrades.yml"
