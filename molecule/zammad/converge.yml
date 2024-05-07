@@ -1,0 +1,30 @@
+# SPDX-FileCopyrightText: Helmholtz Centre for Environmental Research (UFZ)
+# SPDX-FileCopyrightText: Helmholtz-Zentrum Dresden-Rossendorf (HZDR)
+#
+# SPDX-License-Identifier: MIT
+
+---
+- name: "Converge"
+  hosts: "all"
+  tasks:
+
+    - name: "Get private key content"
+      ansible.builtin.command: "cat /etc/ssl/private/ssl-cert-snakeoil.key"
+      changed_when: false
+      check_mode: false
+      register: "private_key"
+
+    - name: "Get SSL certificate content"
+      ansible.builtin.command: "cat /etc/ssl/certs/ssl-cert-snakeoil.pem"
+      changed_when: false
+      check_mode: false
+      register: "certificate"
+
+    - name: "Pass SSL key pair to zammad role"
+      ansible.builtin.set_fact:
+        zammad_ssl_key:  "{{ private_key.stdout }}"
+        zammad_ssl_cert:  "{{ certificate.stdout }}"
+
+    - name: "Include ansible-role-zammad"
+      ansible.builtin.include_role:
+        name: "hifis.software_services.zammad"

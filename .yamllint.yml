@@ -24,7 +24,7 @@ rules:
     max-spaces-after: -1
     level: "error"
   comments: "disable"
-  comments-indentation: "enable"
+  comments-indentation: "disable"
   document-start: "disable"
   empty-lines:
     max: 3

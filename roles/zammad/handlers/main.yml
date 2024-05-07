@@ -1,0 +1,21 @@
+# SPDX-FileCopyrightText: Helmholtz Centre for Environmental Research (UFZ)
+# SPDX-FileCopyrightText: Helmholtz-Zentrum Dresden-Rossendorf (HZDR)
+#
+# SPDX-License-Identifier: MIT
+
+---
+- name: "Reload nginx"
+  ansible.builtin.service:
+    name: "nginx"
+    state: "reloaded"
+
+- name: "Set Elasticsearch server address"
+  ansible.builtin.command: >-
+    zammad run rails r "Setting.set('es_url', '{{ elasticsearch_url | quote }}')"
+  changed_when: true
+
+- name: "Build search index"
+  ansible.builtin.command: "zammad run rake zammad:searchindex:rebuild"
+  changed_when: true
+
+...
