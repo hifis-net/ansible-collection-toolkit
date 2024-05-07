@@ -10,6 +10,6 @@
   tasks:
     - name: "Include unattended_upgrades role"
       ansible.builtin.include_role:
-        name: "hifis.software_services.unattended_upgrades"
+        name: "hifis.toolkit.unattended_upgrades"
 
 ...

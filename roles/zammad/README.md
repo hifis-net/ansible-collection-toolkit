@@ -131,7 +131,7 @@ This role has been successfully tested together with the following roles:
 ```yaml
     - hosts: servers
       roles:
-         - role: hifis.software_services.zammad
+         - role: hifis.toolkit.zammad
            become: yes
 ```
 

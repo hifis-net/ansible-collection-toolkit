@@ -27,4 +27,4 @@
 
     - name: "Include ansible-role-zammad"
       ansible.builtin.include_role:
-        name: "hifis.software_services.zammad"
+        name: "hifis.toolkit.zammad"

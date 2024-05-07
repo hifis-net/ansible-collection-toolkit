@@ -210,7 +210,7 @@ Example for Ubuntu, with custom [origins patterns](#patterns-examples), blacklis
 ```yaml
 - hosts: all
   roles:
-  - role: hifis.software_services.unattended_upgrades
+  - role: hifis.toolkit.unattended_upgrades
     unattended_origins_patterns:
     - 'origin=Ubuntu,archive=${distro_codename}-security'
     - 'o=Ubuntu,a=${distro_codename}-updates'
@@ -229,7 +229,7 @@ systems. You can [use `when` conditional with role](https://docs.ansible.com/ans
 ```yaml
 - hosts: all
   roles:
-     - role: hifis.software_services.unattended_upgrades
+     - role: hifis.toolkit.unattended_upgrades
        when: ansible_facts['os_family'] == 'Debian'
 ```
 

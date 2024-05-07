@@ -50,10 +50,10 @@ jobs:
       - name: "Check out the codebase."
         uses: "actions/checkout@v4"
         with:
-          path: "ansible_collections/hifis/software_services"
+          path: "ansible_collections/hifis/toolkit"
 
       - name: "Prepare the job environment."
-        uses: "./ansible_collections/hifis/software_services/.github/workflows/prepare-action"
+        uses: "./ansible_collections/hifis/toolkit/.github/workflows/prepare-action"
 
       - name: "Install modern podman"
         run: |
@@ -72,4 +72,4 @@ jobs:
         run: "pipenv run molecule test -s unattended_upgrades"
         env:
           MOLECULE_IMAGE: "${{ matrix.image }}"
-        working-directory: "ansible_collections/hifis/software_services"
+        working-directory: "ansible_collections/hifis/toolkit"
