@@ -5,7 +5,7 @@ SPDX-FileCopyrightText: Helmholtz-Zentrum Dresden-Rossendorf (HZDR)
 SPDX-License-Identifier: Apache-2.0
 -->
 
-# Ansible Collection - hifis.software_services
+# Ansible Collection - hifis.toolkit
 
 [![Latest release](https://img.shields.io/github/v/release/hifis-net/ansible-role-unattended-upgrades)](https://github.com/hifis-net/ansible-role-unattended-upgrades/releases)
 [![hifis.unattended_upgrades](https://github.com/hifis-net/ansible-role-unattended-upgrades/actions/workflows/unattended_upgrades.yml/badge.svg)](https://github.com/hifis-net/ansible-role-unattended-upgrades/actions/workflows/unattended_upgrades.yml)
@@ -39,7 +39,7 @@ software engineers, but not exclusively. The following use cases are supported:
 Install the collection via ansible-galaxy:
 
 ```shell
-ansible-galaxy collection install hifis.software_services
+ansible-galaxy collection install hifis.toolkit
 ```
 
 ## License

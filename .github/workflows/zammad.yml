@@ -46,16 +46,16 @@ jobs:
       - name: "Check out the codebase."
         uses: "actions/checkout@v4"
         with:
-          path: "ansible_collections/hifis/software_services"
+          path: "ansible_collections/hifis/toolkit"
 
       - name: "Prepare the job environment."
-        uses: "./ansible_collections/hifis/software_services/.github/workflows/prepare-action"
+        uses: "./ansible_collections/hifis/toolkit/.github/workflows/prepare-action"
 
       # https://github.com/ansible/molecule/issues/3806
       - name: "Help molecule to find the dependencies"
         run: |
           mkdir -p /home/runner/.ansible
-          ln -s /home/runner/work/ansible-role-unattended-upgrades/ansible-role-unattended-upgrades/ansible_collections/hifis/software_services/roles \
+          ln -s /home/runner/work/ansible-role-unattended-upgrades/ansible-role-unattended-upgrades/ansible_collections/hifis/toolkit/roles \
             /home/runner/.ansible/roles
 
       - name: "Install modern podman"
@@ -75,4 +75,4 @@ jobs:
         run: "XDG_RUNTIME_DIR=/run/user/$UID pipenv run molecule test -s zammad"
         env:
           MOLECULE_IMAGE: "${{ matrix.image }}"
-        working-directory: "ansible_collections/hifis/software_services"
+        working-directory: "ansible_collections/hifis/toolkit"
