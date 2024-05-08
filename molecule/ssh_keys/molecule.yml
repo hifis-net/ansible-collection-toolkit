@@ -1,0 +1,24 @@
+# SPDX-FileCopyrightText: Helmholtz Centre for Environmental Research (UFZ)
+# SPDX-FileCopyrightText: Helmholtz-Zentrum Dresden-Rossendorf (HZDR)
+#
+# SPDX-License-Identifier: Apache-2.0
+
+---
+dependency:
+  name: "galaxy"
+  options:
+    requirements-file: "molecule/ssh_keys/requirements.yml"
+driver:
+  name: "podman"
+platforms:
+  - name: "instance"
+    image: "${MOLECULE_IMAGE:-ghcr.io/hifis-net/ubuntu-systemd:22.04}"
+    pre_build_image: true
+    privileged: true
+    override_command: false
+    systemd: true
+    tty: true
+provisioner:
+  name: "ansible"
+verifier:
+  name: "ansible"

@@ -1,0 +1,31 @@
+# SPDX-FileCopyrightText: Helmholtz Centre for Environmental Research (UFZ)
+# SPDX-FileCopyrightText: Helmholtz-Zentrum Dresden-Rossendorf (HZDR)
+#
+# SPDX-License-Identifier: Apache-2.0
+
+---
+- name: "Ensure user account is present"
+  ansible.builtin.user:
+    name: "{{ ssh_user.name }}"
+    state: "present"
+  when:
+    - "ssh_user.name | default('')"
+    - "ssh_user.name | length > 0"
+    - "ssh_user.create_user_account | default(false) | bool"
+  loop: "{{ ssh_user_list }}"
+  loop_control:
+    loop_var: "ssh_user"
+
+- name: "Manage authorized ssh keys"
+  ansible.posix.authorized_key:
+    user: "{{ ssh_user.name }}"
+    key: "{{ ssh_user.authorized_keys | default([]) | join('\n') }}"
+    exclusive: "{{ ssh_authorized_keys_exclusive }}"
+  when:
+    - "ssh_user.name | default('')"
+    - "ssh_user.name | length > 0"
+  loop: "{{ ssh_user_list }}"
+  loop_control:
+    loop_var: "ssh_user"
+
+...
