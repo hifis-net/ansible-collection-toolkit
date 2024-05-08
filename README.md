@@ -7,9 +7,9 @@ SPDX-License-Identifier: Apache-2.0
 
 # Ansible Collection - hifis.toolkit
 
-[![Latest release](https://img.shields.io/github/v/release/hifis-net/ansible-role-unattended-upgrades)](https://github.com/hifis-net/ansible-role-unattended-upgrades/releases)
-[![hifis.unattended_upgrades](https://github.com/hifis-net/ansible-role-unattended-upgrades/actions/workflows/unattended_upgrades.yml/badge.svg)](https://github.com/hifis-net/ansible-role-unattended-upgrades/actions/workflows/unattended_upgrades.yml)
-[![hifis.zammad](https://github.com/hifis-net/ansible-role-unattended-upgrades/actions/workflows/zammad.yml/badge.svg)](https://github.com/hifis-net/ansible-role-unattended-upgrades/actions/workflows/zammad.yml)
+[![Latest release](https://img.shields.io/github/v/release/hifis-net/ansible-collection-toolkit)](https://github.com/hifis-net/ansible-collection-toolkit/releases)
+[![hifis.unattended_upgrades](https://github.com/hifis-net/ansible-collection-toolkit/actions/workflows/unattended_upgrades.yml/badge.svg)](https://github.com/hifis-net/ansible-collection-toolkit/actions/workflows/unattended_upgrades.yml)
+[![hifis.zammad](https://github.com/hifis-net/ansible-collection-toolkit/actions/workflows/zammad.yml/badge.svg)](https://github.com/hifis-net/ansible-collection-toolkit/actions/workflows/zammad.yml)
 
 ## Description
 
@@ -17,18 +17,18 @@ This collection provides production-ready Ansible roles used for providing servi
 software engineers, but not exclusively. The following use cases are supported:
 
 * DevOps platform:
-  * GitLab (coming soon!)
-  * GitLab-Runner (coming soon!)
-  * Redis (coming soon!)
+  * [GitLab](https://github.com/hifis-net/ansible-role-gitlab) (coming soon!)
+  * [GitLab-Runner](https://github.com/hifis-net/ansible-role-gitlab-runner) (coming soon!)
+  * [Redis](https://github.com/hifis-net/ansible-role-redis) (coming soon!)
 * Help desk:
   * [**Zammad**](roles/zammad)
 * High Availability (HA) / Load Balancing:
-  * HAProxy (coming soon!)
-  * Keepalived (coming soon!)
+  * [HAProxy](https://github.com/hifis-net/ansible-role-haproxy) (coming soon!)
+  * [Keepalived](https://github.com/hifis-net/ansible-role-keepalived) (coming soon!)
 * OS-related:
   * [**unattended-upgrades**](roles/unattended_upgrades)
-  * netplan (coming soon!)
-  * managing and distributing authorized SSH keys (coming soon!)
+  * [netplan](https://github.com/hifis-net/ansible-role-gitlab-netplan) (coming soon!)
+  * managing and distributing authorized [SSH keys](https://github.com/hifis-net/ansible-role-ssh-keys) (coming soon!)
 
 ## Minimum required Ansible-version
 
@@ -41,6 +41,10 @@ Install the collection via ansible-galaxy:
 ```shell
 ansible-galaxy collection install hifis.toolkit
 ```
+
+## Contributing
+
+See [CONTRIBUTING.md](CONTRIBUTING.md).
 
 ## License
 

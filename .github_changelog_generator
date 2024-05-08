@@ -4,5 +4,5 @@
 # SPDX-License-Identifier: Apache-2.0
 
 user=hifis-net
-project=ansible-role-unattended-upgrades
+project=ansible-collection-toolkit
 since-tag=v3.3.0

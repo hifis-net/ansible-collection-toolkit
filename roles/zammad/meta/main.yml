@@ -11,7 +11,7 @@ galaxy_info:
   author: "HIFIS Software Services"
   company: "Helmholtz Association of German Research Centres"
   license: "MIT"
-  issue_tracker_url: "https://github.com/hifis-net/ansible-role-unattended-upgrades/issues"
+  issue_tracker_url: "https://github.com/hifis-net/ansible-collection-toolkit/issues"
   min_ansible_version: "2.14"
 
   platforms:

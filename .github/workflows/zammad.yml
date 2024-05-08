@@ -55,7 +55,7 @@ jobs:
       - name: "Help molecule to find the dependencies"
         run: |
           mkdir -p /home/runner/.ansible
-          ln -s /home/runner/work/ansible-role-unattended-upgrades/ansible-role-unattended-upgrades/ansible_collections/hifis/toolkit/roles \
+          ln -s /home/runner/work/ansible-collection-toolkit/ansible-collection-toolkit/ansible_collections/hifis/toolkit/roles \
             /home/runner/.ansible/roles
 
       - name: "Install modern podman"
