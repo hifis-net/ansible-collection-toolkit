@@ -1,0 +1,17 @@
+# SPDX-FileCopyrightText: Helmholtz Centre for Environmental Research (UFZ)
+# SPDX-FileCopyrightText: Helmholtz-Zentrum Dresden-Rossendorf (HZDR)
+#
+# SPDX-License-Identifier: MIT
+
+---
+
+- name: "Install zammad"
+  ansible.builtin.import_tasks: "install.yml"
+
+- name: "Set up SSL/TLS"
+  ansible.builtin.import_tasks: "ssl.yml"
+
+- name: "Configure nginx"
+  ansible.builtin.import_tasks: "nginx-config.yml"
+
+...

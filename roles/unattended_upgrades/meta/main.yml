@@ -1,0 +1,28 @@
+# SPDX-FileCopyrightText: Helmholtz Centre for Environmental Research (UFZ)
+# SPDX-FileCopyrightText: Helmholtz-Zentrum Dresden-Rossendorf (HZDR)
+# SPDX-FileCopyrightText: Jan Vlnas
+#
+# SPDX-License-Identifier: GPL-2.0-or-later
+
+---
+galaxy_info:
+  role_name: "unattended_upgrades"
+  author: "hifis"
+  description: "Setup unattended-upgrades on Debian-based systems"
+  license: "GPLv2"
+  min_ansible_version: "2.14"
+  platforms:
+    - name: "Ubuntu"
+      versions:
+        - "jammy"
+        - "focal"
+    - name: "Debian"
+      versions:
+        - "buster"
+        - "bullseye"
+        - "bookworm"
+
+  galaxy_tags:
+    - "system"
+
+dependencies: []

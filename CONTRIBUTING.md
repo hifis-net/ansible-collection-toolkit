@@ -1,17 +1,17 @@
 <!--
-SPDX-FileCopyrightText: 2022 Helmholtz Centre for Environmental Research (UFZ)
-SPDX-FileCopyrightText: 2022 Helmholtz-Zentrum Dresden-Rossendorf (HZDR)
+SPDX-FileCopyrightText: Helmholtz Centre for Environmental Research (UFZ)
+SPDX-FileCopyrightText: Helmholtz-Zentrum Dresden-Rossendorf (HZDR)
 
 SPDX-License-Identifier: Apache-2.0
 -->
 
 # Contributing
 
-## Please Help to Improve this Project 
+## Please Help to Improve this Project
 
 You would like to contribute to this project and want to know how to do that?
 Let me tell you first that you are awesome because you take care!
-Let's make this Ansible role even better.
+Let's make this Ansible collection even better.
 Any contributions and help to improve this project via issues, pull requests
 and more are most welcome and much appreciated.
 We are here to help you with your contributions at any time.
@@ -24,7 +24,7 @@ Coding is team-work and open-source software is community-work.
 In order to enhance the project or correct bugs and regressions in the project
 we need you and your support because the project benefits from your expertise,
 knowledge, opinions, perspectives, and labour.
-Together we are improving this Ansible role step-by-step.
+Together we are improving this Ansible collection step-by-step.
 Please follow these guidelines and be respectful as we respect your work and
 your contributions in the same manner and support you and help you with your
 contributions.
@@ -44,23 +44,23 @@ There are different ways to contribute to this project:
 
 Before you start contributing and create issues and pull requests we ask you
 to first check whether an issue or pull request already exists for the error,
-enhancement, feature or test case you have in mind. 
+enhancement, feature or test case you have in mind.
 
-###  Discuss Issues and Pull Requests
+### Discuss Issues and Pull Requests
 
-You can contribute by participating in discussions you find in issues and 
+You can contribute by participating in discussions you find in issues and
 pull requests or by starting your own discussions.
 
 ### Submit Bug Reports or Contribute New Feature Proposals
 
-If you found a bug in the Ansible role or a typo in the documentation or
+If you found a bug in the Ansible collection or a typo in the documentation or
 if you would like to discuss or suggest functional or quality aspects of the
-role you are welcome to create issues to get in contact with us.
+collection you are welcome to create issues to get in contact with us.
 
 ### Contribute Fixes or Implement New Features
 
 If you would like to provide a fix for a bug or a typo in the documentation or
-even add or change specific features of the role or specific parts of the
+even add or change specific features of the collection or specific parts of the
 documentation, you are welcome to fork this repository, create a separate
 branch, create a pull request and add your contributions.
 Please also label the pull request, refer to related issues and assign
@@ -74,8 +74,8 @@ While automated tests are by far our preferred testing method we also
 acknowledge contributors doing exploratory testing.
 Sometimes the existing automated tests are not sufficient to account for
 specific corner cases and to reveal hidden bugs.
-Testing the role manually is always a good approach to make sure that the role
-passes a particular additional test case.
+Testing the collection manually is always a good approach to make sure that the
+collection passes a particular additional test case.
 Even more valuable are automated tests because they are repeatable.
 That is why these test methods work best in combination.
 Once a bug is revealed in an exploratory test, additional automated test-cases
@@ -128,23 +128,23 @@ The following sections show how to lint and test your contributions locally.
 
 ### Linting the Project
 
-This role is linted via
+This collection is linted via
 [Ansible Lint](https://ansible-lint.readthedocs.io/en/latest/)
 and
 [yamllint](https://yamllint.readthedocs.io/en/stable/)
-which guarantees that the role adheres to a set of
+which guarantees that the collection adheres to a set of
 [Ansible Lint rules](https://ansible-lint.readthedocs.io/en/latest/default_rules/)
 and
 [yamllint rules](https://yamllint.readthedocs.io/en/stable/rules.html):
 
 ```shell
-$ pipenv run molecule lint
+$ pipenv run ansible-lint --offline
 ```
 
 ### REUSE Specification Compliance
 
 Each file in this project needs to have a proper license and copyright header.
-Please check that each file you add to the project contains license and 
+Please check that each file you add to the project contains license and
 copyright information and that it thereby meets the
 [REUSE Specification](https://reuse.software/spec/):
 
@@ -152,27 +152,27 @@ copyright information and that it thereby meets the
 $ pipenv run reuse lint
 ```
 
-### Testing the Ansible Role
+### Testing the Ansible Collection
 
-This role is tested via
+This collection is tested via
 [Ansible Molecule](https://molecule.readthedocs.io/en/latest/).
 During development of your changes we would like you to use _Molecule_ and
 the existing automated test cases to verify that your changes do not break
 existing test cases:
 
 ```shell
-$ pipenv run molecule test
-````
+$ pipenv run molecule test -s unattended_upgrades
+```
 
 ## How are Contributors Given Credit for Their Valuable Work?
 
-Please add yourself to the list of contributors in file 
-[README.md](README.md#contributors) 
-via a pull request if you made significant contributions to this role.
+Please add yourself to the list of contributors in file
+[README.md](README.md#contributors)
+via a pull request if you made significant contributions to this collection.
 Significant contributions are done by suggesting pull requests that fix
 bugs or add features or test cases to the project.
-Since all other contributions are welcome and may be significant as well 
-you can request to be added as a contributor which is then decided on a 
+Since all other contributions are welcome and may be significant as well
+you can request to be added as a contributor which is then decided on a
 case-by-case basis.
 
 ## Ground Rules and Contributions We are Not Looking For

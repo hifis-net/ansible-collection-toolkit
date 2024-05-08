@@ -1,0 +1,35 @@
+# SPDX-FileCopyrightText: Helmholtz Centre for Environmental Research (UFZ)
+# SPDX-FileCopyrightText: Helmholtz-Zentrum Dresden-Rossendorf (HZDR)
+#
+# SPDX-License-Identifier: Apache-2.0
+
+---
+name: "Ansible Lint"
+
+on:
+  pull_request:
+    paths:
+      - 'roles/**'
+  push:
+    branches:
+      - "main"
+    tags:
+      - "v*.*.*"
+    paths:
+      - 'roles/**'
+
+env:
+  PY_COLORS: 1
+  ANSIBLE_FORCE_COLOR: 1
+
+jobs:
+
+  ansible-lint:
+    name: "Ansible Lint"
+    runs-on: "ubuntu-22.04"
+    steps:
+      - name: "Check out the codebase."
+        uses: "actions/checkout@v4"
+
+      - name: "Lint code."
+        uses: "ansible/ansible-lint@v24.2.1"

@@ -1,0 +1,48 @@
+# SPDX-FileCopyrightText: Helmholtz Centre for Environmental Research (UFZ)
+# SPDX-FileCopyrightText: Helmholtz-Zentrum Dresden-Rossendorf (HZDR)
+#
+# SPDX-License-Identifier: MIT
+
+---
+
+- name:  "SSL | Insert private key"
+  ansible.builtin.blockinfile:
+    path: "{{ zammad_ssl_key_path }}"
+    create: true
+    block: |
+      {{ zammad_ssl_key }}
+    mode: "0640"
+    owner: "root"
+    group: "root"
+  when: "zammad_ssl_key | default('') | length > 0"
+
+- name: "SSL | Insert certificate"
+  ansible.builtin.blockinfile:
+    path: "{{ zammad_ssl_cert_path }}"
+    create: true
+    block: |
+      {{ zammad_ssl_cert }}
+    mode: "0644"
+    owner: "root"
+    group: "root"
+  when: "zammad_ssl_cert | default('') | length > 0"
+
+- name: "SSL | Check if certificate is still valid, ignoring failures"
+  community.crypto.x509_certificate_info:
+    path: "{{ zammad_ssl_cert_path }}"
+  register: "certificate"
+  ignore_errors: "{{ ansible_check_mode }}"
+
+- name: "SSL | Ensure certificate and private key match"
+  community.crypto.openssl_privatekey_info:
+    path: "{{ zammad_ssl_key_path }}"
+  register: "private_key"
+  ignore_errors: "{{ ansible_check_mode }}"
+
+- name: "SSL | Validate that certificate is still valid"
+  ansible.builtin.assert:
+    that:
+      - "not certificate.expired"
+      - "certificate.public_key == private_key.public_key"
+
+...

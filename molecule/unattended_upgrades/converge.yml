@@ -1,0 +1,15 @@
+# SPDX-FileCopyrightText: Helmholtz Centre for Environmental Research (UFZ)
+# SPDX-FileCopyrightText: Helmholtz-Zentrum Dresden-Rossendorf (HZDR)
+#
+# SPDX-License-Identifier: Apache-2.0
+
+---
+# Play to create and provision instance.
+- name: "Converge"
+  hosts: "all"
+  tasks:
+    - name: "Include unattended_upgrades role"
+      ansible.builtin.include_role:
+        name: "hifis.toolkit.unattended_upgrades"
+
+...

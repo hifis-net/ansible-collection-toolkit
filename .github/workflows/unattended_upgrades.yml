@@ -1,0 +1,75 @@
+# SPDX-FileCopyrightText: Helmholtz Centre for Environmental Research (UFZ)
+# SPDX-FileCopyrightText: Helmholtz-Zentrum Dresden-Rossendorf (HZDR)
+#
+# SPDX-License-Identifier: Apache-2.0
+
+---
+name: "hifis.unattended_upgrades"
+
+on:
+  pull_request:
+    paths:
+      - '.github/workflows/unattended_upgrades.yml'
+      - 'roles/unattended_upgrades/**'
+      - 'molecule/unattended_upgrades/**'
+      - 'Pipfile'
+      - 'Pipfile.lock'
+  push:
+    branches:
+      - "main"
+    tags:
+      - "v*.*.*"
+    paths:
+      - '.github/workflows/unattended_upgrades.yml'
+      - 'roles/unattended_upgrades/**'
+      - 'molecule/unattended_upgrades/**'
+      - 'Pipfile'
+      - 'Pipfile.lock'
+  schedule:
+    - cron: '0 0 * * *'
+
+jobs:
+
+  test:
+    name: "Run Molecule tests."
+    runs-on: "ubuntu-22.04"
+    env:
+      PY_COLORS: 1
+      ANSIBLE_FORCE_COLOR: 1
+    strategy:
+      fail-fast: false
+      matrix:
+        image:
+          - "ghcr.io/hifis-net/ubuntu-systemd:22.04"
+          - "ghcr.io/hifis-net/ubuntu-systemd:20.04"
+          - "ghcr.io/hifis-net/debian-systemd:12"
+          - "ghcr.io/hifis-net/debian-systemd:11"
+          - "ghcr.io/hifis-net/debian-systemd:10"
+
+    steps:
+      - name: "Check out the codebase."
+        uses: "actions/checkout@v4"
+        with:
+          path: "ansible_collections/hifis/toolkit"
+
+      - name: "Prepare the job environment."
+        uses: "./ansible_collections/hifis/toolkit/.github/workflows/prepare-action"
+
+      - name: "Install modern podman"
+        run: |
+          sudo mkdir -p /etc/apt/keyrings
+          curl -fsSL https://download.opensuse.org/repositories/devel:kubic:libcontainers:unstable/xUbuntu_$(lsb_release -rs)/Release.key \
+            | gpg --dearmor \
+            | sudo tee /etc/apt/keyrings/devel_kubic_libcontainers_unstable.gpg > /dev/null
+          echo \
+            "deb [arch=$(dpkg --print-architecture) signed-by=/etc/apt/keyrings/devel_kubic_libcontainers_unstable.gpg]\
+              https://download.opensuse.org/repositories/devel:kubic:libcontainers:unstable/xUbuntu_$(lsb_release -rs)/ /" \
+            | sudo tee /etc/apt/sources.list.d/devel:kubic:libcontainers:unstable.list > /dev/null
+          sudo apt-get update -qq
+          sudo apt-get -qq -y install podman
+
+      - name: "Run Molecule tests."
+        run: "pipenv run molecule test -s unattended_upgrades"
+        env:
+          MOLECULE_IMAGE: "${{ matrix.image }}"
+        working-directory: "ansible_collections/hifis/toolkit"

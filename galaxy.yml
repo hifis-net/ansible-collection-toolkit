@@ -1,0 +1,35 @@
+# SPDX-FileCopyrightText: Helmholtz Centre for Environmental Research (UFZ)
+# SPDX-FileCopyrightText: Helmholtz-Zentrum Dresden-Rossendorf (HZDR)
+#
+# SPDX-License-Identifier: Apache-2.0
+
+namespace: 'hifis'
+name: 'toolkit'
+version: '4.0.0'
+readme: 'README.md'
+authors:
+  - 'HIFIS Software Services <support@hifis.net>'
+description: 'This collection provides production-ready Ansible roles used for providing services used in research and by research software engineers, but not exclusively.'
+license:
+  - 'Apache-2.0'
+  - 'GPL-2.0-or-later'
+  - 'MIT'
+tags:
+  - 'hifis'
+  - 'ubuntu'
+  - 'debian'
+  - 'linux'
+  - 'system'
+dependencies: {}
+repository: 'https://github.com/hifis-net/ansible-role-unattended-upgrades'
+homepage: 'https://hifis.net/services/software-overview.html'
+issues: 'https://github.com/hifis-net/ansible-role-unattended-upgrades/issues'
+build_ignore:
+  - '.editorconfig'
+  - '.github'
+  - '.github_changelog_generator'
+  - '.gitattributes'
+  - '.gitignore'
+  - '.yamllint'
+  - 'Pipfile'
+  - 'Pipfile.lock'

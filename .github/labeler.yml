@@ -1,0 +1,18 @@
+# SPDX-FileCopyrightText: Helmholtz Centre for Environmental Research (UFZ)
+# SPDX-FileCopyrightText: Helmholtz-Zentrum Dresden-Rossendorf (HZDR)
+#
+# SPDX-License-Identifier: Apache-2.0
+
+---
+unattended_upgrades:
+  - changed-files:
+      - any-glob-to-any-file:
+          - "roles/unattended_upgrades/**"
+          - "molecule/unattended_upgrades/**"
+          - ".github/workflows/unattended_upgrades.yml"
+zammad:
+  - changed-files:
+      - any-glob-to-any-file:
+          - "roles/zammad/**"
+          - "molecule/zammad/**"
+          - ".github/workflows/zammad.yml"

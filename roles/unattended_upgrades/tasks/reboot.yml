@@ -1,0 +1,15 @@
+# SPDX-FileCopyrightText: Helmholtz Centre for Environmental Research (UFZ)
+# SPDX-FileCopyrightText: Helmholtz-Zentrum Dresden-Rossendorf (HZDR)
+# SPDX-FileCopyrightText: Jan Vlnas
+#
+# SPDX-License-Identifier: GPL-2.0-or-later
+
+---
+# Ignored, since newer distros don't need this package
+# https://github.com/jnv/ansible-role-unattended-upgrades/issues/6
+- name: "Install update-notifier-common"
+  ansible.builtin.apt:
+    name: "update-notifier-common"
+    state: "present"
+    force_apt_get: "yes"
+  failed_when: false

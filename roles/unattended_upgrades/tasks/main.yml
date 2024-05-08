@@ -1,0 +1,20 @@
+# SPDX-FileCopyrightText: Helmholtz Centre for Environmental Research (UFZ)
+# SPDX-FileCopyrightText: Helmholtz-Zentrum Dresden-Rossendorf (HZDR)
+# SPDX-FileCopyrightText: Jan Vlnas
+#
+# SPDX-License-Identifier: GPL-2.0-or-later
+
+---
+- name: "Import tasks from the unattended-upgrades playbook"
+  ansible.builtin.import_tasks: "unattended-upgrades.yml"
+  tags: "unattended"
+
+- name: "Import tasks to install systemd timer schedule overrides"
+  ansible.builtin.import_tasks: "systemd_timers.yml"
+  tags: "unattended_systemd_timers"
+  when: 'unattended_systemd_timer_override'
+
+- name: "Import tasks to remove systemd timer schedule overrides"
+  ansible.builtin.import_tasks: "systemd_timers_remove.yml"
+  tags: "unattended_systemd_timers"
+  when: 'not unattended_systemd_timer_override'

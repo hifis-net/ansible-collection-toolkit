@@ -1,0 +1,45 @@
+# SPDX-FileCopyrightText: Helmholtz Centre for Environmental Research (UFZ)
+# SPDX-FileCopyrightText: Helmholtz-Zentrum Dresden-Rossendorf (HZDR)
+# SPDX-FileCopyrightText: Jan Vlnas
+#
+# SPDX-License-Identifier: GPL-2.0-or-later
+
+---
+- name: "Add distribution-specific variables"
+  ansible.builtin.include_vars: "{{ lookup('ansible.builtin.first_found', params) }}"
+  vars:
+    params:
+      files:
+        - "{{ ansible_facts.distribution }}-{{ ansible_facts.distribution_release }}.yml"
+        - "{{ ansible_facts.distribution }}.yml"
+      paths:
+        - 'vars'
+
+- name: "Install powermgmt-base"
+  ansible.builtin.apt:
+    name: "powermgmt-base"
+    state: "present"
+    cache_valid_time: "{{ unattended_cache_valid_time }}"
+    update_cache: "yes"
+    force_apt_get: "yes"
+  when: "unattended_only_on_ac_power"
+
+- name: "Install unattended-upgrades"
+  ansible.builtin.apt:
+    name: "unattended-upgrades"
+    state: "present"
+    cache_valid_time: "{{ unattended_cache_valid_time }}"
+    update_cache: "yes"
+    force_apt_get: "yes"
+
+- name: "Install reboot dependencies"
+  ansible.builtin.import_tasks: "reboot.yml"
+  when: "unattended_automatic_reboot | bool"
+
+- name: "Create Apt auto-upgrades & unattended-upgrades configuration"
+  ansible.builtin.template:
+    src: "unattended-upgrades.j2"
+    dest: "/etc/apt/apt.conf.d/90-ansible-unattended-upgrades"
+    owner: "root"
+    group: "root"
+    mode: "0644"

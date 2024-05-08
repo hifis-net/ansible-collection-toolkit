@@ -1,0 +1,22 @@
+# SPDX-FileCopyrightText: Helmholtz Centre for Environmental Research (UFZ)
+# SPDX-FileCopyrightText: Helmholtz-Zentrum Dresden-Rossendorf (HZDR)
+#
+# SPDX-License-Identifier: Apache-2.0
+
+---
+name: "Check compliance with the RUSE specification"
+
+on:
+  push:
+  pull_request:
+
+jobs:
+  reuse-lint:
+    name: "REUSE compliance check"
+    runs-on: "ubuntu-22.04"
+    steps:
+      - name: "Check out the codebase."
+        uses: "actions/checkout@v4"
+
+      - name: "REUSE lint"
+        uses: "fsfe/reuse-action@v3.0.0"

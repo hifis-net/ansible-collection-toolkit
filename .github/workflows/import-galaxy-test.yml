@@ -1,0 +1,20 @@
+# SPDX-FileCopyrightText: Helmholtz Centre for Environmental Research (UFZ)
+# SPDX-FileCopyrightText: Helmholtz-Zentrum Dresden-Rossendorf (HZDR)
+#
+# SPDX-License-Identifier: Apache-2.0
+
+---
+name: "Test importing collection"
+
+on:
+  pull_request:
+  push:
+    branches:
+      - "main"
+
+jobs:
+  import-galaxy:
+    permissions:
+      contents: "read"
+    name: "Import collection with Galaxy importer"
+    uses: "ansible-community/github-action-test-galaxy-import/.github/workflows/test-galaxy-import.yml@main"

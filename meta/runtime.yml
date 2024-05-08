@@ -1,12 +1,7 @@
 # SPDX-FileCopyrightText: Helmholtz Centre for Environmental Research (UFZ)
 # SPDX-FileCopyrightText: Helmholtz-Zentrum Dresden-Rossendorf (HZDR)
-# SPDX-FileCopyrightText: Jan Vlnas
 #
-# SPDX-License-Identifier: GPL-2.0-or-later
+# SPDX-License-Identifier: Apache-2.0
 
-.vagrant/
-*~
-*.log
-.idea/
-.pipenv/
-.vscode/
+---
+requires_ansible: '>=2.14.0'

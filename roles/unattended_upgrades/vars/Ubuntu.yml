@@ -4,9 +4,6 @@
 #
 # SPDX-License-Identifier: GPL-2.0-or-later
 
-.vagrant/
-*~
-*.log
-.idea/
-.pipenv/
-.vscode/
+---
+__unattended_origins_patterns:
+  - 'origin=Ubuntu,archive=${distro_codename}-security,label=Ubuntu'

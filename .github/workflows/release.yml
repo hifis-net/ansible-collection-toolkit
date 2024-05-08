@@ -1,0 +1,26 @@
+# SPDX-FileCopyrightText: Helmholtz Centre for Environmental Research (UFZ)
+# SPDX-FileCopyrightText: Helmholtz-Zentrum Dresden-Rossendorf (HZDR)
+#
+# SPDX-License-Identifier: Apache-2.0
+
+---
+name: "Release new version on Ansible Galaxy"
+
+on:
+  release:
+    types:
+      - "released"
+
+jobs:
+
+  release:
+    name: "Release new version on Ansible Galaxy"
+    runs-on: "ubuntu-22.04"
+    steps:
+      - name: "checkout"
+        uses: "actions/checkout@v4"
+
+      - name: "Deploy the collection"
+        uses: "artis3n/ansible_galaxy_collection@v2.10.1"
+        with:
+          api_key: "${{ secrets.galaxy_api_key }}"
