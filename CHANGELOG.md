@@ -30,6 +30,7 @@ To continue using the [`unattended_upgrades`](roles/unattended_upgrades) role as
 
 **Merged pull requests:**
 
+- Prepare release version 4.0.0 [\#209](https://github.com/hifis-net/ansible-collection-toolkit/pull/209) ([Normo](https://github.com/Normo))
 - chore\(deps\): bump ansible/ansible-lint from 24.2.1 to 24.2.3 [\#208](https://github.com/hifis-net/ansible-collection-toolkit/pull/208) ([dependabot[bot]](https://github.com/apps/dependabot))
 - chore\(deps\): bump ansible from 9.3.0 to 9.5.1 [\#204](https://github.com/hifis-net/ansible-collection-toolkit/pull/204) ([dependabot[bot]](https://github.com/apps/dependabot))
 - Release version 4.0.0 [\#198](https://github.com/hifis-net/ansible-collection-toolkit/pull/198) ([Normo](https://github.com/Normo))
