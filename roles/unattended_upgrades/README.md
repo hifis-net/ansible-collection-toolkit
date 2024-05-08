@@ -8,7 +8,7 @@ SPDX-License-Identifier: GPL-2.0-or-later
 
 # hifis.unattended_upgrades Ansible Role
 
-[![CI status](https://github.com/hifis-net/ansible-role-unattended-upgrades/actions/workflows/unattended_upgrades.yml/badge.svg)](https://github.com/hifis-net/ansible-role-unattended-upgrades/actions/workflows/unattended_upgrades.yml)
+[![CI status](https://github.com/hifis-net/ansible-collection-toolkit/actions/workflows/unattended_upgrades.yml/badge.svg)](https://github.com/hifis-net/ansible-collection-toolkit/actions/workflows/unattended_upgrades.yml)
 
 Install and setup [unattended-upgrades](https://launchpad.net/unattended-upgrades) for Ubuntu and Debian, to
 periodically install security upgrades.
@@ -23,7 +23,7 @@ send e-mails.
 
 The role requires unattended-upgrades version 0.70 and newer, which is available since Debian Wheezy and Ubuntu 12.04
 respectively. This is due to [Origins Patterns](#origins-patterns) usage; if this is not available on your system, you
-may use [the first version of the role](https://github.com/hifis-net/ansible-role-unattended-upgrades/tree/v0.1).
+may use [the first version of the role](https://github.com/hifis-net/ansible-collection-toolkit/tree/v0.1).
 
 ### Automatic Reboot
 

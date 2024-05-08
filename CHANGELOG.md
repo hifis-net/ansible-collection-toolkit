@@ -1,12 +1,39 @@
 # Changelog
 
-## [Unreleased](https://github.com/hifis-net/ansible-role-unattended-upgrades/tree/HEAD)
+## [v4.0.0](https://github.com/hifis-net/ansible-collection-toolkit/tree/v4.0.0) (2024-05-08)
 
-[Full Changelog](https://github.com/hifis-net/ansible-role-unattended-upgrades/compare/v3.3.0...HEAD)
+[Full Changelog](https://github.com/hifis-net/ansible-collection-toolkit/compare/v3.3.0...v4.0.0)
+
+**UPGRADE NOTES:**
+
+The `hifis.unattended_upgrades` role has been migrated to the `hifis.toolkit` collection. Please ensure that you install the new collection as follows:
+
+```sh
+ansible-galaxy collection install hifis.toolkit
+```
+
+To continue using the [`unattended_upgrades`](roles/unattended_upgrades) role as before, please include it as described:
+
+```yaml
+- hosts: all
+  roles:
+     - role: hifis.toolkit.unattended_upgrades
+```
+
+**Breaking changes:**
+
+- Migrate role to role in a collection [\#165](https://github.com/hifis-net/ansible-collection-toolkit/issues/165)
+
+**Closed issues:**
+
+- Make collection REUSE-compliant [\#197](https://github.com/hifis-net/ansible-collection-toolkit/issues/197)
 
 **Merged pull requests:**
 
-- chore\(deps-dev\): bump ansible-lint from 24.2.0 to 24.2.1 [\#194](https://github.com/hifis-net/ansible-role-unattended-upgrades/pull/194) ([dependabot[bot]](https://github.com/apps/dependabot))
+- chore\(deps\): bump ansible/ansible-lint from 24.2.1 to 24.2.3 [\#208](https://github.com/hifis-net/ansible-collection-toolkit/pull/208) ([dependabot[bot]](https://github.com/apps/dependabot))
+- chore\(deps\): bump ansible from 9.3.0 to 9.5.1 [\#204](https://github.com/hifis-net/ansible-collection-toolkit/pull/204) ([dependabot[bot]](https://github.com/apps/dependabot))
+- Release version 4.0.0 [\#198](https://github.com/hifis-net/ansible-collection-toolkit/pull/198) ([Normo](https://github.com/Normo))
+- chore\(deps-dev\): bump ansible-lint from 24.2.0 to 24.2.1 [\#194](https://github.com/hifis-net/ansible-collection-toolkit/pull/194) ([dependabot[bot]](https://github.com/apps/dependabot))
 
 
 

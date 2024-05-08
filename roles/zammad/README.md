@@ -5,10 +5,10 @@ SPDX-FileCopyrightText: Helmholtz-Zentrum Dresden-Rossendorf (HZDR)
 SPDX-License-Identifier: MIT
 -->
 
-# Ansible role: Zammad
+# hifis.zammad Ansible Role
 
-[![CI Status](https://github.com/hifis-net/ansible-role-unattended-upgrades/actions/workflows/zammad.yml/badge.svg)](https://github.com/hifis-net/ansible-role-zammad/actions/workflows/zammad.yml)
-[![License](https://img.shields.io/badge/License-MIT-blue.svg)](https://github.com/hifis-net/ansible-role-zammad/blob/main/LICENSE.md)
+[![CI Status](https://github.com/hifis-net/ansible-collection-toolkit/actions/workflows/zammad.yml/badge.svg)](https://github.com/hifis-net/ansible-collection-toolkit/actions/workflows/zammad.yml)
+[![License](https://img.shields.io/badge/License-MIT-blue.svg)](https://github.com/hifis-net/ansible-collection-toolkit/blob/main/LICENSES/MIT.txt)
 
 An Ansible Role that installs and configures the web-based open source user
 support/ticketing solution [Zammad](https://zammad.org/).

@@ -6,7 +6,7 @@
 
 ---
 # List of unattended-upgrades options that need to be erased before set by this role
-# See https://github.com/hifis-net/ansible-role-unattended-upgrades/issues/94
+# See https://github.com/hifis-net/ansible-collection-toolkit/issues/94
 __clear_options:
   - "Acquire::http::Dl-Limit"
   - "APT::Periodic::Update-Package-Lists"

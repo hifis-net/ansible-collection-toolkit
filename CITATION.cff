@@ -4,37 +4,37 @@
 # SPDX-License-Identifier: Apache-2.0
 
 cff-version: '1.2.0'
-title: 'hifis.unattended_upgrades Ansible role'
+title: 'hifis.toolkit Ansible collection'
 message: >-
-  "If you use this Ansible role, please cite it as
-  below."
+  "If you use this Ansible collection, please cite
+  it as below."
 abstract: >-
-  Ansible role to install and setup unattended-upgrades for
-  Ubuntu and Debian, to periodically install security upgrades.
+  Ansible collection that provides production-ready Ansible roles used for providing
+  services used in research and by research software engineers, but not exclusively.
 type: 'software'
 authors:
   - given-names: 'Norman'
     family-names: 'Ziegner'
-    email: 'norman.ziegner@ufz.de'
+    email: 'n.ziegner@hzdr.de'
     affiliation: >-
-      Helmholtz Centre for Environmental Research
-      GmbH - UFZ
+      Helmholtz-Zentrum Dresden - Rossendorf e. V.
+      (HZDR)
     orcid: 'https://orcid.org/0000-0001-7579-216X'
   - given-names: 'Tobias'
     family-names: 'Huste'
     email: 't.huste@hzdr.de'
     affiliation: >-
-      Helmholtz-Zentrum Dresden-Rossendorf e. V.
+      Helmholtz-Zentrum Dresden - Rossendorf e. V.
       (HZDR)
     orcid: 'https://orcid.org/0000-0002-5590-7473'
   - given-names: 'Christian'
     family-names: 'Hüser'
     email: 'c.hueser@hzdr.de'
     affiliation: >-
-      Helmholtz-Zentrum Dresden-Rossendorf e. V.
+      Helmholtz-Zentrum Dresden - Rossendorf e. V.
       (HZDR)
     orcid: 'https://orcid.org/0000-0002-5028-6663'
-repository-code: 'https://github.com/hifis-net/ansible-role-unattended-upgrades'
+repository-code: 'https://github.com/hifis-net/ansible-collection-toolkit'
 repository-artifact: 'https://galaxy.ansible.com/hifis/unattended_upgrades'
-version: 'v3.3.0'
-date-released: '2024-03-01'
+version: 'v4.0.0'
+date-released: '2024-05-08'

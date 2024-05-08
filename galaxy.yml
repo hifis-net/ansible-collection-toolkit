@@ -21,9 +21,9 @@ tags:
   - 'linux'
   - 'system'
 dependencies: {}
-repository: 'https://github.com/hifis-net/ansible-role-unattended-upgrades'
+repository: 'https://github.com/hifis-net/ansible-collection-toolkit'
 homepage: 'https://hifis.net/services/software-overview.html'
-issues: 'https://github.com/hifis-net/ansible-role-unattended-upgrades/issues'
+issues: 'https://github.com/hifis-net/ansible-collection-toolkit/issues'
 build_ignore:
   - '.editorconfig'
   - '.github'
