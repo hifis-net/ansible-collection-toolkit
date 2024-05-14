@@ -1,3 +1,10 @@
+<!--
+SPDX-FileCopyrightText: Helmholtz Centre for Environmental Research (UFZ)
+SPDX-FileCopyrightText: Helmholtz-Zentrum Dresden-Rossendorf (HZDR)
+
+SPDX-License-Identifier: Apache-2.0
+-->
+
 # Changelog
 
 ## [v3.3.0](https://github.com/hifis-net/ansible-collection-toolkit/tree/v3.3.0) (2024-03-01)

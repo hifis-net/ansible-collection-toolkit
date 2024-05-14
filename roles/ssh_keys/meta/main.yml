@@ -1,0 +1,42 @@
+# SPDX-FileCopyrightText: Helmholtz Centre for Environmental Research (UFZ)
+# SPDX-FileCopyrightText: Helmholtz-Zentrum Dresden-Rossendorf (HZDR)
+#
+# SPDX-License-Identifier: Apache-2.0
+
+---
+galaxy_info:
+  role_name: "ssh_keys"
+  author: "HIFIS Software Services"
+  description: "Add provided authorized SSH public keys to a user."
+  company: "Helmholtz Association"
+
+  issue_tracker_url: "https://github.com/hifis-net/ansible-collection-toolkit/issues"
+
+  license: "Apache-2.0"
+  min_ansible_version: "2.14"
+
+  platforms:
+    - name: "EL"
+      versions:
+        - "7"
+        - "8"
+        - "9"
+    - name: "Ubuntu"
+      versions:
+        - "bionic"
+        - "focal"
+        - "jammy"
+    - name: "Debian"
+      versions:
+        - "buster"
+        - "bullseye"
+
+  galaxy_tags:
+    - "ssh"
+    - "authorized"
+    - "key"
+    - "keys"
+
+dependencies: []
+
+...

@@ -4,6 +4,12 @@
 # SPDX-License-Identifier: Apache-2.0
 
 ---
+ssh_keys:
+  - changed-files:
+      - any-glob-to-any-file:
+          - "roles/ssh_keys/**"
+          - "molecule/ssh_keys/**"
+          - ".github/workflows/ssh_keys.yml"
 unattended_upgrades:
   - changed-files:
       - any-glob-to-any-file:
