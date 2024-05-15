@@ -1,0 +1,21 @@
+# SPDX-FileCopyrightText: Helmholtz Centre for Environmental Research (UFZ)
+# SPDX-FileCopyrightText: Helmholtz-Zentrum Dresden-Rossendorf (HZDR)
+#
+# SPDX-License-Identifier: Apache-2.0
+
+[Unit]
+Description=LVS and VRRP High Availability Monitor
+After=network-online.target syslog.target
+Wants=network-online.target
+
+[Service]
+Type=forking
+RuntimeDirectory=keepalived
+PIDFile={{ keepalived_pid_file_path }}
+KillMode=process
+EnvironmentFile=-{{ keepalived_sysconfig_file_path }}
+ExecStart={{ keepalived_executable_path }} -p {{ keepalived_pid_file_path }} $KEEPALIVED_OPTIONS
+ExecReload=/bin/kill -HUP $MAINPID
+
+[Install]
+WantedBy=multi-user.target

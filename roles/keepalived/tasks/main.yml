@@ -1,0 +1,166 @@
+# SPDX-FileCopyrightText: Helmholtz Centre for Environmental Research (UFZ)
+# SPDX-FileCopyrightText: Helmholtz-Zentrum Dresden-Rossendorf (HZDR)
+#
+# SPDX-License-Identifier: Apache-2.0
+
+---
+
+- name: "Check that all mandatory variables are defined."
+  ansible.builtin.assert:
+    that:
+      - "keepalived_unicast_peers is defined"
+      - "keepalived_virtual_ip_address is defined or keepalived_virtual_ipaddress_configs is defined"
+    fail_msg: "Some mandatory variables are not set."
+    success_msg: "All mandatory variables are set."
+
+- name: "Install dependencies for Keepalived."
+  become: true
+  ansible.builtin.package:
+    name: "{{ keepalived_dependencies }}"
+    state: "present"
+    update_cache: true
+
+- name: "Create Keepalived Configuration Directory."
+  become: true
+  ansible.builtin.file:
+    path: "{{ keepalived_conf_dir }}"
+    state: "directory"
+    owner: "root"
+    group: "root"
+    mode: "0755"
+
+- name: "Check whether Keepalived binary is installed."
+  ansible.builtin.stat:
+    path: "{{ keepalived_executable_path }}"
+  register: "keepalived_installed"
+
+- name: "Determine if this is an initial dry-run"
+  ansible.builtin.set_fact:
+    initial_dry_run: "{{ ansible_check_mode and not keepalived_installed.stat.exists }}"
+
+- name: "Get Keepalived version."
+  ansible.builtin.command:
+    cmd: "{{ keepalived_executable_path }} --version"
+  register: "keepalived_version_installed"
+  when: "keepalived_installed.stat.exists"
+  changed_when: false
+  check_mode: false
+
+- name: "Put value of installed version into an Ansible fact."
+  ansible.builtin.set_fact:
+    installed_keepalived_version: "{{ keepalived_version_installed.stderr | regex_search('^Keepalived v(\\d+\\.\\d+\\.\\d+)', '\\1') | first }}"
+  when: "keepalived_installed.stat.exists"
+
+- name: "Output version strings of installed and to be installed Keepalived."
+  ansible.builtin.debug:
+    msg: "Installed version: {{ installed_keepalived_version }}, version to be installed: {{ keepalived_version }}."
+  when: "installed_keepalived_version is defined"
+
+- name: "Check if both version strings are equal."
+  ansible.builtin.set_fact:
+    is_keepalived_version_equal: "{{ installed_keepalived_version is version(keepalived_version, operator='==', strict=True) }}"
+  when: "keepalived_installed.stat.exists"
+
+- name: "Continue with installing Keepalived if Keepalived is not already installed or versions are not equal."
+  when: "not keepalived_installed.stat.exists or not is_keepalived_version_equal"
+  block:
+
+    - name: "Create temporary Keepalived build directory."
+      become: true
+      ansible.builtin.tempfile:
+        state: "directory"
+        prefix: "keepalived-{{ keepalived_version }}_"
+      register: "tempdir"
+      check_mode: false
+
+    - name: "Store temporary build directory path"
+      ansible.builtin.set_fact:
+        keepalived_build_dir: "{{ tempdir.path }}"
+
+    - name: "Download and extract keepalived archive."
+      become: true
+      ansible.builtin.unarchive:
+        src: "{{ keepalived_download_url }}"
+        dest: "{{ keepalived_build_dir }}"
+        remote_src: true
+        extra_opts:
+          - "--strip-components=1"
+        owner: "root"
+        group: "root"
+        mode: "0755"
+
+    - name: "Configure Keepalived to be build."
+      become: true
+      ansible.builtin.command: "./configure"
+      args:
+        chdir: "{{ keepalived_build_dir }}"
+      changed_when: true
+
+    - name: "Build Keepalived from source."
+      become: true
+      community.general.make:
+        chdir: "{{ keepalived_build_dir }}"
+      when: "not initial_dry_run"
+
+    - name: "Install Keepalived binaries."
+      become: true
+      community.general.make:
+        chdir: "{{ keepalived_build_dir }}"
+        target: "install"
+      notify: "Restart Keepalived"
+      when: "not initial_dry_run"
+
+    - name: "Copy Keepalived sysconfig file"
+      become: true
+      ansible.builtin.copy:
+        src: "{{ keepalived_build_dir }}/keepalived/etc/sysconfig/keepalived"
+        dest: "{{ keepalived_sysconfig_file_path }}"
+        owner: "root"
+        group: "root"
+        mode: "0644"
+        remote_src: true
+      when: "not ansible_check_mode"
+  always:
+    - name: "Remove temporary build directory"
+      become: true
+      ansible.builtin.file:
+        path: "{{ keepalived_build_dir }}"
+        state: "absent"
+      check_mode: false
+
+- name: "Create Configuration File."
+  become: true
+  ansible.builtin.template:
+    src: "{{ keepalived_conf_template }}"
+    dest: "{{ keepalived_conf_file_path }}"
+    owner: "root"
+    group: "root"
+    mode: "0644"
+  notify: "Reload Keepalived"
+
+- name: "Verify Keepalived configuration."
+  become: true
+  ansible.builtin.command:
+    cmd: "{{ keepalived_executable_path | quote }} --config-test {{ keepalived_conf_file_path | quote }}"
+  register: "config_check"
+  changed_when: "config_check.rc != 0"
+
+- name: "Create Keepalived Service Unit File."
+  ansible.builtin.template:
+    src: "{{ keepalived_service_template }}"
+    dest: "{{ keepalived_service_file_path }}"
+    owner: "root"
+    group: "root"
+    mode: "0644"
+  notify: "Restart Keepalived"
+
+- name: "Start Keepalived Systemd Service."
+  become: true
+  ansible.builtin.service:
+    name: "keepalived"
+    state: "started"
+    enabled: true
+    daemon_reload: true
+  when: "not initial_dry_run"
+
+...

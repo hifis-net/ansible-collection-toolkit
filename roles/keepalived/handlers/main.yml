@@ -1,0 +1,24 @@
+# SPDX-FileCopyrightText: Helmholtz Centre for Environmental Research (UFZ)
+# SPDX-FileCopyrightText: Helmholtz-Zentrum Dresden-Rossendorf (HZDR)
+#
+# SPDX-License-Identifier: Apache-2.0
+
+---
+
+- name: "Restart Keepalived"
+  become: true
+  ansible.builtin.service:
+    name: "keepalived"
+    state: "restarted"
+    daemon_reload: true
+  when: "not initial_dry_run"
+
+- name: "Reload Keepalived"
+  become: true
+  ansible.builtin.service:
+    name: "keepalived"
+    state: "reloaded"
+    daemon_reload: true
+  when: "not initial_dry_run"
+
+...

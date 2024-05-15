@@ -1,0 +1,20 @@
+# SPDX-FileCopyrightText: Helmholtz Centre for Environmental Research (UFZ)
+# SPDX-FileCopyrightText: Helmholtz-Zentrum Dresden-Rossendorf (HZDR)
+#
+# SPDX-License-Identifier: Apache-2.0
+
+---
+
+- name: "Prepare"
+  hosts: "all"
+  tasks:
+    - name: "Install dependencies"
+      ansible.builtin.apt:
+        name:
+          - "sudo"      # for `become` privilege escalation
+          - "iproute2"  # for gathering network facts
+          - "psmisc"    # provides `killall` command
+        state: "present"
+        update_cache: true
+
+...

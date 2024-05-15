@@ -1,0 +1,86 @@
+# SPDX-FileCopyrightText: Helmholtz Centre for Environmental Research (UFZ)
+# SPDX-FileCopyrightText: Helmholtz-Zentrum Dresden-Rossendorf (HZDR)
+#
+# SPDX-License-Identifier: Apache-2.0
+
+---
+
+# Keepalived version
+keepalived_version: "2.2.8"
+# URL from which Keepalived can be downloaded
+keepalived_download_url: "https://www.keepalived.org/software/keepalived-{{ keepalived_version }}.tar.gz"
+# List of dependencies of Keepalived
+keepalived_dependencies:
+  - "build-essential"
+  - "curl"
+  - "gcc"
+  - "libssl-dev"
+  - "libnl-3-dev"
+  - "libnl-genl-3-dev"
+  - "libsnmp-dev"
+
+# Path to Keepalived executable
+keepalived_executable_path: "/usr/local/sbin/keepalived"
+
+# Name of the template file for Keepalived configuration file
+keepalived_conf_template: "keepalived.conf.j2"
+
+# Folder for configuration files
+keepalived_conf_dir: "/etc/keepalived"
+
+# Path to Keepalived configuration file
+keepalived_conf_file_path: "{{ keepalived_conf_dir }}/keepalived.conf"
+
+# Path to Keepalived sysconfig file
+keepalived_sysconfig_file_path: "{{ keepalived_conf_dir }}/keepalived.sysconfig"
+
+# Name of the template file for Systemd service
+keepalived_service_template: "keepalived.service.j2"
+
+# Path to Keepalived service file
+keepalived_service_file_path: "/etc/systemd/system/keepalived.service"
+
+# Directory for Keepalived PID file
+keepalived_pid_file_path: "/run/keepalived/keepalived.pid"
+
+
+# Configure notification email address
+keepalived_notification_email: "name@localhost"
+# Configure notification sender
+keepalived_notification_email_from: "keepalived@localhost"
+# Configure SMTP Server
+keepalived_smtp_server: "127.0.0.1"
+# Keepalived instance authentication password
+keepalived_auth_pass: "changeme"
+# Keepalived instance virtual router ID
+keepalived_virtual_router_id: "51"
+# Keepalived instance priority
+keepalived_priority: "{{ '100' if keepalived_state == 'MASTER' else '99' }}"
+# Keepalived instance state MASTER or BACKUP
+keepalived_state: "MASTER"
+# Keepalived instance network interface
+keepalived_interface: "{{ ansible_default_ipv4.interface }}"
+# Keepalived instance virtual IP address and network interface
+keepalived_virtual_ipaddress_config: "{{ keepalived_virtual_ip_address }} dev {{ keepalived_interface }}"
+# Keepalived instance unicast source IP address
+keepalived_unicast_src_ip: "{{ ansible_default_ipv4.address }}"
+
+# Enable process tracking
+keepalived_enable_process_tracking: true
+# Define which process shall be tracked
+keepalived_track_process: "haproxy"
+
+# Flag to activate a script to be executed
+keepalived_activate_script: false
+# User for executing Keepalived script
+keepalived_script_user: "haproxy"
+# Group for executing Keepalived script
+keepalived_script_group: "haproxy"
+# Name of the script to be executed
+keepalived_script_name: "chk_haproxy_process"
+# Command of the script to be executed
+keepalived_script_command: "/usr/bin/killall -0 haproxy"
+# Enable script security
+keepalived_set_script_security_flag: true
+
+...
