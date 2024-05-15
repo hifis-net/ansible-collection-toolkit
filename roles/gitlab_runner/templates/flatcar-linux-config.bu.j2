@@ -1,0 +1,82 @@
+{#
+# SPDX-FileCopyrightText: Helmholtz Centre for Environmental Research (UFZ)
+# SPDX-FileCopyrightText: Helmholtz-Zentrum Dresden - Rossendorf (HZDR)
+#
+# SPDX-License-Identifier: Apache-2.0
+#}
+variant: flatcar
+version: 1.1.0
+passwd:
+  users:
+    - name: core
+      ssh_authorized_keys:
+        - {{ gitlab_runner_ssh_keypair.public_key }}
+storage:
+  files:
+    - path: /etc/resolv.conf
+      overwrite: true
+      mode: 0644
+      contents:
+        inline: |
+{% for nameserver in gitlab_runner_namerservers %}
+          nameserver {{ nameserver }}
+{% endfor %}
+    - path: /opt/docker/daemon.json
+      mode: 0644
+      contents:
+        inline: |
+          {
+{% set registry_mirrors_list = [] %}
+{% if gitlab_runner_registry_mirrors is defined %}
+  {%- set registry_mirrors_list = gitlab_runner_registry_mirrors %}
+{% elif gitlab_runner_registry_mirror is defined %}
+  {%- set registry_mirrors_list = [gitlab_runner_registry_mirror] %}
+{% endif %}
+{% if registry_mirrors_list | length > 0 %}
+            "registry-mirrors": {{ registry_mirrors_list | to_json }},
+{% endif %}
+{% if gitlab_runner_insecure_registries | length > 0 %}
+            "insecure-registries": {{ gitlab_runner_insecure_registries | to_json }},
+{% endif %}
+{% if gitlab_runner_set_default_network_opts %}
+            "default-network-opts": {
+              "bridge": {
+                "com.docker.network.bridge.mtu": "{{ gitlab_runner_mtu }}"
+              }
+            },
+{% endif %}
+            "mtu": {{ gitlab_runner_mtu }}
+          }
+    - path: /etc/flatcar/update.conf
+      overwrite: true
+      contents:
+        inline: |
+                    REBOOT_STRATEGY=off
+      mode: 0420
+systemd:
+  units:
+    - name: docker.service
+      enabled: true
+      dropins:
+        - name: 10-docker-opts.conf
+          contents: |
+            [Service]
+            Environment="DOCKER_OPTS=--mtu={{ gitlab_runner_mtu }} {% if gitlab_runner_set_default_network_opts %}--default-network-opt bridge=com.docker.network.bridge.mtu={{ gitlab_runner_mtu }}{% endif %}{% if registry_mirrors_list | length > 0 %}{% for registry_mirror in registry_mirrors_list %} --registry-mirror={{ registry_mirror }}{% endfor %}{% endif %}{% if gitlab_runner_insecure_registries | length > 0 %}{% for insecure_registry in gitlab_runner_insecure_registries %} --insecure-registry={{ insecure_registry }}{% endfor %}{% endif %}"
+    - name: binfmt-init.service
+      enabled: true
+      contents: |
+        [Unit]
+        Description=Initialize binfmt_misc support.
+        After=docker.service network-online.target
+
+        [Service]
+        Type=oneshot
+        Restart=on-failure
+        RemainAfterExit=true
+        ExecStartPre=/usr/bin/docker pull multiarch/qemu-user-static:register
+        ExecStart=/usr/bin/docker run --rm --privileged multiarch/qemu-user-static:register --reset
+        Restart=on-failure
+        RestartSec=15
+
+        [Install]
+        WantedBy=multi-user.target

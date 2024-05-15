@@ -1,0 +1,14 @@
+# SPDX-FileCopyrightText: Helmholtz Centre for Environmental Research (UFZ)
+# SPDX-FileCopyrightText: Helmholtz-Zentrum Dresden - Rossendorf (HZDR)
+#
+# SPDX-License-Identifier: Apache-2.0
+
+---
+- name: Download and install docker-machine binary
+  ansible.builtin.get_url:
+    url: "{{ gitlab_runner_docker_machine_binary_url }}"
+    dest: /usr/local/bin/docker-machine
+    mode: '0755'
+    checksum: "{{ gitlab_runner_docker_machine_binary_checksum }}"
+
+...

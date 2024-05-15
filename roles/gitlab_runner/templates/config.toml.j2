@@ -1,0 +1,126 @@
+{#
+# SPDX-FileCopyrightText: Helmholtz Centre for Environmental Research (UFZ)
+# SPDX-FileCopyrightText: Helmholtz-Zentrum Dresden - Rossendorf (HZDR)
+#
+# SPDX-License-Identifier: Apache-2.0
+#}
+concurrent = {{ gitlab_runner_concurrent }}
+{% if gitlab_runner_listen_address | length > 0 %}
+listen_address = "{{ gitlab_runner_listen_address }}"
+{% endif %}
+check_interval = {{ gitlab_runner_check_interval | default(0) }}
+shutdown_timeout = {{ gitlab_runner_shutdown_timeout | default(0) }}
+{% if gitlab_runner_sentry_dsn | length > 0 %}
+sentry_dsn = "{{ gitlab_runner_sentry_dsn }}"
+{% endif %}
+
+[session_server]
+{% if gitlab_runner_enable_session_server %}
+  listen_address = "{{ gitlab_runner_session_server_listen_address }}"
+  advertise_address = "{{ gitlab_runner_session_server_advertise_address }}"
+{% endif %}
+  session_timeout = {{ gitlab_runner_session_server_timeout }}
+{% for runner in gitlab_runner_list %}
+
+[[runners]]
+  name = "{{ runner.name }}"
+  limit = {{ runner.limit | default(0) }}
+  output_limit = {{ runner.output_limit | default(4096) }}
+  url = "{{ runner.url }}"
+  token = "{{ runner.authentication_token }}"
+  executor = "{{ runner.executor | default('docker') }}"
+  environment = {{ runner.environment | default([]) | to_json }}
+  [runners.cache]
+{% if runner.cache_type | default('') == 's3' %}
+    Type = "{{ runner.cache_type }}"
+{% endif %}
+    MaxUploadedArchiveSize = 0
+{% if runner.cache_type | default('') == 's3' %}
+    [runners.cache.s3]
+      ServerAddress = "{{ runner.cache_server_address }}"
+      AccessKey = "{{ runner.cache_access_key }}"
+      SecretKey = "{{ runner.cache_secret_key }}"
+      BucketName = "{{ runner.cache_bucket_name }}"
+      Insecure = {{ runner.cache_insecure | default(false) | bool | to_json }}
+{% if runner.cache_bucket_location | default('') | length > 0 %}
+      BucketLocation = "{{ runner.cache_bucket_location }}"
+{% endif %}
+{% endif %}
+{% if "docker" in runner.executor %}
+  [runners.docker]
+    tls_verify = {{ runner.docker_tls_verify | default(false) | bool | to_json }}
+    image = "{{ runner.docker_image }}"
+{% if runner.docker_memory | default('') | length > 0 %}
+    memory = "{{ runner.docker_memory }}"
+{% endif %}
+{% if runner.docker_cpus | default('') | string | length > 0 %}
+    cpus = "{{ runner.docker_cpus }}"
+{% endif %}
+    privileged = {{ runner.docker_privileged | default(false) | bool | to_json }}
+    disable_entrypoint_overwrite = false
+    oom_kill_disable = false
+{% if runner.docker_gpus | default('') | length > 0 %}
+    gpus = "{{ runner.docker_gpus }}"
+{% endif %}
+{% if runner.docker_security_opts | default([]) | length > 0 %}
+    security_opt = {{ runner.docker_security_opts | default([]) | to_json }}
+{% endif %}
+{% if runner.docker_devices | default([]) | length > 0 %}
+    devices = {{ runner.docker_devices | default([]) | to_json }}
+{% endif %}
+    disable_cache = {{ runner.docker_disable_cache | default(false) | bool | to_json }}
+    volumes = {{ runner.docker_volumes | default([]) | to_json }}
+    shm_size = {{ runner.docker_shm_size | default(0) }}
+{% if runner.docker_network_mtu | default(0) > 0 %}
+    network_mtu = {{ runner.docker_network_mtu }}
+{% endif %}
+{% endif %}
+{% if runner.executor == "docker+machine" %}
+  [runners.machine]
+    MaxGrowthRate = {{ runner.machine_max_growth_rate | default(0) }}
+    IdleCount = {{ runner.machine_idle_count | default(0) }}
+    IdleScaleFactor = {{ runner.machine_idle_scale_factor | default(0.0) }}
+    IdleCountMin = {{ runner.machine_idle_count_min | default(0) }}
+    IdleTime = {{ runner.machine_idle_time | default(0) }}
+    MaxBuilds = {{ runner.machine_max_builds | default(0) }}
+    MachineDriver = "{{ runner.machine_driver }}"
+    MachineName = "{{ runner.machine_name }}"
+    MachineOptions = {{ runner.machine_options | default([]) | to_json }}
+{% endif %}
+{% if runner.executor == "docker-autoscaler" %}
+  [runners.autoscaler]
+    capacity_per_instance = 1
+    max_use_count = {{ runner.autoscaler_max_builds | default(0) }}
+    max_instances = {{ runner.autoscaler_max_instances }}
+    plugin = "fleeting-plugin-openstack"
+
+  [runners.autoscaler.plugin_config]
+    cloud = "{{ runner.autoscaler_cloud_name }}"
+    clouds_config = "{{ runner.autoscaler_clouds_config }}"
+    name = "{{ runner.autoscaler_group_name | default('autoscaler-runners') }}"
+    boot_time = "3m"
+
+  [runners.autoscaler.plugin_config.server_spec]
+    name = "autoscaler-%d"
+    description = "{{ runner.description }}"
+    tags = [ "gitlab-ci" ]
+    imageRef = "{{ runner.autoscaler_image_ref }}"
+    flavorRef = "{{ runner.autoscaler_flavor_ref }}"
+    key_name = "{{ runner.autoscaler_keyname }}"
+    networks = [ { uuid = "{{ runner.autoscaler_network_id }}" } ]
+    security_groups = [ "{{ runner.autoscaler_security_group }}" ]
+    scheduler_hints = { group = "{{ runner.autoscaler_scheduler_hint }}" }
+    user_data = '{{ ignition_content | to_json }}'
+
+  [runners.autoscaler.connector_config]
+    username = "{{ runner.autoscaler_username }}"
+    key_path = "{{ gitlab_runner_ssh_private_key_path }}"
+    use_static_credentials = true
+    keepalive = "30s"
+    timeout = "0m"
+    use_external_addr = false
+
+  [[runners.autoscaler.policy]]
+    idle_count = {{ runner.autoscaler_idle_count | default(0) }}
+{% endif %}
+{% endfor %}

@@ -10,6 +10,12 @@ keepalived:
           - "roles/keepalived/**"
           - "molecule/keepalived/**"
           - ".github/workflows/keepalived.yml"
+gitlab_runner:
+  - changed-files:
+      - any-glob-to-any-file:
+          - "roles/gitlab_runner/**"
+          - "molecule/gitlab_runner/**"
+          - ".github/workflows/gitlab_runner.yml"
 ssh_keys:
   - changed-files:
       - any-glob-to-any-file:

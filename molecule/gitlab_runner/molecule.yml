@@ -1,0 +1,137 @@
+# SPDX-FileCopyrightText: Helmholtz Centre for Environmental Research (UFZ)
+# SPDX-FileCopyrightText: Helmholtz-Zentrum Dresden - Rossendorf (HZDR)
+#
+# SPDX-License-Identifier: Apache-2.0
+
+---
+dependency:
+  name: galaxy
+  options:
+    requirements-file: "molecule/gitlab_runner/requirements.yml"
+driver:
+  name: podman
+platforms:
+  - name: instancegitlabciopenstack1
+    image: ${MOLECULE_IMAGE:-ghcr.io/hifis-net/ubuntu-systemd:24.04}
+    pre_build_image: true
+    override_command: false
+    privileged: true  # Required to run Docker in Podman
+    systemd: true
+    tty: true
+  - name: instancegitlabciopenstack2
+    image: ${MOLECULE_IMAGE:-ghcr.io/hifis-net/ubuntu-systemd:24.04}
+    pre_build_image: true
+    override_command: false
+    privileged: true  # Required to run Docker in Podman
+    systemd: true
+    tty: true
+provisioner:
+  name: ansible
+  playbooks:
+    prepare: prepare.yml
+    converge: converge.yml
+  inventory:
+    hosts:
+      all:
+        vars:
+          gitlab_runner_concurrent: 4
+    host_vars:
+      instancegitlabciopenstack1:
+        gitlab_runner_version: "16.11.0"
+        gitlab_runner_deb_file: "https://packages.gitlab.com/runner/gitlab-runner/packages/{{ ansible_distribution | lower }}/{{ ansible_distribution_release | lower }}/gitlab-runner_{{ gitlab_runner_pkg_version }}_amd64.deb/download.deb"
+        gitlab_runner_install_docker: true
+        gitlab_runner_ssh_public_key: "test_key.pub"
+        gitlab_runner_ssh_private_key: "test_key"
+        gitlab_runner_sentry_dsn: "https://public@sentry.example.com/1"
+        gitlab_runner_registry_mirrors:
+          - "http://registry-mirror1.example"
+          - "https://registry-mirror2.example"
+        gitlab_runner_insecure_registries:
+          - "registry-mirror1.example"
+        gitlab_runner_enable_session_server: true
+        gitlab_runner_list:
+          - name: "test01"
+            url: "https://gitlab.com"
+            description: "Molecule test runner"
+            authentication_token: ${AUTHENTICATION_TOKEN}
+            executor: "docker"
+            environment: ["CI_CPUS=8", "DOCKER_TLS_CERTDIR=/certs"]
+            docker_security_opts: ["seccomp=unconfined"]
+            docker_volumes: ["/cache", "/certs/client"]
+            docker_devices: ["/dev/kfd", "/dev/dri"]
+            docker_cpus: 2
+            docker_gpus: "all"
+            docker_memory: "2g"
+            docker_image: "python:3.8"
+            docker_network_mtu: 1442
+            tags: ["docker", "hifis"]
+            locked: True
+            limit: 10
+      instancegitlabciopenstack2:
+        gitlab_runner_version: "16.11.0"
+        gitlab_runner_install_docker: false
+        gitlab_runner_ssh_public_key: ""
+        gitlab_runner_ssh_private_key: ""
+        gitlab_runner_registry_mirror: "https://registry-mirror.example"
+        gitlab_runner_listen_address: "127.0.0.1:9252"
+        gitlab_runner_set_default_network_opts: true
+        gitlab_runner_list:
+          - name: "test01"
+            url: "https://gitlab.com"
+            description: "Molecule test runner"
+            authentication_token: ${AUTHENTICATION_TOKEN}
+            executor: "docker+machine"
+            environment: ["CI_CPUS=8", "DOCKER_TLS_CERTDIR=/certs"]
+            docker_volumes: ["/cache", "/certs/client", "/opt/docker/daemon.json:/etc/docker/daemon.json:ro"]
+            docker_image: "python:3.8"
+            docker_shm_size: 2147483648
+            docker_disable_cache: True
+            tags: ["docker", "hifis"]
+            locked: True
+            limit: 10
+            machine_idle_count: 5
+            machine_idle_time: 7200
+            machine_max_builds: 4
+            machine_max_growth_rate: 2
+            machine_driver: "openstack"
+            machine_name: "auto-scale-%s"
+            machine_options:
+              - "openstack-auth-url=https://openstack.example:5000/v3"
+              - "openstack-image-id=73f07dd3-fa8b-468f-b6bc-b0cd4510f5d0"
+              - "openstack-flavor-name=m1.small"
+              - "openstack-net-id=7834deeb-8bd5-4fc7-b35b-24035d8f47a7"
+              - "openstack-username=gitlab-runner"
+              - "openstack-password=secret"
+              - "openstack-tenant-id=123456"
+              - "openstack-domain-name=default"
+              - "openstack-ssh-user=core"
+              - "openstack-sec-groups=Internal"
+              - "openstack-keypair-name=runners-internal"
+              - "openstack-private-key-file=/etc/gitlab-runner/gitlab_runner_key"
+              - "openstack-user-data-file=/etc/gitlab-runner/ignition.json"
+              - "openstack-active-timeout=300"
+              - "engine-registry-mirror=https://registry-mirror.example"
+            cache_type: "s3"
+            cache_server_address: "https://cache.example"
+            cache_access_key: "key"
+            cache_secret_key: "secret"
+            cache_bucket_name: "bucket"
+            cache_bucket_location: "eu-west-1"
+            cache_insecure: "false"
+verifier:
+  name: ansible
+scenario:
+  name: gitlab_runner
+  test_sequence:
+    - destroy
+    - dependency
+    - syntax
+    - create
+    - prepare
+    - check
+    - converge
+    - idempotence
+    - check
+    - side_effect
+    - verify
+    - destroy

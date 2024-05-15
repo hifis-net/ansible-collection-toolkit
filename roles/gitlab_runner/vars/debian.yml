@@ -1,0 +1,7 @@
+# SPDX-FileCopyrightText: Helmholtz Centre for Environmental Research (UFZ)
+# SPDX-FileCopyrightText: Helmholtz-Zentrum Dresden - Rossendorf (HZDR)
+#
+# SPDX-License-Identifier: Apache-2.0
+
+---
+gitlab_runner_package_name: "{{ 'gitlab-runner=' + gitlab_runner_pkg_version if gitlab_runner_version else 'gitlab-runner' }}"

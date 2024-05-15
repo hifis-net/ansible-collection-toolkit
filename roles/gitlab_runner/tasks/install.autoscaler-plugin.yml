@@ -1,0 +1,24 @@
+# SPDX-FileCopyrightText: Helmholtz-Zentrum Dresden - Rossendorf (HZDR)
+#
+# SPDX-License-Identifier: Apache-2.0
+
+---
+- name: "Download and install autoscaler plugin"
+  ansible.builtin.get_url:
+    url: "{{ gitlab_runner_autoscaler_plugin_url }}"
+    dest: "/usr/local/bin/fleeting-plugin-openstack"
+    checksum: "{{ gitlab_runner_autoscaler_plugin_checksum }}"
+    mode: '0755'
+    owner: "root"
+    group: "root"
+
+- name: "Place clouds.yaml template"
+  ansible.builtin.template:
+    src: "clouds.yaml.j2"
+    dest: "/etc/gitlab-runner/clouds.yaml"
+    owner: "root"
+    group: "root"
+    mode: '0600'
+  no_log: true
+
+...
