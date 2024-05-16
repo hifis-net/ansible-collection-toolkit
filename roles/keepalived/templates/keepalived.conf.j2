@@ -1,0 +1,91 @@
+# SPDX-FileCopyrightText: Helmholtz Centre for Environmental Research (UFZ)
+# SPDX-FileCopyrightText: Helmholtz-Zentrum Dresden-Rossendorf (HZDR)
+#
+# SPDX-License-Identifier: Apache-2.0
+
+global_defs {
+{% if keepalived_activate_script %}
+    script_user {{ keepalived_script_user }} {{ keepalived_script_group }}
+{% endif %}
+{% if keepalived_set_script_security_flag %}
+    enable_script_security
+{% endif %}
+    notification_email {
+        {{ keepalived_notification_email }}
+    }
+    notification_email_from {{ keepalived_notification_email_from }}
+    smtp_server {{ keepalived_smtp_server }}
+    smtp_connect_timeout 30
+{% if keepalived_router_id is defined %}
+    router_id {{ keepalived_router_id }}
+{% endif %}
+{% if keepalived_max_auto_priority is defined %}
+    max_auto_priority {{ keepalived_max_auto_priority }}
+{% endif %}
+}
+
+{% if keepalived_enable_process_tracking %}
+vrrp_track_process {{ keepalived_track_process }} {
+    process {{ keepalived_track_process }}
+{% if keepalived_weight is defined %}
+    weight {{ keepalived_weight }}
+{% endif %}
+    quorum 1
+    delay 2
+}
+{% endif %}
+
+{% if keepalived_activate_script %}
+vrrp_script {{ keepalived_script_name }} {
+    script "{{ keepalived_script_command }}"
+    interval 2
+{% if keepalived_weight is defined %}
+    weight {{ keepalived_weight }}
+{% endif %}
+}
+{% endif %}
+
+vrrp_instance VI_1 {
+
+    interface {{ keepalived_interface }}
+    state {{ keepalived_state }}
+    priority {{ keepalived_priority }}
+
+    virtual_router_id {{ keepalived_virtual_router_id }}
+    unicast_src_ip {{ keepalived_unicast_src_ip }}
+    unicast_peer {
+{% for keepalived_unicast_peer in keepalived_unicast_peers %}
+        {{ keepalived_unicast_peer }}
+{% endfor %}
+    }
+
+    virtual_ipaddress {
+{% if keepalived_virtual_ipaddress_configs is defined %}
+{% for config in keepalived_virtual_ipaddress_configs %}
+        {{ config }}
+{% endfor %}
+{% else %}
+        {{ keepalived_virtual_ipaddress_config }}
+{% endif %}
+    }
+
+    authentication {
+        auth_type PASS
+        auth_pass {{ keepalived_auth_pass }}
+    }
+
+{% if keepalived_enable_process_tracking %}
+    track_process {
+        {{ keepalived_track_process }}
+    }
+{% endif %}
+
+{% if keepalived_activate_script %}
+    track_script {
+        {{ keepalived_script_name }}
+    }
+{% endif %}
+
+    smtp_alert
+
+}

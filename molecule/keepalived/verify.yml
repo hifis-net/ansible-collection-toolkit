@@ -1,0 +1,22 @@
+# SPDX-FileCopyrightText: Helmholtz Centre for Environmental Research (UFZ)
+# SPDX-FileCopyrightText: Helmholtz-Zentrum Dresden-Rossendorf (HZDR)
+#
+# SPDX-License-Identifier: Apache-2.0
+
+---
+
+- name: "Verify Keepalived"
+  hosts: "all"
+  tasks:
+    - name: "Populate service facts."
+      ansible.builtin.service_facts:
+      register: "services_state"
+
+    - name: "Check that Keepalived is running on instance."
+      ansible.builtin.assert:
+        that:
+          - "services_state.ansible_facts.services['keepalived.service'].state is search('running')"
+        fail_msg: "Keepalived need to be running on instance."
+        success_msg: "Keepalived is running on instance."
+
+...
