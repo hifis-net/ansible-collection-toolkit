@@ -322,7 +322,7 @@ Note: This role is intended for use with, but not limited to, the
 ```yaml
 - hosts: loadbalancers
   roles:
-    - role: hifis.keepalived
+    - role: hifis.toolkit.keepalived
       vars:
         keepalived_virtual_ip_address: '192.168.33.100'
         keepalived_unicast_peers:
