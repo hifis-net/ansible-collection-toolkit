@@ -7,16 +7,8 @@
 name: "Ansible Lint"
 
 on:
-  pull_request:
-    paths:
-      - 'roles/**'
   push:
-    branches:
-      - "main"
-    tags:
-      - "v*.*.*"
-    paths:
-      - 'roles/**'
+  pull_request:
 
 env:
   PY_COLORS: 1
