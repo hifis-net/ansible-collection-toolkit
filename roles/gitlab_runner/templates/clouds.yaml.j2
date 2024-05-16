@@ -1,0 +1,17 @@
+{#
+# SPDX-FileCopyrightText: Helmholtz-Zentrum Dresden - Rossendorf (HZDR)
+#
+# SPDX-License-Identifier: Apache-2.0
+#}
+clouds:
+  openstack:
+    auth:
+      auth_url: "{{ gitlab_runner_autoscaler_openstack_auth_url }}"
+      username: "{{ gitlab_runner_autoscaler_openstack_username }}"
+      password: "{{ gitlab_runner_autoscaler_openstack_password }}"
+      project_id: "{{ gitlab_runner_autoscaler_openstack_project_id }}"
+      project_name: "{{ gitlab_runner_autoscaler_openstack_project_name }}"
+      user_domain_name:  "{{ gitlab_runner_autoscaler_openstack_user_domain_name }}"
+    region_name: "{{ gitlab_runner_autoscaler_openstack_region_name }}"
+    interface: "public"
+    identity_api_version: 3

@@ -18,18 +18,18 @@ This collection provides production-ready Ansible roles used for providing servi
 software engineers, but not exclusively. The following use cases are supported:
 
 * DevOps platform:
-  * [GitLab](https://github.com/hifis-net/ansible-role-gitlab) (*coming soon!*)
-  * [GitLab-Runner](https://github.com/hifis-net/ansible-role-gitlab-runner) (*coming soon!*)
-  * [Redis](https://github.com/hifis-net/ansible-role-redis) (*coming soon!*)
+    * [GitLab](https://github.com/hifis-net/ansible-role-gitlab) (**coming soon!**)
+    * deploy [**GitLab-Runner**](roles/gitlab_runner) with a focus, but not limited, on Openstack autoscaling
+    * [Redis](https://github.com/hifis-net/ansible-role-redis) (**coming soon!**)
 * Help desk:
-  * [**Zammad**](roles/zammad)
+    * [**Zammad**](roles/zammad)
 * High Availability (HA) / Load Balancing:
-  * [HAProxy](https://github.com/hifis-net/ansible-role-haproxy) (*coming soon!*)
-  * [**Keepalived**](roles/keepalived)
+    * [HAProxy](https://github.com/hifis-net/ansible-role-haproxy) (*coming soon!*)
+    * [**Keepalived**](roles/keepalived)
 * OS-related:
-  * [**unattended-upgrades**](roles/unattended_upgrades)
-  * [netplan](https://github.com/hifis-net/ansible-role-gitlab-netplan) (*coming soon!*)
-  * distribute authorized [**SSH keys**](role/ssh_keys) to users
+    * [**unattended-upgrades**](roles/unattended_upgrades)
+    * [netplan](https://github.com/hifis-net/ansible-role-gitlab-netplan) (*coming soon!*)
+    * distribute authorized [**SSH keys**](role/ssh_keys) to users
 
 ## Minimum required Ansible-version
 

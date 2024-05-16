@@ -1,0 +1,18 @@
+# SPDX-FileCopyrightText: Helmholtz Centre for Environmental Research (UFZ)
+# SPDX-FileCopyrightText: Helmholtz-Zentrum Dresden - Rossendorf (HZDR)
+#
+# SPDX-License-Identifier: Apache-2.0
+
+---
+
+- name: "Transpile the flatcar linux configuration"
+  ansible.builtin.command: "butane -o /etc/gitlab-runner/ignition.json /etc/gitlab-runner/flatcar-linux-config.bu"
+  changed_when: true
+
+- name: "Restart GitLab-Runner"
+  ansible.builtin.service:
+    name: "gitlab-runner"
+    state: "restarted"
+  when: "not gitlab_runner_is_initial_dryrun"
+
+...

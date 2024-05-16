@@ -1,0 +1,39 @@
+# SPDX-FileCopyrightText: Helmholtz Centre for Environmental Research (UFZ)
+# SPDX-FileCopyrightText: Helmholtz-Zentrum Dresden-Rossendorf (HZDR)
+#
+# SPDX-License-Identifier: Apache-2.0
+
+---
+- name: "Prepare"
+  hosts: "all"
+  tasks:
+    - name: "Install necessary packages"
+      when: "ansible_os_family == 'Debian'"
+      block:
+        - name: "Install missing dependencies"
+          ansible.builtin.apt:
+            name:
+              - "sudo"              # for `become` privilege escalation
+              - "iproute2"          # for gathering network facts
+              - "ca-certificates"   # for Gitlab-Runner download
+              - "gpg"
+              - "python3-debian"
+            state: "present"
+            update_cache: true
+    - name: "Set up iptables"
+      when: "ansible_distribution == 'Debian'"
+      block:
+        - name: "Install missing dependencies"
+          ansible.builtin.apt:
+            name:
+              - "iptables"
+            state: "present"
+            update_cache: true
+        - name: "Use legacy iptables"
+          community.general.alternatives:
+            name: "iptables"
+            path: "/usr/sbin/iptables-legacy"
+        - name: "Use legacy ip6tables"
+          community.general.alternatives:
+            name: "ip6tables"
+            path: "/usr/sbin/ip6tables-legacy"

@@ -1,0 +1,34 @@
+# SPDX-FileCopyrightText: Helmholtz Centre for Environmental Research (UFZ)
+# SPDX-FileCopyrightText: Helmholtz-Zentrum Dresden - Rossendorf (HZDR)
+#
+# SPDX-License-Identifier: Apache-2.0
+
+---
+- name: "Check if docker-machine initialization is necessary"
+  ansible.builtin.stat:
+    path: "/root/.docker/machine/certs/ca.pem"
+  register: "docker_machine_config"
+
+- name: "Initialize docker-machine once"
+  when: "not docker_machine_config.stat.exists"
+  block:
+    - name: "Extract machine options as command line parameters"
+      ansible.builtin.set_fact:
+        machine_options: "--{{ gitlab_runner.machine_options | join(' --') }}"
+
+    - name: "Create a VM once via docker-machine"
+      when: "not ansible_check_mode"
+      ansible.builtin.command: "docker-machine create -d {{ gitlab_runner.machine_driver }} {{ machine_options }} test"
+      register: "creation_cmd"
+      changed_when: "creation_cmd.rc == 0"
+      tags: "notest"
+
+  always:
+    - name: "Remove the VM"
+      when: "not ansible_check_mode"
+      ansible.builtin.command: "docker-machine rm -y --force test"
+      register: "removal_cmd"
+      changed_when: "removal_cmd.rc == 0"
+      failed_when: false
+      tags: "notest"
+...

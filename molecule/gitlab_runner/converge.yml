@@ -1,0 +1,12 @@
+# SPDX-FileCopyrightText: Helmholtz Centre for Environmental Research (UFZ)
+# SPDX-FileCopyrightText: Helmholtz-Zentrum Dresden - Rossendorf (HZDR)
+#
+# SPDX-License-Identifier: Apache-2.0
+
+---
+- name: "Converge"
+  hosts: "all"
+  tasks:
+    - name: "Include gitlab_runner role"
+      ansible.builtin.include_role:
+        name: "hifis.toolkit.gitlab_runner"

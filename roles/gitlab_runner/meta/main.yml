@@ -1,0 +1,43 @@
+# SPDX-FileCopyrightText: Helmholtz Centre for Environmental Research (UFZ)
+# SPDX-FileCopyrightText: Helmholtz-Zentrum Dresden - Rossendorf (HZDR)
+#
+# SPDX-License-Identifier: Apache-2.0
+
+---
+galaxy_info:
+  role_name: "gitlab_runner"
+  author: "hifis"
+  description: "Install GitLab CI in Openstack"
+  company: "Helmholtz Association"
+  issue_tracker_url: "https://github.com/hifis-net/ansible-collection-toolkit/issues"
+  license: "Apache-2.0"
+  min_ansible_version: "2.15"
+
+  platforms:
+    - name: "Ubuntu"
+      versions:
+        - "focal"
+        - "jammy"
+        - "noble"
+    - name: "Debian"
+      versions:
+        - "buster"
+        - "bullseye"
+        - "bookworm"
+
+  galaxy_tags:
+    - "gitlab"
+    - "runner"
+    - "ci"
+    - "cd"
+    - "openstack"
+
+collections:
+  - "community.crypto"
+
+dependencies:
+  - role: "geerlingguy.docker"
+    when: "gitlab_runner_install_docker"
+    vars:
+      docker_install_compose: false
+...
