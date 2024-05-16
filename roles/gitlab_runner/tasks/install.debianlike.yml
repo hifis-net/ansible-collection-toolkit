@@ -5,17 +5,17 @@
 
 ---
 
-- name: Install GitLab-Runner dependencies
+- name: "Install GitLab-Runner dependencies"
   ansible.builtin.apt:
     pkg:
-      - debian-archive-keyring
-      - apt-transport-https
-      - gnupg
-    state: present
-    update_cache: yes
+      - "debian-archive-keyring"
+      - "apt-transport-https"
+      - "gnupg"
+    state: "present"
+    update_cache: true
 
-- name: Install gitlab-runner via apt-get
-  when: gitlab_runner_deb_file | length == 0
+- name: "Install gitlab-runner via apt-get"
+  when: "gitlab_runner_deb_file | length == 0"
 
   block:
     - name: "Add packages repository packages.gitlab.com/runner/gitlab-runner"
@@ -38,24 +38,24 @@
         mode: '0644'
       when: "ansible_distribution == 'Debian'"
 
-    - name: Install gitlab-runner with downgrade option
+    - name: "Install gitlab-runner with downgrade option"
       ansible.builtin.apt:
         name: "{{ gitlab_runner_package_name }}"
-        state: present
-        update_cache: yes
+        state: "present"
+        update_cache: true
         allow_downgrade: true
       when: "not gitlab_runner_is_initial_dryrun"  # skip if run for the first time in check mode
 
-- name: Gather the package facts
+- name: "Gather the package facts"
   ansible.builtin.package_facts:
-    manager: auto
+    manager: "auto"
 
-- name: Install gitlab-runner from a .deb file
+- name: "Install gitlab-runner from a .deb file"
   ansible.builtin.apt:
     deb: "{{ gitlab_runner_deb_file }}"
-    allow_downgrade: yes
+    allow_downgrade: true
   when:
-    - gitlab_runner_deb_file | length > 0
+    - "gitlab_runner_deb_file | length > 0"
     - "'gitlab-runner' not in ansible_facts.packages or
       ansible_facts.packages['gitlab-runner'][0].version is version(gitlab_runner_pkg_version, 'ne')"
 ...

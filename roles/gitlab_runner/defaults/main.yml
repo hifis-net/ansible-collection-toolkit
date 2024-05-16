@@ -21,8 +21,8 @@ gitlab_runner_transpiler_binary_checksum: "sha256:28003c61b991d17d66c23cd3f30520
 gitlab_runner_install_docker: true
 
 gitlab_runner_namerservers:
-    - 9.9.9.9
-    - 149.112.112.112
+    - "9.9.9.9"
+    - "149.112.112.112"
 
 gitlab_runner_mtu: 1450
 

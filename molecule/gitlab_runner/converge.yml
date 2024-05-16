@@ -4,8 +4,8 @@
 # SPDX-License-Identifier: Apache-2.0
 
 ---
-- name: Converge
-  hosts: all
+- name: "Converge"
+  hosts: "all"
   tasks:
     - name: "Include gitlab_runner role"
       ansible.builtin.include_role:

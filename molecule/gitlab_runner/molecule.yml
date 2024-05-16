@@ -5,31 +5,31 @@
 
 ---
 dependency:
-  name: galaxy
+  name: "galaxy"
   options:
     requirements-file: "molecule/gitlab_runner/requirements.yml"
 driver:
-  name: podman
+  name: "podman"
 platforms:
-  - name: instancegitlabciopenstack1
-    image: ${MOLECULE_IMAGE:-ghcr.io/hifis-net/ubuntu-systemd:24.04}
+  - name: "instancegitlabciopenstack1"
+    image: "${MOLECULE_IMAGE:-ghcr.io/hifis-net/ubuntu-systemd:24.04}"
     pre_build_image: true
     override_command: false
     privileged: true  # Required to run Docker in Podman
     systemd: true
     tty: true
-  - name: instancegitlabciopenstack2
-    image: ${MOLECULE_IMAGE:-ghcr.io/hifis-net/ubuntu-systemd:24.04}
+  - name: "instancegitlabciopenstack2"
+    image: "${MOLECULE_IMAGE:-ghcr.io/hifis-net/ubuntu-systemd:24.04}"
     pre_build_image: true
     override_command: false
     privileged: true  # Required to run Docker in Podman
     systemd: true
     tty: true
 provisioner:
-  name: ansible
+  name: "ansible"
   playbooks:
-    prepare: prepare.yml
-    converge: converge.yml
+    prepare: "prepare.yml"
+    converge: "converge.yml"
   inventory:
     hosts:
       all:
@@ -53,7 +53,7 @@ provisioner:
           - name: "test01"
             url: "https://gitlab.com"
             description: "Molecule test runner"
-            authentication_token: ${AUTHENTICATION_TOKEN}
+            authentication_token: "${AUTHENTICATION_TOKEN}"
             executor: "docker"
             environment: ["CI_CPUS=8", "DOCKER_TLS_CERTDIR=/certs"]
             docker_security_opts: ["seccomp=unconfined"]
@@ -65,7 +65,7 @@ provisioner:
             docker_image: "python:3.8"
             docker_network_mtu: 1442
             tags: ["docker", "hifis"]
-            locked: True
+            locked: true
             limit: 10
       instancegitlabciopenstack2:
         gitlab_runner_version: "16.11.0"
@@ -79,15 +79,15 @@ provisioner:
           - name: "test01"
             url: "https://gitlab.com"
             description: "Molecule test runner"
-            authentication_token: ${AUTHENTICATION_TOKEN}
+            authentication_token: "${AUTHENTICATION_TOKEN}"
             executor: "docker+machine"
             environment: ["CI_CPUS=8", "DOCKER_TLS_CERTDIR=/certs"]
             docker_volumes: ["/cache", "/certs/client", "/opt/docker/daemon.json:/etc/docker/daemon.json:ro"]
             docker_image: "python:3.8"
             docker_shm_size: 2147483648
-            docker_disable_cache: True
+            docker_disable_cache: true
             tags: ["docker", "hifis"]
-            locked: True
+            locked: true
             limit: 10
             machine_idle_count: 5
             machine_idle_time: 7200
@@ -119,19 +119,19 @@ provisioner:
             cache_bucket_location: "eu-west-1"
             cache_insecure: "false"
 verifier:
-  name: ansible
+  name: "ansible"
 scenario:
-  name: gitlab_runner
+  name: "gitlab_runner"
   test_sequence:
-    - destroy
-    - dependency
-    - syntax
-    - create
-    - prepare
-    - check
-    - converge
-    - idempotence
-    - check
-    - side_effect
-    - verify
-    - destroy
+    - "destroy"
+    - "dependency"
+    - "syntax"
+    - "create"
+    - "prepare"
+    - "check"
+    - "converge"
+    - "idempotence"
+    - "check"
+    - "side_effect"
+    - "verify"
+    - "destroy"

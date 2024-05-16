@@ -34,8 +34,8 @@ env:
 jobs:
 
   test:
-    name: Run Molecule tests.
-    runs-on: ubuntu-24.04
+    name: "Run Molecule tests."
+    runs-on: "ubuntu-24.04"
     env:
       PY_COLORS: 1
       ANSIBLE_FORCE_COLOR: 1
@@ -70,5 +70,5 @@ jobs:
         run: "pipenv run molecule test -s gitlab_runner"
         env:
           MOLECULE_IMAGE: "${{ matrix.image }}"
-          AUTHENTICATION_TOKEN: ${{ secrets.authentication_token }}
+          AUTHENTICATION_TOKEN: "${{ secrets.authentication_token }}"
         working-directory: "ansible_collections/hifis/toolkit"

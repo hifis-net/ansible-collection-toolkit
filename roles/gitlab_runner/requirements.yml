@@ -5,5 +5,4 @@
 
 ---
 roles:
-  - name: geerlingguy.docker
-    version: 4.1.1
+  - name: "geerlingguy.docker"

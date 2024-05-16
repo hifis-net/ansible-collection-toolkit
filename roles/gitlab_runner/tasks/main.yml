@@ -22,19 +22,19 @@
     gitlab_runner_is_initial_dryrun: "{{ ansible_check_mode and not gitlab_runner_dir.stat.exists }}"
 
 - name: "Include docker-machine tasks"
-  ansible.builtin.include_tasks: install.docker-machine.yml
+  ansible.builtin.include_tasks: "install.docker-machine.yml"
   when: "gitlab_runner_install_docker_machine"
 
 - name: "Include installation tasks for Debian-like OS"
-  ansible.builtin.include_tasks: install.debianlike.yml
-  when: ansible_os_family == "Debian"
+  ansible.builtin.include_tasks: "install.debianlike.yml"
+  when: "ansible_os_family == 'Debian'"
 
 - name: "Include autoscaler install tasks"
-  ansible.builtin.include_tasks: install.autoscaler-plugin.yml
+  ansible.builtin.include_tasks: "install.autoscaler-plugin.yml"
   when: "gitlab_runner_install_autoscaler"
 
 - name: "Include tasks to configure the system"
-  ansible.builtin.include_tasks: configuration.yml
+  ansible.builtin.include_tasks: "configuration.yml"
 
 - name: "Ignition configuration must be generated before docker-machine init"
   ansible.builtin.meta: "flush_handlers"
@@ -45,7 +45,7 @@
   no_log: true
   loop: "{{ gitlab_runner_list }}"
   loop_control:
-    loop_var: gitlab_runner
+    loop_var: "gitlab_runner"
 
 - name: "Slurp ignition json"
   ansible.builtin.slurp:

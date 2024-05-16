@@ -4,123 +4,123 @@
 # SPDX-License-Identifier: Apache-2.0
 
 ---
-- name: Verify
-  hosts: all
+- name: "Verify"
+  hosts: "all"
   tasks:
-    - name: Gather package facts
+    - name: "Gather package facts"
       ansible.builtin.package_facts:
-        manager: auto
+        manager: "auto"
 
-    - name: Gather service facts
+    - name: "Gather service facts"
       ansible.builtin.service_facts:
 
-    - name: Assert that docker is installed
-      when: gitlab_runner_install_docker
+    - name: "Assert that docker is installed"
+      when: "gitlab_runner_install_docker"
       ansible.builtin.assert:
         that:
           - "'docker-ce' in ansible_facts.packages"
 
-    - name: Assert that docker is not installed
-      when: not gitlab_runner_install_docker
+    - name: "Assert that docker is not installed"
+      when: "not gitlab_runner_install_docker"
       ansible.builtin.assert:
         that:
           - "'docker-ce' not in ansible_facts.packages"
 
-    - name: Assert that Docker systemd service is running
-      when: gitlab_runner_install_docker
+    - name: "Assert that Docker systemd service is running"
+      when: "gitlab_runner_install_docker"
       ansible.builtin.assert:
         that:
           - "ansible_facts.services['docker.service'].state == 'running'"
           - "ansible_facts.services['docker.service'].status == 'enabled'"
 
-    - name: Check that docker-machine is properly installed
-      ansible.builtin.command: docker-machine version
+    - name: "Check that docker-machine is properly installed"
+      ansible.builtin.command: "docker-machine version"
       changed_when: false
-      register: machine_version
+      register: "machine_version"
       when: "gitlab_runner_list | selectattr('executor', 'equalto', 'docker+machine') | list | length > 0"
       failed_when: "'0.16.2-gitlab.25' not in machine_version.stdout"
 
-    - name: Assert that Gitlab-Runner is installed
+    - name: "Assert that Gitlab-Runner is installed"
       ansible.builtin.assert:
         that:
           - "'gitlab-runner' in ansible_facts.packages"
 
-    - name: Assert that installed GitLab Runner version is equal to the desired one
+    - name: "Assert that installed GitLab Runner version is equal to the desired one"
       ansible.builtin.assert:
         that:
           - "ansible_facts.packages['gitlab-runner'][0].version == gitlab_runner_version + '-1'"
       when:
-        - gitlab_runner_version is defined
+        - "gitlab_runner_version is defined"
 
-    - name: Assert that ignition.json file was created
+    - name: "Assert that ignition.json file was created"
       ansible.builtin.stat:
-        path: /etc/gitlab-runner/ignition.json
-      register: ignition
-      failed_when: not ignition.stat.isreg
+        path: "/etc/gitlab-runner/ignition.json"
+      register: "ignition"
+      failed_when: "not ignition.stat.isreg"
 
-    - name: Determine generated SSH public key
-      when: gitlab_runner_ssh_public_key | default("") | length == 0 or gitlab_runner_ssh_public_key | default("") | length == 0
+    - name: "Determine generated SSH public key"
+      when: "gitlab_runner_ssh_public_key | default('') | length == 0 or gitlab_runner_ssh_public_key | default('') | length == 0"
       block:
-        - name: Assert that SSH key pair was created
+        - name: "Assert that SSH key pair was created"
           ansible.builtin.stat:
-            path: /etc/gitlab-runner/gitlab_runner_key
-          register: ssh_key
-          failed_when: not ssh_key.stat.isreg or ssh_key.stat.mode != "0600"
+            path: "/etc/gitlab-runner/gitlab_runner_key"
+          register: "ssh_key"
+          failed_when: "not ssh_key.stat.isreg or ssh_key.stat.mode != '0600'"
 
-        - name: Read generated SSH public key
-          ansible.builtin.command: cat /etc/gitlab-runner/gitlab_runner_key.pub
-          register: generated_pub_key
+        - name: "Read generated SSH public key"
+          ansible.builtin.command: "cat /etc/gitlab-runner/gitlab_runner_key.pub"
+          register: "generated_pub_key"
           changed_when: false
 
-        - name: Store generated SSH public key in variable
+        - name: "Store generated SSH public key in variable"
           ansible.builtin.set_fact:
             gitlab_runner_ssh_key: "{{ generated_pub_key.stdout | trim }}"
 
-    - name: Store predefined SSH public key in variable
+    - name: "Store predefined SSH public key in variable"
       ansible.builtin.set_fact:
         gitlab_runner_ssh_key: "{{ lookup('file', gitlab_runner_ssh_public_key) | trim }}"
       when:
-        - gitlab_runner_ssh_public_key | default("") | length > 0
-        - gitlab_runner_ssh_private_key | default("") | length > 0
+        - "gitlab_runner_ssh_public_key | default('') | length > 0"
+        - "gitlab_runner_ssh_private_key | default('') | length > 0"
 
-    - name: Read flatcar linux config
-      ansible.builtin.command: cat /etc/gitlab-runner/ignition.json
-      register: flatcar_linux_config
+    - name: "Read flatcar linux config"
+      ansible.builtin.command: "cat /etc/gitlab-runner/ignition.json"
+      register: "flatcar_linux_config"
       changed_when: false
 
-    - name: Assert that SSH public key exists in flatcar linux config
+    - name: "Assert that SSH public key exists in flatcar linux config"
       ansible.builtin.assert:
         that:
-          - flatcar_linux_config.stdout.find(gitlab_runner_ssh_key) != -1
+          - "flatcar_linux_config.stdout.find(gitlab_runner_ssh_key) != -1"
 
-    - name: Store authentication token environment variable as Ansible fact.
+    - name: "Store authentication token environment variable as Ansible fact."
       ansible.builtin.set_fact:
         gitlab_runner_authentication_token: "{{ lookup('env', 'AUTHENTICATION_TOKEN') }}"
 
-    - name: Assert that the runner was registered successfully
-      ansible.builtin.command: gitlab-runner list
+    - name: "Assert that the runner was registered successfully"
+      ansible.builtin.command: "gitlab-runner list"
       changed_when: false
-      register: runners
+      register: "runners"
       failed_when: "'test01' not in runners.stderr"
       # Do not verify runner registration in forks
       when: "gitlab_runner_authentication_token | length > 0"
 
-    - name: Assert that the verify command is successful
-      ansible.builtin.command: gitlab-runner verify
+    - name: "Assert that the verify command is successful"
+      ansible.builtin.command: "gitlab-runner verify"
       changed_when: false
-      register: runners_verify
-      failed_when: runners_verify.rc != 0
+      register: "runners_verify"
+      failed_when: "runners_verify.rc != 0"
 
     - name: "Assert that metrics endpoint is activated"
       when: "gitlab_runner_listen_address is defined and gitlab_runner_listen_address | length > 0"
       ansible.builtin.uri:
         url: "http://{{ gitlab_runner_listen_address }}/metrics"
-        return_content: yes
+        return_content: true
       register: "metrics"
       failed_when: '"# TYPE gitlab_runner_version_info" not in metrics.content'
 
-    - name: Unregister GitLab-Runner
-      ansible.builtin.command: gitlab-runner unregister --all-runners
+    - name: "Unregister GitLab-Runner"
+      ansible.builtin.command: "gitlab-runner unregister --all-runners"
       changed_when: false
       # Do not verify runner registration in forks
       when: "gitlab_runner_authentication_token | length > 0"
