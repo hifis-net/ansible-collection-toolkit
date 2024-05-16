@@ -12,6 +12,11 @@ updates:
     schedule:
       # Check for updates to GitHub Actions every weekday
       interval: "daily"
+  - package-ecosystem: "github-actions"
+    directory: "/.github/workflows/prepare-action"
+    schedule:
+      # Check for updates to GitHub Actions every weekday
+      interval: "daily"
 
   - package-ecosystem: "pip"
     directory: "/"
