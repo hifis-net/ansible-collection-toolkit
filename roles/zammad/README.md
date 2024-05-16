@@ -5,7 +5,7 @@ SPDX-FileCopyrightText: Helmholtz-Zentrum Dresden-Rossendorf (HZDR)
 SPDX-License-Identifier: MIT
 -->
 
-# hifis.zammad Ansible Role
+# `hifis.toolkit.zammad` Ansible Role
 
 [![CI Status](https://github.com/hifis-net/ansible-collection-toolkit/actions/workflows/zammad.yml/badge.svg)](https://github.com/hifis-net/ansible-collection-toolkit/actions/workflows/zammad.yml)
 [![License](https://img.shields.io/badge/License-MIT-blue.svg)](https://github.com/hifis-net/ansible-collection-toolkit/blob/main/LICENSES/MIT.txt)
@@ -141,4 +141,4 @@ MIT
 
 ## Author Information
 
-This role was created in 2020 by [HIFIS Software Services](https://hifis.net/).
+This role was created by [HIFIS Software Services](https://hifis.net/).

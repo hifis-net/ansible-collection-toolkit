@@ -5,7 +5,7 @@ SPDX-FileCopyrightText: 2022 Helmholtz-Zentrum Dresden-Rossendorf (HZDR)
 SPDX-License-Identifier: Apache-2.0
 -->
 
-# hifis.keepalived Role
+# `hifis.toolkit.keepalived` Ansible Role
 
 [![CI Status](https://github.com/hifis-net/ansible-collection-toolkit/actions/workflows/keepalived.yml/badge.svg)](https://github.com/hifis-net/ansible-collection-toolkit/actions/workflows/keepalived.yml)
 
@@ -336,4 +336,4 @@ Note: This role is intended for use with, but not limited to, the
 
 ## Author Information
 
-This role was created by [HIFIS Software Services](https://www.hifis.net)
+This role was created by [HIFIS Software Services](https://hifis.net)

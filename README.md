@@ -24,11 +24,11 @@ software engineers, but not exclusively. The following use cases are supported:
 * Help desk:
     * [**Zammad**](roles/zammad)
 * High Availability (HA) / Load Balancing:
-    * [HAProxy](https://github.com/hifis-net/ansible-role-haproxy) (*coming soon!*)
+    * [HAProxy](https://github.com/hifis-net/ansible-role-haproxy) (**coming soon!**)
     * [**Keepalived**](roles/keepalived)
 * OS-related:
     * [**unattended-upgrades**](roles/unattended_upgrades)
-    * [netplan](https://github.com/hifis-net/ansible-role-gitlab-netplan) (*coming soon!*)
+    * [netplan](https://github.com/hifis-net/ansible-role-netplan) (**coming soon!**)
     * distribute authorized [**SSH keys**](role/ssh_keys) to users
 
 ## Minimum required Ansible-version
@@ -53,4 +53,4 @@ Apache-2.0
 
 ## Author
 
-This role is maintained by [HIFIS Software Services](https://www.hifis.net/).
+This collection is maintained by [HIFIS Software Services](https://hifis.net/).

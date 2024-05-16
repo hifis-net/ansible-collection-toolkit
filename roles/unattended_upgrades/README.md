@@ -6,7 +6,7 @@ SPDX-FileCopyrightText: Jan Vlnas
 SPDX-License-Identifier: GPL-2.0-or-later
 -->
 
-# hifis.unattended_upgrades Ansible Role
+# `hifis.toolkit.unattended_upgrades` Ansible Role
 
 [![CI status](https://github.com/hifis-net/ansible-collection-toolkit/actions/workflows/unattended_upgrades.yml/badge.svg)](https://github.com/hifis-net/ansible-collection-toolkit/actions/workflows/unattended_upgrades.yml)
 
@@ -282,7 +282,7 @@ unattended_origins_patterns: []
 
 ## Author
 
-This role is maintained by [HIFIS Software Services](https://www.hifis.net/)
+This role is maintained by [HIFIS Software Services](https://hifis.net/)
 and was originally forked from [jnv/ansible-role-unattended-upgrades](https://github.com/jnv/ansible-role-unattended-upgrades),
 created by [Jan Vlnas](https://github.com/jnv).
 
