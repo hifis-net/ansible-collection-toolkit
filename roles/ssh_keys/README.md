@@ -5,7 +5,7 @@ SPDX-FileCopyrightText: Helmholtz-Zentrum Dresden-Rossendorf (HZDR)
 SPDX-License-Identifier: Apache-2.0
 -->
 
-# hifis.ssh_keys Ansible Role
+# `hifis.toolkit.ssh_keys` Ansible Role
 
 [![CI Status](https://github.com/hifis-net/ansible-collection-toolkit/actions/workflows/ssh_keys.yml/badge.svg)](https://github.com/hifis-net/ansible-collection-toolkit/actions/workflows/ssh_keys.yml)
 

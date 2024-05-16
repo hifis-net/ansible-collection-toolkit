@@ -1,5 +1,29 @@
 # Changelog
 
+## [v4.1.0](https://github.com/hifis-net/ansible-collection-toolkit/tree/v4.1.0) (2024-05-16)
+
+[Full Changelog](https://github.com/hifis-net/ansible-collection-toolkit/compare/v4.0.0...v4.1.0)
+
+**Implemented enhancements:**
+
+- Include hifis.keepalived role into collection [\#214](https://github.com/hifis-net/ansible-collection-toolkit/issues/214)
+- Include hifis.ssh-keys role into collection [\#212](https://github.com/hifis-net/ansible-collection-toolkit/issues/212)
+- Include hifis.gitlab\_runner role into collection [\#210](https://github.com/hifis-net/ansible-collection-toolkit/issues/210)
+
+**Closed issues:**
+
+- Configure Dependabot to update dependencies in prepare action [\#217](https://github.com/hifis-net/ansible-collection-toolkit/issues/217)
+
+**Merged pull requests:**
+
+- Always run ansible-lint in GitHub Actions [\#221](https://github.com/hifis-net/ansible-collection-toolkit/pull/221) ([tobiashuste](https://github.com/tobiashuste))
+- chore\(deps-dev\): bump ansible-lint from 24.2.3 to 24.5.0 [\#220](https://github.com/hifis-net/ansible-collection-toolkit/pull/220) ([dependabot[bot]](https://github.com/apps/dependabot))
+- chore\(deps\): bump ansible/ansible-lint from 24.2.3 to 24.5.0 [\#219](https://github.com/hifis-net/ansible-collection-toolkit/pull/219) ([dependabot[bot]](https://github.com/apps/dependabot))
+- Make sure to update prepare-action via Dependabot [\#218](https://github.com/hifis-net/ansible-collection-toolkit/pull/218) ([tobiashuste](https://github.com/tobiashuste))
+- Integrate gitlab\_runner role into hifis toolkit [\#216](https://github.com/hifis-net/ansible-collection-toolkit/pull/216) ([tobiashuste](https://github.com/tobiashuste))
+- Add hifis.keepalived role [\#215](https://github.com/hifis-net/ansible-collection-toolkit/pull/215) ([Normo](https://github.com/Normo))
+- Add hifis.ssh\_keys role [\#213](https://github.com/hifis-net/ansible-collection-toolkit/pull/213) ([Normo](https://github.com/Normo))
+
 ## [v4.0.0](https://github.com/hifis-net/ansible-collection-toolkit/tree/v4.0.0) (2024-05-08)
 
 [Full Changelog](https://github.com/hifis-net/ansible-collection-toolkit/compare/v3.3.0...v4.0.0)
@@ -30,11 +54,11 @@ To continue using the [`unattended_upgrades`](roles/unattended_upgrades) role as
 
 **Merged pull requests:**
 
-- Prepare release version 4.0.0 [\#209](https://github.com/hifis-net/ansible-collection-toolkit/pull/209) ([Normo](https://github.com/Normo))
 - chore\(deps\): bump ansible/ansible-lint from 24.2.1 to 24.2.3 [\#208](https://github.com/hifis-net/ansible-collection-toolkit/pull/208) ([dependabot[bot]](https://github.com/apps/dependabot))
+- chore\(deps-dev\): bump ansible-lint from 24.2.0 to 24.2.1 [\#194](https://github.com/hifis-net/ansible-collection-toolkit/pull/194) ([dependabot[bot]](https://github.com/apps/dependabot))
+- Prepare release version 4.0.0 [\#209](https://github.com/hifis-net/ansible-collection-toolkit/pull/209) ([Normo](https://github.com/Normo))
 - chore\(deps\): bump ansible from 9.3.0 to 9.5.1 [\#204](https://github.com/hifis-net/ansible-collection-toolkit/pull/204) ([dependabot[bot]](https://github.com/apps/dependabot))
 - Release version 4.0.0 [\#198](https://github.com/hifis-net/ansible-collection-toolkit/pull/198) ([Normo](https://github.com/Normo))
-- chore\(deps-dev\): bump ansible-lint from 24.2.0 to 24.2.1 [\#194](https://github.com/hifis-net/ansible-collection-toolkit/pull/194) ([dependabot[bot]](https://github.com/apps/dependabot))
 
 
 
