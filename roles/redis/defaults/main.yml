@@ -1,0 +1,67 @@
+# SPDX-FileCopyrightText: Helmholtz Centre for Environmental Research (UFZ)
+# SPDX-FileCopyrightText: Helmholtz-Zentrum Dresden-Rossendorf (HZDR)
+#
+# SPDX-License-Identifier: Apache-2.0
+
+---
+
+# Here you specify whether it is a "master" or "replica" instance:
+redis_instance_type: "master"
+# You need to provide the IP address of your Redis instance:
+redis_instance_ip: "127.0.0.1"
+# This is the name of the Redis cluster:
+redis_cluster_name: "redis-cluster"
+# You need to provide the IP address of your Redis master instance:
+redis_master_instance_ip: "{{ redis_instance_ip if redis_instance_type == 'master' else None }}"
+# Password used to authenticate in the Redis cluster
+redis_password: "changeme"
+
+# Redis version
+redis_version: "7.2.1"
+# Path to the Redis Server binary
+redis_bin: "/usr/local/bin/redis-server"
+# List of dependencies of Redis Server
+redis_dependencies:
+  - "build-essential"
+# URL from which Redis Server can be downloaded
+redis_download_url: "https://download.redis.io/releases/redis-{{ redis_version }}.tar.gz"
+# Path to the directory in which Redis Server is build
+redis_build_dir: "/usr/local/src/redis-{{ redis_version }}"
+# Directory into which Redis service file is copied
+redis_systemd_dir: "/etc/systemd/system"
+# Name of Redis Server service file
+redis_server_service_file: "{{ redis_systemd_dir }}/redis-server.service"
+# Name of Redis Sentinel service file
+redis_sentinel_service_file: "{{ redis_systemd_dir }}/redis-sentinel.service"
+# Directory of Redis Server configuration files
+redis_configuration_dir: "/etc/redis"
+# Path to Redis Server configuration file
+redis_server_configuration_file: "{{ redis_configuration_dir }}/redis.conf"
+# Path to Redis Sentinel configuration file
+redis_sentinel_configuration_file: "{{ redis_configuration_dir }}/sentinel.conf"
+# Redis library directory
+redis_lib_dir: "/var/lib/redis"
+# Redis logging directory
+redis_log_dir: "/var/log/redis"
+# Path to Redis Server log file
+redis_server_log_file_path: "{{ redis_log_dir }}/redis-server.log"
+# Path to Redis Sentinel log file
+redis_sentinel_log_file_path: "{{ redis_log_dir }}/redis-sentinel.log"
+# Redis log level, can be one of: debug, verbose, notice, warning
+redis_log_level: "notice"
+# Sentinel log level, can be one of: debug, verbose, notice, warning
+sentinel_log_level: "notice"
+# Redis protected-mode
+redis_protected_mode: "yes"
+# Sentinel protected-mode
+sentinel_protected_mode: "yes"
+# Redis user name
+redis_user: "redis"
+# Redis group name
+redis_group: "redis"
+# Redis Server service name
+redis_server_service_name: "redis-server"
+# Redis Sentinel service name
+redis_sentinel_service_name: "redis-sentinel"
+
+...

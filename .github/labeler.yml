@@ -28,6 +28,12 @@ netplan:
           - "roles/netplan/**"
           - "molecule/netplan/**"
           - ".github/workflows/netplan.yml"
+redis:
+  - changed-files:
+      - any-glob-to-any-file:
+          - "roles/redis/**"
+          - "molecule/redis/**"
+          - ".github/workflows/redis.yml"
 ssh_keys:
   - changed-files:
       - any-glob-to-any-file:

@@ -1,0 +1,25 @@
+{#
+SPDX-FileCopyrightText: Helmholtz Centre for Environmental Research (UFZ)
+SPDX-FileCopyrightText: Helmholtz-Zentrum Dresden-Rossendorf (HZDR)
+
+SPDX-License-Identifier: Apache-2.0
+#}
+[Unit]
+Description=Redis Sentinel service
+Documentation=https://redis.io/documentation
+AssertPathExists={{ redis_lib_dir }}
+
+[Service]
+ExecStart={{ redis_bin }} {{ redis_sentinel_configuration_file }} --sentinel
+LimitNOFILE=10032
+NoNewPrivileges=yes
+Type=forking
+TimeoutStartSec=300
+TimeoutStopSec=300
+UMask=0077
+User={{ redis_user }}
+Group={{ redis_group }}
+WorkingDirectory={{ redis_lib_dir }}
+
+[Install]
+WantedBy=multi-user.target

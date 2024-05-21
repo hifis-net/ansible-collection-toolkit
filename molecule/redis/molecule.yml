@@ -1,0 +1,48 @@
+# SPDX-FileCopyrightText: Helmholtz Centre for Environmental Research (UFZ)
+# SPDX-FileCopyrightText: Helmholtz-Zentrum Dresden-Rossendorf (HZDR)
+#
+# SPDX-License-Identifier: Apache-2.0
+
+---
+dependency:
+  name: "galaxy"
+driver:
+  name: "podman"
+platforms:
+  - name: "instance_redis"
+    image: "${MOLECULE_IMAGE:-ghcr.io/hifis-net/ubuntu-systemd:22.04}"
+    pre_build_image: true
+    privileged: true
+    systemd: "always"
+    tty: true
+    override_command: false
+provisioner:
+  name: "ansible"
+  config_options:
+    defaults:
+      stdout_callback: "yaml"
+  playbooks:
+    prepare: "prepare.yml"
+    converge: "converge.yml"
+  inventory:
+    hosts:
+      all:
+        vars:
+          redis_sentinel_password: "123456"
+verifier:
+  name: "ansible"
+scenario:
+  name: "redis"
+  test_sequence:
+    - "destroy"
+    - "syntax"
+    - "create"
+    - "prepare"
+    - "check"
+    - "converge"
+    - "idempotence"
+    - "check"
+    - "verify"
+    - "destroy"
+
+...

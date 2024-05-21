@@ -1,0 +1,39 @@
+{#
+SPDX-FileCopyrightText: Helmholtz Centre for Environmental Research (UFZ)
+SPDX-FileCopyrightText: Helmholtz-Zentrum Dresden-Rossendorf (HZDR)
+
+SPDX-License-Identifier: Apache-2.0
+#}
+supervised no
+daemonize yes
+pidfile "/var/run/redis/redis-server.pid"
+logfile "{{ redis_server_log_file_path }}"
+loglevel {{ redis_log_level }}
+dir "/var/lib/redis"
+bind {{ redis_instance_ip }}
+port 6379
+
+requirepass "{{ redis_password }}"
+masterauth "{{ redis_password }}"
+
+timeout 300
+
+databases 16
+
+save 900 1
+save 300 10
+save 60 10000
+
+rdbcompression yes
+
+dbfilename "dump.rdb"
+
+appendonly no
+appendfsync everysec
+no-appendfsync-on-rewrite no
+
+protected-mode {{ redis_protected_mode }}
+
+{% if redis_instance_type == "replica" %}
+replicaof {{ redis_master_instance_ip }} 6379
+{% endif %}
