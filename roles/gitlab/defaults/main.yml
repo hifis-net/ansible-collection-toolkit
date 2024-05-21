@@ -1,0 +1,91 @@
+# SPDX-FileCopyrightText: Helmholtz Centre for Environmental Research (UFZ)
+# SPDX-FileCopyrightText: Helmholtz-Zentrum Dresden-Rossendorf (HZDR)
+#
+# SPDX-License-Identifier: Apache-2.0
+
+---
+
+gitlab_edition: "gitlab-ee"
+gitlab_version: ""
+gitlab_release: ""
+gitlab_gpg_key_url: "https://packages.gitlab.com/gitlab/{{ gitlab_edition }}/gpgkey"
+gitlab_gpg_key_id: "F6403F6544A38863DAA0B6E03F01618A51312F3F"
+
+# Specify whether this is the GitLab primary node
+gitlab_is_primary: false
+
+# Name ot the GitLab configuration template
+gitlab_configuration_file_template: "gitlab.rb.j2"
+# Path to the GitLab configuration file
+gitlab_configuration_file_path: "/etc/gitlab/gitlab.rb"
+
+# URL of the GitLab application
+gitlab_external_url: "http://localhost"
+# GitLab Theme to use
+gitlab_default_theme: "2"
+# Time Zone to set
+gitlab_time_zone: "Europe/Berlin"
+# Keep backups for a week
+gitlab_backup_keep_time: "604800"
+# Backup directory
+gitlab_backup_path: "/var/opt/gitlab/backups"
+# Port for web-requests
+gitlab_nginx_listen_port: "80"
+# Whether to use https
+gitlab_nginx_listen_https: "false"
+# Whether to redirect to https
+gitlab_nginx_redirect_http_to_https: "false"
+
+# Whether to use GitLab Omnibus internal Redis
+gitlab_use_internal_redis: "true"
+# Password for authentication
+gitlab_redis_password: "changeme"
+# Name of the Redis cluster
+gitlab_redis_cluster_name: "redis-cluster"
+# List of IP addresses of Redis Sentinel instances
+gitlab_redis_sentinel_ips: []
+# Port on which Redis Sentinel instances are listening
+gitlab_redis_sentinel_port: "26379"
+# GitLap IP address range
+gitlab_ip_range: "{{ ansible_facts.default_ipv4.address }}/24"
+
+# Whether to use GitLab Omnibus internal Gitaly
+gitlab_use_internal_gitaly: "true"
+# Data directory to use
+gitlab_git_data_dir: "/var/opt/gitlab/git-data"
+# Gitaly token
+gitlab_gitaly_token: "changeme"
+# GitLab Shell token
+gitlab_secret_token: "changeme"
+# IP address of the Gitaly instance
+gitlab_gitaly_instance_ip: "127.0.0.1"
+# Port of the Gitaly instance
+gitlab_gitaly_instance_port: "8075"
+
+# Whether to use GitLab Omnibus internal PostgreSQL database
+gitlab_use_internal_postgresql: "true"
+# External PostgreSQL database host IP / domain
+gitlab_postgresql_db_host: "127.0.0.1"
+# External PostgreSQL database password
+gitlab_postgresql_db_password: "changeme"
+
+# Whether to enable email
+gitlab_email_enabled: "false"
+# Whether to enable LDAP
+gitlab_ldap_enabled: "false"
+# Whether to enable SMTP
+gitlab_smtp_enable: "false"
+
+# Registry configuration
+# Whether to enable GitLab Registry
+gitlab_registry_enable: "false"
+# External URL for the container registry
+gitlab_registry_external_url: "http://localhost:5005"
+
+# Mattermost configuration
+# Whether GitLab Omnibus is used to run Mattermost only without GitLab
+gitlab_mattermost_only_context: "false"
+
+gitlab_feature_flags: []
+
+...

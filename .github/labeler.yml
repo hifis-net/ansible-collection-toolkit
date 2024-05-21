@@ -10,6 +10,12 @@ gitlab_runner:
           - "roles/gitlab_runner/**"
           - "molecule/gitlab_runner/**"
           - ".github/workflows/gitlab_runner.yml"
+gitlab:
+  - changed-files:
+      - any-glob-to-any-file:
+          - "roles/gitlab/**"
+          - "molecule/gitlab/**"
+          - ".github/workflows/gitlab.yml"
 haproxy:
   - changed-files:
       - any-glob-to-any-file:

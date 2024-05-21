@@ -1,0 +1,29 @@
+# SPDX-FileCopyrightText: Helmholtz Centre for Environmental Research (UFZ)
+# SPDX-FileCopyrightText: Helmholtz-Zentrum Dresden-Rossendorf (HZDR)
+#
+# SPDX-License-Identifier: Apache-2.0
+
+---
+
+- name: "Reconfigure Primary GitLab"
+  become: true
+  ansible.builtin.command: "gitlab-ctl reconfigure"
+  changed_when: true
+  environment:
+    SKIP_POST_DEPLOYMENT_MIGRATIONS: "true"
+  when:
+    - "gitlab_is_primary"
+
+- name: "Reconfigure Non Primary GitLab"
+  become: true
+  ansible.builtin.command: "gitlab-ctl reconfigure"
+  changed_when: true
+  when:
+    - "not gitlab_is_primary"
+
+- name: "Remove file that indicates a failed reconfigure"
+  ansible.builtin.file:
+    path: "/etc/gitlab/reconfigure_failed"
+    state: "absent"
+
+...

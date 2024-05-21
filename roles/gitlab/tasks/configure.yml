@@ -1,0 +1,53 @@
+# SPDX-FileCopyrightText: Helmholtz Centre for Environmental Research (UFZ)
+# SPDX-FileCopyrightText: Helmholtz-Zentrum Dresden-Rossendorf (HZDR)
+#
+# SPDX-License-Identifier: Apache-2.0
+
+---
+
+- name: "Copy gitlab-secrets.json"
+  ansible.builtin.copy:
+    src: "{{ gitlab_secrets_file }}"
+    dest: "/etc/gitlab/gitlab-secrets.json"
+    owner: "root"
+    group: "root"
+    mode: "0600"
+    backup: true
+  when: "gitlab_secrets_file is defined"
+  notify:
+    - "Reconfigure Primary GitLab"
+    - "Reconfigure Non Primary GitLab"
+
+- name: "Copy GitLab Configuration File."
+  become: true
+  ansible.builtin.template:
+    src: "{{ gitlab_configuration_file_template }}"
+    dest: "{{ gitlab_configuration_file_path }}"
+    owner: "root"
+    group: "root"
+    mode: "0644"
+  notify:
+    - "Reconfigure Primary GitLab"
+    - "Reconfigure Non Primary GitLab"
+
+- name: "Create file to prevent Gitlab to restart before migrations"
+  ansible.builtin.copy:
+    content: ""
+    dest: "/etc/gitlab/skip-auto-reconfigure"
+    force: false
+    owner: "root"
+    group: "root"
+    mode: "0644"
+  when: "gitlab_is_primary"
+
+- name: "Create file to prevent Gitlab to backup database"
+  ansible.builtin.copy:
+    content: ""
+    dest: "/etc/gitlab/skip-auto-backup"
+    force: false
+    owner: "root"
+    group: "root"
+    mode: "0644"
+  when: "not gitlab_is_primary"
+
+...

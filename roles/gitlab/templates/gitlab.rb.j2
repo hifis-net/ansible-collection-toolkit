@@ -1,0 +1,113 @@
+# SPDX-FileCopyrightText: 2020 Helmholtz Centre for Environmental Research (UFZ)
+# SPDX-FileCopyrightText: 2020 Helmholtz-Zentrum Dresden-Rossendorf (HZDR)
+#
+# SPDX-License-Identifier: Apache-2.0
+
+external_url "{{ gitlab_external_url }}"
+
+gitlab_rails['gitlab_default_theme'] = "{{ gitlab_default_theme }}"
+gitlab_rails['time_zone'] = "{{ gitlab_time_zone }}"
+gitlab_rails['backup_keep_time'] = "{{ gitlab_backup_keep_time }}"
+gitlab_rails['backup_path'] = "{{ gitlab_backup_path }}"
+
+nginx['listen_port'] = "{{ gitlab_nginx_listen_port }}"
+nginx['listen_https'] = {{ gitlab_nginx_listen_https }}
+nginx['redirect_http_to_https'] = {{ gitlab_nginx_redirect_http_to_https }}
+
+{% if not gitlab_use_internal_redis %}
+redis['enable'] = false
+gitlab_rails['redis_password'] = "{{ gitlab_redis_password }}"
+redis['master_name'] = "{{ gitlab_redis_cluster_name }}"
+redis['master_password'] = "{{ gitlab_redis_password }}"
+gitlab_rails['redis_sentinels'] = [
+{% for redis_sentinel_ip in gitlab_redis_sentinel_ips %}
+    { "host" => "{{ redis_sentinel_ip }}", "port" => "{{ gitlab_redis_sentinel_port }}" },
+{% endfor %}
+]
+{% if gitlab_redis_sentinel_password | default('') | length %}
+gitlab_rails['redis_sentinels_password'] = "{{ gitlab_redis_sentinel_password }}"
+{% endif %}
+{% endif %}
+gitlab_rails['monitoring_whitelist'] = ["{{ gitlab_ip_range }}"]
+
+{% if gitlab_use_internal_gitaly %}
+git_data_dirs({"default" => {"path" => "{{ gitlab_git_data_dir }}"} })
+{% else %}
+gitaly['enable'] = false
+gitlab_rails['gitaly_token'] = "{{ gitlab_gitaly_token }}"
+gitlab_shell['secret_token'] = "{{ gitlab_secret_token }}"
+git_data_dirs({
+  'default' => { 'gitaly_address' => 'tcp://{{ gitlab_gitaly_instance_ip }}:{{ gitlab_gitaly_instance_port }}' },
+})
+{% endif %}
+
+gitlab_rails['gitlab_email_enabled'] = {{ gitlab_email_enabled }}
+gitlab_rails['ldap_enabled'] = {{ gitlab_ldap_enabled }}
+gitlab_rails['smtp_enable'] = {{ gitlab_smtp_enable }}
+
+registry['enable'] = {{ gitlab_registry_enable }}
+
+{% if not gitlab_use_internal_postgresql %}
+# Disable the bundled Omnibus provided PostgreSQL
+postgresql['enable'] = false
+# PostgreSQL connection details
+gitlab_rails['db_adapter'] = 'postgresql'
+gitlab_rails['db_encoding'] = 'unicode'
+gitlab_rails['db_host'] = "{{ gitlab_postgresql_db_host }}"
+gitlab_rails['db_password'] = "{{ gitlab_postgresql_db_password }}"
+{% endif %}
+
+{#
+Code Attribution / Terms of Use: This derived code snippet is attributed
+to the work of Jeff Geerling which is originally licensed under the MIT License:
+https://github.com/geerlingguy/ansible-role-gitlab/blob/master/templates/gitlab.rb.j2
+Configurations are mostly done via key-value pairs.
+This is a generic way to add custom key-value pairs to GitLab's configuration file.
+Usage example by setting Ansible variables:
+gitlab_additional_configurations:
+  - gitlab_rails:
+      - key: "time_zone"
+        value: "Europe/Berlin"
+  - nginx:
+      - key: "listen_port"
+        type: "plain"
+        value: "80"
+      - key: "listen_https"
+        type: "plain"
+        value: "false"
+Resulting configuration:
+gitlab_rails['time_zone'] = 'Europe/Berlin'
+nginx['listen_port'] = 80
+nginx['listen_https'] = false
+#}
+{% if gitlab_additional_configurations is defined %}
+{% for configurations in gitlab_additional_configurations %}
+{% for config in configurations %}
+{% for kvpair in configurations[config] %}
+{% if (kvpair.type is defined and kvpair.type == 'plain') or (kvpair.value is not string) %}
+{{ config }}['{{ kvpair.key }}'] = {{ kvpair.value }}
+{% else %}
+{{ config }}['{{ kvpair.key }}'] = '{{ kvpair.value }}'
+{% endif %}
+{% endfor %}
+{% endfor %}
+{% endfor %}
+{% endif %}
+
+{#
+This is a generic way to add Ruby function calls to the
+configuration file.
+Usage example by setting Ansible variables:
+gitlab_ruby_configuration_calls:
+  - key: "pages_external_url"
+    value: "https://pages.example.com"
+  - key: "registry_external_url"
+    value: "https://registry.example.com"
+  - key: "mattermost_external_url"
+    value: "https://mattermost.example.com"
+#}
+{% if gitlab_ruby_configuration_calls is defined %}
+{% for kvpair in gitlab_ruby_configuration_calls %}
+{{ kvpair.key }} "{{ kvpair.value }}"
+{% endfor %}
+{% endif %}

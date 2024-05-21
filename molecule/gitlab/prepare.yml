@@ -1,0 +1,41 @@
+# SPDX-FileCopyrightText: Helmholtz Centre for Environmental Research (UFZ)
+# SPDX-FileCopyrightText: Helmholtz-Zentrum Dresden-Rossendorf (HZDR)
+#
+# SPDX-License-Identifier: Apache-2.0
+
+---
+- name: "Prepare"
+  hosts: "all"
+  tasks:
+    - name: "Install depenencies for OS family RedHat"
+      when:
+        - "ansible_facts.os_family == 'RedHat'"
+        - "ansible_facts.distribution_major_version | int >= 7"
+      block:
+        - name: "Install missing dependencies"
+          ansible.builtin.dnf:
+            name:
+              - "sudo"
+              - "iproute"
+              - "libarchive"
+            state: "present"
+            update_cache: true
+
+    - name: "Install depenencies for OS family Debian"
+      when: "ansible_facts.os_family == 'Debian'"
+      block:
+        - name: "Install missing dependencies"
+          ansible.builtin.apt:
+            name:
+              - "sudo"      # for `become` privilege escalation
+              - "iproute2"  # for gathering network facts
+            state: "present"
+            update_cache: true
+
+    # Provisioning freezes and GitLab "waits for redis server socket" on task "GitLab reconfigure" if file ".dockerenv" exists!
+    - name: "Remove file so GitLab Omnibus does not wait for redis server socket on task GitLab reconfigure."
+      ansible.builtin.file:
+        path: "/.dockerenv"
+        state: "absent"
+
+...

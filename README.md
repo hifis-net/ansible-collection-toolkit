@@ -9,9 +9,11 @@ SPDX-License-Identifier: Apache-2.0
 
 [![Latest release](https://img.shields.io/github/v/release/hifis-net/ansible-collection-toolkit)](https://github.com/hifis-net/ansible-collection-toolkit/releases)
 [![hifis.gitlab_runner](https://github.com/hifis-net/ansible-collection-toolkit/actions/workflows/gitlab_runner.yml/badge.svg)](https://github.com/hifis-net/ansible-collection-toolkit/actions/workflows/gitlab_runner.yml)
+[![hifis.gitlab](https://github.com/hifis-net/ansible-collection-toolkit/actions/workflows/gitlab.yml/badge.svg)](https://github.com/hifis-net/ansible-collection-toolkit/actions/workflows/gitlab.yml)
 [![hifis.haproxy](https://github.com/hifis-net/ansible-collection-toolkit/actions/workflows/haproxy.yml/badge.svg)](https://github.com/hifis-net/ansible-collection-toolkit/actions/workflows/haproxy.yml)
 [![hifis.keepalived](https://github.com/hifis-net/ansible-collection-toolkit/actions/workflows/keepalived.yml/badge.svg)](https://github.com/hifis-net/ansible-collection-toolkit/actions/workflows/keepalived.yml)
 [![hifis.netplan](https://github.com/hifis-net/ansible-collection-toolkit/actions/workflows/netplan.yml/badge.svg)](https://github.com/hifis-net/ansible-collection-toolkit/actions/workflows/netplan.yml)
+[![hifis.redis](https://github.com/hifis-net/ansible-collection-toolkit/actions/workflows/redis.yml/badge.svg)](https://github.com/hifis-net/ansible-collection-toolkit/actions/workflows/redis.yml)
 [![hifis.ssh_keys](https://github.com/hifis-net/ansible-collection-toolkit/actions/workflows/ssh_keys.yml/badge.svg)](https://github.com/hifis-net/ansible-collection-toolkit/actions/workflows/ssh_keys.yml)
 [![hifis.unattended_upgrades](https://github.com/hifis-net/ansible-collection-toolkit/actions/workflows/unattended_upgrades.yml/badge.svg)](https://github.com/hifis-net/ansible-collection-toolkit/actions/workflows/unattended_upgrades.yml)
 [![hifis.zammad](https://github.com/hifis-net/ansible-collection-toolkit/actions/workflows/zammad.yml/badge.svg)](https://github.com/hifis-net/ansible-collection-toolkit/actions/workflows/zammad.yml)
@@ -23,7 +25,7 @@ This collection provides production-ready Ansible roles used for providing servi
 software engineers, but not exclusively. The following use cases are supported:
 
 * DevOps platform:
-    * [GitLab](https://github.com/hifis-net/ansible-role-gitlab) (**coming soon!**)
+    * [**GitLab**](roles/gitlab)
     * deploy [**GitLab-Runner**](roles/gitlab_runner) with a focus, but not limited, on Openstack autoscaling
     * [**Redis**](roles/redis)
 * Help desk:
