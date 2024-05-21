@@ -1,0 +1,88 @@
+# SPDX-FileCopyrightText: Helmholtz Centre for Environmental Research (UFZ)
+# SPDX-FileCopyrightText: Helmholtz-Zentrum Dresden-Rossendorf (HZDR)
+#
+# SPDX-License-Identifier: Apache-2.0
+
+---
+
+- name: "Check whether network configurations are given."
+  ansible.builtin.assert:
+    that:
+      - "netplan_ethernets is defined and netplan_ethernets | length > 0"
+
+- name: "Gather package facts"
+  ansible.builtin.package_facts:
+    manager: "auto"
+
+- name: "Check whether package ifupdown is installed"
+  ansible.builtin.debug:
+    msg: |
+      "Package 'ifupdown' is installed in version '{{ ansible_facts.packages['ifupdown'][0].version }}'.
+      Please consider removing it after Netplan role has been executed successfully."
+  when: "'ifupdown' in ansible_facts.packages"
+
+- name: "Install netplan packages."
+  become: true
+  ansible.builtin.package:
+    name: "{{ netplan_packages }}"
+    state: "present"
+    update_cache: true
+
+- name: "Delete pre-existing network settings files."
+  when: "netplan_remove_existing_configs"
+  block:
+    - name: "Get netplan config files."
+      ansible.builtin.find:
+        paths: "{{ netplan_configuration_dir }}"
+        file_type: "file"
+        excludes:
+          - "{{ netplan_configuration_file }}"
+      register: "netplan_config_files"
+
+    - name: "Remove netplan config files."
+      ansible.builtin.file:
+        path: "{{ item.path }}"
+        state: "absent"
+      with_items: "{{ netplan_config_files['files'] }}"
+
+- name: "Create a netplan config file from template."
+  ansible.builtin.template:
+    src: "{{ netplan_configuration_file_template }}"
+    dest: "{{ netplan_configuration_file_path }}"
+    owner: "root"
+    group: "root"
+    mode: "0600"
+    backup: true
+  notify:
+    - "Generate netplan networking"
+    - "Apply netplan networking"
+    - "Gather network facts"
+
+- name: "Check if file ifstate exists."
+  ansible.builtin.stat:
+    path: "{{ ifupdown_ifstate_file }}"
+  register: "file_ifstate"
+
+- name: "Check whether to reboot host if file ifstate exists."
+  when: "file_ifstate.stat.exists"
+  block:
+    - name: "Read in ifstate file content."
+      ansible.builtin.slurp:
+        src: "{{ ifupdown_ifstate_file }}"
+      register: "slurped_file"
+
+    - name: "Compare ifstate file content to determine whether reboot is necessary."
+      ansible.builtin.set_fact:
+        reboot_to_switch_to_netplan: "{{ slurped_file.content != 'lo=lo\n' | b64encode }}"
+
+    - name: "Trigger reboot to switch to netplan."
+      ansible.builtin.debug:
+        msg: |
+          "Reboot is required to switch from ifupdown to netplan.
+           Triggering the reboot handler now."
+      changed_when: "reboot_to_switch_to_netplan | bool"
+      when:
+        - "reboot_to_switch_to_netplan | bool"
+      notify: "Reboot managed node"
+
+...

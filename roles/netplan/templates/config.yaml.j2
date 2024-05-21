@@ -1,0 +1,51 @@
+{#
+SPDX-FileCopyrightText: Helmholtz Centre for Environmental Research (UFZ)
+SPDX-FileCopyrightText: Helmholtz-Zentrum Dresden-Rossendorf (HZDR)
+
+SPDX-License-Identifier: Apache-2.0
+#}
+
+---
+
+network:
+  version: 2
+  renderer: networkd
+{% if netplan_ethernets is defined %}
+  ethernets:
+{% for ethernet in netplan_ethernets %}
+{% if ethernet['interface_name'] is defined %}
+    {{ ethernet['interface_name'] }}:
+{% if ethernet['dhcp4'] is defined %}
+      dhcp4: "{{ ethernet['dhcp4'] }}"
+{% endif %}
+{% if ethernet['gateway4'] is defined %}
+      routes:
+        - to: "default"
+          via: "{{ ethernet['gateway4'] }}"
+{% endif %}
+{% if ethernet['addresses'] is defined %}
+      addresses:
+{%for addresses in ethernet['addresses'] %}
+        - "{{ addresses }}"
+{% endfor %}
+{% endif %}
+{% if ethernet['nameservers'] is defined %}
+      nameservers:
+{% if ethernet['nameservers']['addresses'] is defined %}
+        addresses:
+{%for addresses in ethernet['nameservers']['addresses'] %}
+          - "{{ addresses }}"
+{% endfor %}
+{% endif %}
+{% if ethernet['nameservers']['search'] is defined %}
+        search:
+{%for search in ethernet['nameservers']['search'] %}
+          - "{{ search }}"
+{% endfor %}
+{% endif %}
+{% endif %}
+{% endif %}
+{% endfor %}
+{% endif %}
+
+...
