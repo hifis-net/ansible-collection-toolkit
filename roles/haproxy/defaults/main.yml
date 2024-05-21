@@ -1,0 +1,82 @@
+# SPDX-FileCopyrightText: Helmholtz Centre for Environmental Research (UFZ)
+# SPDX-FileCopyrightText: Helmholtz-Zentrum Dresden-Rossendorf (HZDR)
+#
+# SPDX-License-Identifier: Apache-2.0
+
+---
+# Path to the executable of HAProxy
+haproxy_executable_path: "/usr/sbin/haproxy"
+# HAProxy PPA version
+haproxy_ppa_version: "ppa:vbernat/haproxy-2.6"
+# HAProxy version
+haproxy_version: "2.6.*"
+# HAProxy user
+haproxy_user: "haproxy"
+# HAProxy group
+haproxy_group: "haproxy"
+# HAProxy dependencies to be installed
+haproxy_dependencies:
+  - "software-properties-common"
+  - "python3-cryptography"
+  - "python3-openssl"
+# Number of processors used by HAProxy
+haproxy_nbproc: "1"
+# Number of threads used by HAProxy
+haproxy_nbthread: "2"
+# HAProxy CPU Map
+haproxy_cpumap: "auto:1/1-2 0-1"
+# HAProxy name
+haproxy_name: "haproxy"
+# HAProxy configuration template
+haproxy_config_template: "haproxy.cfg.j2"
+# HAProxy configuration directory
+haproxy_conf_dir: "/etc/haproxy"
+# HAProxy configuration file path
+haproxy_conf_file_path: "{{ haproxy_conf_dir }}/{{ haproxy_name }}.cfg"
+# HAProxy log socket
+haproxy_log_socket: "/dev/log"
+# Log level of HAProxy, possible values are:
+# emerg, alert, crit, err, warning, notice, info, debug
+haproxy_log_level: "info"
+# HAProxy socket file
+haproxy_socket: "/run/haproxy/admin.sock"
+# HAProxy SSL directory
+haproxy_ssl_certificate_dir: "/etc/haproxy/ssl"
+# Generate a self-signed SSL certificate
+haproxy_create_self_signed_cert: true
+# Country name for SSL certificate
+haproxy_country_name: "DE"
+# State name for SSL certificate
+haproxy_state_or_province_name: "Saxony"
+# Locality name for SSL certificate
+haproxy_locality_name: "Dresden"
+# Organization name for SSL certificate
+haproxy_organization_name: "Helmholtz-Zentrum Dresden-Rossendorf (HZDR)"
+# Organization unit name for SSL certificate
+haproxy_organizational_unit_name: "FWCC / Computational Science"
+# Email address for SSL certificate
+haproxy_email_address: "hifis-help@hzdr.de"
+# Name for SSL certificate
+haproxy_common_name: "Helmholtz Association"
+# HAProxy Private Key file
+haproxy_ssl_certificate_key_file: "{{ haproxy_ssl_certificate_dir }}/haproxy.key"
+# HAProxy Certificate Signing Request file
+haproxy_ssl_certificate_csr_file: "{{ haproxy_ssl_certificate_dir }}/haproxy.csr"
+# HAProxy Certificate file
+haproxy_ssl_certificate_crt_file: "{{ haproxy_ssl_certificate_dir }}/haproxy.crt"
+# HAProxy Certificate pkcs12 file
+haproxy_ssl_certificate_pkcs12_file: "{{ haproxy_ssl_certificate_dir }}/haproxy.p12"
+# HAProxy Certificate Chain file
+haproxy_ssl_certificate_chain_file: "{{ haproxy_ssl_certificate_dir }}/haproxy.pem"
+# HAProxy DH Parameter file
+haproxy_ssl_dhparam_file: "{{ haproxy_ssl_certificate_dir }}/dhparam.pem"
+# Size in bits of generated DH-params
+haproxy_ssl_dhparam_size: 4096
+# Enable/disable stats
+haproxy_stats_enable: "enable"
+# Stats admin user name
+haproxy_stats_admin_user: "admin"
+# Stats admin user password
+haproxy_stats_admin_user_password: "changeme"
+
+...
