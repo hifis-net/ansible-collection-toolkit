@@ -10,7 +10,7 @@
   block:
 
     - name: "Install | Install EPEL repo"
-      ansible.builtin.yum:
+      ansible.builtin.dnf:
         name: "epel-release"
         state: "present"
 
