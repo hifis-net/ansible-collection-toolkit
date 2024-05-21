@@ -4,7 +4,7 @@
 # SPDX-License-Identifier: Apache-2.0
 
 ---
-name: "hifis.keepalived"
+name: "hifis.toolkit.keepalived"
 
 on:
   pull_request:

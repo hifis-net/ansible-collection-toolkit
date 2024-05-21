@@ -18,7 +18,7 @@ jobs:
 
   ansible-lint:
     name: "Ansible Lint"
-    runs-on: "ubuntu-22.04"
+    runs-on: "ubuntu-24.04"
     steps:
       - name: "Check out the codebase."
         uses: "actions/checkout@v4"
