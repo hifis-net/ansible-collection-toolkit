@@ -1,0 +1,31 @@
+# SPDX-FileCopyrightText: Helmholtz Centre for Environmental Research (UFZ)
+# SPDX-FileCopyrightText: Helmholtz-Zentrum Dresden-Rossendorf (HZDR)
+#
+# SPDX-License-Identifier: Apache-2.0
+
+---
+
+- name: "Generate netplan networking"
+  become: true
+  ansible.builtin.command:
+    cmd: "netplan generate"
+  changed_when: true
+
+- name: "Apply netplan networking"
+  become: true
+  ansible.builtin.command:
+    cmd: "netplan apply"
+  changed_when: true
+
+- name: "Gather network facts"
+  become: true
+  ansible.builtin.setup:
+    gather_subset:
+      - "network"
+
+- name: "Reboot managed node"
+  become: true
+  ansible.builtin.reboot:
+    reboot_timeout: 300
+
+...

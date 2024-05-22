@@ -1,0 +1,69 @@
+# SPDX-FileCopyrightText: Helmholtz Centre for Environmental Research (UFZ)
+# SPDX-FileCopyrightText: Helmholtz-Zentrum Dresden-Rossendorf (HZDR)
+#
+# SPDX-License-Identifier: Apache-2.0
+
+---
+name: "hifis.toolkit.netplan"
+
+on:
+  pull_request:
+    paths:
+      - '.github/workflows/netplan.yml'
+      - 'roles/netplan/**'
+      - 'molecule/netplan/**'
+      - 'Pipfile'
+      - 'Pipfile.lock'
+  push:
+    branches:
+      - "main"
+    tags:
+      - "v*.*.*"
+    paths:
+      - '.github/workflows/netplan.yml'
+      - 'roles/netplan/**'
+      - 'molecule/netplan/**'
+      - 'Pipfile'
+      - 'Pipfile.lock'
+  schedule:
+    - cron: "0 0 * * *"
+
+jobs:
+
+  test:
+    name: "Run Molecule tests."
+    runs-on: "ubuntu-24.04"
+    env:
+      PY_COLORS: 1
+      ANSIBLE_FORCE_COLOR: 1
+    strategy:
+      fail-fast: false
+      matrix:
+        image:
+          - "ghcr.io/hifis-net/ubuntu-systemd:20.04"
+          - "ghcr.io/hifis-net/ubuntu-systemd:22.04"
+
+    steps:
+      - name: "Check out the codebase."
+        uses: "actions/checkout@v4"
+        with:
+          path: "ansible_collections/hifis/toolkit"
+
+      - name: "Prepare the job environment."
+        uses: "./ansible_collections/hifis/toolkit/.github/workflows/prepare-action"
+
+      # https://github.com/ansible/molecule/issues/3806
+      - name: "Help molecule to find the dependencies"
+        run: |
+          mkdir -p /home/runner/.ansible
+          ln -s /home/runner/work/ansible-collection-toolkit/ansible-collection-toolkit/ansible_collections/hifis/toolkit/roles \
+            /home/runner/.ansible/roles
+
+      - name: "Create Podman network required for testing"
+        run: "podman network create --subnet 10.123.0.0/24 netplan_network"
+
+      - name: "Run Molecule tests."
+        run: "pipenv run molecule test -s netplan"
+        env:
+          MOLECULE_IMAGE: "${{ matrix.image }}"
+        working-directory: "ansible_collections/hifis/toolkit"

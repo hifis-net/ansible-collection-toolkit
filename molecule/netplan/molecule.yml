@@ -1,0 +1,30 @@
+# SPDX-FileCopyrightText: Helmholtz Centre for Environmental Research (UFZ)
+# SPDX-FileCopyrightText: Helmholtz-Zentrum Dresden-Rossendorf (HZDR)
+#
+# SPDX-License-Identifier: Apache-2.0
+
+---
+dependency:
+  name: "galaxy"
+driver:
+  name: "podman"
+platforms:
+  - name: "instancenetplan"
+    image: "${MOLECULE_IMAGE:-ghcr.io/hifis-net/ubuntu-systemd:22.04}"
+    pre_build_image: true
+    override_command: false
+    privileged: true
+    systemd: true
+    tty: true
+    extra_opts:
+      - "--network=netplan_network"
+provisioner:
+  name: "ansible"
+  playbooks:
+    prepare: "prepare.yml"
+    converge: "converge.yml"
+    verify: "verify.yml"
+verifier:
+  name: "ansible"
+
+...

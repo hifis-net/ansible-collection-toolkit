@@ -22,6 +22,12 @@ keepalived:
           - "roles/keepalived/**"
           - "molecule/keepalived/**"
           - ".github/workflows/keepalived.yml"
+netplan:
+  - changed-files:
+      - any-glob-to-any-file:
+          - "roles/netplan/**"
+          - "molecule/netplan/**"
+          - ".github/workflows/netplan.yml"
 ssh_keys:
   - changed-files:
       - any-glob-to-any-file:

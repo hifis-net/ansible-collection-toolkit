@@ -1,0 +1,23 @@
+# SPDX-FileCopyrightText: Helmholtz Centre for Environmental Research (UFZ)
+# SPDX-FileCopyrightText: Helmholtz-Zentrum Dresden-Rossendorf (HZDR)
+#
+# SPDX-License-Identifier: Apache-2.0
+
+---
+# Flag to decide whether all other pre-existing config files should be deleted before applying network settings
+netplan_remove_existing_configs: true
+# Name of netplan configuration file template
+netplan_configuration_file_template: "config.yaml.j2"
+# Directory containing netplan configuration file
+netplan_configuration_dir: "/etc/netplan"
+# Name of netplan configuration file
+netplan_configuration_file: "config.yaml"
+# Path of netplan configuration file
+netplan_configuration_file_path: "{{ (netplan_configuration_dir, netplan_configuration_file) | path_join }}"
+# Packages to be installed
+netplan_packages:
+  - "netplan.io"
+# Package ifupdown network configuration file
+ifupdown_ifstate_file: "/run/network/ifstate"
+
+...
