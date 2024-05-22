@@ -9,6 +9,7 @@ SPDX-License-Identifier: Apache-2.0
 
 [![Latest release](https://img.shields.io/github/v/release/hifis-net/ansible-collection-toolkit)](https://github.com/hifis-net/ansible-collection-toolkit/releases)
 [![hifis.gitlab_runner](https://github.com/hifis-net/ansible-collection-toolkit/actions/workflows/gitlab_runner.yml/badge.svg)](https://github.com/hifis-net/ansible-collection-toolkit/actions/workflows/gitlab_runner.yml)
+[![hifis.haproxy](https://github.com/hifis-net/ansible-collection-toolkit/actions/workflows/haproxy.yml/badge.svg)](https://github.com/hifis-net/ansible-collection-toolkit/actions/workflows/haproxy.yml)
 [![hifis.keepalived](https://github.com/hifis-net/ansible-collection-toolkit/actions/workflows/keepalived.yml/badge.svg)](https://github.com/hifis-net/ansible-collection-toolkit/actions/workflows/keepalived.yml)
 [![hifis.ssh_keys](https://github.com/hifis-net/ansible-collection-toolkit/actions/workflows/ssh_keys.yml/badge.svg)](https://github.com/hifis-net/ansible-collection-toolkit/actions/workflows/ssh_keys.yml)
 [![hifis.unattended_upgrades](https://github.com/hifis-net/ansible-collection-toolkit/actions/workflows/unattended_upgrades.yml/badge.svg)](https://github.com/hifis-net/ansible-collection-toolkit/actions/workflows/unattended_upgrades.yml)
@@ -27,7 +28,7 @@ software engineers, but not exclusively. The following use cases are supported:
 * Help desk:
     * [**Zammad**](roles/zammad)
 * High Availability (HA) / Load Balancing:
-    * [HAProxy](https://github.com/hifis-net/ansible-role-haproxy) (**coming soon!**)
+    * [**HAProxy**](roles/haproxy)
     * [**Keepalived**](roles/keepalived)
 * OS-related:
     * [**unattended-upgrades**](roles/unattended_upgrades)

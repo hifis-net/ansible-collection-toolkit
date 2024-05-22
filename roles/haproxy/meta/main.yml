@@ -1,0 +1,37 @@
+# SPDX-FileCopyrightText: Helmholtz Centre for Environmental Research (UFZ)
+# SPDX-FileCopyrightText: Helmholtz-Zentrum Dresden-Rossendorf (HZDR)
+#
+# SPDX-License-Identifier: Apache-2.0
+
+---
+galaxy_info:
+  role_name: "haproxy"
+  namespace: "hifis"
+  author: "HIFIS Software Team"
+  description: "Install and configure HAProxy to be used for load-balancing in a high availability and scalability context."
+  company: "Helmholtz Association"
+
+  issue_tracker_url: "https://github.com/hifis-net/ansible-collection-toolkit/issues"
+
+  license: "Apache-2.0"
+  min_ansible_version: "2.14"
+
+  platforms:
+    - name: "Ubuntu"
+      versions:
+        - "focal"
+        - "jammy"
+
+  galaxy_tags:
+    - "haproxy"
+    - "loadbalancer"
+    - "networking"
+    - "web"
+
+collections:
+  - "community.crypto"
+  - "ansible.posix"
+
+dependencies: []
+
+...

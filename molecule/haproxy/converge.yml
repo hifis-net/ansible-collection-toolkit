@@ -1,0 +1,19 @@
+# SPDX-FileCopyrightText: Helmholtz Centre for Environmental Research (UFZ)
+# SPDX-FileCopyrightText: Helmholtz-Zentrum Dresden-Rossendorf (HZDR)
+#
+# SPDX-License-Identifier: Apache-2.0
+
+---
+- name: "Converge"
+  hosts: "all"
+  tasks:
+    - name: "Include haproxy_role"
+      ansible.builtin.include_role:
+        name: "hifis.toolkit.haproxy"
+  vars:
+    haproxy_frontend_ip: "192.168.33.100"
+    haproxy_backends:
+      - backend_name: "backend_server_1"
+        backend_ip: "192.168.33.10"
+
+...

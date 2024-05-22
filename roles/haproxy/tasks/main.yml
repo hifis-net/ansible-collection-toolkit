@@ -1,0 +1,213 @@
+# SPDX-FileCopyrightText: Helmholtz Centre for Environmental Research (UFZ)
+# SPDX-FileCopyrightText: Helmholtz-Zentrum Dresden-Rossendorf (HZDR)
+#
+# SPDX-License-Identifier: Apache-2.0
+
+---
+- name: "Check that all mandatory variables are defined."
+  ansible.builtin.assert:
+    that:
+      - "haproxy_backends is defined"
+      - "haproxy_frontend_ip is defined"
+      - "haproxy_create_self_signed_cert or haproxy_ssl_cert_chain_src_file_path is defined"
+    fail_msg: "Some mandatory variables are not set."
+    success_msg: "All mandatory variables are set."
+  when: "haproxy_config_template == 'haproxy.cfg.j2'"
+
+- name: "Enable ip_forward."
+  become: true
+  ansible.posix.sysctl:
+    name: "net.ipv4.ip_forward"
+    value: "1"
+    state: "present"
+    sysctl_set: true
+    reload: true
+
+- name: "Enable ip_nonlocal_bind."
+  become: true
+  ansible.posix.sysctl:
+    name: "net.ipv4.ip_nonlocal_bind"
+    value: "1"
+    state: "present"
+    sysctl_set: true
+    reload: true
+
+- name: "Install dependencies of HAProxy."
+  become: true
+  ansible.builtin.package:
+    name: "{{ haproxy_dependencies }}"
+    state: "present"
+    update_cache: true
+
+- name: "Add PPA for HAProxy"
+  become: true
+  ansible.builtin.apt_repository:
+    repo: "{{ haproxy_ppa_version }}"
+    state: "present"
+    validate_certs: true
+    mode: "0644"
+  register: "ppa"
+  when: "haproxy_ppa_version | length > 0"
+
+- name: "Check whether wildcard character is contained in version string."
+  ansible.builtin.set_fact:
+    version_contains_wildcard: "{{ '*' in haproxy_version }}"
+
+- name: "Check whether HAProxy binary is installed."
+  ansible.builtin.stat:
+    path: "{{ haproxy_executable_path }}"
+  register: "haproxy_installed"
+
+- name: "Check currently installed HAProxy version"
+  when: "not version_contains_wildcard and haproxy_installed.stat.exists"
+  block:
+    - name: "Get HAProxy version."
+      ansible.builtin.command:
+        cmd: "{{ haproxy_executable_path }} -v"
+      register: "haproxy_version_installed"
+      changed_when: false
+      check_mode: false
+
+    - name: "Extract installed and target HAProxy versions."
+      ansible.builtin.set_fact:
+        installed_version: "{{ haproxy_version_installed |
+                               regex_search('HA-?Proxy version (\\d+\\.\\d+\\.\\d+)', '\\1') |
+                               default([None], True) |
+                               first }}"
+        target_version: "{{ haproxy_version |
+                            regex_search('^(\\d+\\.\\d+\\.\\d+)', '\\1') |
+                            default([None], True) |
+                            first }}"
+
+- name: "Determine if errors in check mode can be ignored"
+  ansible.builtin.set_fact:
+    ignore_errors_in_check_mode: "{{ ansible_check_mode and ppa.changed }}"
+
+- name: "Install and configure HAProxy"
+  ignore_errors: "{{ ignore_errors_in_check_mode }}"  # noqa ignore-errors
+  block:
+
+    - name: "Install or upgrade haproxy package."
+      become: true
+      ansible.builtin.package:
+        name: "{{ haproxy_name }}={{ haproxy_version }}"
+        update_cache: true
+      when: "version_contains_wildcard or
+            not haproxy_installed.stat.exists or
+            installed_version is version(target_version, operator='lt', strict=True)"
+
+    - name: "Create HAProxy Configuration Directory."
+      become: true
+      ansible.builtin.file:
+        path: "{{ haproxy_conf_dir }}"
+        state: "directory"
+        owner: "{{ haproxy_user }}"
+        group: "{{ haproxy_group }}"
+        mode: "0750"
+
+    - name: "Create HAProxy Configuration File."
+      become: true
+      ansible.builtin.template:
+        src: "{{ haproxy_config_template }}"
+        dest: "{{ haproxy_conf_file_path }}"
+        owner: "{{ haproxy_user }}"
+        group: "{{ haproxy_group }}"
+        mode: "0640"
+      notify:
+        - "Check HAProxy configuration file"
+        - "Reload HAProxy"
+
+    - name: "Create HAProxy SSL Directory."
+      become: true
+      ansible.builtin.file:
+        path: "{{ haproxy_ssl_certificate_dir }}"
+        state: "directory"
+        owner: "{{ haproxy_user }}"
+        group: "{{ haproxy_group }}"
+        mode: "0750"
+
+- name: "Generate self-signed TLS certificate"
+  when: "haproxy_create_self_signed_cert | bool"
+  ignore_errors: "{{ ignore_errors_in_check_mode }}"  # noqa ignore-errors
+  block:
+    - name: "Generate an OpenSSL Private Key (4096 bits)"
+      become: true
+      community.crypto.openssl_privatekey:
+        path: "{{ haproxy_ssl_certificate_key_file }}"
+        size: "4096"
+        type: "RSA"
+
+    - name: "Generate an OpenSSL Certificate Signing Request"
+      become: true
+      community.crypto.openssl_csr:
+        path: "{{ haproxy_ssl_certificate_csr_file }}"
+        privatekey_path: "{{ haproxy_ssl_certificate_key_file }}"
+        country_name: "{{ haproxy_country_name }}"
+        state_or_province_name: "{{ haproxy_state_or_province_name }}"
+        locality_name: "{{ haproxy_locality_name }}"
+        organization_name: "{{ haproxy_organization_name }}"
+        organizational_unit_name: "{{ haproxy_organizational_unit_name }}"
+        email_address: "{{ haproxy_email_address }}"
+        common_name: "{{ haproxy_common_name }}"
+
+    - name: "Generate a Self Signed OpenSSL certificate"
+      become: true
+      community.crypto.x509_certificate:
+        path: "{{ haproxy_ssl_certificate_crt_file }}"
+        privatekey_path: "{{ haproxy_ssl_certificate_key_file }}"
+        csr_path: "{{ haproxy_ssl_certificate_csr_file }}"
+        provider: "selfsigned"
+
+    - name: "Generate PKCS12 file"
+      become: true
+      community.crypto.openssl_pkcs12:
+        action: "export"
+        path: "{{ haproxy_ssl_certificate_pkcs12_file }}"
+        certificate_path: "{{ haproxy_ssl_certificate_crt_file }}"
+        privatekey_path: "{{ haproxy_ssl_certificate_key_file }}"
+        state: "present"
+        friendly_name: "pkcs12_file"
+      notify:
+        - "Check HAProxy configuration file"
+        - "Reload HAProxy"
+
+    - name: "Parse PKCS12 file"
+      become: true
+      community.crypto.openssl_pkcs12:
+        action: "parse"
+        src: "{{ haproxy_ssl_certificate_pkcs12_file }}"
+        path: "{{ haproxy_ssl_certificate_chain_file }}"
+        state: "present"
+        mode: "0640"
+        owner: "root"
+        group: "{{ haproxy_group }}"
+      notify:
+        - "Check HAProxy configuration file"
+        - "Reload HAProxy"
+
+- name: "Copy TLS Pem file for HAProxy."
+  when: "not haproxy_create_self_signed_cert | bool"
+  ansible.builtin.copy:
+    src: "{{ haproxy_ssl_cert_chain_src_file_path }}"
+    dest: "{{ haproxy_ssl_certificate_chain_file }}"
+    mode: "0640"
+    owner: "root"
+    group: "{{ haproxy_group }}"
+  notify:
+    - "Check HAProxy configuration file"
+    - "Reload HAProxy"
+
+- name: "Generate DH Parameter file"
+  ignore_errors: "{{ ignore_errors_in_check_mode }}"  # noqa ignore-errors
+  become: true
+  community.crypto.openssl_dhparam:
+    path: "{{ haproxy_ssl_dhparam_file }}"
+    size: "{{ haproxy_ssl_dhparam_size }}"
+    mode: "0640"
+    owner: "root"
+    group: "{{ haproxy_group }}"
+  notify:
+    - "Check HAProxy configuration file"
+    - "Reload HAProxy"
+
+...
