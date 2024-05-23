@@ -24,6 +24,7 @@
 
 **Merged pull requests:**
 
+- Prepare release version 4.2.0 [\#249](https://github.com/hifis-net/ansible-collection-toolkit/pull/249) ([Normo](https://github.com/Normo))
 - Add hifis.gitlab role [\#241](https://github.com/hifis-net/ansible-collection-toolkit/pull/241) [[gitlab](https://github.com/hifis-net/ansible-collection-toolkit/labels/gitlab)] ([Normo](https://github.com/Normo))
 - Use jinja style comments for license headers in jinja templates [\#239](https://github.com/hifis-net/ansible-collection-toolkit/pull/239) [[unattended_upgrades](https://github.com/hifis-net/ansible-collection-toolkit/labels/unattended_upgrades)] [[zammad](https://github.com/hifis-net/ansible-collection-toolkit/labels/zammad)] [[gitlab_runner](https://github.com/hifis-net/ansible-collection-toolkit/labels/gitlab_runner)] [[keepalived](https://github.com/hifis-net/ansible-collection-toolkit/labels/keepalived)] ([Normo](https://github.com/Normo))
 - Switch to Ubuntu 24.04 image for GitHub Actions hosted runners [\#238](https://github.com/hifis-net/ansible-collection-toolkit/pull/238) [[unattended_upgrades](https://github.com/hifis-net/ansible-collection-toolkit/labels/unattended_upgrades)] [[zammad](https://github.com/hifis-net/ansible-collection-toolkit/labels/zammad)] [[ssh_keys](https://github.com/hifis-net/ansible-collection-toolkit/labels/ssh_keys)] [[keepalived](https://github.com/hifis-net/ansible-collection-toolkit/labels/keepalived)] ([Normo](https://github.com/Normo))
