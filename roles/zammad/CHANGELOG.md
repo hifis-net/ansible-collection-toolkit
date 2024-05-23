@@ -7,6 +7,14 @@ SPDX-License-Identifier: MIT
 
 # Changelog
 
+## [v2.1.1](https://github.com/hifis-net/ansible-role-zammad/tree/v2.1.1) (2024-05-23)
+
+[Full Changelog](https://github.com/hifis-net/ansible-role-zammad/compare/v2.1.0...v2.1.1)
+
+**Fixed bugs:**
+
+- Fix randomly failing CI jobs [\#47](https://github.com/hifis-net/ansible-role-zammad/issues/47)
+
 ## [v2.1.0](https://github.com/hifis-net/ansible-role-zammad/tree/v2.1.0) (2024-03-14)
 
 [Full Changelog](https://github.com/hifis-net/ansible-role-zammad/compare/v2.0.0...v2.1.0)

@@ -6,6 +6,23 @@ SPDX-License-Identifier: Apache-2.0
 -->
 # Changelog
 
+## [v0.5.1](https://github.com/hifis-net/ansible-role-netplan/tree/v0.5.1) (2024-05-22)
+
+[Full Changelog](https://github.com/hifis-net/ansible-role-netplan/compare/v0.5.0...v0.5.1)
+
+**Merged pull requests:**
+
+- chore\(deps-dev\): bump netaddr from 0.10.1 to 1.0.0 [\#119](https://github.com/hifis-net/ansible-role-netplan/pull/119) ([dependabot[bot]](https://github.com/apps/dependabot))
+- chore\(deps-dev\): bump molecule from 6.0.3 to 24.2.0 [\#118](https://github.com/hifis-net/ansible-role-netplan/pull/118) ([dependabot[bot]](https://github.com/apps/dependabot))
+- chore\(deps-dev\): bump ansible-lint from 6.22.2 to 24.2.0 [\#116](https://github.com/hifis-net/ansible-role-netplan/pull/116) ([dependabot[bot]](https://github.com/apps/dependabot))
+- chore\(deps-dev\): bump yamllint from 1.33.0 to 1.34.0 [\#115](https://github.com/hifis-net/ansible-role-netplan/pull/115) ([dependabot[bot]](https://github.com/apps/dependabot))
+- chore\(deps\): bump ansible from 9.1.0 to 9.2.0 [\#114](https://github.com/hifis-net/ansible-role-netplan/pull/114) ([dependabot[bot]](https://github.com/apps/dependabot))
+- chore\(deps-dev\): bump reuse from 3.0.0 to 3.0.1 [\#111](https://github.com/hifis-net/ansible-role-netplan/pull/111) ([dependabot[bot]](https://github.com/apps/dependabot))
+- chore\(deps-dev\): bump reuse from 2.1.0 to 3.0.0 [\#110](https://github.com/hifis-net/ansible-role-netplan/pull/110) ([dependabot[bot]](https://github.com/apps/dependabot))
+- chore\(deps-dev\): bump ansible-lint from 6.22.1 to 6.22.2 [\#109](https://github.com/hifis-net/ansible-role-netplan/pull/109) ([dependabot[bot]](https://github.com/apps/dependabot))
+- Bump netaddr from 0.9.0 to 0.10.1 [\#108](https://github.com/hifis-net/ansible-role-netplan/pull/108) ([dependabot[bot]](https://github.com/apps/dependabot))
+- Bump molecule from 6.0.2 to 6.0.3 [\#106](https://github.com/hifis-net/ansible-role-netplan/pull/106) ([dependabot[bot]](https://github.com/apps/dependabot))
+
 ## [v0.5.0](https://github.com/hifis-net/ansible-role-netplan/tree/v0.5.0) (2023-12-13)
 
 [Full Changelog](https://github.com/hifis-net/ansible-role-netplan/compare/v0.4.0...v0.5.0)

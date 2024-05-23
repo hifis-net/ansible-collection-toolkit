@@ -7,6 +7,23 @@ SPDX-License-Identifier: Apache-2.0
 
 # Changelog
 
+## [v1.2.1](https://github.com/hifis-net/ansible-role-keepalived/tree/v1.2.1) (2024-05-22)
+
+[Full Changelog](https://github.com/hifis-net/ansible-role-keepalived/compare/v1.2.0...v1.2.1)
+
+**Merged pull requests:**
+
+- Bump yamllint from 1.34.0 to 1.35.1 [\#93](https://github.com/hifis-net/ansible-role-keepalived/pull/93) ([dependabot[bot]](https://github.com/apps/dependabot))
+- Bump molecule from 6.0.3 to 24.2.0 [\#91](https://github.com/hifis-net/ansible-role-keepalived/pull/91) ([dependabot[bot]](https://github.com/apps/dependabot))
+- Bump molecule-plugins from 23.5.0 to 23.5.3 [\#90](https://github.com/hifis-net/ansible-role-keepalived/pull/90) ([dependabot[bot]](https://github.com/apps/dependabot))
+- Bump ansible-lint from 6.22.2 to 24.2.0 [\#89](https://github.com/hifis-net/ansible-role-keepalived/pull/89) ([dependabot[bot]](https://github.com/apps/dependabot))
+- Bump yamllint from 1.33.0 to 1.34.0 [\#88](https://github.com/hifis-net/ansible-role-keepalived/pull/88) ([dependabot[bot]](https://github.com/apps/dependabot))
+- Bump ansible from 9.1.0 to 9.2.0 [\#87](https://github.com/hifis-net/ansible-role-keepalived/pull/87) ([dependabot[bot]](https://github.com/apps/dependabot))
+- Bump reuse from 3.0.0 to 3.0.1 [\#86](https://github.com/hifis-net/ansible-role-keepalived/pull/86) ([dependabot[bot]](https://github.com/apps/dependabot))
+- Bump ansible-lint from 6.22.1 to 6.22.2 [\#85](https://github.com/hifis-net/ansible-role-keepalived/pull/85) ([dependabot[bot]](https://github.com/apps/dependabot))
+- Bump reuse from 2.1.0 to 3.0.0 [\#84](https://github.com/hifis-net/ansible-role-keepalived/pull/84) ([dependabot[bot]](https://github.com/apps/dependabot))
+- Bump molecule from 6.0.2 to 6.0.3 [\#83](https://github.com/hifis-net/ansible-role-keepalived/pull/83) ([dependabot[bot]](https://github.com/apps/dependabot))
+
 ## [v1.2.0](https://github.com/hifis-net/ansible-role-keepalived/tree/v1.2.0) (2023-12-13)
 
 [Full Changelog](https://github.com/hifis-net/ansible-role-keepalived/compare/v1.1.1...v1.2.0)

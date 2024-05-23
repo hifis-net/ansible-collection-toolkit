@@ -7,6 +7,24 @@ SPDX-License-Identifier: Apache-2.0
 
 # Changelog
 
+## [v2.2.1](https://github.com/hifis-net/ansible-role-haproxy/tree/v2.2.1) (2024-05-22)
+
+[Full Changelog](https://github.com/hifis-net/ansible-role-haproxy/compare/v2.2.0...v2.2.1)
+
+**Merged pull requests:**
+
+- chore\(deps-dev\): bump molecule-plugins from 23.5.0 to 23.5.3 [\#142](https://github.com/hifis-net/ansible-role-haproxy/pull/142) ([dependabot[bot]](https://github.com/apps/dependabot))
+- chore\(deps-dev\): bump molecule from 6.0.3 to 24.2.0 [\#141](https://github.com/hifis-net/ansible-role-haproxy/pull/141) ([dependabot[bot]](https://github.com/apps/dependabot))
+- chore\(deps-dev\): bump ansible-lint from 6.22.2 to 24.2.0 [\#140](https://github.com/hifis-net/ansible-role-haproxy/pull/140) ([dependabot[bot]](https://github.com/apps/dependabot))
+- chore\(deps-dev\): bump yamllint from 1.33.0 to 1.34.0 [\#139](https://github.com/hifis-net/ansible-role-haproxy/pull/139) ([dependabot[bot]](https://github.com/apps/dependabot))
+- chore\(deps\): bump ansible from 9.1.0 to 9.2.0 [\#138](https://github.com/hifis-net/ansible-role-haproxy/pull/138) ([dependabot[bot]](https://github.com/apps/dependabot))
+- chore\(deps-dev\): bump reuse from 3.0.0 to 3.0.1 [\#137](https://github.com/hifis-net/ansible-role-haproxy/pull/137) ([dependabot[bot]](https://github.com/apps/dependabot))
+- chore\(deps-dev\): bump ansible-lint from 6.22.1 to 6.22.2 [\#136](https://github.com/hifis-net/ansible-role-haproxy/pull/136) ([dependabot[bot]](https://github.com/apps/dependabot))
+- chore\(deps-dev\): bump reuse from 2.1.0 to 3.0.0 [\#135](https://github.com/hifis-net/ansible-role-haproxy/pull/135) ([dependabot[bot]](https://github.com/apps/dependabot))
+- chore\(deps-dev\): bump molecule from 6.0.2 to 6.0.3 [\#134](https://github.com/hifis-net/ansible-role-haproxy/pull/134) ([dependabot[bot]](https://github.com/apps/dependabot))
+- chore\(deps\): bump ansible from 9.0.1 to 9.1.0 [\#133](https://github.com/hifis-net/ansible-role-haproxy/pull/133) ([dependabot[bot]](https://github.com/apps/dependabot))
+- chore\(deps-dev\): bump ansible-lint from 6.22.0 to 6.22.1 [\#132](https://github.com/hifis-net/ansible-role-haproxy/pull/132) ([dependabot[bot]](https://github.com/apps/dependabot))
+
 ## [v2.2.0](https://github.com/hifis-net/ansible-role-haproxy/tree/v2.2.0) (2023-11-29)
 
 [Full Changelog](https://github.com/hifis-net/ansible-role-haproxy/compare/v2.1.0...v2.2.0)
