@@ -1,0 +1,61 @@
+# SPDX-FileCopyrightText: Helmholtz Centre for Environmental Research (UFZ)
+# SPDX-FileCopyrightText: Helmholtz-Zentrum Dresden-Rossendorf (HZDR)
+#
+# SPDX-License-Identifier: Apache-2.0
+
+---
+- name: "Verify"
+  hosts: "all"
+  tasks:
+    - name: "Gather package facts"
+      ansible.builtin.package_facts:
+        manager: "auto"
+
+    - name: "Assert that GitLab Omnibus package is installed"
+      ansible.builtin.assert:
+        that:
+          - "'{{ gitlab_edition }}' in ansible_facts.packages"
+      when:
+        - "gitlab_edition is defined"
+
+    - name: "Assert that installed GitLab version is equal to the desired one"
+      ansible.builtin.assert:
+        that:
+          - "ansible_facts.packages['{{ gitlab_edition }}'][0].version == gitlab_version"
+          - "ansible_facts.packages['{{ gitlab_edition }}'][0].release == gitlab_release"
+      when:
+        - "gitlab_edition is defined"
+        - "gitlab_version is defined"
+        - "gitlab_release is defined"
+
+    - name: "Check GitLab Health endpoint"
+      ansible.builtin.uri:
+        url: "http://localhost/-/health"
+      register: "health_check"
+      failed_when: "'OK' not in health_check.msg or health_check.status != 200"
+
+    - name: "Check GitLab Readiness endpoint"
+      ansible.builtin.uri:
+        url: "http://localhost/-/readiness?all=1"
+      register: "readiness_check"
+      failed_when: "readiness_check.status == 503"
+
+    - name: "Check GitLab Liveness endpoint"
+      ansible.builtin.uri:
+        url: "http://localhost/-/liveness"
+      register: "liveness_check"
+      failed_when: "liveness_check.status == 503"
+
+    - name: "Check the output of gitlab status"
+      ansible.builtin.command: "gitlab-ctl status"
+      register: "gitlab_ctl_status"
+      changed_when: "gitlab_ctl_status.rc != 0"
+      failed_when: "gitlab_ctl_status.rc != 0"
+
+    - name: "Check GitLab configuration via Rake task"
+      ansible.builtin.command: "gitlab-rake gitlab:check"
+      register: "gitlab_rake_check"
+      changed_when: "gitlab_rake_check.rc != 0"
+      failed_when: "gitlab_rake_check.rc != 0"
+
+...

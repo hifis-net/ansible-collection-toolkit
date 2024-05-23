@@ -1,0 +1,156 @@
+# SPDX-FileCopyrightText: Helmholtz Centre for Environmental Research (UFZ)
+# SPDX-FileCopyrightText: Helmholtz-Zentrum Dresden-Rossendorf (HZDR)
+#
+# SPDX-License-Identifier: Apache-2.0
+
+---
+
+- name: "Install GitLab Dependencies"
+  become: true
+  ansible.builtin.package:
+    name: "{{ gitlab_dependencies }}"
+    state: "present"
+
+- name: "Prepare Debian GitLab installation"
+  when: "ansible_facts.os_family == 'Debian'"
+  block:
+    - name: "Install APT GPG key"
+      ansible.builtin.apt_key:
+        url: "{{ gitlab_gpg_key_url }}"
+        id: "{{ gitlab_gpg_key_id }}"
+        state: "present"
+      when: "not gitlab_is_initial_dryrun"
+
+    - name: "Add GitLab APT repository"
+      ansible.builtin.apt_repository:
+        repo: "deb {{ gitlab_repo_url }} {{ ansible_facts.distribution_release }} main"
+        state: "present"
+        filename: "gitlab_{{ gitlab_edition }}"
+        mode: "0644"
+
+    - name: "Add GitLab source APT repository"
+      ansible.builtin.apt_repository:
+        repo: "deb-src {{ gitlab_repo_url }} {{ ansible_facts.distribution_release }} main"
+        state: "present"
+        filename: "gitlab_{{ gitlab_edition }}"
+        mode: "0644"
+
+    - name: "Update APT package cache"
+      ansible.builtin.apt:
+        update_cache: true
+        cache_valid_time: 3600
+      register: "gitlab_apt_cache"
+      check_mode: false
+      changed_when:
+        - "gitlab_apt_cache.cache_updated"
+        - "not ansible_check_mode"
+
+- name: "Install GitLab on RedHat Like OS"
+  when: "ansible_facts.os_family == 'RedHat'"
+  block:
+    - name: "Add GitLab yum repository"
+      ansible.builtin.yum_repository:
+        name: "gitlab_{{ gitlab_edition }}"
+        description: "GitLab yum repo"
+        baseurl: "{{ gitlab_repo_url }}"
+        state: "present"
+        repo_gpgcheck: true
+        gpgcheck: true
+        enabled: true
+        gpgkey:
+          - "{{ gitlab_gpg_key_url }}"
+          - "{{ gitlab_gpg_key_url }}/gitlab-{{ gitlab_edition }}-3D645A26AB9FBD22.pub.gpg"
+        sslverify: true
+        sslcacert: "/etc/pki/tls/certs/ca-bundle.crt"
+        metadata_expire: "300"
+
+    - name: "Add GitLab source yum repository"
+      ansible.builtin.yum_repository:
+        name: "gitlab_{{ gitlab_edition }}-source"
+        description: "GitLab source yum repo"
+        baseurl: "{{ gitlab_source_repo_url }}"
+        state: "present"
+        repo_gpgcheck: true
+        gpgcheck: true
+        enabled: true
+        gpgkey:
+          - "{{ gitlab_gpg_key_url }}"
+          - "{{ gitlab_gpg_key_url }}/gitlab-{{ gitlab_edition }}-3D645A26AB9FBD22.pub.gpg"
+        sslverify: true
+        sslcacert: "/etc/pki/tls/certs/ca-bundle.crt"
+        metadata_expire: "300"
+
+    - name: "Update yum package cache"
+      ansible.builtin.dnf:
+        update_cache: true
+      check_mode: false
+
+- name: "Check if VERSION file exists"
+  ansible.builtin.stat:
+    path: "/var/opt/gitlab/gitlab-rails/VERSION"
+  register: "gitlab_version_file"
+
+- name: "Wait for background migrations on primary node"
+  when:
+    - "gitlab_is_primary"
+    - "gitlab_version_file.stat.exists"
+    - "gitlab_rails_binary.stat.exists"
+    - "gitlab_rails_binary.stat.executable"
+  block:
+    - name: "Get the currently installed GitLab version"
+      ansible.builtin.slurp:
+        path: "/var/opt/gitlab/gitlab-rails/VERSION"
+      register: "gitlab_version_base64"
+
+    - name: "Set fact about installed GitLab version"
+      ansible.builtin.set_fact:
+        gitlab_installed_version: "{{ gitlab_version_base64['content'] | b64decode }}"
+      check_mode: false
+
+    - name: "Wait until all previous background migrations are processed."
+      become: true
+      ansible.builtin.command:
+        cmd: "gitlab-rails runner -e production 'puts Gitlab::BackgroundMigration.remaining'"
+      register: "remaining"
+      until: "remaining.stdout == '0'"
+      retries: 10
+      delay: 10
+      check_mode: false
+      changed_when: false
+      when: "gitlab_version == '' or gitlab_installed_version is version(gitlab_version, operator='lt', strict=True)"
+
+- name: "Install GitLab and add helper to detect failed reconfigures"
+  block:
+
+    - name: "Install or upgrade GitLab."
+      become: true
+      ansible.builtin.package:
+        name: "{{ gitlab_package_name }}"
+        state: "{{ 'present' if gitlab_version | length > 0 else 'latest' }}"
+      register: "gitlab_install_output"
+      notify: "GitLab has been installed or upgraded"
+      when: "not gitlab_is_initial_dryrun"
+
+  rescue:
+
+    - name: "Ensure GitLab directory exists"
+      ansible.builtin.file:
+        path: "/etc/gitlab"
+        state: "directory"
+        owner: "root"
+        group: "root"
+        mode: "0775"
+
+    - name: "Create file to detect a failed reconfigure"
+      ansible.builtin.copy:
+        content: "This file is managed by Ansible."
+        dest: "/etc/gitlab/reconfigure_failed"
+        force: false
+        owner: "root"
+        group: "root"
+        mode: "0644"
+
+    - name: "Stop role execution due to failed package installation"
+      ansible.builtin.fail:
+
+...

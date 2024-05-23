@@ -1,0 +1,51 @@
+# SPDX-FileCopyrightText: Helmholtz Centre for Environmental Research (UFZ)
+# SPDX-FileCopyrightText: Helmholtz-Zentrum Dresden-Rossendorf (HZDR)
+#
+# SPDX-License-Identifier: Apache-2.0
+
+---
+
+- name: "GitLab has been installed or upgraded"
+  become: true
+  ansible.builtin.set_fact:
+    gitlab_is_upgraded: true
+
+- name: "Reconfigure Primary GitLab"
+  become: true
+  ansible.builtin.shell:
+    cmd: "gitlab-ctl reconfigure || (touch /etc/gitlab/reconfigure_failed && /bin/false)"
+  changed_when: true
+  environment:
+    SKIP_POST_DEPLOYMENT_MIGRATIONS: true
+  listen: "GitLab has been installed or upgraded"
+  when: "gitlab_is_primary"
+
+- name: "Reconfigure Non Primary GitLab"
+  become: true
+  ansible.builtin.shell:
+    cmd: "gitlab-ctl reconfigure || (touch /etc/gitlab/reconfigure_failed && /bin/false)"
+  changed_when: true
+  listen: "GitLab has been installed or upgraded"
+  when: "not gitlab_is_primary"
+
+- name: "Restart GitLab"
+  become: true
+  ansible.builtin.command: "gitlab-ctl restart"
+  changed_when: true
+  register: "gitlab_restart"
+
+- name: "Send SIGHUP to puma worker"
+  become: true
+  ansible.builtin.command: "gitlab-ctl hup puma"
+  changed_when: true
+  listen: "GitLab has been installed or upgraded"
+  when: "not gitlab_mattermost_only_context"
+
+- name: "Restart sidekiq"
+  become: true
+  ansible.builtin.command: "gitlab-ctl restart sidekiq"
+  changed_when: true
+  listen: "GitLab has been installed or upgraded"
+  when: "not gitlab_mattermost_only_context"
+
+...
