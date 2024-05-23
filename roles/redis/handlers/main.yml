@@ -1,0 +1,39 @@
+# SPDX-FileCopyrightText: Helmholtz Centre for Environmental Research (UFZ)
+# SPDX-FileCopyrightText: Helmholtz-Zentrum Dresden-Rossendorf (HZDR)
+#
+# SPDX-License-Identifier: Apache-2.0
+
+---
+- name: "Remove auto-generated Redis config section"
+  become: true
+  ansible.builtin.replace:
+    path: "{{ redis_server_configuration_file }}"
+    after: "# END ANSIBLE MANAGED BLOCK"
+    regexp: "^.*$"
+    replace: ""
+  when: "not is_initial_dryrun"
+
+- name: "Remove auto-generated Sentinel config section"
+  become: true
+  ansible.builtin.replace:
+    path: "{{ redis_sentinel_configuration_file }}"
+    after: "# END ANSIBLE MANAGED BLOCK"
+    regexp: "^.*$"
+    replace: ""
+  when: "not is_initial_dryrun"
+
+- name: "Restart Redis Server"
+  become: true
+  ansible.builtin.service:
+    name: "{{ redis_server_service_name }}"
+    state: "restarted"
+  when: "not is_initial_dryrun"
+
+- name: "Restart Redis Sentinel"
+  become: true
+  ansible.builtin.service:
+    name: "{{ redis_sentinel_service_name }}"
+    state: "restarted"
+  when: "not is_initial_dryrun"
+
+...
