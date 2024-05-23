@@ -1,5 +1,37 @@
 # Changelog
 
+## [Unreleased](https://github.com/hifis-net/ansible-collection-toolkit/tree/HEAD)
+
+[Full Changelog](https://github.com/hifis-net/ansible-collection-toolkit/compare/v4.1.0...HEAD)
+
+**Implemented enhancements:**
+
+- Include hifis.gitlab role into collection [\#240](https://github.com/hifis-net/ansible-collection-toolkit/issues/240) [[gitlab](https://github.com/hifis-net/ansible-collection-toolkit/labels/gitlab)]
+- Include hifis.redis role into collection [\#236](https://github.com/hifis-net/ansible-collection-toolkit/issues/236) [[redis](https://github.com/hifis-net/ansible-collection-toolkit/labels/redis)]
+- Include hifis.netplan into collection [\#234](https://github.com/hifis-net/ansible-collection-toolkit/issues/234) [[netplan](https://github.com/hifis-net/ansible-collection-toolkit/labels/netplan)]
+- Include hifis.haproxy into collection [\#228](https://github.com/hifis-net/ansible-collection-toolkit/issues/228) [[haproxy](https://github.com/hifis-net/ansible-collection-toolkit/labels/haproxy)]
+
+**Fixed bugs:**
+
+- Use dnf instead of yum module [\#232](https://github.com/hifis-net/ansible-collection-toolkit/pull/232) [[zammad](https://github.com/hifis-net/ansible-collection-toolkit/labels/zammad)] ([Normo](https://github.com/Normo))
+
+**Closed issues:**
+
+- Remove master branch [\#245](https://github.com/hifis-net/ansible-collection-toolkit/issues/245)
+- Switch to Ubuntu 24.04 image for GitHub Actions hosted runners [\#231](https://github.com/hifis-net/ansible-collection-toolkit/issues/231)
+- License headers in jinja templates should use jinja style comments [\#229](https://github.com/hifis-net/ansible-collection-toolkit/issues/229)
+- Version 3.3.0 doesn't seem to be available on ansible galaxy [\#201](https://github.com/hifis-net/ansible-collection-toolkit/issues/201)
+
+**Merged pull requests:**
+
+- Add hifis.gitlab role [\#241](https://github.com/hifis-net/ansible-collection-toolkit/pull/241) [[gitlab](https://github.com/hifis-net/ansible-collection-toolkit/labels/gitlab)] ([Normo](https://github.com/Normo))
+- Use jinja style comments for license headers in jinja templates [\#239](https://github.com/hifis-net/ansible-collection-toolkit/pull/239) [[unattended_upgrades](https://github.com/hifis-net/ansible-collection-toolkit/labels/unattended_upgrades)] [[zammad](https://github.com/hifis-net/ansible-collection-toolkit/labels/zammad)] [[gitlab_runner](https://github.com/hifis-net/ansible-collection-toolkit/labels/gitlab_runner)] [[keepalived](https://github.com/hifis-net/ansible-collection-toolkit/labels/keepalived)] ([Normo](https://github.com/Normo))
+- Switch to Ubuntu 24.04 image for GitHub Actions hosted runners [\#238](https://github.com/hifis-net/ansible-collection-toolkit/pull/238) [[unattended_upgrades](https://github.com/hifis-net/ansible-collection-toolkit/labels/unattended_upgrades)] [[zammad](https://github.com/hifis-net/ansible-collection-toolkit/labels/zammad)] [[ssh_keys](https://github.com/hifis-net/ansible-collection-toolkit/labels/ssh_keys)] [[keepalived](https://github.com/hifis-net/ansible-collection-toolkit/labels/keepalived)] ([Normo](https://github.com/Normo))
+- Add hifis.redis role [\#237](https://github.com/hifis-net/ansible-collection-toolkit/pull/237) [[redis](https://github.com/hifis-net/ansible-collection-toolkit/labels/redis)] ([Normo](https://github.com/Normo))
+- Add hifis.netplan role [\#235](https://github.com/hifis-net/ansible-collection-toolkit/pull/235) [[netplan](https://github.com/hifis-net/ansible-collection-toolkit/labels/netplan)] ([Normo](https://github.com/Normo))
+- chore\(deps\): bump ansible from 9.5.1 to 9.6.0 [\#233](https://github.com/hifis-net/ansible-collection-toolkit/pull/233) ([dependabot[bot]](https://github.com/apps/dependabot))
+- Add hifis.haproxy role [\#230](https://github.com/hifis-net/ansible-collection-toolkit/pull/230) [[haproxy](https://github.com/hifis-net/ansible-collection-toolkit/labels/haproxy)] ([Normo](https://github.com/Normo))
+
 ## [v4.1.0](https://github.com/hifis-net/ansible-collection-toolkit/tree/v4.1.0) (2024-05-16)
 
 [Full Changelog](https://github.com/hifis-net/ansible-collection-toolkit/compare/v4.0.0...v4.1.0)
@@ -18,12 +50,12 @@
 
 - chore\(deps-dev\): bump ansible-lint from 24.2.3 to 24.5.0 [\#220](https://github.com/hifis-net/ansible-collection-toolkit/pull/220) ([dependabot[bot]](https://github.com/apps/dependabot))
 - chore\(deps\): bump ansible/ansible-lint from 24.2.3 to 24.5.0 [\#219](https://github.com/hifis-net/ansible-collection-toolkit/pull/219) ([dependabot[bot]](https://github.com/apps/dependabot))
-- Prepare release version 4.1.0 [\#224](https://github.com/hifis-net/ansible-collection-toolkit/pull/224) ([Normo](https://github.com/Normo))
+- Prepare release version 4.1.0 [\#224](https://github.com/hifis-net/ansible-collection-toolkit/pull/224) [[unattended_upgrades](https://github.com/hifis-net/ansible-collection-toolkit/labels/unattended_upgrades)] [[zammad](https://github.com/hifis-net/ansible-collection-toolkit/labels/zammad)] [[ssh_keys](https://github.com/hifis-net/ansible-collection-toolkit/labels/ssh_keys)] [[keepalived](https://github.com/hifis-net/ansible-collection-toolkit/labels/keepalived)] ([Normo](https://github.com/Normo))
 - Always run ansible-lint in GitHub Actions [\#221](https://github.com/hifis-net/ansible-collection-toolkit/pull/221) ([tobiashuste](https://github.com/tobiashuste))
 - Make sure to update prepare-action via Dependabot [\#218](https://github.com/hifis-net/ansible-collection-toolkit/pull/218) ([tobiashuste](https://github.com/tobiashuste))
-- Integrate gitlab\_runner role into hifis toolkit [\#216](https://github.com/hifis-net/ansible-collection-toolkit/pull/216) ([tobiashuste](https://github.com/tobiashuste))
-- Add hifis.keepalived role [\#215](https://github.com/hifis-net/ansible-collection-toolkit/pull/215) ([Normo](https://github.com/Normo))
-- Add hifis.ssh\_keys role [\#213](https://github.com/hifis-net/ansible-collection-toolkit/pull/213) ([Normo](https://github.com/Normo))
+- Integrate gitlab\_runner role into hifis toolkit [\#216](https://github.com/hifis-net/ansible-collection-toolkit/pull/216) [[gitlab_runner](https://github.com/hifis-net/ansible-collection-toolkit/labels/gitlab_runner)] ([tobiashuste](https://github.com/tobiashuste))
+- Add hifis.keepalived role [\#215](https://github.com/hifis-net/ansible-collection-toolkit/pull/215) [[keepalived](https://github.com/hifis-net/ansible-collection-toolkit/labels/keepalived)] ([Normo](https://github.com/Normo))
+- Add hifis.ssh\_keys role [\#213](https://github.com/hifis-net/ansible-collection-toolkit/pull/213) [[ssh_keys](https://github.com/hifis-net/ansible-collection-toolkit/labels/ssh_keys)] ([Normo](https://github.com/Normo))
 
 ## [v4.0.0](https://github.com/hifis-net/ansible-collection-toolkit/tree/v4.0.0) (2024-05-08)
 
@@ -57,7 +89,7 @@ To continue using the [`unattended_upgrades`](roles/unattended_upgrades) role as
 
 - chore\(deps\): bump ansible/ansible-lint from 24.2.1 to 24.2.3 [\#208](https://github.com/hifis-net/ansible-collection-toolkit/pull/208) ([dependabot[bot]](https://github.com/apps/dependabot))
 - chore\(deps-dev\): bump ansible-lint from 24.2.0 to 24.2.1 [\#194](https://github.com/hifis-net/ansible-collection-toolkit/pull/194) ([dependabot[bot]](https://github.com/apps/dependabot))
-- Prepare release version 4.0.0 [\#209](https://github.com/hifis-net/ansible-collection-toolkit/pull/209) ([Normo](https://github.com/Normo))
+- Prepare release version 4.0.0 [\#209](https://github.com/hifis-net/ansible-collection-toolkit/pull/209) [[unattended_upgrades](https://github.com/hifis-net/ansible-collection-toolkit/labels/unattended_upgrades)] [[zammad](https://github.com/hifis-net/ansible-collection-toolkit/labels/zammad)] ([Normo](https://github.com/Normo))
 - chore\(deps\): bump ansible from 9.3.0 to 9.5.1 [\#204](https://github.com/hifis-net/ansible-collection-toolkit/pull/204) ([dependabot[bot]](https://github.com/apps/dependabot))
 - Release version 4.0.0 [\#198](https://github.com/hifis-net/ansible-collection-toolkit/pull/198) ([Normo](https://github.com/Normo))
 

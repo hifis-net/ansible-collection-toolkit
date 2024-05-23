@@ -6,6 +6,26 @@ SPDX-License-Identifier: Apache-2.0
 -->
 # Changelog
 
+## [v1.4.3](https://github.com/hifis-net/ansible-role-redis/tree/v1.4.3) (2024-05-23)
+
+[Full Changelog](https://github.com/hifis-net/ansible-role-redis/compare/v1.4.2...v1.4.3)
+
+**Merged pull requests:**
+
+- chore\(deps-dev\): bump molecule from 6.0.3 to 24.2.0 [\#154](https://github.com/hifis-net/ansible-role-redis/pull/154) ([dependabot[bot]](https://github.com/apps/dependabot))
+- chore\(deps-dev\): bump molecule-plugins from 23.5.0 to 23.5.3 [\#153](https://github.com/hifis-net/ansible-role-redis/pull/153) ([dependabot[bot]](https://github.com/apps/dependabot))
+- chore\(deps-dev\): bump ansible-lint from 6.22.2 to 24.2.0 [\#152](https://github.com/hifis-net/ansible-role-redis/pull/152) ([dependabot[bot]](https://github.com/apps/dependabot))
+- chore\(deps-dev\): bump yamllint from 1.33.0 to 1.34.0 [\#151](https://github.com/hifis-net/ansible-role-redis/pull/151) ([dependabot[bot]](https://github.com/apps/dependabot))
+- chore\(deps\): bump ansible from 9.1.0 to 9.2.0 [\#150](https://github.com/hifis-net/ansible-role-redis/pull/150) ([dependabot[bot]](https://github.com/apps/dependabot))
+- chore\(deps-dev\): bump reuse from 3.0.0 to 3.0.1 [\#149](https://github.com/hifis-net/ansible-role-redis/pull/149) ([dependabot[bot]](https://github.com/apps/dependabot))
+- chore\(deps-dev\): bump ansible-lint from 6.22.1 to 6.22.2 [\#148](https://github.com/hifis-net/ansible-role-redis/pull/148) ([dependabot[bot]](https://github.com/apps/dependabot))
+- chore\(deps-dev\): bump reuse from 2.1.0 to 3.0.0 [\#147](https://github.com/hifis-net/ansible-role-redis/pull/147) ([dependabot[bot]](https://github.com/apps/dependabot))
+- chore\(deps-dev\): bump molecule from 6.0.2 to 6.0.3 [\#146](https://github.com/hifis-net/ansible-role-redis/pull/146) ([dependabot[bot]](https://github.com/apps/dependabot))
+- chore\(deps\): bump ansible from 8.5.0 to 9.1.0 [\#145](https://github.com/hifis-net/ansible-role-redis/pull/145) ([dependabot[bot]](https://github.com/apps/dependabot))
+- chore\(deps-dev\): bump ansible-lint from 6.22.0 to 6.22.1 [\#144](https://github.com/hifis-net/ansible-role-redis/pull/144) ([dependabot[bot]](https://github.com/apps/dependabot))
+- chore\(deps-dev\): bump yamllint from 1.32.0 to 1.33.0 [\#141](https://github.com/hifis-net/ansible-role-redis/pull/141) ([dependabot[bot]](https://github.com/apps/dependabot))
+- chore\(deps-dev\): bump ansible-lint from 6.20.3 to 6.22.0 [\#139](https://github.com/hifis-net/ansible-role-redis/pull/139) ([dependabot[bot]](https://github.com/apps/dependabot))
+
 ## [v1.4.2](https://github.com/hifis-net/ansible-role-redis/tree/v1.4.2) (2023-10-18)
 
 [Full Changelog](https://github.com/hifis-net/ansible-role-redis/compare/v1.4.1...v1.4.2)

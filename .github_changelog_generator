@@ -6,3 +6,4 @@
 user=hifis-net
 project=ansible-collection-toolkit
 since-tag=v3.3.0
+issue-line-labels=gitlab,gitlab_runner,haproxy,keepalived,netplan,redis,ssh_keys,unattended_upgrades,zammad

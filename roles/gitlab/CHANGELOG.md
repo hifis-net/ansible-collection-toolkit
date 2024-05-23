@@ -6,6 +6,33 @@ SPDX-License-Identifier: Apache-2.0
 -->
 # Changelog
 
+## [Unreleased](https://github.com/hifis-net/ansible-role-gitlab/tree/HEAD)
+
+[Full Changelog](https://github.com/hifis-net/ansible-role-gitlab/compare/v1.6.1...HEAD)
+
+**Implemented enhancements:**
+
+- Query ansible facts through ansible\_facts.\* namespace [\#143](https://github.com/hifis-net/ansible-role-gitlab/issues/143)
+
+**Fixed bugs:**
+
+- Prefix variables with role name [\#106](https://github.com/hifis-net/ansible-role-gitlab/issues/106)
+
+**Closed issues:**
+
+- Add CITATION.cff [\#125](https://github.com/hifis-net/ansible-role-gitlab/issues/125)
+
+**Merged pull requests:**
+
+- chore\(deps-dev\): Bump ansible-lint from 6.21.0 to 24.2.0 [\#146](https://github.com/hifis-net/ansible-role-gitlab/pull/146) ([dependabot[bot]](https://github.com/apps/dependabot))
+- refactor: refer to ansible facts through ansible\_facts.\* namespace [\#144](https://github.com/hifis-net/ansible-role-gitlab/pull/144) ([Normo](https://github.com/Normo))
+- chore\(deps-dev\): Bump molecule-plugins from 23.5.0 to 23.5.3 [\#142](https://github.com/hifis-net/ansible-role-gitlab/pull/142) ([dependabot[bot]](https://github.com/apps/dependabot))
+- chore\(deps-dev\): Bump molecule from 6.0.2 to 24.2.0 [\#141](https://github.com/hifis-net/ansible-role-gitlab/pull/141) ([dependabot[bot]](https://github.com/apps/dependabot))
+- chore\(deps-dev\): Bump reuse from 2.1.0 to 3.0.1 [\#140](https://github.com/hifis-net/ansible-role-gitlab/pull/140) ([dependabot[bot]](https://github.com/apps/dependabot))
+- chore\(deps\): Bump ansible from 8.5.0 to 9.3.0 [\#139](https://github.com/hifis-net/ansible-role-gitlab/pull/139) ([dependabot[bot]](https://github.com/apps/dependabot))
+- chore\(deps-dev\): Bump yamllint from 1.32.0 to 1.35.1 [\#138](https://github.com/hifis-net/ansible-role-gitlab/pull/138) ([dependabot[bot]](https://github.com/apps/dependabot))
+- refactor: add role name prefix to variables [\#121](https://github.com/hifis-net/ansible-role-gitlab/pull/121) ([Normo](https://github.com/Normo))
+
 ## [v1.6.1](https://github.com/hifis-net/ansible-role-gitlab/tree/v1.6.1) (2023-11-07)
 
 [Full Changelog](https://github.com/hifis-net/ansible-role-gitlab/compare/v1.6.0...v1.6.1)
