@@ -10,7 +10,7 @@ driver:
   name: "podman"
 platforms:
   - name: "instance"
-    image: "${MOLECULE_IMAGE:-ghcr.io/hifis-net/ubuntu-systemd:22.04}"
+    image: "${MOLECULE_IMAGE:-ghcr.io/hifis-net/ubuntu-systemd:24.04}"
     pre_build_image: true
     privileged: true
     override_command: false
