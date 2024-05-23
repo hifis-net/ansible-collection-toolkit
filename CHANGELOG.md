@@ -1,8 +1,8 @@
 # Changelog
 
-## [Unreleased](https://github.com/hifis-net/ansible-collection-toolkit/tree/HEAD)
+## [v4.2.0](https://github.com/hifis-net/ansible-collection-toolkit/tree/v4.2.0) (2024-05-23)
 
-[Full Changelog](https://github.com/hifis-net/ansible-collection-toolkit/compare/v4.1.0...HEAD)
+[Full Changelog](https://github.com/hifis-net/ansible-collection-toolkit/compare/v4.1.0...v4.2.0)
 
 **Implemented enhancements:**
 
