@@ -25,7 +25,7 @@ software engineers, but not exclusively. The following use cases are supported:
 * DevOps platform:
     * [GitLab](https://github.com/hifis-net/ansible-role-gitlab) (**coming soon!**)
     * deploy [**GitLab-Runner**](roles/gitlab_runner) with a focus, but not limited, on Openstack autoscaling
-    * [**Redis**](role/redis)
+    * [**Redis**](roles/redis)
 * Help desk:
     * [**Zammad**](roles/zammad)
 * High Availability (HA) / Load Balancing:
