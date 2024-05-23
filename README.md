@@ -19,8 +19,6 @@ SPDX-License-Identifier: Apache-2.0
 [![hifis.zammad](https://github.com/hifis-net/ansible-collection-toolkit/actions/workflows/zammad.yml/badge.svg)](https://github.com/hifis-net/ansible-collection-toolkit/actions/workflows/zammad.yml)
 [![DOI](https://zenodo.org/badge/495697576.svg)](https://zenodo.org/doi/10.5281/zenodo.11147483)
 
-## Description
-
 This collection provides production-ready Ansible roles used for providing services used in research and by research
 software engineers, but not exclusively. The following use cases are supported:
 
