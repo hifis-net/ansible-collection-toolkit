@@ -13,8 +13,9 @@ Ansible role to set up Keepalived in a high availability and scalability context
 
 Currently [supported platforms](meta/main.yml) are:
 
-- Ubuntu 22.04 LTS
 - Ubuntu 20.04 LTS
+- Ubuntu 22.04 LTS
+- Ubuntu 24.04 LTS
 
 ## Requirements
 

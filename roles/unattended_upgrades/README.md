@@ -13,6 +13,15 @@ SPDX-License-Identifier: GPL-2.0-or-later
 Install and setup [unattended-upgrades](https://launchpad.net/unattended-upgrades) for Ubuntu and Debian, to
 periodically install security upgrades.
 
+Currently [supported platforms](meta/main.yml) are:
+
+- Ubuntu 20.04 LTS
+- Ubuntu 22.04 LTS
+- Ubuntu 24.04 LTS
+- Debian Buster
+- Debian Bullseye
+- Debian Bookworm
+
 ## Requirements
 
 The role uses [apt module](https://docs.ansible.com/ansible/latest/collections/ansible/builtin/apt_module.html) which
