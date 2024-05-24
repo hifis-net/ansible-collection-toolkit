@@ -1,5 +1,14 @@
 # Changelog
 
+## [Unreleased](https://github.com/hifis-net/ansible-collection-toolkit/tree/HEAD)
+
+[Full Changelog](https://github.com/hifis-net/ansible-collection-toolkit/compare/v4.2.0...HEAD)
+
+**Merged pull requests:**
+
+- Add support for Ubuntu 24.04 [\#253](https://github.com/hifis-net/ansible-collection-toolkit/pull/253) [[unattended_upgrades](https://github.com/hifis-net/ansible-collection-toolkit/labels/unattended_upgrades)] [[ssh_keys](https://github.com/hifis-net/ansible-collection-toolkit/labels/ssh_keys)] [[keepalived](https://github.com/hifis-net/ansible-collection-toolkit/labels/keepalived)] [[netplan](https://github.com/hifis-net/ansible-collection-toolkit/labels/netplan)] [[redis](https://github.com/hifis-net/ansible-collection-toolkit/labels/redis)] ([Normo](https://github.com/Normo))
+- Bump keepalived from version 2.2.8 to 2.3.0 [\#251](https://github.com/hifis-net/ansible-collection-toolkit/pull/251) [[keepalived](https://github.com/hifis-net/ansible-collection-toolkit/labels/keepalived)] ([Normo](https://github.com/Normo))
+
 ## [v4.2.0](https://github.com/hifis-net/ansible-collection-toolkit/tree/v4.2.0) (2024-05-23)
 
 [Full Changelog](https://github.com/hifis-net/ansible-collection-toolkit/compare/v4.1.0...v4.2.0)
