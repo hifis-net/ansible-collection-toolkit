@@ -21,6 +21,11 @@ galaxy_info:
       versions:
         - "focal"
         - "jammy"
+    - name: "Debian"
+      versions:
+        - "buster"
+        - "bullseye"
+        - "bookworm"
 
   galaxy_tags:
     - "haproxy"

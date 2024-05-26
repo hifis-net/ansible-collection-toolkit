@@ -16,13 +16,16 @@ Currently [supported platforms](meta/main.yml) are:
 
 - Ubuntu 22.04 LTS
 - Ubuntu 20.04 LTS
+- Debian 10 (Buster)
+- Debian 11 (Bullseye)
+- Debian 12 (Bookworm)
 
 This role is tested against the two latest LTS versions of HAProxy.
 Currently, this results in official support for the HAProxy release series:
 
-- `2.8`
+- `2.8` (not supported on Debian 10)
 - `2.6`
-- `2.4`
+- `2.4` (not supported on Debian 12)
 
 Other versions are known to work as well but are not automatically tested.
 
