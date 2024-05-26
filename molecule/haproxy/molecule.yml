@@ -9,14 +9,21 @@ dependency:
 driver:
   name: "podman"
 platforms:
-  - name: "instancehaproxy1"
+  - name: "haproxy_v2.8"
     image: "${MOLECULE_IMAGE:-ghcr.io/hifis-net/ubuntu-systemd:22.04}"
     pre_build_image: true
     privileged: true
     override_command: false
     systemd: true
     tty: true
-  - name: "instancehaproxy2"
+  - name: "haproxy_v2.6"
+    image: "${MOLECULE_IMAGE:-ghcr.io/hifis-net/ubuntu-systemd:22.04}"
+    pre_build_image: true
+    privileged: true
+    override_command: false
+    systemd: true
+    tty: true
+  - name: "haproxy_v2.4"
     image: "${MOLECULE_IMAGE:-ghcr.io/hifis-net/ubuntu-systemd:22.04}"
     pre_build_image: true
     privileged: true
@@ -31,15 +38,19 @@ provisioner:
         vars:
           haproxy_ssl_dhparam_size: 512
     host_vars:
-      instancehaproxy1:
+      haproxy_v2.8:
         haproxy_create_self_signed_cert: true
-        haproxy_ppa_version: "ppa:vbernat/haproxy-2.4"
-        haproxy_version: "2.4.*"
-      instancehaproxy2:
+        haproxy_ppa_version: "ppa:vbernat/haproxy-2.8"
+        haproxy_version: "2.8.*"
+      haproxy_v2.6:
         haproxy_create_self_signed_cert: false
         haproxy_ssl_cert_chain_src_file_path: "{{ (lookup('env', 'MOLECULE_SCENARIO_DIRECTORY'), 'test.pem') | path_join }}"
         haproxy_ppa_version: "ppa:vbernat/haproxy-2.6"
         haproxy_version: "2.6.*"
+      haproxy_v2.4:
+        haproxy_create_self_signed_cert: true
+        haproxy_ppa_version: "ppa:vbernat/haproxy-2.4"
+        haproxy_version: "2.4.*"
   playbooks:
     prepare: "prepare.yml"
     check: "converge.yml"
