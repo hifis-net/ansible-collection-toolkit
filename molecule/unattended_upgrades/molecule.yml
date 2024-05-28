@@ -9,7 +9,14 @@ dependency:
 driver:
   name: "podman"
 platforms:
-  - name: "instance"
+  - name: "instance1"
+    image: "${MOLECULE_IMAGE:-ghcr.io/hifis-net/ubuntu-systemd:24.04}"
+    pre_build_image: true
+    privileged: true
+    override_command: false
+    systemd: true
+    tty: true
+  - name: "instance2"
     image: "${MOLECULE_IMAGE:-ghcr.io/hifis-net/ubuntu-systemd:24.04}"
     pre_build_image: true
     privileged: true
@@ -24,19 +31,30 @@ provisioner:
     hosts:
       all:
         vars:
-          unattended_autofix_interrupted_dpkg: false
-          unattended_minimal_steps: true
-          unattended_install_on_shutdown: true
-          unattended_automatic_reboot: true
-          unattended_update_days: '{"Sat"}'
-          unattended_remove_unused_kernel_packages: true
-          unattended_only_on_ac_power: true
-          unattended_mail_sender: "jane@example.org"
-          unattended_systemd_timer_override: true
-          unattended_apt_daily_oncalendar: "*-*-* 11:08"
-          unattended_apt_daily_randomizeddelaysec: "0s"
-          unattended_apt_daily_upgrade_oncalendar: "*-*-* 11:31"
-          unattended_apt_daily_upgrade_randomizeddelaysec: "0s"
+          ubuntu_defaults:
+            - 'Unattended-Upgrade::Allowed-Origins:: "${distro_id}:${distro_codename}";'
+            - 'Unattended-Upgrade::Allowed-Origins:: "${distro_id}:${distro_codename}-security";'
+            - 'Unattended-Upgrade::Allowed-Origins:: "${distro_id}ESMApps:${distro_codename}-apps-security";'
+            - 'Unattended-Upgrade::Allowed-Origins:: "${distro_id}ESM:${distro_codename}-infra-security";'
+          debian_defaults:
+            - 'Unattended-Upgrade::Origins-Pattern:: "origin=Debian,codename=${distro_codename},label=Debian";'
+    host_vars:
+      instance1:
+        unattended_systemd_timer_override: false
+        unattended_autofix_interrupted_dpkg: false
+        unattended_minimal_steps: true
+        unattended_install_on_shutdown: true
+        unattended_automatic_reboot: true
+        unattended_update_days: '{"Sat"}'
+        unattended_remove_unused_kernel_packages: true
+        unattended_only_on_ac_power: true
+        unattended_mail_sender: "jane@example.org"
+      instance2:
+        unattended_systemd_timer_override: true
+        unattended_apt_daily_oncalendar: "*-*-* 11:08"
+        unattended_apt_daily_randomizeddelaysec: "0s"
+        unattended_apt_daily_upgrade_oncalendar: "*-*-* 11:31"
+        unattended_apt_daily_upgrade_randomizeddelaysec: "0s"
   playbooks:
     prepare: "prepare.yml"
     check: "converge.yml"
