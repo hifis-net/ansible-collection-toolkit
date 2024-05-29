@@ -20,6 +20,7 @@ Currently [supported platforms](meta/main.yml) are:
 This role is tested against the two latest LTS versions of HAProxy.
 Currently, this results in official support for the HAProxy release series:
 
+- `2.8`
 - `2.6`
 - `2.4`
 
