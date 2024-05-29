@@ -14,6 +14,12 @@
     success_msg: "All mandatory variables are set."
   when: "haproxy_config_template == 'haproxy.cfg.j2'"
 
+- name: "Stop role for unsupported HAProxy / Debian combinations"
+  ansible.builtin.meta: "end_host"
+  when: >-
+    ansible_facts.distribution_release | lower == 'bookworm' and haproxy_version | regex_search('\\d+\\.\\d+') is version('2.4', '==') or
+    ansible_facts.distribution_release | lower == 'buster' and haproxy_version | regex_search('\\d+\\.\\d+') is version('2.8', '==')
+
 - name: "Enable ip_forward."
   become: true
   ansible.posix.sysctl:
@@ -39,7 +45,24 @@
     state: "present"
     update_cache: true
 
+- name: "Add HAProxy Debian repository"
+  when: "ansible_facts.distribution == 'Debian'"
+  become: true
+  ansible.builtin.deb822_repository:
+    name: "haproxy"
+    types: "deb"
+    uris: "http://haproxy.debian.net"
+    suites: "{{ ansible_facts.distribution_release | lower }}-backports-{{ haproxy_version | regex_search('\\d+\\.\\d+') }}"
+    components: "main"
+    signed_by: "https://haproxy.debian.net/bernat.debian.org.gpg"
+    state: "present"
+    enabled: true
+  register: "deb_repo"
+
 - name: "Add PPA for HAProxy"
+  when:
+    - "ansible_facts.distribution == 'Ubuntu'"
+    - "haproxy_ppa_version | length > 0"
   become: true
   ansible.builtin.apt_repository:
     repo: "{{ haproxy_ppa_version }}"
@@ -47,7 +70,6 @@
     validate_certs: true
     mode: "0644"
   register: "ppa"
-  when: "haproxy_ppa_version | length > 0"
 
 - name: "Check whether wildcard character is contained in version string."
   ansible.builtin.set_fact:
@@ -81,7 +103,7 @@
 
 - name: "Determine if errors in check mode can be ignored"
   ansible.builtin.set_fact:
-    ignore_errors_in_check_mode: "{{ ansible_check_mode and ppa.changed }}"
+    ignore_errors_in_check_mode: "{{ ansible_check_mode and (ppa.changed or deb_repo.changed) }}"
 
 - name: "Install and configure HAProxy"
   ignore_errors: "{{ ignore_errors_in_check_mode }}"  # noqa ignore-errors
