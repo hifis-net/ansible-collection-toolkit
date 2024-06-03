@@ -10,10 +10,10 @@ assignees: ''
 ## Description
 A clear and concise description of what the bug is.
 
-## To Reproduce
+## To reproduce
 Paste an example playbook that can be used to reproduce the problem and/or describe steps to reproduce the behavior.
 
-## Current Behavior
+## Current behavior
 Please describe the results you received.
 
 ## Expected behavior
