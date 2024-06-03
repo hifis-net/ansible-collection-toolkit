@@ -6,15 +6,6 @@
 ---
 - name: "Verify unattended upgrades installation"
   hosts: "all"
-  vars:
-    ubuntu_defaults:
-      - 'Unattended-Upgrade::Allowed-Origins:: "${distro_id}:${distro_codename}";'
-      - 'Unattended-Upgrade::Allowed-Origins:: "${distro_id}:${distro_codename}-security";'
-      - 'Unattended-Upgrade::Allowed-Origins:: "${distro_id}ESMApps:${distro_codename}-apps-security";'
-      - 'Unattended-Upgrade::Allowed-Origins:: "${distro_id}ESM:${distro_codename}-infra-security";'
-    debian_defaults:
-      - 'Unattended-Upgrade::Origins-Pattern:: "origin=Debian,codename=${distro_codename},label=Debian";'
-
   tasks:
     - name: "Get apt-config variables"
       ansible.builtin.command: "apt-config dump"
@@ -22,6 +13,7 @@
       changed_when: false
 
     - name: "Check for registered variables"
+      when: "not unattended_systemd_timer_override"
       ansible.builtin.assert:
         that: "item in aptconfig.stdout"
       with_items:
@@ -74,6 +66,7 @@
       changed_when: false
 
     - name: "Verify custom apt-daily timers"  # noqa command-instead-of-shell
+      when: "unattended_systemd_timer_override"
       ansible.builtin.shell:
         cmd: "{{ item }}"
       changed_when: false
