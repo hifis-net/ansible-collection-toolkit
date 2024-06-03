@@ -6,12 +6,17 @@
 
 **Implemented enhancements:**
 
+- Add Debian 12 Bookworm support for ssh\_keys role [\#263](https://github.com/hifis-net/ansible-collection-toolkit/issues/263) [[ssh_keys](https://github.com/hifis-net/ansible-collection-toolkit/labels/ssh_keys)]
+- Bump keepalived to version 2.3.1 [\#262](https://github.com/hifis-net/ansible-collection-toolkit/issues/262) [[keepalived](https://github.com/hifis-net/ansible-collection-toolkit/labels/keepalived)]
 - Support HAProxy 2.8 [\#254](https://github.com/hifis-net/ansible-collection-toolkit/issues/254) [[haproxy](https://github.com/hifis-net/ansible-collection-toolkit/labels/haproxy)]
 - Add Debain support [\#243](https://github.com/hifis-net/ansible-collection-toolkit/issues/243) [[haproxy](https://github.com/hifis-net/ansible-collection-toolkit/labels/haproxy)]
 
 **Merged pull requests:**
 
+- Bump netaddr from 1.2.1 to 1.3.0 [\#261](https://github.com/hifis-net/ansible-collection-toolkit/pull/261) ([dependabot[bot]](https://github.com/apps/dependabot))
+- Bump keepalived from version 2.3.0 to 2.3.1 [\#259](https://github.com/hifis-net/ansible-collection-toolkit/pull/259) [[keepalived](https://github.com/hifis-net/ansible-collection-toolkit/labels/keepalived)] ([Normo](https://github.com/Normo))
 - Add Debian Support for HAProxy role [\#258](https://github.com/hifis-net/ansible-collection-toolkit/pull/258) [[haproxy](https://github.com/hifis-net/ansible-collection-toolkit/labels/haproxy)] ([Normo](https://github.com/Normo))
+- Test ssh\_keys role on Debian 12 \(Bookworm\) [\#257](https://github.com/hifis-net/ansible-collection-toolkit/pull/257) [[ssh_keys](https://github.com/hifis-net/ansible-collection-toolkit/labels/ssh_keys)] ([Normo](https://github.com/Normo))
 - Support HAProxy 2.8 [\#255](https://github.com/hifis-net/ansible-collection-toolkit/pull/255) [[haproxy](https://github.com/hifis-net/ansible-collection-toolkit/labels/haproxy)] ([Normo](https://github.com/Normo))
 - Add support for Ubuntu 24.04 [\#253](https://github.com/hifis-net/ansible-collection-toolkit/pull/253) [[unattended_upgrades](https://github.com/hifis-net/ansible-collection-toolkit/labels/unattended_upgrades)] [[ssh_keys](https://github.com/hifis-net/ansible-collection-toolkit/labels/ssh_keys)] [[keepalived](https://github.com/hifis-net/ansible-collection-toolkit/labels/keepalived)] [[netplan](https://github.com/hifis-net/ansible-collection-toolkit/labels/netplan)] [[redis](https://github.com/hifis-net/ansible-collection-toolkit/labels/redis)] ([Normo](https://github.com/Normo))
 - Bump keepalived from version 2.2.8 to 2.3.0 [\#251](https://github.com/hifis-net/ansible-collection-toolkit/pull/251) [[keepalived](https://github.com/hifis-net/ansible-collection-toolkit/labels/keepalived)] ([Normo](https://github.com/Normo))
