@@ -16,6 +16,7 @@
 
 **Merged pull requests:**
 
+- Prepare release version 4.3.0 [\#265](https://github.com/hifis-net/ansible-collection-toolkit/pull/265) [[unattended_upgrades](https://github.com/hifis-net/ansible-collection-toolkit/labels/unattended_upgrades)] [[zammad](https://github.com/hifis-net/ansible-collection-toolkit/labels/zammad)] [[ssh_keys](https://github.com/hifis-net/ansible-collection-toolkit/labels/ssh_keys)] [[keepalived](https://github.com/hifis-net/ansible-collection-toolkit/labels/keepalived)] [[haproxy](https://github.com/hifis-net/ansible-collection-toolkit/labels/haproxy)] [[netplan](https://github.com/hifis-net/ansible-collection-toolkit/labels/netplan)] [[redis](https://github.com/hifis-net/ansible-collection-toolkit/labels/redis)] [[gitlab](https://github.com/hifis-net/ansible-collection-toolkit/labels/gitlab)] ([Normo](https://github.com/Normo))
 - Bump netaddr from 1.2.1 to 1.3.0 [\#261](https://github.com/hifis-net/ansible-collection-toolkit/pull/261) ([dependabot[bot]](https://github.com/apps/dependabot))
 - Add second test instance to unattended\_upgrades molecule scenario [\#260](https://github.com/hifis-net/ansible-collection-toolkit/pull/260) [[unattended_upgrades](https://github.com/hifis-net/ansible-collection-toolkit/labels/unattended_upgrades)] ([Normo](https://github.com/Normo))
 - Bump keepalived from version 2.3.0 to 2.3.1 [\#259](https://github.com/hifis-net/ansible-collection-toolkit/pull/259) [[keepalived](https://github.com/hifis-net/ansible-collection-toolkit/labels/keepalived)] ([Normo](https://github.com/Normo))
