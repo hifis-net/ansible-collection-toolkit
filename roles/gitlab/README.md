@@ -208,7 +208,7 @@ gitlab_feature_flags:
   - name: "chatops"
     enabled: true
   - name: "webauthn"
-    enabled: false  
+    enabled: false
 ```
 
 #### Mattermost only use case
@@ -357,6 +357,14 @@ Set IP Address of PostgreSQL Database instance:
 
 ```yaml
 gitlab_postgresql_db_host: '127.0.0.1'
+```
+
+#### Port of External PostgreSQL Database Instance
+
+Set Port of PostgreSQL Database instance:
+
+```yaml
+gitlab_postgresql_db_port: '5432'
 ```
 
 #### Password for External PostgreSQL Database Instance
