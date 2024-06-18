@@ -1,5 +1,17 @@
 # Changelog
 
+## [v4.4.0](https://github.com/hifis-net/ansible-collection-toolkit/tree/v4.4.0) (2024-06-18)
+
+[Full Changelog](https://github.com/hifis-net/ansible-collection-toolkit/compare/v4.3.0...v4.4.0)
+
+**Implemented enhancements:**
+
+- Make GitLab DB port configurable in role gitlab [\#272](https://github.com/hifis-net/ansible-collection-toolkit/issues/272) [[gitlab](https://github.com/hifis-net/ansible-collection-toolkit/labels/gitlab)]
+
+**Merged pull requests:**
+
+- Make GitLab DB port configurable in GitLab config template [\#273](https://github.com/hifis-net/ansible-collection-toolkit/pull/273) [[gitlab](https://github.com/hifis-net/ansible-collection-toolkit/labels/gitlab)] ([christianhueserhzdr](https://github.com/christianhueserhzdr))
+
 ## [v4.3.0](https://github.com/hifis-net/ansible-collection-toolkit/tree/v4.3.0) (2024-06-04)
 
 [Full Changelog](https://github.com/hifis-net/ansible-collection-toolkit/compare/v4.2.0...v4.3.0)
