@@ -54,6 +54,7 @@ postgresql['enable'] = false
 gitlab_rails['db_adapter'] = 'postgresql'
 gitlab_rails['db_encoding'] = 'unicode'
 gitlab_rails['db_host'] = "{{ gitlab_postgresql_db_host }}"
+gitlab_rails['db_port'] = {{ gitlab_postgresql_db_port }}
 gitlab_rails['db_password'] = "{{ gitlab_postgresql_db_password }}"
 {% endif %}
 

@@ -66,6 +66,8 @@ gitlab_gitaly_instance_port: "8075"
 gitlab_use_internal_postgresql: "true"
 # External PostgreSQL database host IP / domain
 gitlab_postgresql_db_host: "127.0.0.1"
+# External PostgreSQL database port
+gitlab_postgresql_db_port: 5432
 # External PostgreSQL database password
 gitlab_postgresql_db_password: "changeme"
 
