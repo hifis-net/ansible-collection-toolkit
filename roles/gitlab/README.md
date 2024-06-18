@@ -361,7 +361,7 @@ gitlab_postgresql_db_host: '127.0.0.1'
 
 #### Port of External PostgreSQL Database Instance
 
-Set Port of PostgreSQL Database instance:
+Set port of PostgreSQL database instance, if port other than `5432` is used:
 
 ```yaml
 gitlab_postgresql_db_port: '5432'
