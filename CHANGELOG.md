@@ -1,5 +1,20 @@
 # Changelog
 
+## [v4.5.0](https://github.com/hifis-net/ansible-collection-toolkit/tree/v4.5.0) (2024-06-19)
+
+[Full Changelog](https://github.com/hifis-net/ansible-collection-toolkit/compare/v4.4.0...v4.5.0)
+
+**Implemented enhancements:**
+
+- Allow to configure more autoscaler policy values [\#278](https://github.com/hifis-net/ansible-collection-toolkit/issues/278) [[gitlab_runner](https://github.com/hifis-net/ansible-collection-toolkit/labels/gitlab_runner)]
+
+**Merged pull requests:**
+
+- Make sure idle\_time is a string in the runner config [\#280](https://github.com/hifis-net/ansible-collection-toolkit/pull/280) [[gitlab_runner](https://github.com/hifis-net/ansible-collection-toolkit/labels/gitlab_runner)] ([tobiashuste](https://github.com/tobiashuste))
+- Support more autoscaler policy config options [\#279](https://github.com/hifis-net/ansible-collection-toolkit/pull/279) [[gitlab_runner](https://github.com/hifis-net/ansible-collection-toolkit/labels/gitlab_runner)] ([tobiashuste](https://github.com/tobiashuste))
+- Bump ansible from 9.6.0 to 10.1.0 [\#277](https://github.com/hifis-net/ansible-collection-toolkit/pull/277) ([dependabot[bot]](https://github.com/apps/dependabot))
+- Bump ansible/ansible-lint from 24.5.0 to 24.6.0 [\#267](https://github.com/hifis-net/ansible-collection-toolkit/pull/267) ([dependabot[bot]](https://github.com/apps/dependabot))
+
 ## [v4.4.0](https://github.com/hifis-net/ansible-collection-toolkit/tree/v4.4.0) (2024-06-18)
 
 [Full Changelog](https://github.com/hifis-net/ansible-collection-toolkit/compare/v4.3.0...v4.4.0)
@@ -11,6 +26,7 @@
 **Merged pull requests:**
 
 - Make GitLab DB port configurable in GitLab config template [\#273](https://github.com/hifis-net/ansible-collection-toolkit/pull/273) [[gitlab](https://github.com/hifis-net/ansible-collection-toolkit/labels/gitlab)] ([christianhueserhzdr](https://github.com/christianhueserhzdr))
+- Prepare release of version 4.4.0 [\#275](https://github.com/hifis-net/ansible-collection-toolkit/pull/275) ([tobiashuste](https://github.com/tobiashuste))
 
 ## [v4.3.0](https://github.com/hifis-net/ansible-collection-toolkit/tree/v4.3.0) (2024-06-04)
 
