@@ -122,5 +122,8 @@ sentry_dsn = "{{ gitlab_runner_sentry_dsn }}"
 
   [[runners.autoscaler.policy]]
     idle_count = {{ runner.autoscaler_idle_count | default(0) }}
+    idle_time = {{ runner.autoscaler_idle_time | default("30m0s") }}
+    scale_factor = {{ runner.autoscaler_scale_factor | default(0.0) }}
+    scale_factor_limit = {{ runner.autoscaler_scale_factor_limit | default(0) }}
 {% endif %}
 {% endfor %}

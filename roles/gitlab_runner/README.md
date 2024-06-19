@@ -424,6 +424,9 @@ gitlab_runner_list:
     cache_insecure: "false"
     autoscaler_max_builds: 1
     autoscaler_idle_count: 4
+    autoscaler_idle_time: "30m0s"
+    autoscaler_scale_factor: 0.0
+    autoscaler_scale_factor_limit: 0
     autoscaler_max_instances: "10"
     autoscaler_group_name: "autoscaler-runners"
     autoscaler_cloud_name: "openstack"
