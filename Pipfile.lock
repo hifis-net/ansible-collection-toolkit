@@ -1,7 +1,7 @@
 {
     "_meta": {
         "hash": {
-            "sha256": "997b0f37e8f08ab65e67b140f03014ded2bb4d50dd4ea79f45420389fb6da50e"
+            "sha256": "2d7124845c424f55a0b526fe76630987740a901a27f7f95187c9b8c27ae9b820"
         },
         "pipfile-spec": 6,
         "requires": {
@@ -793,12 +793,12 @@
         },
         "reuse": {
             "hashes": [
-                "sha256:73eb8262b84527a90822404e7504f69081854759806830d402ea1e92176f32a6",
-                "sha256:bf5a65c2dba4b481ee5ace18a3863095ee95ff3e72acaf6cd4446bb83d786970"
+                "sha256:7b0e7880b76f834d6ccffe088fea597141dcaaa0cd23ce3171481758cb263f0e",
+                "sha256:be040da309a5624a41dcee620b940b7ff7d9d66cee10650e122da2ccbe82637d"
             ],
             "index": "pypi",
             "markers": "python_version >= '3.8' and python_version < '4.0'",
-            "version": "==3.0.2"
+            "version": "==4.0.2"
         },
         "rich": {
             "hashes": [
@@ -984,6 +984,14 @@
             ],
             "markers": "python_version >= '3.8'",
             "version": "==0.4.1"
+        },
+        "tomlkit": {
+            "hashes": [
+                "sha256:af914f5a9c59ed9d0762c7b64d3b5d5df007448eb9cd2edc8a46b1eafead172f",
+                "sha256:eef34fba39834d4d6b73c9ba7f3e4d1c417a4e56f89a7e96e090dd0d24b8fb3c"
+            ],
+            "markers": "python_version >= '3.7'",
+            "version": "==0.12.5"
         },
         "wcmatch": {
             "hashes": [
