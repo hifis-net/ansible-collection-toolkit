@@ -24,19 +24,19 @@ Currently [supported platforms](meta/main.yml) are:
 
 ## Requirements
 
-The role uses [apt module](https://docs.ansible.com/ansible/latest/collections/ansible/builtin/apt_module.html) which
+The role uses the [apt module](https://docs.ansible.com/ansible/latest/collections/ansible/builtin/apt_module.html) which
 has additional dependencies.
 
-If you set `unattended_mail` to an e-mail address, make sure `mailx` command is available and your system is able to
+If you set `unattended_mail` to an e-mail address, make sure the `mailx` command is available and your system is able to
 send e-mails.
 
-The role requires unattended-upgrades version 0.70 and newer, which is available since Debian Wheezy and Ubuntu 12.04
+The role requires unattended-upgrades version 0.70 or newer, which is available since Debian Wheezy and Ubuntu 12.04
 respectively. This is due to [Origins Patterns](#origins-patterns) usage; if this is not available on your system, you
 may use [the first version of the role](https://github.com/hifis-net/ansible-collection-toolkit/tree/v0.1).
 
 ### Automatic Reboot
 
-If you enable automatic reboot feature (`unattended_automatic_reboot`), the role will attempt to install
+If you enable the automatic reboot feature (`unattended_automatic_reboot`), the role will attempt to install the
 `update-notifier-common` package, which is required on some systems for detecting and executing reboot after the
 upgrade. You may optionally define a specific time for rebooting (`unattended_automatic_reboot_time`).
 
@@ -67,7 +67,7 @@ upgrade. You may optionally define a specific time for rebooting (`unattended_au
   * Description: E-mail address to send information about upgrades or problems with unattended upgrades.
 * `unattended_mail_sender`:
   * Default: `false` (same as `root`)
-  * Description: Use the specified value in the "From" field of outgoing mails
+  * Description: Use the specified value in the "From" field of outgoing mails.
 * `unattended_mail_only_on_error`:
   * Default: `false`
   * Description: Send e-mail only on errors, otherwise e-mail will be sent every time there's a package upgrade.
@@ -82,7 +82,7 @@ upgrade. You may optionally define a specific time for rebooting (`unattended_au
   * Description: Do automatic removal of new unused dependencies after the upgrade.
 * `unattended_remove_unused_kernel_packages`:
   * Default: `false`
-  * Description: Remove unused automatically installed kernel-related packages (kernel images, kernel headers and kernel version locked tools)
+  * Description: Remove unused automatically installed kernel-related packages (kernel images, kernel headers and kernel version locked tools).
 * `unattended_automatic_reboot`:
   * Default: `false`
   * Description: Automatically reboot system if any upgraded package requires it, immediately after the upgrade.
@@ -166,7 +166,7 @@ Pattern is composed of specific keywords:
 You can review the available repositories using `apt-cache policy` and debug your choice using `unattended-upgrades -d`
 command on a target system.
 
-Additionally, unattended-upgrades support two macros (variables), derived from `/etc/debian_version`:
+Additionally, unattended-upgrades supports two macros (variables), derived from `/etc/debian_version`:
 
 * `${distro_id}` – Installed distribution name, e.g. `Debian` or `Ubuntu`.
 * `${distro_codename}` – Installed codename, e.g. `bullseye` or `jammy`.
@@ -232,7 +232,7 @@ variable is not set.
 
 ### Running Only on Debian-based Systems
 
-If you manage multiple distribution with the same playbook, you may want to skip running this role on non-Debian
+If you manage multiple distributions with the same playbook, you may want to skip running this role on non-Debian
 systems. You can [use `when` conditional with role](https://docs.ansible.com/ansible/latest/user_guide/playbooks_conditionals.html#conditionals-with-roles) to limit the role to particular systems:
 
 ```yaml
