@@ -431,6 +431,7 @@ gitlab_runner_list:
     autoscaler_group_name: "autoscaler-runners"
     autoscaler_cloud_name: "openstack"
     autoscaler_clouds_config: "/etc/gitlab-runner/clouds.yaml"
+    autoscaler_use_ignition: false
     autoscaler_flavor_ref: "5be35abe-a4d5-427f-a0f8-c7afe19961e2"
     autoscaler_image_ref: "8225b31c-86fc-4e48-a3e4-8bf800d5fc8d"
     autoscaler_network_id: "ea80dd07-5dc2-4f18-af04-733ace5892ef"
