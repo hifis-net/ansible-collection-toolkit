@@ -1,5 +1,19 @@
 # Changelog
 
+## [v4.6.0](https://github.com/hifis-net/ansible-collection-toolkit/tree/v4.6.0) (2024-07-12)
+
+[Full Changelog](https://github.com/hifis-net/ansible-collection-toolkit/compare/v4.5.0...v4.6.0)
+
+**Implemented enhancements:**
+
+- Support the new use\_ignition parameter [\#294](https://github.com/hifis-net/ansible-collection-toolkit/pull/294) [[gitlab_runner](https://github.com/hifis-net/ansible-collection-toolkit/labels/gitlab_runner)] ([tobiashuste](https://github.com/tobiashuste))
+
+**Merged pull requests:**
+
+- Bump reuse from 3.0.2 to 4.0.3 [\#289](https://github.com/hifis-net/ansible-collection-toolkit/pull/289) ([dependabot[bot]](https://github.com/apps/dependabot))
+- language, spelling [\#287](https://github.com/hifis-net/ansible-collection-toolkit/pull/287) [[unattended_upgrades](https://github.com/hifis-net/ansible-collection-toolkit/labels/unattended_upgrades)] ([dnmvisser](https://github.com/dnmvisser))
+- Bump fsfe/reuse-action from 3.0.0 to 4.0.0 [\#286](https://github.com/hifis-net/ansible-collection-toolkit/pull/286) ([dependabot[bot]](https://github.com/apps/dependabot))
+
 ## [v4.5.0](https://github.com/hifis-net/ansible-collection-toolkit/tree/v4.5.0) (2024-06-19)
 
 [Full Changelog](https://github.com/hifis-net/ansible-collection-toolkit/compare/v4.4.0...v4.5.0)
@@ -10,6 +24,7 @@
 
 **Merged pull requests:**
 
+- Prepare release of version 4.5.0 [\#281](https://github.com/hifis-net/ansible-collection-toolkit/pull/281) ([tobiashuste](https://github.com/tobiashuste))
 - Make sure idle\_time is a string in the runner config [\#280](https://github.com/hifis-net/ansible-collection-toolkit/pull/280) [[gitlab_runner](https://github.com/hifis-net/ansible-collection-toolkit/labels/gitlab_runner)] ([tobiashuste](https://github.com/tobiashuste))
 - Support more autoscaler policy config options [\#279](https://github.com/hifis-net/ansible-collection-toolkit/pull/279) [[gitlab_runner](https://github.com/hifis-net/ansible-collection-toolkit/labels/gitlab_runner)] ([tobiashuste](https://github.com/tobiashuste))
 - Bump ansible from 9.6.0 to 10.1.0 [\#277](https://github.com/hifis-net/ansible-collection-toolkit/pull/277) ([dependabot[bot]](https://github.com/apps/dependabot))
