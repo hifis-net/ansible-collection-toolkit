@@ -10,21 +10,21 @@ driver:
   name: "podman"
 platforms:
   - name: "haproxy_v2.8"
-    image: "${MOLECULE_IMAGE:-ghcr.io/hifis-net/ubuntu-systemd:22.04}"
+    image: "${MOLECULE_IMAGE:-ghcr.io/hifis-net/ubuntu-systemd:24.04}"
     pre_build_image: true
     privileged: true
     override_command: false
     systemd: true
     tty: true
   - name: "haproxy_v2.6"
-    image: "${MOLECULE_IMAGE:-ghcr.io/hifis-net/ubuntu-systemd:22.04}"
+    image: "${MOLECULE_IMAGE:-ghcr.io/hifis-net/ubuntu-systemd:24.04}"
     pre_build_image: true
     privileged: true
     override_command: false
     systemd: true
     tty: true
   - name: "haproxy_v2.4"
-    image: "${MOLECULE_IMAGE:-ghcr.io/hifis-net/ubuntu-systemd:22.04}"
+    image: "${MOLECULE_IMAGE:-ghcr.io/hifis-net/ubuntu-systemd:24.04}"
     pre_build_image: true
     privileged: true
     override_command: false
