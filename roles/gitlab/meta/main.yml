@@ -23,7 +23,6 @@ galaxy_info:
         - "8"
     - name: "Ubuntu"
       versions:
-        - "bionic"
         - "focal"
         - "jammy"
         - "noble"
