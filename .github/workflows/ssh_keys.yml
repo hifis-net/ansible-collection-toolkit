@@ -40,10 +40,8 @@ jobs:
       fail-fast: false
       matrix:
         image:
-          - "ghcr.io/hifis-net/centos-systemd:7"
           - "ghcr.io/hifis-net/almalinux-systemd:8"
           - "ghcr.io/hifis-net/almalinux-systemd:9"
-          - "ghcr.io/hifis-net/ubuntu-systemd:18.04"
           - "ghcr.io/hifis-net/ubuntu-systemd:20.04"
           - "ghcr.io/hifis-net/ubuntu-systemd:22.04"
           - "ghcr.io/hifis-net/ubuntu-systemd:24.04"
