@@ -75,12 +75,19 @@ provisioner:
         gitlab_runner_registry_mirror: "https://registry-mirror.example"
         gitlab_runner_listen_address: "127.0.0.1:9252"
         gitlab_runner_set_default_network_opts: true
+        gitlab_runner_autoscaler_openstack_auth_url: "https://openstack.helmholtz.de:5000"
+        gitlab_runner_autoscaler_openstack_username: "openstackuser"
+        gitlab_runner_autoscaler_openstack_password: "123456"
+        gitlab_runner_autoscaler_openstack_project_id: "e5cc8263-be6c-45a7-a6ce-e852dac95395"
+        gitlab_runner_autoscaler_openstack_project_name: "openstack-project"
+        gitlab_runner_autoscaler_openstack_user_domain_name: "Default"
+        gitlab_runner_autoscaler_openstack_region_name: "Default"
         gitlab_runner_list:
           - name: "test01"
             url: "https://gitlab.com"
             description: "Molecule test runner"
             authentication_token: "${AUTHENTICATION_TOKEN}"
-            executor: "docker+machine"
+            executor: "docker-autoscaler"
             environment: ["CI_CPUS=8", "DOCKER_TLS_CERTDIR=/certs"]
             docker_volumes: ["/cache", "/certs/client", "/opt/docker/daemon.json:/etc/docker/daemon.json:ro"]
             docker_image: "python:3.8"
@@ -89,28 +96,21 @@ provisioner:
             tags: ["docker", "hifis"]
             locked: true
             limit: 10
+            autoscaler_max_builds: 1
+            autoscaler_idle_count: 5
+            autoscaler_max_instances: 10
             machine_idle_count: 5
-            machine_idle_time: 7200
-            machine_max_builds: 4
-            machine_max_growth_rate: 2
-            machine_driver: "openstack"
-            machine_name: "auto-scale-%s"
-            machine_options:
-              - "openstack-auth-url=https://openstack.example:5000/v3"
-              - "openstack-image-id=73f07dd3-fa8b-468f-b6bc-b0cd4510f5d0"
-              - "openstack-flavor-name=m1.small"
-              - "openstack-net-id=7834deeb-8bd5-4fc7-b35b-24035d8f47a7"
-              - "openstack-username=gitlab-runner"
-              - "openstack-password=secret"
-              - "openstack-tenant-id=123456"
-              - "openstack-domain-name=default"
-              - "openstack-ssh-user=core"
-              - "openstack-sec-groups=Internal"
-              - "openstack-keypair-name=runners-internal"
-              - "openstack-private-key-file=/etc/gitlab-runner/gitlab_runner_key"
-              - "openstack-user-data-file=/etc/gitlab-runner/ignition.json"
-              - "openstack-active-timeout=300"
-              - "engine-registry-mirror=https://registry-mirror.example"
+            autoscaler_group_name: "hifis"
+            autoscaler_cloud_name: "openstack"
+            autoscaler_clouds_config: "/etc/gitlab-runner/clouds.yaml"
+            autoscaler_use_ignition: true
+            autoscaler_flavor_ref: "a7779e0c-899a-4c73-b75d-757e7722dc9b"
+            autoscaler_image_ref: "67c1e69a-921d-4a5c-85cf-cf2a7d94a14d"
+            autoscaler_network_id: "183bd5c6-e720-4601-b471-f4135a32263d"
+            autoscaler_security_group: "8f291fca-006c-4576-a18e-f343d06af2c4"
+            autoscaler_scheduler_hint: "8357bc97-580a-429f-a71d-895a3ab4b645"
+            autoscaler_username: "core"
+            autoscaler_keyname: "runner-internal"
             cache_type: "s3"
             cache_server_address: "https://cache.example"
             cache_access_key: "key"

@@ -51,7 +51,9 @@
   ansible.builtin.slurp:
     src: "/etc/gitlab-runner/ignition.json"
   register: "ignition_json"
-  when: "gitlab_runner_install_autoscaler"
+  when:
+    - "gitlab_runner_install_autoscaler"
+    - "not gitlab_runner_is_initial_dryrun"
 
 - name: "Template config file"
   ansible.builtin.template:
@@ -64,6 +66,7 @@
   no_log: true
   vars:
     ignition_content: "{{ ignition_json['content'] | b64decode }}"
+  when: "not gitlab_runner_is_initial_dryrun"
 
 - name: "Start GitLab-Runner"
   ansible.builtin.service:
