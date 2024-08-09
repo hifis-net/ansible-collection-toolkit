@@ -40,6 +40,17 @@
       when: "gitlab_runner_list | selectattr('executor', 'equalto', 'docker+machine') | list | length > 0"
       failed_when: "'0.16.2-gitlab.25' not in machine_version.stdout"
 
+    - name: "Identify installed fleeting plugins"
+      ansible.builtin.command: "gitlab-runner fleeting list"
+      register: "fleeting_cmd"
+      changed_when: false
+
+    - name: "Assert that fleeting-plugin-openstack is installed"
+      when: "gitlab_runner_list | selectattr('executor', 'equalto', 'docker-autoscaler') | list | length > 0"
+      ansible.builtin.assert:
+        that:
+          - "'fleeting-plugin-openstack' in fleeting_cmd.stdout"
+
     - name: "Assert that Gitlab-Runner is installed"
       ansible.builtin.assert:
         that:
