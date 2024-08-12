@@ -36,5 +36,5 @@ authors:
     orcid: 'https://orcid.org/0000-0002-5028-6663'
 repository-code: 'https://github.com/hifis-net/ansible-collection-toolkit'
 repository-artifact: 'https://galaxy.ansible.com/ui/repo/published/hifis/toolkit/'
-version: v4.6.0'
-date-released: '2024-07-12'
+version: v4.7.0'
+date-released: '2024-08-12'
