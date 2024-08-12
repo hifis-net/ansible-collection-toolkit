@@ -1,5 +1,24 @@
 # Changelog
 
+## [v4.7.0](https://github.com/hifis-net/ansible-collection-toolkit/tree/v4.7.0) (2024-08-12)
+
+[Full Changelog](https://github.com/hifis-net/ansible-collection-toolkit/compare/v4.6.0...v4.7.0)
+
+**Implemented enhancements:**
+
+- Support new parameter use\_ignition [\#293](https://github.com/hifis-net/ansible-collection-toolkit/issues/293)
+- Install fleeting-plugin-openstack directly from GitHub [\#303](https://github.com/hifis-net/ansible-collection-toolkit/pull/303) [[gitlab_runner](https://github.com/hifis-net/ansible-collection-toolkit/labels/gitlab_runner)] ([tobiashuste](https://github.com/tobiashuste))
+
+**Merged pull requests:**
+
+- Install Zammad 6.3.1 by default [\#302](https://github.com/hifis-net/ansible-collection-toolkit/pull/302) [[zammad](https://github.com/hifis-net/ansible-collection-toolkit/labels/zammad)] ([tobiashuste](https://github.com/tobiashuste))
+- Remove support for OS that are EOL [\#301](https://github.com/hifis-net/ansible-collection-toolkit/pull/301) [[ssh_keys](https://github.com/hifis-net/ansible-collection-toolkit/labels/ssh_keys)] [[gitlab](https://github.com/hifis-net/ansible-collection-toolkit/labels/gitlab)] ([tobiashuste](https://github.com/tobiashuste))
+- Support Ubuntu 24.04 and remove 18.04 support [\#299](https://github.com/hifis-net/ansible-collection-toolkit/pull/299) [[gitlab](https://github.com/hifis-net/ansible-collection-toolkit/labels/gitlab)] ([tobiashuste](https://github.com/tobiashuste))
+- Bump ansible from 10.1.0 to 10.2.0 [\#297](https://github.com/hifis-net/ansible-collection-toolkit/pull/297) ([dependabot[bot]](https://github.com/apps/dependabot))
+- Bump ansible/ansible-lint from 24.6.0 to 24.7.0 [\#292](https://github.com/hifis-net/ansible-collection-toolkit/pull/292) ([dependabot[bot]](https://github.com/apps/dependabot))
+- Bump ansible-lint from 24.5.0 to 24.7.0 [\#291](https://github.com/hifis-net/ansible-collection-toolkit/pull/291) ([dependabot[bot]](https://github.com/apps/dependabot))
+- Bump molecule from 24.2.1 to 24.7.0 [\#290](https://github.com/hifis-net/ansible-collection-toolkit/pull/290) ([dependabot[bot]](https://github.com/apps/dependabot))
+
 ## [v4.6.0](https://github.com/hifis-net/ansible-collection-toolkit/tree/v4.6.0) (2024-07-12)
 
 [Full Changelog](https://github.com/hifis-net/ansible-collection-toolkit/compare/v4.5.0...v4.6.0)
@@ -10,6 +29,7 @@
 
 **Merged pull requests:**
 
+- Prepare release of version 4.6.0 [\#295](https://github.com/hifis-net/ansible-collection-toolkit/pull/295) ([tobiashuste](https://github.com/tobiashuste))
 - Bump reuse from 3.0.2 to 4.0.3 [\#289](https://github.com/hifis-net/ansible-collection-toolkit/pull/289) ([dependabot[bot]](https://github.com/apps/dependabot))
 - language, spelling [\#287](https://github.com/hifis-net/ansible-collection-toolkit/pull/287) [[unattended_upgrades](https://github.com/hifis-net/ansible-collection-toolkit/labels/unattended_upgrades)] ([dnmvisser](https://github.com/dnmvisser))
 - Bump fsfe/reuse-action from 3.0.0 to 4.0.0 [\#286](https://github.com/hifis-net/ansible-collection-toolkit/pull/286) ([dependabot[bot]](https://github.com/apps/dependabot))
