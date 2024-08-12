@@ -3,14 +3,62 @@
 # SPDX-License-Identifier: Apache-2.0
 
 ---
-- name: "Download and install autoscaler plugin"
-  ansible.builtin.get_url:
-    url: "{{ gitlab_runner_autoscaler_plugin_url }}"
-    dest: "/usr/local/bin/fleeting-plugin-openstack"
-    checksum: "{{ gitlab_runner_autoscaler_plugin_checksum }}"
-    mode: '0755'
-    owner: "root"
-    group: "root"
+
+- name: "Check if fleeting-plugin-openstack is installed"
+  ansible.builtin.stat:
+    path: "/usr/local/bin/fleeting-plugin-openstack"
+  register: "_fleeting_plugin_openstack_stat"
+
+- name: "Check version of installed fleeting plugin"
+  when: "_fleeting_plugin_openstack_stat.stat.exists"
+  ansible.builtin.shell:
+    cmd: |
+      set -o pipefail
+      strings /usr/local/bin/fleeting-plugin-openstack | grep -oP "(?<=fleeting-plugin-openstack.Version=)(\d+\.\d+\.\d+)" | head -n 1
+    executable: "/bin/bash"
+  register: "_fleeting_plugin_version_installed"
+  changed_when: false
+  check_mode: false
+
+- name: "Download and install fleeting plugin"
+  when: "not _fleeting_plugin_openstack_stat.stat.exists or _fleeting_plugin_version_installed.stdout != gitlab_runner_autoscaler_plugin_version"
+  block:
+    - name: "Create temporary directory"
+      ansible.builtin.tempfile:
+        state: "directory"
+      register: "tempdir_fleeting_plugin"
+      check_mode: false
+      changed_when: false
+
+    - name: "Download fleeting-plugin-openstack"
+      ansible.builtin.get_url:
+        url: "{{ gitlab_runner_autoscaler_plugin_url }}"
+        dest: "{{ (tempdir_fleeting_plugin.path, 'fleeting-plugin-openstack.tar.gz') | path_join }}"
+        checksum: "sha512:{{ gitlab_runner_autoscaler_plugin_checksumfile }}"
+        owner: "root"
+        group: "root"
+        mode: "0600"
+      check_mode: false
+
+    - name: "Extract fleeting-plugin-openstack binary"
+      ansible.builtin.unarchive:
+        src: "{{ (tempdir_fleeting_plugin.path, 'fleeting-plugin-openstack.tar.gz') | path_join }}"
+        dest: "/usr/local/bin/"
+        include:
+          - "bin/fleeting-plugin-openstack"
+        owner: "root"
+        group: "root"
+        mode: "0755"
+        remote_src: true
+        extra_opts: ['--strip-components=1']
+
+  always:
+    - name: "Remove temporary directory"
+      ansible.builtin.file:
+        path: "{{ tempdir_fleeting_plugin.path }}"
+        state: "absent"
+      check_mode: false
+      changed_when: false
 
 - name: "Place clouds.yaml template"
   ansible.builtin.template:
