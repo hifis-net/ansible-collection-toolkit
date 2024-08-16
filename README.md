@@ -34,7 +34,7 @@ software engineers, but not exclusively. The following use cases are supported:
 * OS-related:
     * [**unattended-upgrades**](roles/unattended_upgrades)
     * [**netplan**](roles/netplan)
-    * distribute authorized [**SSH keys**](role/ssh_keys) to users
+    * distribute authorized [**SSH keys**](roles/ssh_keys) to users
 
 ## Looking for the unattended_upgrades role?
 
