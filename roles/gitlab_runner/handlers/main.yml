@@ -6,7 +6,7 @@
 ---
 
 - name: "Transpile the flatcar linux configuration"
-  ansible.builtin.command: "butane -o /etc/gitlab-runner/ignition.json /etc/gitlab-runner/flatcar-linux-config.bu"
+  ansible.builtin.command: "butane -o /etc/gitlab-runner/ignition.json /etc/gitlab-runner/butane-config.bu"
   changed_when: true
 
 - name: "Restart GitLab-Runner"
