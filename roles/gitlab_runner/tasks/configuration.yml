@@ -41,8 +41,8 @@
 
 - name: "Place the container linux configuration on the host"
   ansible.builtin.template:
-    src: "flatcar-linux-config.bu.j2"
-    dest: "/etc/gitlab-runner/flatcar-linux-config.bu"
+    src: "{{ gitlab_runner_butane_config_template }}"
+    dest: "/etc/gitlab-runner/butane-config.bu"
     owner: "root"
     group: "root"
     mode: "0644"
@@ -75,7 +75,7 @@
       check_mode: false
 
     - name: "Dry-run of transpile the flatcar linux configuration"
-      ansible.builtin.command: "butane -o {{ (temp_directory.path, 'ignition.json') | path_join }} /etc/gitlab-runner/flatcar-linux-config.bu"
+      ansible.builtin.command: "butane -o {{ (temp_directory.path, 'ignition.json') | path_join }} /etc/gitlab-runner/butane-config.bu"
       changed_when: false
       check_mode: false
 
