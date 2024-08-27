@@ -48,6 +48,9 @@ sentry_dsn = "{{ gitlab_runner_sentry_dsn }}"
 {% endif %}
 {% if "docker" in runner.executor %}
   [runners.docker]
+{% if runner.docker_host | default('') | length > 0 %}
+    host = "{{ runner.docker_host }}"
+{% endif %}
     tls_verify = {{ runner.docker_tls_verify | default(false) | bool | to_json }}
     image = "{{ runner.docker_image }}"
 {% if runner.docker_memory | default('') | length > 0 %}
