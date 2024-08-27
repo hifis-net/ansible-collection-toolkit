@@ -15,7 +15,7 @@ RuntimeDirectory=keepalived
 PIDFile={{ keepalived_pid_file_path }}
 KillMode=process
 EnvironmentFile=-{{ keepalived_sysconfig_file_path }}
-ExecStart={{ keepalived_executable_path }} -p {{ keepalived_pid_file_path }} $KEEPALIVED_OPTIONS
+ExecStart={{ keepalived_executable_path }} -p {{ keepalived_pid_file_path }} --use-file {{ keepalived_conf_file_path }} $KEEPALIVED_OPTIONS
 ExecReload=/bin/kill -HUP $MAINPID
 
 [Install]
