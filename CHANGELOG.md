@@ -1,5 +1,28 @@
 # Changelog
 
+## [v4.8.0](https://github.com/hifis-net/ansible-collection-toolkit/tree/v4.8.0) (2024-08-27)
+
+[Full Changelog](https://github.com/hifis-net/ansible-collection-toolkit/compare/v4.7.0...v4.8.0)
+
+**Implemented enhancements:**
+
+- Support docker host parameter to allow Podman support [\#312](https://github.com/hifis-net/ansible-collection-toolkit/pull/312) [[gitlab_runner](https://github.com/hifis-net/ansible-collection-toolkit/labels/gitlab_runner)] ([tobiashuste](https://github.com/tobiashuste))
+- Allow to customize butane config file [\#311](https://github.com/hifis-net/ansible-collection-toolkit/pull/311) [[gitlab_runner](https://github.com/hifis-net/ansible-collection-toolkit/labels/gitlab_runner)] ([tobiashuste](https://github.com/tobiashuste))
+
+**Fixed bugs:**
+
+- Add parameter to use specified configuration file [\#310](https://github.com/hifis-net/ansible-collection-toolkit/pull/310) [[keepalived](https://github.com/hifis-net/ansible-collection-toolkit/labels/keepalived)] ([boerngen-schmidt-next](https://github.com/boerngen-schmidt-next))
+
+**Closed issues:**
+
+- Link to SSH keys role in README results in 404 [\#306](https://github.com/hifis-net/ansible-collection-toolkit/issues/306)
+
+**Merged pull requests:**
+
+- Bump molecule from 24.7.0 to 24.8.0 [\#309](https://github.com/hifis-net/ansible-collection-toolkit/pull/309) ([dependabot[bot]](https://github.com/apps/dependabot))
+- Fix link to SSH keys role in README [\#308](https://github.com/hifis-net/ansible-collection-toolkit/pull/308) ([tobiashuste](https://github.com/tobiashuste))
+- Bump ansible from 10.2.0 to 10.3.0 [\#307](https://github.com/hifis-net/ansible-collection-toolkit/pull/307) ([dependabot[bot]](https://github.com/apps/dependabot))
+
 ## [v4.7.0](https://github.com/hifis-net/ansible-collection-toolkit/tree/v4.7.0) (2024-08-12)
 
 [Full Changelog](https://github.com/hifis-net/ansible-collection-toolkit/compare/v4.6.0...v4.7.0)
@@ -11,6 +34,7 @@
 
 **Merged pull requests:**
 
+- Prepare release of version 4.7.0 [\#304](https://github.com/hifis-net/ansible-collection-toolkit/pull/304) ([tobiashuste](https://github.com/tobiashuste))
 - Install Zammad 6.3.1 by default [\#302](https://github.com/hifis-net/ansible-collection-toolkit/pull/302) [[zammad](https://github.com/hifis-net/ansible-collection-toolkit/labels/zammad)] ([tobiashuste](https://github.com/tobiashuste))
 - Remove support for OS that are EOL [\#301](https://github.com/hifis-net/ansible-collection-toolkit/pull/301) [[ssh_keys](https://github.com/hifis-net/ansible-collection-toolkit/labels/ssh_keys)] [[gitlab](https://github.com/hifis-net/ansible-collection-toolkit/labels/gitlab)] ([tobiashuste](https://github.com/tobiashuste))
 - Support Ubuntu 24.04 and remove 18.04 support [\#299](https://github.com/hifis-net/ansible-collection-toolkit/pull/299) [[gitlab](https://github.com/hifis-net/ansible-collection-toolkit/labels/gitlab)] ([tobiashuste](https://github.com/tobiashuste))
