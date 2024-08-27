@@ -141,7 +141,7 @@
 - name: "Verify Keepalived configuration."
   become: true
   ansible.builtin.command:
-    cmd: "{{ keepalived_executable_path | quote }} --config-test {{ keepalived_conf_file_path | quote }}"
+    cmd: "{{ keepalived_executable_path | quote }} --config-test --use-file {{ keepalived_conf_file_path | quote }}"
   register: "config_check"
   changed_when: "config_check.rc != 0"
 
