@@ -20,6 +20,11 @@
     ansible_facts.distribution_release | lower == 'bookworm' and haproxy_version | regex_search('\\d+\\.\\d+') is version('2.4', '==') or
     ansible_facts.distribution_release | lower == 'buster' and haproxy_version | regex_search('\\d+\\.\\d+') is version('2.8', '==')
 
+- name: "Stop role for unsupported HAProxy / Ubuntu combinations"
+  ansible.builtin.meta: "end_host"
+  when: >-
+    ansible_facts.distribution_release | lower == 'noble' and haproxy_version | regex_search('\\d+\\.\\d+') is version('2.9', '<')
+
 - name: "Enable ip_forward."
   become: true
   ansible.posix.sysctl:
