@@ -7,9 +7,9 @@
 # Path to the executable of HAProxy
 haproxy_executable_path: "/usr/sbin/haproxy"
 # HAProxy PPA version
-haproxy_ppa_version: "ppa:vbernat/haproxy-2.6"
+haproxy_ppa_version: "ppa:vbernat/haproxy-3.0"
 # HAProxy version
-haproxy_version: "2.6.*"
+haproxy_version: "3.0.*"
 # HAProxy user
 haproxy_user: "haproxy"
 # HAProxy group
