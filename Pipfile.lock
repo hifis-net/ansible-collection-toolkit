@@ -1,7 +1,7 @@
 {
     "_meta": {
         "hash": {
-            "sha256": "8c97ba9d75ed6a5ef72a5fdbffba4d1c05a57be207d8ccecf3949e38e16521fe"
+            "sha256": "570d651f325a838c56c17dd09e3d19e71dc869a8caa8cbfa2e854afe5d00a447"
         },
         "pipfile-spec": 6,
         "requires": {
@@ -552,11 +552,11 @@
         },
         "jsonschema-specifications": {
             "hashes": [
-                "sha256:48a76787b3e70f5ed53f1160d2b81f586e4ca6d1548c5de7085d1682674764cc",
-                "sha256:87e4fdf3a94858b8a2ba2778d9ba57d8a9cafca7c7489c46ba0d30a8bc6a9c3c"
+                "sha256:0f38b83639958ce1152d02a7f062902c41c8fd20d558b0c34344292d417ae272",
+                "sha256:a09a0680616357d9a0ecf05c12ad234479f549239d0f5b55f3deea67475da9bf"
             ],
-            "markers": "python_version >= '3.8'",
-            "version": "==2023.12.1"
+            "markers": "python_version >= '3.9'",
+            "version": "==2024.10.1"
         },
         "license-expression": {
             "hashes": [
@@ -651,12 +651,12 @@
         },
         "molecule": {
             "hashes": [
-                "sha256:140738904e9f17815780568ac408c9f73bb9e2ac721e34685a359e6d3507e677",
-                "sha256:8e748ec0cf18e7ef718af2caf18e3ef77dff54f5be1ecee9ffaa93095f301cf5"
+                "sha256:8548eda13c31a1ea41ba0786b29dde466cfb812617c25792151335b17a410f63",
+                "sha256:ecb15e4c6b66e208e0621e19b100d471a06cd114371f46449620e7eda3ec0a62"
             ],
             "index": "pypi",
             "markers": "python_version >= '3.10'",
-            "version": "==24.8.0"
+            "version": "==24.9.0"
         },
         "molecule-plugins": {
             "extras": [
@@ -1028,7 +1028,7 @@
                 "sha256:0dd927072d03c0a6527a20d2e6ad5ba8d0380e60870c383bc533b71744df7b7a",
                 "sha256:e72f0de09bba6a04e0de70937b0cf06e55f36f37b3deb422dfaf854b867b840a"
             ],
-            "markers": "python_version >= '3.12'",
+            "markers": "python_version >= '3.8'",
             "version": "==10.0"
         },
         "yamllint": {
