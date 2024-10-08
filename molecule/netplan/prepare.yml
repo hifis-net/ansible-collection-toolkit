@@ -16,4 +16,9 @@
         update_cache: true
         state: "present"
 
+    - name: "Ensure systemd-udevd is started on Ubuntu 24.04"
+      ansible.builtin.service:
+        name: "systemd-udevd"
+        state: "started"
+      when: "ansible_facts.distribution_release | lower == 'noble'"
 ...
