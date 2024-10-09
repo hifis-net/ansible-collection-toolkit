@@ -104,6 +104,7 @@ provisioner:
             autoscaler_cloud_name: "openstack"
             autoscaler_clouds_config: "/etc/gitlab-runner/clouds.yaml"
             autoscaler_use_ignition: true
+            autoscaler_boot_time: "5m"
             autoscaler_flavor_ref: "a7779e0c-899a-4c73-b75d-757e7722dc9b"
             autoscaler_image_ref: "67c1e69a-921d-4a5c-85cf-cf2a7d94a14d"
             autoscaler_network_id: "183bd5c6-e720-4601-b471-f4135a32263d"

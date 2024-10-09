@@ -101,7 +101,7 @@ sentry_dsn = "{{ gitlab_runner_sentry_dsn }}"
     cloud = "{{ runner.autoscaler_cloud_name }}"
     clouds_config = "{{ runner.autoscaler_clouds_config }}"
     name = "{{ runner.autoscaler_group_name | default('autoscaler-runners') }}"
-    boot_time = "3m"
+    boot_time = "{{ runner.autoscaler_boot_time | default('3m') }}"
     use_ignition = {{ runner.autoscaler_use_ignition | default(false) | bool | to_json }}
 
   [runners.autoscaler.plugin_config.server_spec]
