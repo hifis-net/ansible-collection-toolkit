@@ -29,12 +29,12 @@ None.
 ### GitLab-Runner variables
 
 ```yaml
-gitlab_runner_version: "16.9.0"
+gitlab_runner_version: "17.4.0"
 ```
 The version of GitLab-Runner to install.
 
 ```yaml
-gitlab_runner_pkg_version: "16.9.0-1"
+gitlab_runner_pkg_version: "17.4.0-1"
 ```
 The version to be used to determine the GitLab-Runner
 [package](https://packages.gitlab.com/runner/gitlab-runner) (optional).

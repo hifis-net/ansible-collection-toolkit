@@ -16,6 +16,7 @@ Currently [supported platforms](meta/main.yml) are:
 - Debian 11 (Bullseye)
 - Ubuntu 20.04 LTS (Focal Fossa)
 - Ubuntu 22.04 LTS (Jemmy Jellyfish)
+- Ubuntu 24.04 LTS (Noble Numbat)
 
 ## Requirements
 
@@ -41,10 +42,10 @@ the desired release. You can find the available releases
 [here](https://packages.gitlab.com/gitlab).
 
 ```yaml
-gitlab_version: "15.6.1"
+gitlab_version: "17.4.2"
 
-# GitLab Release for RHEL/AlmaLinux 8
-gitlab_release: "ce.0.el8"
+# GitLab Release for RHEL/AlmaLinux 9
+gitlab_release: "ce.0.el9"
 
 # GitLab Release for Ubuntu
 gitlab_release: "ce.0"

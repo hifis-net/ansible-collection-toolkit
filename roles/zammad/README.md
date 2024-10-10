@@ -16,6 +16,12 @@ support/ticketing solution [Zammad](https://zammad.org/).
 **Note:** This role does not install elasticsearch  and postgresql server.
 See [Dependencies](#dependencies).
 
+Currently [supported platforms](meta/main.yml) are:
+
+- Ubuntu 20.04 LTS
+- Ubuntu 22.04 LTS
+- Ubuntu 24.04 LTS
+
 ## Requirements
 
 The below requirements are needed on the target host:
@@ -25,7 +31,7 @@ The below requirements are needed on the target host:
 ## Role Variables
 
 ```yaml
-zammad_version: "6.3.0"
+zammad_version: "6.3.1"
 ```
 
 Zammad version to be installed.

@@ -21,13 +21,13 @@ Currently [supported platforms](meta/main.yml) are:
 - Debian 11 (Bullseye)
 - Debian 12 (Bookworm)
 
-This role is tested against the two latest LTS versions of HAProxy.
+This role is tested against the four latest LTS versions of HAProxy.
 Currently, this results in official support for the HAProxy release series:
 
 - `3.0` (not supported on Debian 10 and Ubuntu 20.04)
-- `2.8` (not supported on Debian 10)
-- `2.6`
-- `2.4` (not supported on Debian 12)
+- `2.8` (not supported on Debian 10 and Ubuntu 24.04)
+- `2.6` (not supported on Ubuntu 24.04)
+- `2.4` (not supported on Debian 12 and Ubuntu 24.04)
 
 Other versions are known to work as well but are not automatically tested.
 
@@ -123,7 +123,7 @@ haproxy_executable_path: '/usr/sbin/haproxy'
 Variable to pin the PPA version to a certain value:
 
 ```yaml
-haproxy_ppa_version: 'ppa:vbernat/haproxy-2.6'
+haproxy_ppa_version: 'ppa:vbernat/haproxy-3.0'
 ```
 
 #### HAProxy version
@@ -131,7 +131,7 @@ haproxy_ppa_version: 'ppa:vbernat/haproxy-2.6'
 Variable to pin the HAProxy version to a certain value:
 
 ```yaml
-haproxy_version: '2.6.*'
+haproxy_version: '3.0.*'
 ```
 
 #### HAProxy user
