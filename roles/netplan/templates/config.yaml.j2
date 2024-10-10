@@ -22,6 +22,21 @@ network:
       routes:
         - to: "default"
           via: "{{ ethernet['gateway4'] }}"
+{% if ethernet['routes'] is defined %}
+{% for route in ethernet['routes']%}
+        - to: "{{ route.to }}"
+          via: "{{ route.via }}"
+{% endfor %}
+{% endif %}
+{% endif %}
+{% if ethernet['gateway4'] is not defined %}
+{% if ethernet['routes'] is defined %}
+      routes:
+{% for route in ethernet['routes']%}
+        - to: "{{ route.to }}"
+          via: "{{ route.via }}"
+{% endfor %}
+{% endif %}
 {% endif %}
 {% if ethernet['addresses'] is defined %}
       addresses:
