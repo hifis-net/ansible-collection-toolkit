@@ -44,7 +44,7 @@ the desired release. You can find the available releases
 ```yaml
 gitlab_version: "17.4.2"
 
-# GitLab Release for RHEL/AlmaLinux 8
+# GitLab Release for RHEL/AlmaLinux 9
 gitlab_release: "ce.0.el9"
 
 # GitLab Release for Ubuntu
