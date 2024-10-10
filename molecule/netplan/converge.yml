@@ -10,7 +10,11 @@
     netplan_ethernets:
       - interface_name: "eth0"
         dhcp4: "no"
-        gateway4: "10.123.0.1"
+        routes:
+          - to: "default"
+            via: "10.123.0.1"
+          - to: "172.16.0.0/24"
+            via: "10.123.0.100"
         addresses:
           - "10.123.0.10/24"
         nameservers:

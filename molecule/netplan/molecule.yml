@@ -20,6 +20,8 @@ platforms:
       - "--network=netplan_network"
 provisioner:
   name: "ansible"
+  options:
+    D: true
   playbooks:
     prepare: "prepare.yml"
     converge: "converge.yml"
