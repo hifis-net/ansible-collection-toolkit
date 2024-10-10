@@ -22,19 +22,19 @@ SPDX-License-Identifier: Apache-2.0
 This collection provides production-ready Ansible roles used for providing services used in research and by research
 software engineers, but not exclusively. The following use cases are supported:
 
-* DevOps platform:
-    * [**GitLab**](roles/gitlab)
-    * deploy [**GitLab-Runner**](roles/gitlab_runner) with a focus, but not limited, on Openstack autoscaling
-    * [**Redis**](roles/redis)
-* Help desk:
-    * [**Zammad**](roles/zammad)
-* High Availability (HA) / Load Balancing:
-    * [**HAProxy**](roles/haproxy)
-    * [**Keepalived**](roles/keepalived)
-* OS-related:
-    * [**unattended-upgrades**](roles/unattended_upgrades)
-    * [**netplan**](roles/netplan)
-    * distribute authorized [**SSH keys**](roles/ssh_keys) to users
+* **DevOps platform:**
+    * [GitLab](roles/gitlab)
+    * deploy [GitLab-Runner](roles/gitlab_runner) with a focus, but not limited, on Openstack autoscaling
+    * [Redis](roles/redis)
+* **Help desk:**
+    * [Zammad](roles/zammad)
+* **High Availability (HA) / Load Balancing:**
+    * [HAProxy](roles/haproxy)
+    * [Keepalived](roles/keepalived)
+* **OS-related:**
+    * [unattended-upgrades](roles/unattended_upgrades)
+    * [netplan](roles/netplan)
+    * distribute authorized [SSH keys](roles/ssh_keys) to users
 
 ## Looking for the unattended_upgrades role?
 

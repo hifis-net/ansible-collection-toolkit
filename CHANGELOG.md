@@ -1,5 +1,37 @@
 # Changelog
 
+## [v5.0.0](https://github.com/hifis-net/ansible-collection-toolkit/tree/v5.0.0) (2024-10-10)
+
+[Full Changelog](https://github.com/hifis-net/ansible-collection-toolkit/compare/v4.8.0...v5.0.0)
+
+**Breaking changes:**
+
+- Install HAProxy 3.0 by default [\#256](https://github.com/hifis-net/ansible-collection-toolkit/issues/256) [[haproxy](https://github.com/hifis-net/ansible-collection-toolkit/labels/haproxy)]
+
+**Implemented enhancements:**
+
+- hifis.toolkit.gitlab\_runner: Support autoscaler boot\_time parameter [\#326](https://github.com/hifis-net/ansible-collection-toolkit/issues/326) [[gitlab_runner](https://github.com/hifis-net/ansible-collection-toolkit/labels/gitlab_runner)]
+- Add support for Ubuntu 24.04 \(Noble Numbat\) [\#252](https://github.com/hifis-net/ansible-collection-toolkit/issues/252)
+
+**Fixed bugs:**
+
+- hifis.toolkit.netplan Molecule test fails on Ubuntu 24.04 [\#318](https://github.com/hifis-net/ansible-collection-toolkit/issues/318)
+
+**Merged pull requests:**
+
+- Replace deprecated gateway4 with routes [\#330](https://github.com/hifis-net/ansible-collection-toolkit/pull/330) [[netplan](https://github.com/hifis-net/ansible-collection-toolkit/labels/netplan)] ([Normo](https://github.com/Normo))
+- Bump ansible from 10.4.0 to 10.5.0 [\#329](https://github.com/hifis-net/ansible-collection-toolkit/pull/329) ([dependabot[bot]](https://github.com/apps/dependabot))
+- Fix molecule tests for netplan on Ubuntu 24.04 [\#328](https://github.com/hifis-net/ansible-collection-toolkit/pull/328) [[netplan](https://github.com/hifis-net/ansible-collection-toolkit/labels/netplan)] ([Normo](https://github.com/Normo))
+- Support fleeting-pluign-openstack boot\_time parameter [\#327](https://github.com/hifis-net/ansible-collection-toolkit/pull/327) [[gitlab_runner](https://github.com/hifis-net/ansible-collection-toolkit/labels/gitlab_runner)] ([Normo](https://github.com/Normo))
+- Add custom routes [\#325](https://github.com/hifis-net/ansible-collection-toolkit/pull/325) [[netplan](https://github.com/hifis-net/ansible-collection-toolkit/labels/netplan)] ([axldd](https://github.com/axldd))
+- Bump ansible-lint from 24.7.0 to 24.9.2 [\#324](https://github.com/hifis-net/ansible-collection-toolkit/pull/324) ([dependabot[bot]](https://github.com/apps/dependabot))
+- Bump ansible/ansible-lint from 24.7.0 to 24.9.2 [\#323](https://github.com/hifis-net/ansible-collection-toolkit/pull/323) ([dependabot[bot]](https://github.com/apps/dependabot))
+- Bump molecule from 24.8.0 to 24.9.0 [\#322](https://github.com/hifis-net/ansible-collection-toolkit/pull/322) ([dependabot[bot]](https://github.com/apps/dependabot))
+- Bump ansible from 10.3.0 to 10.4.0 [\#319](https://github.com/hifis-net/ansible-collection-toolkit/pull/319) ([dependabot[bot]](https://github.com/apps/dependabot))
+- Add Ubuntu 24.04 support to zammad role [\#317](https://github.com/hifis-net/ansible-collection-toolkit/pull/317) [[zammad](https://github.com/hifis-net/ansible-collection-toolkit/labels/zammad)] ([Normo](https://github.com/Normo))
+- Install haproxy 3.0 by default [\#316](https://github.com/hifis-net/ansible-collection-toolkit/pull/316) [[haproxy](https://github.com/hifis-net/ansible-collection-toolkit/labels/haproxy)] ([Normo](https://github.com/Normo))
+- Support Ubuntu 24.04 in HAProxy role  [\#315](https://github.com/hifis-net/ansible-collection-toolkit/pull/315) [[haproxy](https://github.com/hifis-net/ansible-collection-toolkit/labels/haproxy)] ([Normo](https://github.com/Normo))
+
 ## [v4.8.0](https://github.com/hifis-net/ansible-collection-toolkit/tree/v4.8.0) (2024-08-27)
 
 [Full Changelog](https://github.com/hifis-net/ansible-collection-toolkit/compare/v4.7.0...v4.8.0)
@@ -19,6 +51,7 @@
 
 **Merged pull requests:**
 
+- Prepare release of version 4.8.0 [\#313](https://github.com/hifis-net/ansible-collection-toolkit/pull/313) ([tobiashuste](https://github.com/tobiashuste))
 - Bump molecule from 24.7.0 to 24.8.0 [\#309](https://github.com/hifis-net/ansible-collection-toolkit/pull/309) ([dependabot[bot]](https://github.com/apps/dependabot))
 - Fix link to SSH keys role in README [\#308](https://github.com/hifis-net/ansible-collection-toolkit/pull/308) ([tobiashuste](https://github.com/tobiashuste))
 - Bump ansible from 10.2.0 to 10.3.0 [\#307](https://github.com/hifis-net/ansible-collection-toolkit/pull/307) ([dependabot[bot]](https://github.com/apps/dependabot))
