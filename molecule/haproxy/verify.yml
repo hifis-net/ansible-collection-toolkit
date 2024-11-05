@@ -15,9 +15,7 @@
 
     - name: "Stop play for unsupported HAProxy / Ubuntu combinations"
       ansible.builtin.meta: "end_host"
-      when: >-
-        ansible_facts.distribution_release | lower == 'focal' and haproxy_version | regex_search('\\d+\\.\\d+') is version('2.9', '>') or
-        ansible_facts.distribution_release | lower == 'noble' and haproxy_version | regex_search('\\d+\\.\\d+') is version('2.9', '<')
+      when: "ansible_facts.distribution_release | lower == 'noble' and haproxy_version | regex_search('\\d+\\.\\d+') is version('2.9', '<')"
 
     - name: "Populate service facts."
       ansible.builtin.service_facts:

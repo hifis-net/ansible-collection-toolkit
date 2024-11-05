@@ -23,7 +23,7 @@ Currently [supported platforms](meta/main.yml) are:
 This role is tested against the four latest LTS versions of HAProxy.
 Currently, this results in official support for the HAProxy release series:
 
-- `3.0` (not supported on Ubuntu 20.04)
+- `3.0`
 - `2.8` (not supported on Ubuntu 24.04)
 - `2.6` (not supported on Ubuntu 24.04)
 - `2.4` (not supported on Debian 12 and Ubuntu 24.04)
