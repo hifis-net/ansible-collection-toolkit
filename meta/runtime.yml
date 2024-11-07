@@ -4,4 +4,4 @@
 # SPDX-License-Identifier: Apache-2.0
 
 ---
-requires_ansible: '>=2.15.0'
+requires_ansible: '>=2.16.0'
