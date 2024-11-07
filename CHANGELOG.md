@@ -1,5 +1,21 @@
 # Changelog
 
+## [v5.1.0](https://github.com/hifis-net/ansible-collection-toolkit/tree/v5.1.0) (2024-11-08)
+
+[Full Changelog](https://github.com/hifis-net/ansible-collection-toolkit/compare/v5.0.0...v5.1.0)
+
+**Closed issues:**
+
+- Drop support for Debian 10 Buster [\#333](https://github.com/hifis-net/ansible-collection-toolkit/issues/333)
+- Drop support for ansible 2.15 [\#332](https://github.com/hifis-net/ansible-collection-toolkit/issues/332)
+
+**Merged pull requests:**
+
+- Remove support for EOL Ansible 2.15 [\#337](https://github.com/hifis-net/ansible-collection-toolkit/pull/337) [[unattended_upgrades](https://github.com/hifis-net/ansible-collection-toolkit/labels/unattended_upgrades)] [[zammad](https://github.com/hifis-net/ansible-collection-toolkit/labels/zammad)] [[ssh_keys](https://github.com/hifis-net/ansible-collection-toolkit/labels/ssh_keys)] [[gitlab_runner](https://github.com/hifis-net/ansible-collection-toolkit/labels/gitlab_runner)] [[keepalived](https://github.com/hifis-net/ansible-collection-toolkit/labels/keepalived)] [[haproxy](https://github.com/hifis-net/ansible-collection-toolkit/labels/haproxy)] [[netplan](https://github.com/hifis-net/ansible-collection-toolkit/labels/netplan)] [[redis](https://github.com/hifis-net/ansible-collection-toolkit/labels/redis)] [[gitlab](https://github.com/hifis-net/ansible-collection-toolkit/labels/gitlab)] ([tobiashuste](https://github.com/tobiashuste))
+- Bump ansible from 10.5.0 to 10.6.0 [\#336](https://github.com/hifis-net/ansible-collection-toolkit/pull/336) ([dependabot[bot]](https://github.com/apps/dependabot))
+- Remove the restriction for HAproxy 3.0 under Ubuntu 20.04 [\#335](https://github.com/hifis-net/ansible-collection-toolkit/pull/335) [[haproxy](https://github.com/hifis-net/ansible-collection-toolkit/labels/haproxy)] ([Normo](https://github.com/Normo))
+- Drop support for Debian 10 buster [\#334](https://github.com/hifis-net/ansible-collection-toolkit/pull/334) [[unattended_upgrades](https://github.com/hifis-net/ansible-collection-toolkit/labels/unattended_upgrades)] [[ssh_keys](https://github.com/hifis-net/ansible-collection-toolkit/labels/ssh_keys)] [[gitlab_runner](https://github.com/hifis-net/ansible-collection-toolkit/labels/gitlab_runner)] [[haproxy](https://github.com/hifis-net/ansible-collection-toolkit/labels/haproxy)] ([Normo](https://github.com/Normo))
+
 ## [v5.0.0](https://github.com/hifis-net/ansible-collection-toolkit/tree/v5.0.0) (2024-10-10)
 
 [Full Changelog](https://github.com/hifis-net/ansible-collection-toolkit/compare/v4.8.0...v5.0.0)
@@ -19,6 +35,7 @@
 
 **Merged pull requests:**
 
+- Prepare release version 5.0.0 [\#331](https://github.com/hifis-net/ansible-collection-toolkit/pull/331) [[zammad](https://github.com/hifis-net/ansible-collection-toolkit/labels/zammad)] [[gitlab_runner](https://github.com/hifis-net/ansible-collection-toolkit/labels/gitlab_runner)] [[haproxy](https://github.com/hifis-net/ansible-collection-toolkit/labels/haproxy)] [[gitlab](https://github.com/hifis-net/ansible-collection-toolkit/labels/gitlab)] ([Normo](https://github.com/Normo))
 - Replace deprecated gateway4 with routes [\#330](https://github.com/hifis-net/ansible-collection-toolkit/pull/330) [[netplan](https://github.com/hifis-net/ansible-collection-toolkit/labels/netplan)] ([Normo](https://github.com/Normo))
 - Bump ansible from 10.4.0 to 10.5.0 [\#329](https://github.com/hifis-net/ansible-collection-toolkit/pull/329) ([dependabot[bot]](https://github.com/apps/dependabot))
 - Fix molecule tests for netplan on Ubuntu 24.04 [\#328](https://github.com/hifis-net/ansible-collection-toolkit/pull/328) [[netplan](https://github.com/hifis-net/ansible-collection-toolkit/labels/netplan)] ([Normo](https://github.com/Normo))
