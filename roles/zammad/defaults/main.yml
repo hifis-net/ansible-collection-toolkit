@@ -14,6 +14,7 @@ zammad_ssl_key_path: "/etc/ssl/private/zammad_key.pem"
 
 zammad_nginx_additional_server_configs: []
 zammad_nginx_server_tokens: "off"
+zammad_nginx_disabled: false
 
 elasticsearch_url: "http://localhost:9200"
 ...

@@ -6,6 +6,8 @@
 ---
 - name: "Converge"
   hosts: "all"
+  vars:
+    zammad_nginx_disabled: true
   tasks:
 
     - name: "Get private key content"

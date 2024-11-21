@@ -8,6 +8,7 @@
   ansible.builtin.service:
     name: "nginx"
     state: "reloaded"
+  when: "not zammad_nginx_disabled"
 
 - name: "Set Elasticsearch server address"
   ansible.builtin.command: >-

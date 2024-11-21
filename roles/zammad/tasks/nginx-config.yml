@@ -14,4 +14,12 @@
     group: "root"
   notify: "Reload nginx"
 
+- name: "Stop nginx"
+  ansible.builtin.service:
+    name: "nginx"
+    state: "stopped"
+    enabled: false
+    daemon_reload: true
+  when: "zammad_nginx_disabled"
+
 ...
