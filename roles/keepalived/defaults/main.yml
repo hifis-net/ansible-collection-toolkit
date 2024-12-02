@@ -6,7 +6,7 @@
 ---
 
 # Keepalived version
-keepalived_version: "2.3.1"
+keepalived_version: "2.3.2"
 # URL from which Keepalived can be downloaded
 keepalived_download_url: "https://www.keepalived.org/software/keepalived-{{ keepalived_version }}.tar.gz"
 # List of dependencies of Keepalived
