@@ -12,7 +12,7 @@ verify_ssl = true
 yamllint = "~=1.35.1"
 ansible-lint = "~=24.12.2"
 molecule = "~=24.12.0"
-molecule-plugins = {extras = ["podman"], version = "~=23.5.3"}
+molecule-plugins = {extras = ["podman"], version = "~=23.6.0"}
 reuse = "~=5.0.2"
 netaddr = "~=1.3.0"
 
