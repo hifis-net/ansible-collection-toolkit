@@ -22,3 +22,18 @@ provisioner:
   name: "ansible"
 verifier:
   name: "ansible"
+scenario:
+  name: "ssh_keys"
+  test_sequence:
+    - "destroy"
+    - "dependency"
+    - "syntax"
+    - "create"
+    - "prepare"
+    - "check"
+    - "converge"
+    - "idempotence"
+    - "check"
+    - "side_effect"
+    - "verify"
+    - "destroy"
