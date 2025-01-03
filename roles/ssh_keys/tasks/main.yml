@@ -27,5 +27,6 @@
   loop: "{{ ssh_user_list }}"
   loop_control:
     loop_var: "ssh_user"
+  ignore_errors: "{{ ansible_check_mode }}"
 
 ...
