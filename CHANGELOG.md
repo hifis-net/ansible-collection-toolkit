@@ -1,5 +1,26 @@
 # Changelog
 
+## [v5.1.1](https://github.com/hifis-net/ansible-collection-toolkit/tree/v5.1.1) (2025-01-03)
+
+[Full Changelog](https://github.com/hifis-net/ansible-collection-toolkit/compare/v5.1.0...v5.1.1)
+
+**Fixed bugs:**
+
+- role ssh\_keys: ignores errors when in check-mode and users doesnt exist yet [\#356](https://github.com/hifis-net/ansible-collection-toolkit/pull/356) [[ssh_keys](https://github.com/hifis-net/ansible-collection-toolkit/labels/ssh_keys)] ([iceowlbeer](https://github.com/iceowlbeer))
+
+**Merged pull requests:**
+
+- Bump molecule-plugins from 23.5.3 to 23.6.0 [\#355](https://github.com/hifis-net/ansible-collection-toolkit/pull/355) ([dependabot[bot]](https://github.com/apps/dependabot))
+- Bump ansible-lint from 24.10.0 to 24.12.2 [\#354](https://github.com/hifis-net/ansible-collection-toolkit/pull/354) ([dependabot[bot]](https://github.com/apps/dependabot))
+- Bump ansible/ansible-lint from 24.10.0 to 24.12.2 [\#353](https://github.com/hifis-net/ansible-collection-toolkit/pull/353) ([dependabot[bot]](https://github.com/apps/dependabot))
+- Bump molecule from 24.9.0 to 24.12.0 [\#348](https://github.com/hifis-net/ansible-collection-toolkit/pull/348) ([dependabot[bot]](https://github.com/apps/dependabot))
+- Bump ansible from 10.6.0 to 11.1.0 [\#347](https://github.com/hifis-net/ansible-collection-toolkit/pull/347) ([dependabot[bot]](https://github.com/apps/dependabot))
+- Bump keepalived from version 2.3.1 to 2.3.2 [\#346](https://github.com/hifis-net/ansible-collection-toolkit/pull/346) [[keepalived](https://github.com/hifis-net/ansible-collection-toolkit/labels/keepalived)] ([Normo](https://github.com/Normo))
+- Bump ansible/ansible-lint from 24.9.2 to 24.10.0 [\#343](https://github.com/hifis-net/ansible-collection-toolkit/pull/343) ([dependabot[bot]](https://github.com/apps/dependabot))
+- Bump fsfe/reuse-action from 4.0.0 to 5.0.0 [\#342](https://github.com/hifis-net/ansible-collection-toolkit/pull/342) ([dependabot[bot]](https://github.com/apps/dependabot))
+- Bump reuse from 4.0.3 to 5.0.2 [\#341](https://github.com/hifis-net/ansible-collection-toolkit/pull/341) ([dependabot[bot]](https://github.com/apps/dependabot))
+- Bump ansible-lint from 24.9.2 to 24.10.0 [\#340](https://github.com/hifis-net/ansible-collection-toolkit/pull/340) ([dependabot[bot]](https://github.com/apps/dependabot))
+
 ## [v5.1.0](https://github.com/hifis-net/ansible-collection-toolkit/tree/v5.1.0) (2024-11-08)
 
 [Full Changelog](https://github.com/hifis-net/ansible-collection-toolkit/compare/v5.0.0...v5.1.0)
@@ -11,6 +32,7 @@
 
 **Merged pull requests:**
 
+- Prepare release version 5.1.0 [\#338](https://github.com/hifis-net/ansible-collection-toolkit/pull/338) ([tobiashuste](https://github.com/tobiashuste))
 - Remove support for EOL Ansible 2.15 [\#337](https://github.com/hifis-net/ansible-collection-toolkit/pull/337) [[unattended_upgrades](https://github.com/hifis-net/ansible-collection-toolkit/labels/unattended_upgrades)] [[zammad](https://github.com/hifis-net/ansible-collection-toolkit/labels/zammad)] [[ssh_keys](https://github.com/hifis-net/ansible-collection-toolkit/labels/ssh_keys)] [[gitlab_runner](https://github.com/hifis-net/ansible-collection-toolkit/labels/gitlab_runner)] [[keepalived](https://github.com/hifis-net/ansible-collection-toolkit/labels/keepalived)] [[haproxy](https://github.com/hifis-net/ansible-collection-toolkit/labels/haproxy)] [[netplan](https://github.com/hifis-net/ansible-collection-toolkit/labels/netplan)] [[redis](https://github.com/hifis-net/ansible-collection-toolkit/labels/redis)] [[gitlab](https://github.com/hifis-net/ansible-collection-toolkit/labels/gitlab)] ([tobiashuste](https://github.com/tobiashuste))
 - Bump ansible from 10.5.0 to 10.6.0 [\#336](https://github.com/hifis-net/ansible-collection-toolkit/pull/336) ([dependabot[bot]](https://github.com/apps/dependabot))
 - Remove the restriction for HAproxy 3.0 under Ubuntu 20.04 [\#335](https://github.com/hifis-net/ansible-collection-toolkit/pull/335) [[haproxy](https://github.com/hifis-net/ansible-collection-toolkit/labels/haproxy)] ([Normo](https://github.com/Normo))
