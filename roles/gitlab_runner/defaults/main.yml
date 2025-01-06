@@ -14,9 +14,9 @@ gitlab_runner_docker_machine_binary_url: "https://gitlab.com/gitlab-org/ci-cd/do
 
 gitlab_runner_docker_machine_binary_checksum: "sha256:04cc18c8f6ee0d71614064fa81116f20f3a37af53eeebf19bfb832ab9c46d3a0"
 
-gitlab_runner_transpiler_binary_url: "https://github.com/coreos/butane/releases/download/v0.20.0/butane-{{ ansible_architecture }}-unknown-linux-gnu"
+gitlab_runner_transpiler_binary_url: "https://github.com/coreos/butane/releases/download/v0.23.0/butane-{{ ansible_architecture }}-unknown-linux-gnu"
 
-gitlab_runner_transpiler_binary_checksum: "sha256:28003c61b991d17d66c23cd3f305202ae14736b8e7fd941986b6086cf931ed4b"
+gitlab_runner_transpiler_binary_checksum: "sha256:5833ce9f9c2932d9b02bc05821ffb6927d1e896a524c8dd53a4c9d2d90c47e2c"
 
 gitlab_runner_install_docker: true
 
