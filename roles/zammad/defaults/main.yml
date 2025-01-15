@@ -4,7 +4,7 @@
 # SPDX-License-Identifier: MIT
 
 ---
-zammad_version: "6.3.1"
+zammad_version: "6.4.1"
 zammad_release_channel: "stable"
 zammad_domain_name: "{{ ansible_fqdn }}"
 
