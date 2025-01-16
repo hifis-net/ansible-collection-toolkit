@@ -1,5 +1,19 @@
 # Changelog
 
+## [v5.2.0](https://github.com/hifis-net/ansible-collection-toolkit/tree/v5.2.0) (2025-01-16)
+
+[Full Changelog](https://github.com/hifis-net/ansible-collection-toolkit/compare/v5.1.1...v5.2.0)
+
+**Fixed bugs:**
+
+- Fix autoscaler URL template and install 0.28.0 by default [\#362](https://github.com/hifis-net/ansible-collection-toolkit/pull/362) [[gitlab_runner](https://github.com/hifis-net/ansible-collection-toolkit/labels/gitlab_runner)] ([tobiashuste](https://github.com/tobiashuste))
+
+**Merged pull requests:**
+
+- Install Zammad 6.4.1 by default [\#361](https://github.com/hifis-net/ansible-collection-toolkit/pull/361) [[zammad](https://github.com/hifis-net/ansible-collection-toolkit/labels/zammad)] ([Normo](https://github.com/Normo))
+- Bump jinja2 from 3.1.4 to 3.1.5 [\#360](https://github.com/hifis-net/ansible-collection-toolkit/pull/360) ([dependabot[bot]](https://github.com/apps/dependabot))
+- Update butane to v0.23.0 [\#359](https://github.com/hifis-net/ansible-collection-toolkit/pull/359) [[gitlab_runner](https://github.com/hifis-net/ansible-collection-toolkit/labels/gitlab_runner)] ([tobiashuste](https://github.com/tobiashuste))
+
 ## [v5.1.1](https://github.com/hifis-net/ansible-collection-toolkit/tree/v5.1.1) (2025-01-03)
 
 [Full Changelog](https://github.com/hifis-net/ansible-collection-toolkit/compare/v5.1.0...v5.1.1)
@@ -57,16 +71,16 @@
 
 **Merged pull requests:**
 
-- Prepare release version 5.0.0 [\#331](https://github.com/hifis-net/ansible-collection-toolkit/pull/331) [[zammad](https://github.com/hifis-net/ansible-collection-toolkit/labels/zammad)] [[gitlab_runner](https://github.com/hifis-net/ansible-collection-toolkit/labels/gitlab_runner)] [[haproxy](https://github.com/hifis-net/ansible-collection-toolkit/labels/haproxy)] [[gitlab](https://github.com/hifis-net/ansible-collection-toolkit/labels/gitlab)] ([Normo](https://github.com/Normo))
-- Replace deprecated gateway4 with routes [\#330](https://github.com/hifis-net/ansible-collection-toolkit/pull/330) [[netplan](https://github.com/hifis-net/ansible-collection-toolkit/labels/netplan)] ([Normo](https://github.com/Normo))
 - Bump ansible from 10.4.0 to 10.5.0 [\#329](https://github.com/hifis-net/ansible-collection-toolkit/pull/329) ([dependabot[bot]](https://github.com/apps/dependabot))
-- Fix molecule tests for netplan on Ubuntu 24.04 [\#328](https://github.com/hifis-net/ansible-collection-toolkit/pull/328) [[netplan](https://github.com/hifis-net/ansible-collection-toolkit/labels/netplan)] ([Normo](https://github.com/Normo))
-- Support fleeting-pluign-openstack boot\_time parameter [\#327](https://github.com/hifis-net/ansible-collection-toolkit/pull/327) [[gitlab_runner](https://github.com/hifis-net/ansible-collection-toolkit/labels/gitlab_runner)] ([Normo](https://github.com/Normo))
-- Add custom routes [\#325](https://github.com/hifis-net/ansible-collection-toolkit/pull/325) [[netplan](https://github.com/hifis-net/ansible-collection-toolkit/labels/netplan)] ([axldd](https://github.com/axldd))
 - Bump ansible-lint from 24.7.0 to 24.9.2 [\#324](https://github.com/hifis-net/ansible-collection-toolkit/pull/324) ([dependabot[bot]](https://github.com/apps/dependabot))
 - Bump ansible/ansible-lint from 24.7.0 to 24.9.2 [\#323](https://github.com/hifis-net/ansible-collection-toolkit/pull/323) ([dependabot[bot]](https://github.com/apps/dependabot))
 - Bump molecule from 24.8.0 to 24.9.0 [\#322](https://github.com/hifis-net/ansible-collection-toolkit/pull/322) ([dependabot[bot]](https://github.com/apps/dependabot))
 - Bump ansible from 10.3.0 to 10.4.0 [\#319](https://github.com/hifis-net/ansible-collection-toolkit/pull/319) ([dependabot[bot]](https://github.com/apps/dependabot))
+- Prepare release version 5.0.0 [\#331](https://github.com/hifis-net/ansible-collection-toolkit/pull/331) [[zammad](https://github.com/hifis-net/ansible-collection-toolkit/labels/zammad)] [[gitlab_runner](https://github.com/hifis-net/ansible-collection-toolkit/labels/gitlab_runner)] [[haproxy](https://github.com/hifis-net/ansible-collection-toolkit/labels/haproxy)] [[gitlab](https://github.com/hifis-net/ansible-collection-toolkit/labels/gitlab)] ([Normo](https://github.com/Normo))
+- Replace deprecated gateway4 with routes [\#330](https://github.com/hifis-net/ansible-collection-toolkit/pull/330) [[netplan](https://github.com/hifis-net/ansible-collection-toolkit/labels/netplan)] ([Normo](https://github.com/Normo))
+- Fix molecule tests for netplan on Ubuntu 24.04 [\#328](https://github.com/hifis-net/ansible-collection-toolkit/pull/328) [[netplan](https://github.com/hifis-net/ansible-collection-toolkit/labels/netplan)] ([Normo](https://github.com/Normo))
+- Support fleeting-pluign-openstack boot\_time parameter [\#327](https://github.com/hifis-net/ansible-collection-toolkit/pull/327) [[gitlab_runner](https://github.com/hifis-net/ansible-collection-toolkit/labels/gitlab_runner)] ([Normo](https://github.com/Normo))
+- Add custom routes [\#325](https://github.com/hifis-net/ansible-collection-toolkit/pull/325) [[netplan](https://github.com/hifis-net/ansible-collection-toolkit/labels/netplan)] ([axldd](https://github.com/axldd))
 - Add Ubuntu 24.04 support to zammad role [\#317](https://github.com/hifis-net/ansible-collection-toolkit/pull/317) [[zammad](https://github.com/hifis-net/ansible-collection-toolkit/labels/zammad)] ([Normo](https://github.com/Normo))
 - Install haproxy 3.0 by default [\#316](https://github.com/hifis-net/ansible-collection-toolkit/pull/316) [[haproxy](https://github.com/hifis-net/ansible-collection-toolkit/labels/haproxy)] ([Normo](https://github.com/Normo))
 - Support Ubuntu 24.04 in HAProxy role  [\#315](https://github.com/hifis-net/ansible-collection-toolkit/pull/315) [[haproxy](https://github.com/hifis-net/ansible-collection-toolkit/labels/haproxy)] ([Normo](https://github.com/Normo))
