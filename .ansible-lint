@@ -3,5 +3,8 @@
 #
 # SPDX-License-Identifier: Apache-2.0
 
+exclude_paths:
+  - ".cache/"
+  - ".ansible/"
 skip_list:
   - 'var-naming[no-role-prefix]'

@@ -21,7 +21,7 @@
   check_mode: false
 
 - name: "Download and install fleeting plugin"
-  when: "not _fleeting_plugin_openstack_stat.stat.exists or _fleeting_plugin_version_installed.stdout != gitlab_runner_autoscaler_plugin_version"
+  when: "not _fleeting_plugin_openstack_stat.stat.exists or _fleeting_plugin_version_installed.stdout != gitlab_runner_autoscaler_binary_version"
   block:
     - name: "Create temporary directory"
       ansible.builtin.tempfile:
