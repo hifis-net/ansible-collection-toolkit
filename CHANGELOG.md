@@ -10,6 +10,7 @@
 
 **Merged pull requests:**
 
+- Prepare release v5.2.0 [\#363](https://github.com/hifis-net/ansible-collection-toolkit/pull/363) ([Normo](https://github.com/Normo))
 - Install Zammad 6.4.1 by default [\#361](https://github.com/hifis-net/ansible-collection-toolkit/pull/361) [[zammad](https://github.com/hifis-net/ansible-collection-toolkit/labels/zammad)] ([Normo](https://github.com/Normo))
 - Bump jinja2 from 3.1.4 to 3.1.5 [\#360](https://github.com/hifis-net/ansible-collection-toolkit/pull/360) ([dependabot[bot]](https://github.com/apps/dependabot))
 - Update butane to v0.23.0 [\#359](https://github.com/hifis-net/ansible-collection-toolkit/pull/359) [[gitlab_runner](https://github.com/hifis-net/ansible-collection-toolkit/labels/gitlab_runner)] ([tobiashuste](https://github.com/tobiashuste))
