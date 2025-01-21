@@ -11,6 +11,9 @@ gitlab_release: ""
 gitlab_gpg_key_url: "https://packages.gitlab.com/gitlab/{{ gitlab_edition }}/gpgkey"
 gitlab_gpg_key_id: "F6403F6544A38863DAA0B6E03F01618A51312F3F"
 
+# Do not display sensitive changes in diffs by default
+gitlab_hide_sensitive_changes: true
+
 # Specify whether this is the GitLab primary node
 gitlab_is_primary: false
 

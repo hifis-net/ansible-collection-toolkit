@@ -14,6 +14,7 @@
     mode: "0600"
     backup: true
   when: "gitlab_secrets_file is defined"
+  no_log: "{{ gitlab_hide_sensitive_changes }}"
   notify:
     - "Reconfigure Primary GitLab"
     - "Reconfigure Non Primary GitLab"
@@ -26,6 +27,7 @@
     owner: "root"
     group: "root"
     mode: "0644"
+  no_log: "{{ gitlab_hide_sensitive_changes }}"
   notify:
     - "Reconfigure Primary GitLab"
     - "Reconfigure Non Primary GitLab"
