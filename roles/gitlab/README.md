@@ -54,6 +54,12 @@ gitlab_release: "ce.0"
 **Please note:** If no GitLab version is specified the role will always install
 the latest available GitLab package.
 
+#### Do not display sensitive changes in diffs by default
+
+```yaml
+gitlab_hide_sensitive_changes: true
+```
+
 #### GPG Key URL
 
 URL to the GPG key that was used to sign the packages.
