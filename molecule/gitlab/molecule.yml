@@ -36,6 +36,10 @@ provisioner:
               - key: "modify_kernel_parameters"
                 type: "plain"
                 value: "false"
+          - gitlab_kas:
+              - key: "env"
+                type: "plain"
+                value: "{ 'OWN_PRIVATE_API_URL' => 'grpc://127.0.0.1:8155' }"
         gitlab_feature_flags:
           # See https://docs.gitlab.com/ee/user/feature_flags.html
           - name: "vscode_web_ide"
