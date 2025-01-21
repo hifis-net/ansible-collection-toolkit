@@ -23,7 +23,8 @@ rules:
   commas:
     max-spaces-after: -1
     level: "error"
-  comments: "disable"
+  comments:
+    min-spaces-from-content: 1
   comments-indentation: "disable"
   document-start: "disable"
   empty-lines:
@@ -37,6 +38,9 @@ rules:
   new-line-at-end-of-file: "enable"
   new-lines:
     type: "unix"
+  octal-values:
+    forbid-implicit-octal: true
+    forbid-explicit-octal: true
   quoted-strings:
     quote-type: "any"
     required: true
