@@ -1,7 +1,7 @@
 {
     "_meta": {
         "hash": {
-            "sha256": "5ec136f3364229011419ddb4a15ba5f7f6881b1c7696d4a91e936120672037a8"
+            "sha256": "2ab89f948e6d4f01804a9dd410b592a61288626b1fae675b35cc4bb72b35a852"
         },
         "pipfile-spec": 6,
         "requires": {
@@ -654,12 +654,12 @@
         },
         "molecule": {
             "hashes": [
-                "sha256:7243ff58e0b8159aa2cf465ba9605d657f1d614617264307bef5b32518467afe",
-                "sha256:c650d92295860ce17d79048b1dabb787f674718870668d99b52ecdc0e88af541"
+                "sha256:9b447c6145733adba202510589a61a840b2116bfe4cec2ba0a9456ba41fdb6c8",
+                "sha256:d3d3346465e3e4cf8614db6b083e352b65c76bbe05e511af85fbf42f5950adde"
             ],
             "index": "pypi",
             "markers": "python_version >= '3.10'",
-            "version": "==24.12.0"
+            "version": "==25.1.0"
         },
         "molecule-plugins": {
             "extras": [
@@ -732,11 +732,11 @@
         },
         "pygments": {
             "hashes": [
-                "sha256:786ff802f32e91311bff3889f6e9a86e81505fe99f2735bb6d60ae0c5004f199",
-                "sha256:b8e6aca0523f3ab76fee51799c488e38782ac06eafcf95e7ba832985c8e7b13a"
+                "sha256:61c16d2a8576dc0649d9f39e089b5f02bcd27fba10d8fb4dcc28173f7a45151f",
+                "sha256:9ea1544ad55cecf4b8242fab6dd35a93bbce657034b0611ee383099054ab6d8c"
             ],
             "markers": "python_version >= '3.8'",
-            "version": "==2.18.0"
+            "version": "==2.19.1"
         },
         "python-debian": {
             "hashes": [
@@ -1036,7 +1036,7 @@
                 "sha256:0dd927072d03c0a6527a20d2e6ad5ba8d0380e60870c383bc533b71744df7b7a",
                 "sha256:e72f0de09bba6a04e0de70937b0cf06e55f36f37b3deb422dfaf854b867b840a"
             ],
-            "markers": "python_version >= '3.12'",
+            "markers": "python_version >= '3.8'",
             "version": "==10.0"
         },
         "yamllint": {
