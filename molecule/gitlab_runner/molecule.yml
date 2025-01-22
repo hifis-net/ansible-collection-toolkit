@@ -37,7 +37,7 @@ provisioner:
           gitlab_runner_concurrent: 4
     host_vars:
       instancegitlabciopenstack1:
-        gitlab_runner_version: "16.11.0"
+        gitlab_runner_version: "17.8.1"
         gitlab_runner_deb_file: "https://packages.gitlab.com/runner/gitlab-runner/packages/{{ ansible_distribution | lower }}/{{ ansible_distribution_release | lower }}/gitlab-runner_{{ gitlab_runner_pkg_version }}_amd64.deb/download.deb"
         gitlab_runner_install_docker: true
         gitlab_runner_ssh_public_key: "test_key.pub"
@@ -68,7 +68,7 @@ provisioner:
             locked: true
             limit: 10
       instancegitlabciopenstack2:
-        gitlab_runner_version: "16.11.0"
+        gitlab_runner_version: "17.8.1"
         gitlab_runner_install_docker: false
         gitlab_runner_ssh_public_key: ""
         gitlab_runner_ssh_private_key: ""
