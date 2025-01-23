@@ -43,6 +43,14 @@
         update_cache: true
         mode: "0644"
 
+- name: "Gather the package facts to check wether Zammad has already been installed"
+  ansible.builtin.package_facts:
+    manager: "auto"
+
+- name: "Check if Zammad is already installed"
+  ansible.builtin.set_fact:
+    __zammad_is_installed: "{{ 'zammad' in ansible_facts.packages }}"
+
 - name: "Install | Install Zammad package"
   ansible.builtin.package:
     name: "zammad={{ zammad_version }}*"

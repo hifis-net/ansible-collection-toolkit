@@ -124,6 +124,15 @@ elasticsearch_url: "http://localhost:9200"
 
 Elasticsearch server address.
 
+```yaml
+zammad_force_es_searchindex_rebuild: false
+```
+
+By default, the Elasticsearch indexes are only rebuilt during the initial
+installation.
+Set this variable to `true` to force Ansible to trigger the rebuild of the
+Zammad search index when Zammad is updated.
+
 ## Dependencies
 
 Zammad requires Elasticsearch and PostgreSQL database server.
