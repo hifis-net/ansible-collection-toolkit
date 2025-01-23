@@ -37,37 +37,57 @@ provisioner:
           gitlab_runner_concurrent: 4
     host_vars:
       instancegitlabciopenstack1:
-        gitlab_runner_version: "17.8.1"
-        gitlab_runner_deb_file: "https://packages.gitlab.com/runner/gitlab-runner/packages/{{ ansible_distribution | lower }}/{{ ansible_distribution_release | lower }}/gitlab-runner_{{ gitlab_runner_pkg_version }}_amd64.deb/download.deb"
-        gitlab_runner_helper_images_deb_file: "https://packages.gitlab.com/runner/gitlab-runner/packages/{{ ansible_distribution | lower }}/{{ ansible_distribution_release | lower }}/gitlab-runner-helper-images_{{ gitlab_runner_pkg_version }}_all.deb/download.deb"
-        gitlab_runner_install_docker: true
-        gitlab_runner_ssh_public_key: "test_key.pub"
-        gitlab_runner_ssh_private_key: "test_key"
-        gitlab_runner_sentry_dsn: "https://public@sentry.example.com/1"
-        gitlab_runner_registry_mirrors:
-          - "http://registry-mirror1.example"
-          - "https://registry-mirror2.example"
-        gitlab_runner_insecure_registries:
-          - "registry-mirror1.example"
-        gitlab_runner_enable_session_server: true
+        gitlab_runner_version: "17.6.1"
+        gitlab_runner_install_docker: false
+        gitlab_runner_ssh_public_key: ""
+        gitlab_runner_ssh_private_key: ""
+        gitlab_runner_registry_mirror: "https://registry-mirror.example"
+        gitlab_runner_listen_address: "127.0.0.1:9252"
+        gitlab_runner_set_default_network_opts: true
+        gitlab_runner_autoscaler_openstack_auth_url: "https://openstack.helmholtz.de:5000"
+        gitlab_runner_autoscaler_openstack_username: "openstackuser"
+        gitlab_runner_autoscaler_openstack_password: "123456"
+        gitlab_runner_autoscaler_openstack_project_id: "e5cc8263-be6c-45a7-a6ce-e852dac95395"
+        gitlab_runner_autoscaler_openstack_project_name: "openstack-project"
+        gitlab_runner_autoscaler_openstack_user_domain_name: "Default"
+        gitlab_runner_autoscaler_openstack_region_name: "Default"
         gitlab_runner_list:
           - name: "test01"
             url: "https://gitlab.com"
             description: "Molecule test runner"
             authentication_token: "${AUTHENTICATION_TOKEN}"
-            executor: "docker"
+            executor: "docker-autoscaler"
             environment: ["CI_CPUS=8", "DOCKER_TLS_CERTDIR=/certs"]
-            docker_security_opts: ["seccomp=unconfined"]
-            docker_volumes: ["/cache", "/certs/client"]
-            docker_devices: ["/dev/kfd", "/dev/dri"]
-            docker_cpus: 2
-            docker_gpus: "all"
-            docker_memory: "2g"
+            docker_volumes: ["/cache", "/certs/client", "/opt/docker/daemon.json:/etc/docker/daemon.json:ro"]
             docker_image: "python:3.8"
-            docker_network_mtu: 1442
+            docker_shm_size: 2147483648
+            docker_disable_cache: true
             tags: ["docker", "hifis"]
             locked: true
             limit: 10
+            autoscaler_max_builds: 1
+            autoscaler_idle_count: 5
+            autoscaler_max_instances: 10
+            machine_idle_count: 5
+            autoscaler_group_name: "hifis"
+            autoscaler_cloud_name: "openstack"
+            autoscaler_clouds_config: "/etc/gitlab-runner/clouds.yaml"
+            autoscaler_use_ignition: true
+            autoscaler_boot_time: "5m"
+            autoscaler_flavor_ref: "a7779e0c-899a-4c73-b75d-757e7722dc9b"
+            autoscaler_image_ref: "67c1e69a-921d-4a5c-85cf-cf2a7d94a14d"
+            autoscaler_network_id: "183bd5c6-e720-4601-b471-f4135a32263d"
+            autoscaler_security_group: "8f291fca-006c-4576-a18e-f343d06af2c4"
+            autoscaler_scheduler_hint: "8357bc97-580a-429f-a71d-895a3ab4b645"
+            autoscaler_username: "core"
+            autoscaler_keyname: "runner-internal"
+            cache_type: "s3"
+            cache_server_address: "https://cache.example"
+            cache_access_key: "key"
+            cache_secret_key: "secret"
+            cache_bucket_name: "bucket"
+            cache_bucket_location: "eu-west-1"
+            cache_insecure: "false"
       instancegitlabciopenstack2:
         gitlab_runner_version: "17.8.1"
         gitlab_runner_install_docker: false
