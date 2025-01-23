@@ -17,5 +17,5 @@ zammad_nginx_server_tokens: "off"
 
 zammad_force_es_searchindex_rebuild: false
 
-elasticsearch_url: "http://localhost:9200"
+zammad_elasticsearch_url: "http://localhost:9200"
 ...
