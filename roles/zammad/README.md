@@ -119,7 +119,7 @@ configuring multiple domains or the redirection of outdated domains to the
 most recent one.
 
 ```yaml
-elasticsearch_url: "http://localhost:9200"
+zammad_elasticsearch_url: "http://localhost:9200"
 ```
 
 Elasticsearch server address.
