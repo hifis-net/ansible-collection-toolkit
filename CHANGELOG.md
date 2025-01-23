@@ -18,6 +18,7 @@
 
 **Merged pull requests:**
 
+- Release version 5.2.1 [\#383](https://github.com/hifis-net/ansible-collection-toolkit/pull/383) ([tobiashuste](https://github.com/tobiashuste))
 - Rename elasticsearch\_url variable [\#377](https://github.com/hifis-net/ansible-collection-toolkit/pull/377) [[zammad](https://github.com/hifis-net/ansible-collection-toolkit/labels/zammad)] ([tobiashuste](https://github.com/tobiashuste))
 - Do not run search index rebuild by default [\#376](https://github.com/hifis-net/ansible-collection-toolkit/pull/376) [[zammad](https://github.com/hifis-net/ansible-collection-toolkit/labels/zammad)] ([tobiashuste](https://github.com/tobiashuste))
 - Fix incompatibilities with ansible-lint in custom yamllint config [\#372](https://github.com/hifis-net/ansible-collection-toolkit/pull/372) [[unattended_upgrades](https://github.com/hifis-net/ansible-collection-toolkit/labels/unattended_upgrades)] ([Normo](https://github.com/Normo))
