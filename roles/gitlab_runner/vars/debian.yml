@@ -4,4 +4,5 @@
 # SPDX-License-Identifier: Apache-2.0
 
 ---
-gitlab_runner_package_name: "{{ 'gitlab-runner=' + gitlab_runner_pkg_version if gitlab_runner_version else 'gitlab-runner' }}"
+gitlab_runner_package_name: "gitlab-runner{{ '=' + gitlab_runner_pkg_version if gitlab_runner_version else '' }}"
+gitlab_runner_helper_images_package_name: "gitlab-runner-helper-images{{ '=' + gitlab_runner_pkg_version if gitlab_runner_version else '' }}"
