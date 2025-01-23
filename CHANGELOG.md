@@ -1,5 +1,31 @@
 # Changelog
 
+## [v5.2.1](https://github.com/hifis-net/ansible-collection-toolkit/tree/v5.2.1) (2025-01-23)
+
+[Full Changelog](https://github.com/hifis-net/ansible-collection-toolkit/compare/v5.2.0...v5.2.1)
+
+**Fixed bugs:**
+
+- Ensure gitlab-runner and helper-images have the same version [\#381](https://github.com/hifis-net/ansible-collection-toolkit/issues/381) [[gitlab_runner](https://github.com/hifis-net/ansible-collection-toolkit/labels/gitlab_runner)]
+- \[gitlab-runner\] Manual installation from a deb file fails for version \>=17.7.0 [\#375](https://github.com/hifis-net/ansible-collection-toolkit/issues/375)
+- Fix gitlab molecule tests [\#367](https://github.com/hifis-net/ansible-collection-toolkit/issues/367) [[gitlab](https://github.com/hifis-net/ansible-collection-toolkit/labels/gitlab)]
+- Ensure gitlab-runner and helper-images have the same version [\#380](https://github.com/hifis-net/ansible-collection-toolkit/pull/380) [[gitlab_runner](https://github.com/hifis-net/ansible-collection-toolkit/labels/gitlab_runner)] ([Normo](https://github.com/Normo))
+- Support manual deb file installation for gitlab-runner version 17.7 or greater [\#373](https://github.com/hifis-net/ansible-collection-toolkit/pull/373) [[gitlab_runner](https://github.com/hifis-net/ansible-collection-toolkit/labels/gitlab_runner)] ([Normo](https://github.com/Normo))
+
+**Closed issues:**
+
+- Custom yamllint configurationis incompatible with ansible-lint [\#371](https://github.com/hifis-net/ansible-collection-toolkit/issues/371)
+
+**Merged pull requests:**
+
+- Rename elasticsearch\_url variable [\#377](https://github.com/hifis-net/ansible-collection-toolkit/pull/377) [[zammad](https://github.com/hifis-net/ansible-collection-toolkit/labels/zammad)] ([tobiashuste](https://github.com/tobiashuste))
+- Do not run search index rebuild by default [\#376](https://github.com/hifis-net/ansible-collection-toolkit/pull/376) [[zammad](https://github.com/hifis-net/ansible-collection-toolkit/labels/zammad)] ([tobiashuste](https://github.com/tobiashuste))
+- Fix incompatibilities with ansible-lint in custom yamllint config [\#372](https://github.com/hifis-net/ansible-collection-toolkit/pull/372) [[unattended_upgrades](https://github.com/hifis-net/ansible-collection-toolkit/labels/unattended_upgrades)] ([Normo](https://github.com/Normo))
+- Bump ansible/ansible-lint from 24.12.2 to 25.1.0 [\#370](https://github.com/hifis-net/ansible-collection-toolkit/pull/370) ([dependabot[bot]](https://github.com/apps/dependabot))
+- Bump ansible-lint from 24.12.2 to 25.1.0 [\#369](https://github.com/hifis-net/ansible-collection-toolkit/pull/369) ([dependabot[bot]](https://github.com/apps/dependabot))
+- Fix failing GitLab KAS in molecule test [\#368](https://github.com/hifis-net/ansible-collection-toolkit/pull/368) [[gitlab](https://github.com/hifis-net/ansible-collection-toolkit/labels/gitlab)] ([Normo](https://github.com/Normo))
+- Make sure to not output sensitive information [\#365](https://github.com/hifis-net/ansible-collection-toolkit/pull/365) [[gitlab](https://github.com/hifis-net/ansible-collection-toolkit/labels/gitlab)] ([tobiashuste](https://github.com/tobiashuste))
+
 ## [v5.2.0](https://github.com/hifis-net/ansible-collection-toolkit/tree/v5.2.0) (2025-01-16)
 
 [Full Changelog](https://github.com/hifis-net/ansible-collection-toolkit/compare/v5.1.1...v5.2.0)
