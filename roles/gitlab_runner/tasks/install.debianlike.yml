@@ -39,6 +39,16 @@
         mode: '0644'
       when: "ansible_distribution == 'Debian'"
 
+    - name: "Install gitlab-runner-helper-images with downgrade option"
+      ansible.builtin.apt:
+        name: "{{ gitlab_runner_helper_images_package_name }}"
+        state: "present"
+        update_cache: true
+        allow_downgrade: true
+      when:
+        - "not gitlab_runner_is_initial_dryrun"  # skip if run for the first time in check mode
+        - "gitlab_runner_version is version('17.7.0', 'ge') or gitlab_runner_version | length == 0"
+
     - name: "Install gitlab-runner with downgrade option"
       ansible.builtin.apt:
         name: "{{ gitlab_runner_package_name }}"
