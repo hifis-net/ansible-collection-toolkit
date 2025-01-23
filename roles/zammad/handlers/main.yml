@@ -17,5 +17,6 @@
 - name: "Build search index"
   ansible.builtin.command: "zammad run rake zammad:searchindex:rebuild"
   changed_when: true
+  when: "not __zammad_is_installed or zammad_force_es_searchindex_rebuild"
 
 ...
