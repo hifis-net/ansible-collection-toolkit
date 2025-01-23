@@ -5,6 +5,18 @@
 
 ---
 
+- name: "Variable elasticsearch_url is deprecated"
+  ansible.builtin.debug:
+    msg:
+      - "The variable elasticsearch_url is deprecated and will be removed in the next major release."
+      - "Please use zammad_elasticsearch_url instead"
+  when: "elasticsearch_url is defined and elasticsearch_url | length > 0"
+
+- name: "Set variable zammad_elasticsearch_url for backwards compatibility"
+  ansible.builtin.set_fact:
+    zammad_elasticsearch_url: "{{ elasticsearch_url }}"
+  when: "elasticsearch_url is defined and elasticsearch_url | length > 0"
+
 - name: "Configure Zammad repository for Centos-like"
   when: "ansible_distribution | lower == 'centos'"
   block:
