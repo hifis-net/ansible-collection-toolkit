@@ -1,7 +1,7 @@
 {
     "_meta": {
         "hash": {
-            "sha256": "5ec136f3364229011419ddb4a15ba5f7f6881b1c7696d4a91e936120672037a8"
+            "sha256": "c15b09f2cd05626577b6c8eafbecc38b5993068fb71454f733b2a65b3212bcd4"
         },
         "pipfile-spec": 6,
         "requires": {
@@ -303,19 +303,19 @@
     "develop": {
         "ansible-compat": {
             "hashes": [
-                "sha256:0415bcd82f7d84e5b344c03439154c1f16576809dc3a523b81178354c86ae5a1",
-                "sha256:0ad873e0dae8b2de79bc33ced813d6c92c716c4d7b82f9a4693e1fd57f43776e"
+                "sha256:d8befd5c632c5ea0486f0537dea0fd0bb3340aabcc079025a373689150890b57",
+                "sha256:e6d696b0ffe098af2fae7c5b2085fe8fd92c9ed8cb938fe77c8c87af0f2da056"
             ],
-            "markers": "python_version >= '3.9'",
-            "version": "==24.10.0"
+            "markers": "python_version >= '3.10'",
+            "version": "==25.1.0"
         },
         "ansible-core": {
             "hashes": [
-                "sha256:14cac1f92bbdae881cb0616eddeb17925e8cb507e486087975e724533d9de74f",
-                "sha256:4a312e416e09c7271188d6b8e2b1062fc6834fefd6a1814d0e02fb8aadb3e1ba"
+                "sha256:725b047d35942304eb322eb934b98cc5442ac3f49d33827d97171c238c4b69b9",
+                "sha256:c337512d740d9d9606846e1b1620eaaeadccb6dc2e864ce92cb485a8fc1f57f4"
             ],
             "markers": "python_version >= '3.11'",
-            "version": "==2.18.1"
+            "version": "==2.18.2"
         },
         "ansible-lint": {
             "hashes": [
@@ -328,11 +328,11 @@
         },
         "attrs": {
             "hashes": [
-                "sha256:8f5c07333d543103541ba7be0e2ce16eeee8130cb0b3f9238ab904ce1e85baff",
-                "sha256:ac96cd038792094f438ad1f6ff80837353805ac950cd2aa0e0625ef19850c308"
+                "sha256:1c97078a80c814273a76b2a298a932eb681c87415c11dee0a6921de7f1b02c3e",
+                "sha256:c75a69e28a550a7e93789579c22aa26b0f5b83b75dc4e08fe092980051e1090a"
             ],
             "markers": "python_version >= '3.8'",
-            "version": "==24.3.0"
+            "version": "==25.1.0"
         },
         "binaryornot": {
             "hashes": [
@@ -654,12 +654,12 @@
         },
         "molecule": {
             "hashes": [
-                "sha256:7243ff58e0b8159aa2cf465ba9605d657f1d614617264307bef5b32518467afe",
-                "sha256:c650d92295860ce17d79048b1dabb787f674718870668d99b52ecdc0e88af541"
+                "sha256:2f74a31ed03a562c0cb453fe80c2f95a92f663c6104429817c56cb101d903047",
+                "sha256:772394855c6511362e5e5312017936975a490b24a6b8fe528ad736842ba3fc0f"
             ],
             "index": "pypi",
             "markers": "python_version >= '3.10'",
-            "version": "==24.12.0"
+            "version": "==25.2.0"
         },
         "molecule-plugins": {
             "extras": [
@@ -732,11 +732,11 @@
         },
         "pygments": {
             "hashes": [
-                "sha256:786ff802f32e91311bff3889f6e9a86e81505fe99f2735bb6d60ae0c5004f199",
-                "sha256:b8e6aca0523f3ab76fee51799c488e38782ac06eafcf95e7ba832985c8e7b13a"
+                "sha256:61c16d2a8576dc0649d9f39e089b5f02bcd27fba10d8fb4dcc28173f7a45151f",
+                "sha256:9ea1544ad55cecf4b8242fab6dd35a93bbce657034b0611ee383099054ab6d8c"
             ],
             "markers": "python_version >= '3.8'",
-            "version": "==2.18.0"
+            "version": "==2.19.1"
         },
         "python-debian": {
             "hashes": [
@@ -808,11 +808,11 @@
         },
         "referencing": {
             "hashes": [
-                "sha256:363d9c65f080d0d70bc41c721dce3c7f3e77fc09f269cd5c8813da18069a6794",
-                "sha256:ca2e6492769e3602957e9b831b94211599d2aade9477f5d44110d2530cf9aade"
+                "sha256:df2e89862cd09deabbdba16944cc3f10feb6b3e6f18e902f7cc25609a34775aa",
+                "sha256:e8699adbbf8b5c7de96d8ffa0eb5c158b3beafce084968e2ea8bb08c6794dcd0"
             ],
             "markers": "python_version >= '3.9'",
-            "version": "==0.36.1"
+            "version": "==0.36.2"
         },
         "resolvelib": {
             "hashes": [
@@ -1036,7 +1036,7 @@
                 "sha256:0dd927072d03c0a6527a20d2e6ad5ba8d0380e60870c383bc533b71744df7b7a",
                 "sha256:e72f0de09bba6a04e0de70937b0cf06e55f36f37b3deb422dfaf854b867b840a"
             ],
-            "markers": "python_version >= '3.12'",
+            "markers": "python_version >= '3.8'",
             "version": "==10.0"
         },
         "yamllint": {
