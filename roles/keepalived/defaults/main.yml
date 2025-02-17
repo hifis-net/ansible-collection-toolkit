@@ -44,8 +44,8 @@ keepalived_service_file_path: "/etc/systemd/system/keepalived.service"
 keepalived_pid_file_path: "/run/keepalived/keepalived.pid"
 
 
-# Configure notification email address
-keepalived_notification_email: "name@localhost"
+# Configure email accounts that will receive notification mails
+keepalived_notification_email: ["root@localhost"]
 # Configure notification sender
 keepalived_notification_email_from: "keepalived@localhost"
 # Configure SMTP Server
