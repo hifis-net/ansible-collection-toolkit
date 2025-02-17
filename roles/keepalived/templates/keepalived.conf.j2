@@ -17,10 +17,10 @@ global_defs {
         {{ email }}
 {% endfor %}
     }
-{% endif %}
     notification_email_from {{ keepalived_notification_email_from }}
     smtp_server {{ keepalived_smtp_server }}
     smtp_connect_timeout 30
+{% endif %}
 {% if keepalived_router_id is defined %}
     router_id {{ keepalived_router_id }}
 {% endif %}
