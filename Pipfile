@@ -10,7 +10,7 @@ verify_ssl = true
 
 [dev-packages]
 yamllint = "~=1.35.1"
-ansible-lint = "~=25.1.1"
+ansible-lint = "~=25.1.2"
 molecule = "~=24.12.0"
 molecule-plugins = {extras = ["podman"], version = "~=23.6.0"}
 reuse = "~=5.0.2"
