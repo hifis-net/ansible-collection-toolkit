@@ -27,6 +27,14 @@ provisioner:
     check: "converge.yml"
     converge: "converge.yml"
     verify: "verify.yml"
+  inventory:
+    hosts:
+      all:
+        vars:
+          keepalived_unicast_peers:
+            - "172.17.0.3"
+            - "172.17.0.4"
+          keepalived_virtual_ip_address: "172.17.0.20"
 verifier:
   name: "ansible"
 scenario:
