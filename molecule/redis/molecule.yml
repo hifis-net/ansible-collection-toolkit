@@ -20,7 +20,7 @@ provisioner:
   name: "ansible"
   config_options:
     defaults:
-      stdout_callback: "yaml"
+      result_format: "yaml"
   playbooks:
     prepare: "prepare.yml"
     converge: "converge.yml"
