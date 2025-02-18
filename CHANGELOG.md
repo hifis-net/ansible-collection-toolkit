@@ -10,6 +10,7 @@
 
 **Merged pull requests:**
 
+- Prepare release version 5.3.0 [\#395](https://github.com/hifis-net/ansible-collection-toolkit/pull/395) ([Normo](https://github.com/Normo))
 - Replace deprecated community.general.yaml [\#393](https://github.com/hifis-net/ansible-collection-toolkit/pull/393) [[keepalived](https://github.com/hifis-net/ansible-collection-toolkit/labels/keepalived)] [[redis](https://github.com/hifis-net/ansible-collection-toolkit/labels/redis)] [[gitlab](https://github.com/hifis-net/ansible-collection-toolkit/labels/gitlab)] ([Normo](https://github.com/Normo))
 - Convert keepalived\_notification\_email to a list [\#391](https://github.com/hifis-net/ansible-collection-toolkit/pull/391) [[keepalived](https://github.com/hifis-net/ansible-collection-toolkit/labels/keepalived)] ([Normo](https://github.com/Normo))
 - Bump ansible-lint from 25.1.1 to 25.1.2 [\#390](https://github.com/hifis-net/ansible-collection-toolkit/pull/390) ([dependabot[bot]](https://github.com/apps/dependabot))
