@@ -1,5 +1,23 @@
 # Changelog
 
+## [v5.3.0](https://github.com/hifis-net/ansible-collection-toolkit/tree/v5.3.0) (2025-02-18)
+
+[Full Changelog](https://github.com/hifis-net/ansible-collection-toolkit/compare/v5.2.1...v5.3.0)
+
+**Closed issues:**
+
+- community.general.yaml has been deprecated [\#392](https://github.com/hifis-net/ansible-collection-toolkit/issues/392)
+
+**Merged pull requests:**
+
+- Replace deprecated community.general.yaml [\#393](https://github.com/hifis-net/ansible-collection-toolkit/pull/393) [[keepalived](https://github.com/hifis-net/ansible-collection-toolkit/labels/keepalived)] [[redis](https://github.com/hifis-net/ansible-collection-toolkit/labels/redis)] [[gitlab](https://github.com/hifis-net/ansible-collection-toolkit/labels/gitlab)] ([Normo](https://github.com/Normo))
+- Convert keepalived\_notification\_email to a list [\#391](https://github.com/hifis-net/ansible-collection-toolkit/pull/391) [[keepalived](https://github.com/hifis-net/ansible-collection-toolkit/labels/keepalived)] ([Normo](https://github.com/Normo))
+- Bump ansible-lint from 25.1.1 to 25.1.2 [\#390](https://github.com/hifis-net/ansible-collection-toolkit/pull/390) ([dependabot[bot]](https://github.com/apps/dependabot))
+- Bump ansible/ansible-lint from 25.1.1 to 25.1.2 [\#389](https://github.com/hifis-net/ansible-collection-toolkit/pull/389) ([dependabot[bot]](https://github.com/apps/dependabot))
+- Bump ansible/ansible-lint from 25.1.0 to 25.1.1 [\#388](https://github.com/hifis-net/ansible-collection-toolkit/pull/388) ([dependabot[bot]](https://github.com/apps/dependabot))
+- Bump ansible from 11.1.0 to 11.2.0 [\#387](https://github.com/hifis-net/ansible-collection-toolkit/pull/387) ([dependabot[bot]](https://github.com/apps/dependabot))
+- Bump ansible-lint from 25.1.0 to 25.1.1 [\#386](https://github.com/hifis-net/ansible-collection-toolkit/pull/386) ([dependabot[bot]](https://github.com/apps/dependabot))
+
 ## [v5.2.1](https://github.com/hifis-net/ansible-collection-toolkit/tree/v5.2.1) (2025-01-23)
 
 [Full Changelog](https://github.com/hifis-net/ansible-collection-toolkit/compare/v5.2.0...v5.2.1)
