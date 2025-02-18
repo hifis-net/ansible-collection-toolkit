@@ -7,11 +7,6 @@
 
 - name: "Converge"
   hosts: "all"
-  vars:
-    keepalived_unicast_peers:
-      - "172.17.0.3"
-      - "172.17.0.4"
-    keepalived_virtual_ip_address: "172.17.0.20"
   tasks:
     - name: "Include keepalived role"
       ansible.builtin.include_role:

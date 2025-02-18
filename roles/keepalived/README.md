@@ -153,10 +153,11 @@ keepalived_pid_file_path: "/run/keepalived/keepalived.pid"
 
 #### Configure notification email address
 
-Configure recipient of notification emails:
+List of email accounts that will receive notification mails:
 
 ```yaml
-keepalived_notification_email: 'name@localhost'
+keepalived_notification_emails:
+  - 'root@localhost'
 ```
 
 #### Configure notification sender

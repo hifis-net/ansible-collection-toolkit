@@ -11,12 +11,16 @@ global_defs {
 {% if keepalived_set_script_security_flag %}
     enable_script_security
 {% endif %}
+{% if keepalived_notification_emails | default([]) | length > 0 %}
     notification_email {
-        {{ keepalived_notification_email }}
+{% for email in keepalived_notification_emails %}
+        {{ email }}
+{% endfor %}
     }
     notification_email_from {{ keepalived_notification_email_from }}
     smtp_server {{ keepalived_smtp_server }}
     smtp_connect_timeout 30
+{% endif %}
 {% if keepalived_router_id is defined %}
     router_id {{ keepalived_router_id }}
 {% endif %}
