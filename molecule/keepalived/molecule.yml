@@ -35,9 +35,10 @@ provisioner:
             - "172.17.0.3"
             - "172.17.0.4"
           keepalived_virtual_ip_address: "172.17.0.20"
-          keepalived_notification_email:
-            - "root@localhost"
-            - "sysadmin@firewall.loc"
+          keepalived_notification_email: "sysadmin@firewall.loc"
+          # keepalived_notification_emails:
+          #   - "root@localhost"
+          #   - "sysadmin@firewall.loc"
 verifier:
   name: "ansible"
 scenario:

@@ -45,7 +45,7 @@ keepalived_pid_file_path: "/run/keepalived/keepalived.pid"
 
 
 # Configure email accounts that will receive notification mails
-keepalived_notification_email: ["root@localhost"]
+keepalived_notification_emails: ["root@localhost"]
 # Configure notification sender
 keepalived_notification_email_from: "keepalived@localhost"
 # Configure SMTP Server

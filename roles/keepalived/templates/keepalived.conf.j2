@@ -11,9 +11,9 @@ global_defs {
 {% if keepalived_set_script_security_flag %}
     enable_script_security
 {% endif %}
-{% if keepalived_notification_email | default([]) | length > 0 %}
+{% if keepalived_notification_emails | default([]) | length > 0 %}
     notification_email {
-{% for email in keepalived_notification_email %}
+{% for email in keepalived_notification_emails %}
         {{ email }}
 {% endfor %}
     }

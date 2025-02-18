@@ -156,7 +156,7 @@ keepalived_pid_file_path: "/run/keepalived/keepalived.pid"
 List of email accounts that will receive notification mails:
 
 ```yaml
-keepalived_notification_email:
+keepalived_notification_emails:
   - 'root@localhost'
 ```
 
