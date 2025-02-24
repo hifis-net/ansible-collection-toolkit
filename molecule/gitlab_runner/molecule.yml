@@ -37,6 +37,11 @@ provisioner:
           gitlab_runner_concurrent: 4
     host_vars:
       instancegitlabciopenstack1:
+        docker_packages:
+          - "docker-{{ docker_edition }}=5:27.*"
+          - "docker-{{ docker_edition }}-cli=5:27.*"
+          - "docker-{{ docker_edition }}-rootless-extras=5:27.*"
+          - "containerd.io=1.7.*"
         gitlab_runner_version: "17.8.1"
         gitlab_runner_deb_file: "https://packages.gitlab.com/runner/gitlab-runner/packages/{{ ansible_distribution | lower }}/{{ ansible_distribution_release | lower }}/gitlab-runner_{{ gitlab_runner_pkg_version }}_amd64.deb/download.deb"
         gitlab_runner_helper_images_deb_file: "https://packages.gitlab.com/runner/gitlab-runner/packages/{{ ansible_distribution | lower }}/{{ ansible_distribution_release | lower }}/gitlab-runner-helper-images_{{ gitlab_runner_pkg_version }}_all.deb/download.deb"
