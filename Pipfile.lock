@@ -1,7 +1,7 @@
 {
     "_meta": {
         "hash": {
-            "sha256": "d0d16979fd121fbbef344ae84f5f20dddf47a2e343d8dab1096d229d6262b2c2"
+            "sha256": "992d7508e010356b79a0f0a787613e1ca4d2d050f0040fb5d128b490a571980c"
         },
         "pipfile-spec": 6,
         "requires": {
@@ -320,12 +320,12 @@
         },
         "ansible-lint": {
             "hashes": [
-                "sha256:4d9de2726829ca700a9b4cc6d52506f5cc8e086ce52760131eb0aabfe7e61ce5",
-                "sha256:a7c84f67a9c4f37312f70c65a34ae2d7ffc6f756458b965141830ae721be62d8"
+                "sha256:b68b2149423246ec6369be86df2b79e3555b2b71507e4f7915671ec77381fa2b",
+                "sha256:ff92b31c83a2366381907e21c9a9d4de57f0cd7574e9943ea1b7e32b371f31a2"
             ],
             "index": "pypi",
             "markers": "python_version >= '3.10'",
-            "version": "==25.1.2"
+            "version": "==25.1.3"
         },
         "attrs": {
             "hashes": [
@@ -1007,7 +1007,7 @@
                 "sha256:fc4b630cd3fa2cf7fce38afa91d7cfe844a9f75d7f0f36393fa98815e911d987",
                 "sha256:fd5415dded15c3822597455bc02bcd66e81ef8b7a48cb71a33628fc9fdde39df"
             ],
-            "markers": "python_version >= '3.9'",
+            "markers": "python_version < '3.13' and platform_python_implementation == 'CPython'",
             "version": "==0.2.12"
         },
         "subprocess-tee": {
@@ -1039,7 +1039,7 @@
                 "sha256:0dd927072d03c0a6527a20d2e6ad5ba8d0380e60870c383bc533b71744df7b7a",
                 "sha256:e72f0de09bba6a04e0de70937b0cf06e55f36f37b3deb422dfaf854b867b840a"
             ],
-            "markers": "python_version >= '3.8'",
+            "markers": "python_version >= '3.12'",
             "version": "==10.0"
         },
         "yamllint": {
