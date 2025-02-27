@@ -7,14 +7,6 @@
 - name: "Converge"
   hosts: "all"
   tasks:
-    - name: "Set Docker daemon options for Ubuntu 20.04 and Debian"
-      ansible.builtin.set_fact:
-        docker_daemon_options:
-          ipv6: false
-          ip6tables: false
-      when: "(ansible_distribution == 'Ubuntu' and ansible_distribution_version == '20.04') or
-            ansible_distribution == 'Debian'"
-
     - name: "Include gitlab_runner role"
       ansible.builtin.include_role:
         name: "hifis.toolkit.gitlab_runner"
