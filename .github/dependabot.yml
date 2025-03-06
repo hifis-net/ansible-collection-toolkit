@@ -5,6 +5,7 @@
 
 ---
 version: 2
+enable-beta-ecosystems: true
 updates:
 
   - package-ecosystem: "github-actions"
@@ -18,7 +19,7 @@ updates:
       # Check for updates to GitHub Actions every weekday
       interval: "daily"
 
-  - package-ecosystem: "pip"
+  - package-ecosystem: "uv"
     directory: "/"
     schedule:
       # Check for updates to pip packages every weekday

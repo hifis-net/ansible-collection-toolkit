@@ -48,7 +48,7 @@ jobs:
       - name: "Check out the codebase."
         uses: "actions/checkout@v4"
         with:
-          path: "ansible_collections/hifis/toolkit"
+          path: "./ansible_collections/hifis/toolkit"
 
       - name: "Prepare the job environment."
         uses: "./ansible_collections/hifis/toolkit/.github/workflows/prepare-action"
@@ -64,7 +64,7 @@ jobs:
         run: "podman network create --subnet 10.123.0.0/24 netplan_network"
 
       - name: "Run Molecule tests."
-        run: "pipenv run molecule test -s netplan"
+        run: "uv run molecule test -s netplan"
         env:
           MOLECULE_IMAGE: "${{ matrix.image }}"
-        working-directory: "ansible_collections/hifis/toolkit"
+        working-directory: "./ansible_collections/hifis/toolkit"

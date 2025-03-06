@@ -9,18 +9,23 @@ description: "Install the necessary dependencies for jobs."
 runs:
   using: "composite"
   steps:
-    - name: "Install pipenv."
-      run: "pipx install pipenv"
+    - name: "Configure UV_PYTHON variable"
+      run: 'echo "UV_PYTHON=$(cat .python-version)" >> $GITHUB_ENV'
       shell: "bash"
+      working-directory: "./ansible_collections/hifis/toolkit/"
 
-    - name: "Set up Python 3."
+    - name: "Set up Python 3.x"
       uses: "actions/setup-python@v5"
-      id: "setup-python"
       with:
-        python-version: "3.12"
-        cache: "pipenv"
+        python-version-file: "./ansible_collections/hifis/toolkit/.python-version"
 
-    - name: "Install dependencies via pipenv."
-      run: "pipenv install --dev"
+    - name: "Install uv"
+      uses: "astral-sh/setup-uv@v5"
+      with:
+        enable-cache: true
+        cache-dependency-glob: "./ansible_collections/hifis/toolkit/uv.lock"
+
+    - name: "Install dependencies via uv."
+      run: "uv sync --frozen"
       shell: "bash"
-      working-directory: "ansible_collections/hifis/toolkit"
+      working-directory: "./ansible_collections/hifis/toolkit"

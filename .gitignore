@@ -8,5 +8,5 @@
 *~
 *.log
 .idea/
-.pipenv/
+.venv/
 .vscode/
