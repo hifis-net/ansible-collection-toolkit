@@ -53,7 +53,7 @@ jobs:
       - name: "Check out the codebase."
         uses: "actions/checkout@v4"
         with:
-          path: "ansible_collections/hifis/toolkit"
+          path: "./ansible_collections/hifis/toolkit"
 
       - name: "Prepare the job environment."
         uses: "./ansible_collections/hifis/toolkit/.github/workflows/prepare-action"
@@ -66,8 +66,8 @@ jobs:
             /home/runner/.ansible/roles
 
       - name: "Run Molecule tests."
-        run: "pipenv run molecule test -s gitlab_runner"
+        run: "uv run molecule test -s gitlab_runner"
         env:
           MOLECULE_IMAGE: "${{ matrix.image }}"
           AUTHENTICATION_TOKEN: "${{ secrets.authentication_token }}"
-        working-directory: "ansible_collections/hifis/toolkit"
+        working-directory: "./ansible_collections/hifis/toolkit"

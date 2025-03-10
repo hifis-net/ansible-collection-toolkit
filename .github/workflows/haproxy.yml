@@ -50,7 +50,7 @@ jobs:
       - name: "Check out the codebase."
         uses: "actions/checkout@v4"
         with:
-          path: "ansible_collections/hifis/toolkit"
+          path: "./ansible_collections/hifis/toolkit"
 
       - name: "Prepare the job environment."
         uses: "./ansible_collections/hifis/toolkit/.github/workflows/prepare-action"
@@ -65,7 +65,7 @@ jobs:
       - name: "Run Molecule tests."
         # Haproxy tries to configure the nofile limit which is not allowed from within podman.
         # This approach increased the limit beforehand.
-        run: "XDG_RUNTIME_DIR=/run/user/$UID pipenv run sudo prlimit --pid $$ --nofile=500000:500000 && pipenv run molecule test -s haproxy"
+        run: "XDG_RUNTIME_DIR=/run/user/$UID uv run sudo prlimit --pid $$ --nofile=500000:500000 && uv run molecule test -s haproxy"
         env:
           MOLECULE_IMAGE: "${{ matrix.image }}"
-        working-directory: "ansible_collections/hifis/toolkit"
+        working-directory: "./ansible_collections/hifis/toolkit"

@@ -48,13 +48,13 @@ jobs:
       - name: "Check out the codebase."
         uses: "actions/checkout@v4"
         with:
-          path: "ansible_collections/hifis/toolkit"
+          path: "./ansible_collections/hifis/toolkit"
 
       - name: "Prepare the job environment."
         uses: "./ansible_collections/hifis/toolkit/.github/workflows/prepare-action"
 
       - name: "Run Molecule tests."
-        run: "pipenv run molecule test -s keepalived"
+        run: "uv run molecule test -s keepalived"
         env:
           MOLECULE_IMAGE: "${{ matrix.image }}"
-        working-directory: "ansible_collections/hifis/toolkit"
+        working-directory: "./ansible_collections/hifis/toolkit"

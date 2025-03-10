@@ -119,7 +119,7 @@ After cloning the project locally the _Python_ dependencies need to be
 installed:
 
 ```shell
-$ pipenv install --dev
+uv sync --frozen
 ```
 
 As mentioned in the suggested contribution workflow above, linting and testing
@@ -138,7 +138,7 @@ and
 [yamllint rules](https://yamllint.readthedocs.io/en/stable/rules.html):
 
 ```shell
-$ pipenv run ansible-lint --offline
+uv run ansible-lint --offline
 ```
 
 ### REUSE Specification Compliance
@@ -149,7 +149,7 @@ copyright information and that it thereby meets the
 [REUSE Specification](https://reuse.software/spec/):
 
 ```shell
-$ pipenv run reuse lint
+uv run reuse lint
 ```
 
 ### Testing the Ansible Collection
@@ -161,7 +161,7 @@ the existing automated test cases to verify that your changes do not break
 existing test cases:
 
 ```shell
-$ pipenv run molecule test -s unattended_upgrades
+uv run molecule test -s unattended_upgrades
 ```
 
 ## How are Contributors Given Credit for Their Valuable Work?
