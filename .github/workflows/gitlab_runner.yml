@@ -12,8 +12,8 @@ on:
       - '.github/workflows/gitlab_runner.yml'
       - 'roles/gitlab_runner/**'
       - 'molecule/gitlab_runner/**'
-      - 'Pipfile'
-      - 'Pipfile.lock'
+      - 'pyproject.toml'
+      - 'uv.lock'
   push:
     branches:
       - "main"
@@ -23,8 +23,8 @@ on:
       - '.github/workflows/gitlab_runner.yml'
       - 'roles/gitlab_runner/**'
       - 'molecule/gitlab_runner/**'
-      - 'Pipfile'
-      - 'Pipfile.lock'
+      - 'pyproject.toml'
+      - 'uv.lock'
   schedule:
     - cron: "0 0 * * *"
 env:

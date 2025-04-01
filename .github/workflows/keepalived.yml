@@ -12,8 +12,8 @@ on:
       - '.github/workflows/keepalived.yml'
       - 'roles/keepalived/**'
       - 'molecule/keepalived/**'
-      - 'Pipfile'
-      - 'Pipfile.lock'
+      - 'pyproject.toml'
+      - 'uv.lock'
   push:
     branches:
       - "main"
@@ -23,8 +23,8 @@ on:
       - '.github/workflows/keepalived.yml'
       - 'roles/keepalived/**'
       - 'molecule/keepalived/**'
-      - 'Pipfile'
-      - 'Pipfile.lock'
+      - 'pyproject.toml'
+      - 'uv.lock'
   schedule:
     - cron: '0 0 * * *'
 

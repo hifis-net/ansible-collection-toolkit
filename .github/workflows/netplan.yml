@@ -12,8 +12,8 @@ on:
       - '.github/workflows/netplan.yml'
       - 'roles/netplan/**'
       - 'molecule/netplan/**'
-      - 'Pipfile'
-      - 'Pipfile.lock'
+      - 'pyproject.toml'
+      - 'uv.lock'
   push:
     branches:
       - "main"
@@ -23,8 +23,8 @@ on:
       - '.github/workflows/netplan.yml'
       - 'roles/netplan/**'
       - 'molecule/netplan/**'
-      - 'Pipfile'
-      - 'Pipfile.lock'
+      - 'pyproject.toml'
+      - 'uv.lock'
   schedule:
     - cron: "0 0 * * *"
 

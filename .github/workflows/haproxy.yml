@@ -12,8 +12,8 @@ on:
       - '.github/workflows/haproxy.yml'
       - 'roles/haproxy/**'
       - 'molecule/haproxy/**'
-      - 'Pipfile'
-      - 'Pipfile.lock'
+      - 'pyproject.toml'
+      - 'uv.lock'
   push:
     branches:
       - "main"
@@ -23,8 +23,8 @@ on:
       - '.github/workflows/haproxy.yml'
       - 'roles/haproxy/**'
       - 'molecule/haproxy/**'
-      - 'Pipfile'
-      - 'Pipfile.lock'
+      - 'pyproject.toml'
+      - 'uv.lock'
   schedule:
     - cron: "0 0 * * *"
 

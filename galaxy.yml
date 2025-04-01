@@ -31,5 +31,5 @@ build_ignore:
   - '.gitattributes'
   - '.gitignore'
   - '.yamllint'
-  - 'Pipfile'
-  - 'Pipfile.lock'
+  - 'pyproject.toml'
+  - 'uv.lock'
