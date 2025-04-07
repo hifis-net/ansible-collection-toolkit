@@ -45,15 +45,19 @@
     - name: "Install | Add Zammad apt key"
       ansible.builtin.apt_key:
         url: "https://dl.packager.io/srv/zammad/zammad/key"
-        state: "present"
+        state: "absent"
 
     - name: "Install | Add Zammad DEB repository"
-      ansible.builtin.apt_repository:
-        repo: "deb https://dl.packager.io/srv/deb/zammad/zammad/{{ zammad_release_channel }}/ubuntu {{ ansible_distribution_version }} main"
+      ansible.builtin.deb822_repository:
+        name: "zammad"
+        types: "deb"
+        uris: "{{ zammad_repo_url }}"
+        suites: "{{ ansible_distribution_version }}"
+        components: "main"
+        signed_by: "https://dl.packager.io/srv/zammad/zammad/key"
         state: "present"
-        filename: "zammad"
-        update_cache: true
         mode: "0644"
+        enabled: true
 
 - name: "Gather the package facts to check wether Zammad has already been installed"
   ansible.builtin.package_facts:
