@@ -29,6 +29,8 @@
             name:
               - "sudo"      # for `become` privilege escalation
               - "iproute2"  # for gathering network facts
+              - "python3-debian"
+              - "ca-certificates"
             state: "present"
             update_cache: true
 
