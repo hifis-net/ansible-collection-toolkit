@@ -31,14 +31,23 @@ gitlab_rails['redis_sentinels_password'] = "{{ gitlab_redis_sentinel_password }}
 gitlab_rails['monitoring_whitelist'] = ["{{ gitlab_ip_range }}"]
 
 {% if gitlab_use_internal_gitaly %}
-git_data_dirs({"default" => {"path" => "{{ gitlab_git_data_dir }}"} })
+gitaly['configuration'] = {
+  "storage": [
+    {
+      "name": "default",
+      "path": "{{ (gitlab_git_data_dir, 'repositories') | path_join }}",
+    },
+  ],
+}
 {% else %}
 gitaly['enable'] = false
 gitlab_rails['gitaly_token'] = "{{ gitlab_gitaly_token }}"
 gitlab_shell['secret_token'] = "{{ gitlab_secret_token }}"
-git_data_dirs({
-  'default' => { 'gitaly_address' => 'tcp://{{ gitlab_gitaly_instance_ip }}:{{ gitlab_gitaly_instance_port }}' },
-})
+gitlab_rails['repositories_storages'] = {
+  "default" => {
+    "gitaly_address" => "tcp://{{ gitlab_gitaly_instance_ip }}:{{ gitlab_gitaly_instance_port }}"
+  }
+}
 {% endif %}
 
 gitlab_rails['gitlab_email_enabled'] = {{ gitlab_email_enabled }}
