@@ -20,7 +20,7 @@ runs:
         python-version-file: "./ansible_collections/hifis/toolkit/.python-version"
 
     - name: "Install uv"
-      uses: "astral-sh/setup-uv@v5"
+      uses: "astral-sh/setup-uv@v6"
       with:
         enable-cache: true
         cache-dependency-glob: "./ansible_collections/hifis/toolkit/uv.lock"
