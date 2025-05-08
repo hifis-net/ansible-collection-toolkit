@@ -10,6 +10,7 @@ on:
   pull_request:
     paths:
       - '.github/workflows/zammad.yml'
+      - '.github/workflows/prepare-action/action.yml'
       - 'roles/zammad/**'
       - 'molecule/zammad/**'
       - 'pyproject.toml'
@@ -21,6 +22,7 @@ on:
       - "v*.*.*"
     paths:
       - '.github/workflows/zammad.yml'
+      - '.github/workflows/prepare-action/action.yml'
       - 'roles/zammad/**'
       - 'molecule/zammad/**'
       - 'pyproject.toml'

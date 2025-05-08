@@ -10,6 +10,7 @@ on:
   pull_request:
     paths:
       - '.github/workflows/netplan.yml'
+      - '.github/workflows/prepare-action/action.yml'
       - 'roles/netplan/**'
       - 'molecule/netplan/**'
       - 'pyproject.toml'
@@ -21,6 +22,7 @@ on:
       - "v*.*.*"
     paths:
       - '.github/workflows/netplan.yml'
+      - '.github/workflows/prepare-action/action.yml'
       - 'roles/netplan/**'
       - 'molecule/netplan/**'
       - 'pyproject.toml'

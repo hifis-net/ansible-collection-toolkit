@@ -10,6 +10,7 @@ on:
   pull_request:
     paths:
       - '.github/workflows/gitlab.yml'
+      - '.github/workflows/prepare-action/action.yml'
       - 'roles/gitlab/**'
       - 'molecule/gitlab/**'
       - 'pyproject.toml'
@@ -21,6 +22,7 @@ on:
       - "v*.*.*"
     paths:
       - '.github/workflows/gitlab.yml'
+      - '.github/workflows/prepare-action/action.yml'
       - 'roles/gitlab/**'
       - 'molecule/gitlab/**'
       - 'pyproject.toml'

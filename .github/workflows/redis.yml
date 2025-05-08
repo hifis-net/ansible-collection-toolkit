@@ -10,6 +10,7 @@ on:
   pull_request:
     paths:
       - '.github/workflows/redis.yml'
+      - '.github/workflows/prepare-action/action.yml'
       - 'roles/redis/**'
       - 'molecule/redis/**'
       - 'pyproject.toml'
@@ -21,6 +22,7 @@ on:
       - "v*.*.*"
     paths:
       - '.github/workflows/redis.yml'
+      - '.github/workflows/prepare-action/action.yml'
       - 'roles/redis/**'
       - 'molecule/redis/**'
       - 'pyproject.toml'

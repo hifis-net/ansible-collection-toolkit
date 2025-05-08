@@ -10,6 +10,7 @@ on:
   pull_request:
     paths:
       - '.github/workflows/ssh_keys.yml'
+      - '.github/workflows/prepare-action/action.yml'
       - 'roles/ssh_keys/**'
       - 'molecule/ssh_keys/**'
       - 'pyproject.toml'
@@ -21,6 +22,7 @@ on:
       - "v*.*.*"
     paths:
       - '.github/workflows/ssh_keys.yml'
+      - '.github/workflows/prepare-action/action.yml'
       - 'roles/ssh_keys/**'
       - 'molecule/ssh_keys/**'
       - 'pyproject.toml'
