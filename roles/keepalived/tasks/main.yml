@@ -13,20 +13,6 @@
     fail_msg: "Some mandatory variables are not set."
     success_msg: "All mandatory variables are set."
 
-- name: "Variable keepalived_notification_email is deprecated"
-  when: "keepalived_notification_email | default('') | length > 0"
-  block:
-
-    - name: "Set keepalived_notification_emails variable"
-      ansible.builtin.set_fact:
-        keepalived_notification_emails: ["{{ keepalived_notification_email }}"]
-
-    - name: "Show deprecation warning"
-      ansible.builtin.debug:
-        msg:
-          - "The variable keepalived_notification_email is deprecated and will be removed in the next major release."
-          - "Please use list variable 'keepalived_notification_emails' instead."
-
 - name: "Install dependencies for Keepalived."
   become: true
   ansible.builtin.package:
