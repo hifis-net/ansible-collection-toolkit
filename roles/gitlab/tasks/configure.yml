@@ -19,6 +19,31 @@
     - "Reconfigure Primary GitLab"
     - "Reconfigure Non Primary GitLab"
 
+- name: "Ensure gitaly['configuration'] is not present in gitlab_additional_configurations"
+  when: "gitlab_use_internal_gitaly"
+  block:
+    - name: "Check if gitaly is present"
+      when:
+        - "gitlab_additional_configurations | length > 0"
+        - "item.gitaly is defined"
+      ansible.builtin.set_fact:
+        __gitaly_item: "{{ item.gitaly }}"
+      with_items: "{{ gitlab_additional_configurations }}"
+
+    - name: "Check if gitaly['configuration'] is present"
+      when:
+        - "item.key is defined"
+        - "item.key == 'configuration'"
+      ansible.builtin.set_fact:
+        __gitaly_configuration_exists: true
+      with_items: "{{ __gitaly_item | default([]) }}"
+
+    - name: "Warn if gitaly['configuration'] is already present"
+      when:
+        - "__gitaly_configuration_exists"
+      ansible.builtin.debug:
+        msg: "Please make sure to configure gitaly storage paths yourself in gitaly['configuration']"
+
 - name: "Copy GitLab Configuration File."
   become: true
   ansible.builtin.template:

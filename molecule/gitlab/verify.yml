@@ -14,15 +14,22 @@
     - name: "Assert that GitLab Omnibus package is installed"
       ansible.builtin.assert:
         that:
-          - "'{{ gitlab_edition }}' in ansible_facts.packages"
+          - "gitlab_edition in ansible_facts.packages"
       when:
         - "gitlab_edition is defined"
+
+    - name: "Set expected package version of GitLab"
+      ansible.builtin.set_fact:
+        gitlab_expected_package_version: "{{ gitlab_version }}-{{ gitlab_release }}"
+      when:
+        - "gitlab_edition is defined"
+        - "gitlab_version is defined"
+        - "gitlab_release is defined"
 
     - name: "Assert that installed GitLab version is equal to the desired one"
       ansible.builtin.assert:
         that:
-          - "ansible_facts.packages['{{ gitlab_edition }}'][0].version == gitlab_version"
-          - "ansible_facts.packages['{{ gitlab_edition }}'][0].release == gitlab_release"
+          - "ansible_facts.packages[gitlab_edition][0].version == gitlab_expected_package_version"
       when:
         - "gitlab_edition is defined"
         - "gitlab_version is defined"
