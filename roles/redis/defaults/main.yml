@@ -17,7 +17,7 @@ redis_master_instance_ip: "{{ redis_instance_ip if redis_instance_type == 'maste
 redis_password: "changeme"
 
 # Redis version
-redis_version: "7.2.1"
+redis_version: "8.0.1"
 # Path to the Redis Server binary
 redis_bin: "/usr/local/bin/redis-server"
 # List of dependencies of Redis Server
