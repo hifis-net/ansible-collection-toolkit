@@ -29,8 +29,6 @@ provisioner:
   inventory:
     host_vars:
       instancegitlab:
-        gitlab_version: "17.11.2"
-        gitlab_release: "ce.0"
         gitlab_edition: "gitlab-ce"
         gitlab_ip_range: "0.0.0.0/0"
         gitlab_additional_configurations:
