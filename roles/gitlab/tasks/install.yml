@@ -14,36 +14,45 @@
 - name: "Prepare Debian GitLab installation"
   when: "ansible_facts.os_family == 'Debian'"
   block:
-    - name: "Install APT GPG key"
+    - name: "Remove GitLab APT GPG key from legacy trusted.gpg keyring"
       ansible.builtin.apt_key:
         url: "{{ gitlab_gpg_key_url }}"
         id: "{{ gitlab_gpg_key_id }}"
-        state: "present"
+        state: "absent"
       when: "not gitlab_is_initial_dryrun"
 
-    - name: "Add GitLab APT repository"
+    - name: "Remove GitLab APT repository from sources.list"
       ansible.builtin.apt_repository:
         repo: "deb {{ gitlab_repo_url }} {{ ansible_facts.distribution_release }} main"
-        state: "present"
+        state: "absent"
         filename: "gitlab_{{ gitlab_edition }}"
-        mode: "0644"
 
-    - name: "Add GitLab source APT repository"
+    - name: "Remove GitLab source APT repository from sources.list"
       ansible.builtin.apt_repository:
         repo: "deb-src {{ gitlab_repo_url }} {{ ansible_facts.distribution_release }} main"
-        state: "present"
+        state: "absent"
         filename: "gitlab_{{ gitlab_edition }}"
+
+    - name: "Add GitLab APT repository"
+      ansible.builtin.deb822_repository:
+        name: "{{ gitlab_edition }}"
+        types:
+          - "deb"
+          - "deb-src"
+        uris: "{{ gitlab_repo_url }}"
+        suites: "{{ ansible_facts.distribution_release | lower }}"
+        components: "main"
+        signed_by: "{{ gitlab_gpg_key_url }}"
+        architectures: "amd64"
+        state: "present"
         mode: "0644"
+        enabled: true
 
     - name: "Update APT package cache"
       ansible.builtin.apt:
         update_cache: true
-        cache_valid_time: 3600
-      register: "gitlab_apt_cache"
       check_mode: false
-      changed_when:
-        - "gitlab_apt_cache.cache_updated"
-        - "not ansible_check_mode"
+      changed_when: false
 
 - name: "Install GitLab on RedHat Like OS"
   when: "ansible_facts.os_family == 'RedHat'"

@@ -28,6 +28,7 @@
           - "gpg"
           - "ca-certificates"
           - "python3-cryptography"
+          - "python3-debian"
           - "ssl-cert"
         state: "present"
         update_cache: true

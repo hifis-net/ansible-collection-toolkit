@@ -30,18 +30,34 @@
   when: "ansible_distribution | lower == 'ubuntu'"
   block:
 
-    - name: "Install | Add Zammad apt key"
+    - name: "Remove Zammad apt key from legacy trusted.gpg keyring"
       ansible.builtin.apt_key:
         url: "https://dl.packager.io/srv/zammad/zammad/key"
-        state: "present"
+        state: "absent"
 
-    - name: "Install | Add Zammad DEB repository"
+    - name: "Remove Zammad DEB repository from sources.list"
       ansible.builtin.apt_repository:
         repo: "deb https://dl.packager.io/srv/deb/zammad/zammad/{{ zammad_release_channel }}/ubuntu {{ ansible_distribution_version }} main"
-        state: "present"
+        state: "absent"
         filename: "zammad"
-        update_cache: true
+
+    - name: "Install | Add Zammad DEB repository"
+      ansible.builtin.deb822_repository:
+        name: "zammad"
+        types: "deb"
+        uris: "{{ zammad_repo_url }}"
+        suites: "{{ ansible_facts.distribution_version }}"
+        components: "main"
+        signed_by: "https://dl.packager.io/srv/zammad/zammad/key"
+        architectures: "amd64"
+        state: "present"
         mode: "0644"
+        enabled: true
+
+    - name: "Update apt cache"
+      ansible.builtin.apt:
+        update_cache: true
+      changed_when: false
 
 - name: "Gather the package facts to check wether Zammad has already been installed"
   ansible.builtin.package_facts:
