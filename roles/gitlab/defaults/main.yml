@@ -64,6 +64,8 @@ gitlab_secret_token: "changeme"
 gitlab_gitaly_instance_ip: "127.0.0.1"
 # Port of the Gitaly instance
 gitlab_gitaly_instance_port: "8075"
+# Set to false to define gitlab_rails['repositories_storages'] on your own
+gitlab_use_default_repositories_storages: true
 
 # Whether to use GitLab Omnibus internal PostgreSQL database
 gitlab_use_internal_postgresql: "true"

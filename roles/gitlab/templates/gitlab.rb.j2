@@ -45,11 +45,13 @@ gitaly['configuration'] = {
 gitaly['enable'] = false
 gitlab_rails['gitaly_token'] = "{{ gitlab_gitaly_token }}"
 gitlab_shell['secret_token'] = "{{ gitlab_secret_token }}"
+{% if gitlab_use_default_repositories_storages %}
 gitlab_rails['repositories_storages'] = {
   "default" => {
     "gitaly_address" => "tcp://{{ gitlab_gitaly_instance_ip }}:{{ gitlab_gitaly_instance_port }}"
   }
 }
+{% endif %}
 {% endif %}
 
 gitlab_rails['gitlab_email_enabled'] = {{ gitlab_email_enabled }}
