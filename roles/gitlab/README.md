@@ -216,6 +216,16 @@ gitlab_feature_flags:
     enabled: false
 ```
 
+#### Configure gitlab_rails['repositories_storages'] on your own
+
+If you have the requirement to configure gitlab_rails['repositories_storages']
+on your own, set this variable to `false`.
+This can be useful if you want to configure multiple Gitaly instances.
+
+```yaml
+gitlab_use_default_repositories_storages: true
+```
+
 #### Mattermost only use case
 
 This role can be used to run Mattermost without deploying GitLab. In this
