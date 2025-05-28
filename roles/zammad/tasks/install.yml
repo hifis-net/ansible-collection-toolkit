@@ -40,6 +40,7 @@
         repo: "deb https://dl.packager.io/srv/deb/zammad/zammad/{{ zammad_release_channel }}/ubuntu {{ ansible_distribution_version }} main"
         state: "absent"
         filename: "zammad"
+        update_cache: false
 
     - name: "Install | Add Zammad DEB repository"
       ansible.builtin.deb822_repository:
