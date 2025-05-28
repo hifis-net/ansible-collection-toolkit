@@ -26,12 +26,14 @@
         repo: "deb {{ gitlab_repo_url }} {{ ansible_facts.distribution_release }} main"
         state: "absent"
         filename: "gitlab_{{ gitlab_edition }}"
+        update_cache: false
 
     - name: "Remove GitLab source APT repository from sources.list"
       ansible.builtin.apt_repository:
         repo: "deb-src {{ gitlab_repo_url }} {{ ansible_facts.distribution_release }} main"
         state: "absent"
         filename: "gitlab_{{ gitlab_edition }}"
+        update_cache: false
 
     - name: "Add GitLab APT repository"
       ansible.builtin.deb822_repository:
