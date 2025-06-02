@@ -1,8 +1,14 @@
 # Changelog
 
-## [Unreleased](https://github.com/hifis-net/ansible-collection-toolkit/tree/HEAD)
+## [v6.0.0](https://github.com/hifis-net/ansible-collection-toolkit/tree/v6.0.0) (2025-06-04)
 
-[Full Changelog](https://github.com/hifis-net/ansible-collection-toolkit/compare/v5.3.0...HEAD)
+[Full Changelog](https://github.com/hifis-net/ansible-collection-toolkit/compare/v5.3.0...v6.0.0)
+
+**UPGRADE NOTES:**
+
+- The deprecated `keepalived_notification_email` variable has been removed from the hifis.keepalived role. Please use `keepalived_notification_emails` instead.
+- The deprecated `elasticsearch_url` variable has been removed from the hifis.zammad role. Please use `zammad_elasticsearch_url` instead.
+- In preparation for GitLab 18.0, the `git_data_dirs` configuration has been replaced by `gitaly['configuration']` in the hifis.gitlab role. If `gitaly['configuration']` is already defined in the [`gitlab_additional_configurations`](https://github.com/hifis-net/ansible-collection-toolkit/tree/main/roles/gitlab#configurations-via-dictionary-like-ruby-variables) role variable, please ensure that Gitaly storage paths are configured manually.
 
 **Breaking changes:**
 
@@ -12,18 +18,24 @@
 
 **Fixed bugs:**
 
-- unattended upgrades are not scheduled correctly [\#426](https://github.com/hifis-net/ansible-collection-toolkit/issues/426)
 - Disable apt cache updates when removing repositories from sources.list [\#432](https://github.com/hifis-net/ansible-collection-toolkit/pull/432) [[zammad](https://github.com/hifis-net/ansible-collection-toolkit/labels/zammad)] [[gitlab](https://github.com/hifis-net/ansible-collection-toolkit/labels/gitlab)] ([Normo](https://github.com/Normo))
 - Replace obsolete occurrences of Pipfile [\#409](https://github.com/hifis-net/ansible-collection-toolkit/pull/409) [[unattended_upgrades](https://github.com/hifis-net/ansible-collection-toolkit/labels/unattended_upgrades)] [[zammad](https://github.com/hifis-net/ansible-collection-toolkit/labels/zammad)] [[ssh_keys](https://github.com/hifis-net/ansible-collection-toolkit/labels/ssh_keys)] [[gitlab_runner](https://github.com/hifis-net/ansible-collection-toolkit/labels/gitlab_runner)] [[keepalived](https://github.com/hifis-net/ansible-collection-toolkit/labels/keepalived)] [[haproxy](https://github.com/hifis-net/ansible-collection-toolkit/labels/haproxy)] [[netplan](https://github.com/hifis-net/ansible-collection-toolkit/labels/netplan)] [[redis](https://github.com/hifis-net/ansible-collection-toolkit/labels/redis)] [[gitlab](https://github.com/hifis-net/ansible-collection-toolkit/labels/gitlab)] ([Normo](https://github.com/Normo))
 
 **Closed issues:**
 
+- Remove official support for EOL Ubuntu 20.04 [\#435](https://github.com/hifis-net/ansible-collection-toolkit/issues/435)
 - unattended upgrades unattended\_apt\_daily\_upgrade\_oncalendar is not scheduled [\#429](https://github.com/hifis-net/ansible-collection-toolkit/issues/429)
+- unattended upgrades are not scheduled correctly [\#426](https://github.com/hifis-net/ansible-collection-toolkit/issues/426)
 - Fix apt-key deprecation [\#412](https://github.com/hifis-net/ansible-collection-toolkit/issues/412) [[zammad](https://github.com/hifis-net/ansible-collection-toolkit/labels/zammad)] [[gitlab](https://github.com/hifis-net/ansible-collection-toolkit/labels/gitlab)]
 
 **Merged pull requests:**
 
+- Remove official support for EOL Ubuntu 20.04 [\#436](https://github.com/hifis-net/ansible-collection-toolkit/pull/436) [[unattended_upgrades](https://github.com/hifis-net/ansible-collection-toolkit/labels/unattended_upgrades)] [[zammad](https://github.com/hifis-net/ansible-collection-toolkit/labels/zammad)] [[ssh_keys](https://github.com/hifis-net/ansible-collection-toolkit/labels/ssh_keys)] [[gitlab_runner](https://github.com/hifis-net/ansible-collection-toolkit/labels/gitlab_runner)] [[keepalived](https://github.com/hifis-net/ansible-collection-toolkit/labels/keepalived)] [[haproxy](https://github.com/hifis-net/ansible-collection-toolkit/labels/haproxy)] [[netplan](https://github.com/hifis-net/ansible-collection-toolkit/labels/netplan)] [[redis](https://github.com/hifis-net/ansible-collection-toolkit/labels/redis)] [[gitlab](https://github.com/hifis-net/ansible-collection-toolkit/labels/gitlab)] ([Normo](https://github.com/Normo))
+- Test gitlab-runner version 18.0.2 with molecule [\#434](https://github.com/hifis-net/ansible-collection-toolkit/pull/434) [[gitlab_runner](https://github.com/hifis-net/ansible-collection-toolkit/labels/gitlab_runner)] ([Normo](https://github.com/Normo))
+- Install HAProxy 3.2 by default [\#433](https://github.com/hifis-net/ansible-collection-toolkit/pull/433) [[haproxy](https://github.com/hifis-net/ansible-collection-toolkit/labels/haproxy)] ([Normo](https://github.com/Normo))
+- Bump ansible/ansible-lint from 25.4.0 to 25.5.0 [\#431](https://github.com/hifis-net/ansible-collection-toolkit/pull/431) ([dependabot[bot]](https://github.com/apps/dependabot))
 - Allow users to overwrite gitlab\_rails\['repositories\_storages'\] [\#430](https://github.com/hifis-net/ansible-collection-toolkit/pull/430) [[gitlab](https://github.com/hifis-net/ansible-collection-toolkit/labels/gitlab)] ([tobiashuste](https://github.com/tobiashuste))
+- Remove support for Ansible EOL 2.16 [\#428](https://github.com/hifis-net/ansible-collection-toolkit/pull/428) [[unattended_upgrades](https://github.com/hifis-net/ansible-collection-toolkit/labels/unattended_upgrades)] [[zammad](https://github.com/hifis-net/ansible-collection-toolkit/labels/zammad)] [[ssh_keys](https://github.com/hifis-net/ansible-collection-toolkit/labels/ssh_keys)] [[gitlab_runner](https://github.com/hifis-net/ansible-collection-toolkit/labels/gitlab_runner)] [[keepalived](https://github.com/hifis-net/ansible-collection-toolkit/labels/keepalived)] [[haproxy](https://github.com/hifis-net/ansible-collection-toolkit/labels/haproxy)] [[netplan](https://github.com/hifis-net/ansible-collection-toolkit/labels/netplan)] [[redis](https://github.com/hifis-net/ansible-collection-toolkit/labels/redis)] [[gitlab](https://github.com/hifis-net/ansible-collection-toolkit/labels/gitlab)] ([Normo](https://github.com/Normo))
 - Install Redis 8 by default [\#425](https://github.com/hifis-net/ansible-collection-toolkit/pull/425) [[redis](https://github.com/hifis-net/ansible-collection-toolkit/labels/redis)] ([Normo](https://github.com/Normo))
 - Do not pin GitLab in Molecule [\#424](https://github.com/hifis-net/ansible-collection-toolkit/pull/424) [[gitlab](https://github.com/hifis-net/ansible-collection-toolkit/labels/gitlab)] ([tobiashuste](https://github.com/tobiashuste))
 - Bump ansible from 11.3.0 to 11.6.0 [\#423](https://github.com/hifis-net/ansible-collection-toolkit/pull/423) ([dependabot[bot]](https://github.com/apps/dependabot))
