@@ -121,7 +121,7 @@ haproxy_executable_path: '/usr/sbin/haproxy'
 Variable to pin the PPA version to a certain value:
 
 ```yaml
-haproxy_ppa_version: 'ppa:vbernat/haproxy-3.0'
+haproxy_ppa_version: 'ppa:vbernat/haproxy-3.2'
 ```
 
 #### HAProxy version
@@ -129,7 +129,7 @@ haproxy_ppa_version: 'ppa:vbernat/haproxy-3.0'
 Variable to pin the HAProxy version to a certain value:
 
 ```yaml
-haproxy_version: '3.0.*'
+haproxy_version: '3.2.*'
 ```
 
 #### HAProxy user
