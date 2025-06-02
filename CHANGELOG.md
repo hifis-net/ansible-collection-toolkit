@@ -1,5 +1,50 @@
 # Changelog
 
+## [Unreleased](https://github.com/hifis-net/ansible-collection-toolkit/tree/HEAD)
+
+[Full Changelog](https://github.com/hifis-net/ansible-collection-toolkit/compare/v5.3.0...HEAD)
+
+**Breaking changes:**
+
+- Remove keepalived\_notification\_email variable [\#394](https://github.com/hifis-net/ansible-collection-toolkit/issues/394) [[keepalived](https://github.com/hifis-net/ansible-collection-toolkit/labels/keepalived)]
+- Remove elasticsearch\_url variable [\#379](https://github.com/hifis-net/ansible-collection-toolkit/issues/379) [[zammad](https://github.com/hifis-net/ansible-collection-toolkit/labels/zammad)]
+- Deprecate git\_data\_dirs setting [\#366](https://github.com/hifis-net/ansible-collection-toolkit/issues/366) [[gitlab](https://github.com/hifis-net/ansible-collection-toolkit/labels/gitlab)]
+
+**Fixed bugs:**
+
+- unattended upgrades are not scheduled correctly [\#426](https://github.com/hifis-net/ansible-collection-toolkit/issues/426)
+- Disable apt cache updates when removing repositories from sources.list [\#432](https://github.com/hifis-net/ansible-collection-toolkit/pull/432) [[zammad](https://github.com/hifis-net/ansible-collection-toolkit/labels/zammad)] [[gitlab](https://github.com/hifis-net/ansible-collection-toolkit/labels/gitlab)] ([Normo](https://github.com/Normo))
+- Replace obsolete occurrences of Pipfile [\#409](https://github.com/hifis-net/ansible-collection-toolkit/pull/409) [[unattended_upgrades](https://github.com/hifis-net/ansible-collection-toolkit/labels/unattended_upgrades)] [[zammad](https://github.com/hifis-net/ansible-collection-toolkit/labels/zammad)] [[ssh_keys](https://github.com/hifis-net/ansible-collection-toolkit/labels/ssh_keys)] [[gitlab_runner](https://github.com/hifis-net/ansible-collection-toolkit/labels/gitlab_runner)] [[keepalived](https://github.com/hifis-net/ansible-collection-toolkit/labels/keepalived)] [[haproxy](https://github.com/hifis-net/ansible-collection-toolkit/labels/haproxy)] [[netplan](https://github.com/hifis-net/ansible-collection-toolkit/labels/netplan)] [[redis](https://github.com/hifis-net/ansible-collection-toolkit/labels/redis)] [[gitlab](https://github.com/hifis-net/ansible-collection-toolkit/labels/gitlab)] ([Normo](https://github.com/Normo))
+
+**Closed issues:**
+
+- unattended upgrades unattended\_apt\_daily\_upgrade\_oncalendar is not scheduled [\#429](https://github.com/hifis-net/ansible-collection-toolkit/issues/429)
+- Fix apt-key deprecation [\#412](https://github.com/hifis-net/ansible-collection-toolkit/issues/412) [[zammad](https://github.com/hifis-net/ansible-collection-toolkit/labels/zammad)] [[gitlab](https://github.com/hifis-net/ansible-collection-toolkit/labels/gitlab)]
+
+**Merged pull requests:**
+
+- Allow users to overwrite gitlab\_rails\['repositories\_storages'\] [\#430](https://github.com/hifis-net/ansible-collection-toolkit/pull/430) [[gitlab](https://github.com/hifis-net/ansible-collection-toolkit/labels/gitlab)] ([tobiashuste](https://github.com/tobiashuste))
+- Install Redis 8 by default [\#425](https://github.com/hifis-net/ansible-collection-toolkit/pull/425) [[redis](https://github.com/hifis-net/ansible-collection-toolkit/labels/redis)] ([Normo](https://github.com/Normo))
+- Do not pin GitLab in Molecule [\#424](https://github.com/hifis-net/ansible-collection-toolkit/pull/424) [[gitlab](https://github.com/hifis-net/ansible-collection-toolkit/labels/gitlab)] ([tobiashuste](https://github.com/tobiashuste))
+- Bump ansible from 11.3.0 to 11.6.0 [\#423](https://github.com/hifis-net/ansible-collection-toolkit/pull/423) ([dependabot[bot]](https://github.com/apps/dependabot))
+- Remove deprecated keepalived\_notification\_email variable from keepalived role [\#421](https://github.com/hifis-net/ansible-collection-toolkit/pull/421) [[keepalived](https://github.com/hifis-net/ansible-collection-toolkit/labels/keepalived)] ([Normo](https://github.com/Normo))
+- Remove deprecated elasticsearch\_url variable from zammad role [\#420](https://github.com/hifis-net/ansible-collection-toolkit/pull/420) [[zammad](https://github.com/hifis-net/ansible-collection-toolkit/labels/zammad)] ([Normo](https://github.com/Normo))
+- Install Zammad 6.5.0 by default [\#419](https://github.com/hifis-net/ansible-collection-toolkit/pull/419) [[zammad](https://github.com/hifis-net/ansible-collection-toolkit/labels/zammad)] ([tobiashuste](https://github.com/tobiashuste))
+- Ensure role workflows are running when prepare-action is updated [\#418](https://github.com/hifis-net/ansible-collection-toolkit/pull/418) [[unattended_upgrades](https://github.com/hifis-net/ansible-collection-toolkit/labels/unattended_upgrades)] [[zammad](https://github.com/hifis-net/ansible-collection-toolkit/labels/zammad)] [[ssh_keys](https://github.com/hifis-net/ansible-collection-toolkit/labels/ssh_keys)] [[gitlab_runner](https://github.com/hifis-net/ansible-collection-toolkit/labels/gitlab_runner)] [[keepalived](https://github.com/hifis-net/ansible-collection-toolkit/labels/keepalived)] [[haproxy](https://github.com/hifis-net/ansible-collection-toolkit/labels/haproxy)] [[netplan](https://github.com/hifis-net/ansible-collection-toolkit/labels/netplan)] [[redis](https://github.com/hifis-net/ansible-collection-toolkit/labels/redis)] [[gitlab](https://github.com/hifis-net/ansible-collection-toolkit/labels/gitlab)] ([Normo](https://github.com/Normo))
+- Bump ansible/ansible-lint from 25.1.3 to 25.4.0 [\#417](https://github.com/hifis-net/ansible-collection-toolkit/pull/417) ([dependabot[bot]](https://github.com/apps/dependabot))
+- Replace git\_data\_dirs [\#416](https://github.com/hifis-net/ansible-collection-toolkit/pull/416) [[gitlab](https://github.com/hifis-net/ansible-collection-toolkit/labels/gitlab)] ([tobiashuste](https://github.com/tobiashuste))
+- Bump astral-sh/setup-uv from 5 to 6 in /.github/workflows/prepare-action [\#415](https://github.com/hifis-net/ansible-collection-toolkit/pull/415) ([dependabot[bot]](https://github.com/apps/dependabot))
+- Use deb822\_repository module to add apt repositories [\#413](https://github.com/hifis-net/ansible-collection-toolkit/pull/413) [[zammad](https://github.com/hifis-net/ansible-collection-toolkit/labels/zammad)] [[gitlab](https://github.com/hifis-net/ansible-collection-toolkit/labels/gitlab)] ([Normo](https://github.com/Normo))
+- Replace pipenv by uv [\#406](https://github.com/hifis-net/ansible-collection-toolkit/pull/406) [[unattended_upgrades](https://github.com/hifis-net/ansible-collection-toolkit/labels/unattended_upgrades)] [[zammad](https://github.com/hifis-net/ansible-collection-toolkit/labels/zammad)] [[ssh_keys](https://github.com/hifis-net/ansible-collection-toolkit/labels/ssh_keys)] [[gitlab_runner](https://github.com/hifis-net/ansible-collection-toolkit/labels/gitlab_runner)] [[keepalived](https://github.com/hifis-net/ansible-collection-toolkit/labels/keepalived)] [[haproxy](https://github.com/hifis-net/ansible-collection-toolkit/labels/haproxy)] [[netplan](https://github.com/hifis-net/ansible-collection-toolkit/labels/netplan)] [[redis](https://github.com/hifis-net/ansible-collection-toolkit/labels/redis)] [[gitlab](https://github.com/hifis-net/ansible-collection-toolkit/labels/gitlab)] ([tobiashuste](https://github.com/tobiashuste))
+- Bump artis3n/ansible\_galaxy\_collection from 2.10.1 to 2.11.0 [\#405](https://github.com/hifis-net/ansible-collection-toolkit/pull/405) ([dependabot[bot]](https://github.com/apps/dependabot))
+- Remove Docker 28 IPV6 related fix [\#404](https://github.com/hifis-net/ansible-collection-toolkit/pull/404) [[gitlab_runner](https://github.com/hifis-net/ansible-collection-toolkit/labels/gitlab_runner)] ([tobiashuste](https://github.com/tobiashuste))
+- Bump ansible from 11.2.0 to 11.3.0 [\#403](https://github.com/hifis-net/ansible-collection-toolkit/pull/403) ([dependabot[bot]](https://github.com/apps/dependabot))
+- Fix molecule docker startup for Debian and Ubuntu 20.04 [\#402](https://github.com/hifis-net/ansible-collection-toolkit/pull/402) [[gitlab_runner](https://github.com/hifis-net/ansible-collection-toolkit/labels/gitlab_runner)] ([tobiashuste](https://github.com/tobiashuste))
+- Bump molecule from 25.2.0 to 25.3.1 [\#400](https://github.com/hifis-net/ansible-collection-toolkit/pull/400) ([dependabot[bot]](https://github.com/apps/dependabot))
+- Bump ansible-lint from 25.1.2 to 25.1.3 [\#399](https://github.com/hifis-net/ansible-collection-toolkit/pull/399) ([dependabot[bot]](https://github.com/apps/dependabot))
+- Bump ansible/ansible-lint from 25.1.2 to 25.1.3 [\#398](https://github.com/hifis-net/ansible-collection-toolkit/pull/398) ([dependabot[bot]](https://github.com/apps/dependabot))
+- Bump molecule from 24.12.0 to 25.2.0 [\#397](https://github.com/hifis-net/ansible-collection-toolkit/pull/397) ([Normo](https://github.com/Normo))
+
 ## [v5.3.0](https://github.com/hifis-net/ansible-collection-toolkit/tree/v5.3.0) (2025-02-18)
 
 [Full Changelog](https://github.com/hifis-net/ansible-collection-toolkit/compare/v5.2.1...v5.3.0)
