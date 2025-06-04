@@ -30,7 +30,7 @@ The below requirements are needed on the target host:
 ## Role Variables
 
 ```yaml
-zammad_version: "6.4.1"
+zammad_version: "6.5.0"
 ```
 
 Zammad version to be installed.
