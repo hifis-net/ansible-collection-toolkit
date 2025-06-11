@@ -70,7 +70,7 @@
         enabled: true
         gpgkey:
           - "{{ gitlab_gpg_key_url }}"
-          - "{{ gitlab_gpg_key_url }}/gitlab-{{ gitlab_edition }}-3D645A26AB9FBD22.pub.gpg"
+          - "{{ gitlab_gpg_key_url }}/gitlab-{{ gitlab_edition }}-{{ gitlab_gpg_key_id }}.pub.gpg"
         sslverify: true
         sslcacert: "/etc/pki/tls/certs/ca-bundle.crt"
         metadata_expire: "300"
@@ -86,7 +86,7 @@
         enabled: true
         gpgkey:
           - "{{ gitlab_gpg_key_url }}"
-          - "{{ gitlab_gpg_key_url }}/gitlab-{{ gitlab_edition }}-3D645A26AB9FBD22.pub.gpg"
+          - "{{ gitlab_gpg_key_url }}/gitlab-{{ gitlab_edition }}-{{ gitlab_gpg_key_id }}.pub.gpg"
         sslverify: true
         sslcacert: "/etc/pki/tls/certs/ca-bundle.crt"
         metadata_expire: "300"
