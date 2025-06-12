@@ -25,6 +25,9 @@ galaxy_info:
     - name: "Debian"
       versions:
         - "bullseye"
+    - name: "EL"
+      versions:
+        - "9"
 
   galaxy_tags:
     - "git"
