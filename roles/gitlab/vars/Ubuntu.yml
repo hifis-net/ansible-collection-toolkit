@@ -13,3 +13,4 @@ gitlab_dependencies:
   - "tzdata"
 gitlab_repo_url: "https://packages.gitlab.com/gitlab/{{ gitlab_edition }}/ubuntu/"
 gitlab_package_name: "{{ gitlab_edition + '=' + gitlab_version + '-' + gitlab_release if gitlab_version and gitlab_release else gitlab_edition }}"
+gitlab_gpg_key_id: "F6403F6544A38863DAA0B6E03F01618A51312F3F"
