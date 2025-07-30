@@ -26,7 +26,6 @@
     state: 'directory'
     owner: 'root'
     group: 'root'
-  register: '_apt_daily_timer_d'
 
 - name: 'Ensure directory apt-daily-upgrade.timer.d exists'
   ansible.builtin.file:
@@ -35,7 +34,6 @@
     state: 'directory'
     owner: 'root'
     group: 'root'
-  register: '_apt_daily_upgrade_timer_d'
 
 - name: 'Deploy apt-daily timer'
   ansible.builtin.template:
@@ -46,7 +44,6 @@
     group: 'root'
   when:
     - '_apt_daily.rc == 0'
-    - '_apt_daily_timer_d' # skip if run for the first time in check mode
   notify:
     - 'Restart apt-daily timer'
 
@@ -59,7 +56,6 @@
     group: 'root'
   when:
     - '_apt_daily_upgrade.rc == 0'
-    - '_apt_daily_upgrade_timer_d' # skip if run for the first time in check mode
   notify:
     - 'Restart apt-daily-upgrade timer'
 ...
