@@ -10,6 +10,7 @@
   ansible.builtin.package:
     name: "{{ gitlab_dependencies }}"
     state: "present"
+    allowerasing: "{{ true if ansible_facts['os_family'] == 'RedHat' else omit }}"
 
 - name: "Prepare Debian GitLab installation"
   when: "ansible_facts.os_family == 'Debian'"
@@ -71,6 +72,7 @@
         gpgkey:
           - "{{ gitlab_gpg_key_url }}"
           - "{{ gitlab_gpg_key_url }}/gitlab-{{ gitlab_edition }}-3D645A26AB9FBD22.pub.gpg"
+          - "{{ gitlab_gpg_key_url }}/gitlab-{{ gitlab_edition }}-CB947AD886C8E8FD.pub.gpg"
         sslverify: true
         sslcacert: "/etc/pki/tls/certs/ca-bundle.crt"
         metadata_expire: "300"
@@ -87,6 +89,7 @@
         gpgkey:
           - "{{ gitlab_gpg_key_url }}"
           - "{{ gitlab_gpg_key_url }}/gitlab-{{ gitlab_edition }}-3D645A26AB9FBD22.pub.gpg"
+          - "{{ gitlab_gpg_key_url }}/gitlab-{{ gitlab_edition }}-CB947AD886C8E8FD.pub.gpg"
         sslverify: true
         sslcacert: "/etc/pki/tls/certs/ca-bundle.crt"
         metadata_expire: "300"
