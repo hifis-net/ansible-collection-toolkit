@@ -17,6 +17,7 @@
   no_log: "{{ gitlab_hide_sensitive_changes }}"
   notify:
     - "Reconfigure Primary GitLab"
+    - "Trigger registry metadata database migrations"
     - "Reconfigure Non Primary GitLab"
 
 - name: "Ensure gitaly['configuration'] is not present in gitlab_additional_configurations"
@@ -55,6 +56,7 @@
   no_log: "{{ gitlab_hide_sensitive_changes }}"
   notify:
     - "Reconfigure Primary GitLab"
+    - "Trigger registry metadata database migrations"
     - "Reconfigure Non Primary GitLab"
 
 - name: "Create file to prevent Gitlab to restart before migrations"

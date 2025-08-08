@@ -20,6 +20,10 @@
   listen: "GitLab has been installed or upgraded"
   when: "gitlab_is_primary"
 
+- name: "Trigger registry metadata database migrations"
+  ansible.builtin.include_tasks: "registry_metadata_db.yml"
+  when: "gitlab_is_primary"
+
 - name: "Reconfigure Non Primary GitLab"
   become: true
   ansible.builtin.shell:
