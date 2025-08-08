@@ -1,0 +1,22 @@
+# SPDX-FileCopyrightText: Helmholtz-Zentrum Dresden-Rossendorf (HZDR)
+#
+# SPDX-License-Identifier: Apache-2.0
+
+---
+
+- name: "Check if registry configuration exists"
+  ansible.builtin.set_fact:
+    __gitlab_registry_config: "{{ item.registry }}"
+  when: "item.registry is defined"
+  loop: "{{ gitlab_additional_configurations }}"
+
+- name: "Check if database key is defined in registry"
+  ansible.builtin.set_fact:
+    __gitlab_registry_database_used: "{{ __gitlab_registry_config | default([]) | selectattr('key', '==', 'database') | list | length > 0 }}"
+
+- name: "Run registry metadata database migrations"
+  become: true
+  ansible.builtin.command: "gitlab-ctl registry-database migrate up --skip-post-deployment"
+  changed_when: true
+  when:
+    - "__gitlab_registry_database_used"
