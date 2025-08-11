@@ -1,0 +1,29 @@
+# SPDX-FileCopyrightText: Helmholtz-Zentrum Dresden-Rossendorf (HZDR)
+#
+# SPDX-License-Identifier: Apache-2.0
+
+---
+
+- name: "Check whether gitlab-rails binary is installed"
+  ansible.builtin.stat:
+    path: "/usr/bin/gitlab-rails"
+  register: "gitlab_rails_binary"
+
+- name: "Determine if this is an initial dry-run"
+  ansible.builtin.set_fact:
+    gitlab_is_initial_dryrun: "{{ ansible_check_mode and not gitlab_rails_binary.stat.exists }}"
+
+- name: "Check if a previous reconfigure had failed"
+  ansible.builtin.stat:
+    path: "/etc/gitlab/reconfigure_failed"
+  register: "gitlab_reconfigure_failed"
+
+- name: "Check if registry configuration exists"
+  ansible.builtin.set_fact:
+    __gitlab_registry_config: "{{ item.registry }}"
+  when: "item.registry is defined"
+  loop: "{{ gitlab_additional_configurations }}"
+
+- name: "Check if database key is defined in registry"
+  ansible.builtin.set_fact:
+    __gitlab_registry_database_used: "{{ __gitlab_registry_config | default([]) | selectattr('key', '==', 'database') | list | length > 0 }}"
