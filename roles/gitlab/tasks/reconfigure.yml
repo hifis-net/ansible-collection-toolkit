@@ -21,25 +21,13 @@
   when:
     - "not gitlab_is_primary"
 
-- name: "Trigger registry metadata database migrations"
-  when: "gitlab_is_primary"
-  block:
-    - name: "Check if registry configuration exists"
-      ansible.builtin.set_fact:
-        __gitlab_registry_config: "{{ item.registry }}"
-      when: "item.registry is defined"
-      loop: "{{ gitlab_additional_configurations }}"
-
-    - name: "Check if database key is defined in registry"
-      ansible.builtin.set_fact:
-        __gitlab_registry_database_used: "{{ __gitlab_registry_config | default([]) | selectattr('key', '==', 'database') | list | length > 0 }}"
-
-    - name: "Run registry metadata database migrations"
-      become: true
-      ansible.builtin.command: "gitlab-ctl registry-database migrate up --skip-post-deployment"
-      changed_when: true
-      when:
-        - "__gitlab_registry_database_used"
+- name: "Run registry metadata database migrations"
+  become: true
+  ansible.builtin.command: "gitlab-ctl registry-database migrate up --skip-post-deployment"
+  changed_when: true
+  when:
+    - "__gitlab_registry_database_used"
+    - "gitlab_is_primary"
 
 - name: "Remove file that indicates a failed reconfigure"
   ansible.builtin.file:
