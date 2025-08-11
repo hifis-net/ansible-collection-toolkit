@@ -22,10 +22,8 @@
 
 - name: "Run registry metadata database migrations"
   become: true
-  ansible.builtin.command: "gitlab-ctl registry-database migrate up"
+  ansible.builtin.command: "gitlab-ctl registry-database migrate up --skip-post-deployment"
   changed_when: true
-  environment:
-    SKIP_POST_DEPLOYMENT_MIGRATIONS: true
   when:
     - "__gitlab_registry_database_used"
     - "gitlab_is_primary"
