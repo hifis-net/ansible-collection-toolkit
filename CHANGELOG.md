@@ -1,5 +1,24 @@
 # Changelog
 
+## [6.1.0](https://github.com/hifis-net/ansible-collection-toolkit/tree/6.1.0) (2025-08-12)
+
+[Full Changelog](https://github.com/hifis-net/ansible-collection-toolkit/compare/v6.0.1...6.1.0)
+
+**Implemented enhancements:**
+
+- Make sure to run registry metadata database migrations [\#455](https://github.com/hifis-net/ansible-collection-toolkit/pull/455) [[gitlab](https://github.com/hifis-net/ansible-collection-toolkit/labels/gitlab)] ([Normo](https://github.com/Normo))
+- Add AlmaLinux OS 9 support for GitLab role [\#440](https://github.com/hifis-net/ansible-collection-toolkit/pull/440) [[gitlab](https://github.com/hifis-net/ansible-collection-toolkit/labels/gitlab)] ([Normo](https://github.com/Normo))
+
+**Merged pull requests:**
+
+- Bump yamllint from 1.35.1 to 1.37.1 [\#453](https://github.com/hifis-net/ansible-collection-toolkit/pull/453) ([dependabot[bot]](https://github.com/apps/dependabot))
+- Bump molecule from 25.3.1 to 25.7.0 [\#452](https://github.com/hifis-net/ansible-collection-toolkit/pull/452) ([dependabot[bot]](https://github.com/apps/dependabot))
+- Bump ansible-lint from 25.1.3 to 25.7.0 [\#451](https://github.com/hifis-net/ansible-collection-toolkit/pull/451) ([dependabot[bot]](https://github.com/apps/dependabot))
+- Fix condition for compatibility with Ansible 2.19 [\#449](https://github.com/hifis-net/ansible-collection-toolkit/pull/449) [[ssh_keys](https://github.com/hifis-net/ansible-collection-toolkit/labels/ssh_keys)] ([tobiashuste](https://github.com/tobiashuste))
+- Fix conditionals for Ansible 2.19 [\#448](https://github.com/hifis-net/ansible-collection-toolkit/pull/448) [[unattended_upgrades](https://github.com/hifis-net/ansible-collection-toolkit/labels/unattended_upgrades)] ([sur5r](https://github.com/sur5r))
+- Bump ansible/ansible-lint from 25.6.0 to 25.7.0 [\#447](https://github.com/hifis-net/ansible-collection-toolkit/pull/447) ([dependabot[bot]](https://github.com/apps/dependabot))
+- Bump ansible from 11.7.0 to 11.8.0 [\#446](https://github.com/hifis-net/ansible-collection-toolkit/pull/446) ([dependabot[bot]](https://github.com/apps/dependabot))
+
 ## [v6.0.1](https://github.com/hifis-net/ansible-collection-toolkit/tree/v6.0.1) (2025-06-19)
 
 [Full Changelog](https://github.com/hifis-net/ansible-collection-toolkit/compare/v6.0.0...v6.0.1)
