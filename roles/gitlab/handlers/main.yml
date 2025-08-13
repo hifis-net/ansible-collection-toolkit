@@ -24,6 +24,7 @@
   become: true
   ansible.builtin.command: "gitlab-ctl registry-database migrate up --skip-post-deployment"
   changed_when: true
+  listen: "GitLab has been installed or upgraded"
   when:
     - "__gitlab_registry_database_used"
     - "gitlab_is_primary"
