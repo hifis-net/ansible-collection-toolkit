@@ -5,7 +5,7 @@
 
 [project]
 name = "ansible-collection-toolkit"
-version = "6.1.0"
+version = "6.1.1"
 description = "This collection provides production-ready Ansible roles used for providing services used in research and by research software engineers, but not exclusively."
 readme = "README.md"
 requires-python = ">=3.11"
