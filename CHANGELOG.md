@@ -1,8 +1,21 @@
 # Changelog
 
-## [6.1.0](https://github.com/hifis-net/ansible-collection-toolkit/tree/6.1.0) (2025-08-12)
+## [6.1.1](https://github.com/hifis-net/ansible-collection-toolkit/tree/6.1.1) (2025-08-13)
 
-[Full Changelog](https://github.com/hifis-net/ansible-collection-toolkit/compare/v6.0.1...6.1.0)
+[Full Changelog](https://github.com/hifis-net/ansible-collection-toolkit/compare/v6.1.0...6.1.1)
+
+**Fixed bugs:**
+
+- Fix registry db migrations not executed upon gitlab upgrades [\#459](https://github.com/hifis-net/ansible-collection-toolkit/pull/459) [[gitlab](https://github.com/hifis-net/ansible-collection-toolkit/labels/gitlab)] ([tobiashuste](https://github.com/tobiashuste))
+
+**Merged pull requests:**
+
+- Bump ansible from 11.8.0 to 11.9.0 [\#460](https://github.com/hifis-net/ansible-collection-toolkit/pull/460) ([dependabot[bot]](https://github.com/apps/dependabot))
+- Bump actions/checkout from 4 to 5 [\#458](https://github.com/hifis-net/ansible-collection-toolkit/pull/458) [[unattended_upgrades](https://github.com/hifis-net/ansible-collection-toolkit/labels/unattended_upgrades)] [[zammad](https://github.com/hifis-net/ansible-collection-toolkit/labels/zammad)] [[ssh_keys](https://github.com/hifis-net/ansible-collection-toolkit/labels/ssh_keys)] [[gitlab_runner](https://github.com/hifis-net/ansible-collection-toolkit/labels/gitlab_runner)] [[keepalived](https://github.com/hifis-net/ansible-collection-toolkit/labels/keepalived)] [[haproxy](https://github.com/hifis-net/ansible-collection-toolkit/labels/haproxy)] [[netplan](https://github.com/hifis-net/ansible-collection-toolkit/labels/netplan)] [[redis](https://github.com/hifis-net/ansible-collection-toolkit/labels/redis)] [[gitlab](https://github.com/hifis-net/ansible-collection-toolkit/labels/gitlab)] ([dependabot[bot]](https://github.com/apps/dependabot))
+
+## [v6.1.0](https://github.com/hifis-net/ansible-collection-toolkit/tree/v6.1.0) (2025-08-12)
+
+[Full Changelog](https://github.com/hifis-net/ansible-collection-toolkit/compare/v6.0.1...v6.1.0)
 
 **Implemented enhancements:**
 
@@ -11,6 +24,7 @@
 
 **Merged pull requests:**
 
+- Prepare release 6.1.0 [\#456](https://github.com/hifis-net/ansible-collection-toolkit/pull/456) ([tobiashuste](https://github.com/tobiashuste))
 - Bump yamllint from 1.35.1 to 1.37.1 [\#453](https://github.com/hifis-net/ansible-collection-toolkit/pull/453) ([dependabot[bot]](https://github.com/apps/dependabot))
 - Bump molecule from 25.3.1 to 25.7.0 [\#452](https://github.com/hifis-net/ansible-collection-toolkit/pull/452) ([dependabot[bot]](https://github.com/apps/dependabot))
 - Bump ansible-lint from 25.1.3 to 25.7.0 [\#451](https://github.com/hifis-net/ansible-collection-toolkit/pull/451) ([dependabot[bot]](https://github.com/apps/dependabot))
