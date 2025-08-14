@@ -37,7 +37,7 @@
         - name: "Check that network settings are correct."
           ansible.builtin.assert:
             that:
-              - "actual_ip_addresses | ansible.utils.ipaddr('bool')"
+              - "(actual_ip_addresses | ansible.utils.ipaddr('bool')) is all"
               - "target_ip_address | ansible.utils.ipaddr('bool')"
               - "actual_interface_name == target_interface_name"
               - "target_ip_address in actual_ip_addresses"
