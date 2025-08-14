@@ -53,7 +53,7 @@ gitlab_redis_sentinel_port: "26379"
 gitlab_ip_range: "{{ ansible_facts.default_ipv4.address }}/24"
 
 # Whether to use GitLab Omnibus internal Gitaly
-gitlab_use_internal_gitaly: "true"
+gitlab_use_internal_gitaly: true
 # Data directory to use
 gitlab_git_data_dir: "/var/opt/gitlab/git-data"
 # Gitaly token

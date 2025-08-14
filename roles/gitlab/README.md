@@ -309,7 +309,7 @@ gitlab_ip_range: '{{ ansible_facts.default_ipv4.address }}/24'
 Set switch to `false` to enable external Gitaly instance:
 
 ```yaml
-gitlab_use_internal_gitaly: 'false'
+gitlab_use_internal_gitaly: false
 ```
 
 #### Path to GitLab Data Directory
