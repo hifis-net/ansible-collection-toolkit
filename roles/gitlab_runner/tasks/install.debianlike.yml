@@ -46,7 +46,7 @@
         update_cache: true
         allow_downgrade: true
       when:
-        - "not gitlab_runner_is_initial_dryrun"  # skip if run for the first time in check mode
+        - "not __gitlab_runner_is_initial_dryrun"  # skip if run for the first time in check mode
         - "gitlab_runner_version is version('17.7.0', 'ge') or gitlab_runner_version | length == 0"
 
     - name: "Install gitlab-runner with downgrade option"
@@ -55,7 +55,7 @@
         state: "present"
         update_cache: true
         allow_downgrade: true
-      when: "not gitlab_runner_is_initial_dryrun"  # skip if run for the first time in check mode
+      when: "not __gitlab_runner_is_initial_dryrun"  # skip if run for the first time in check mode
 
 - name: "Gather the package facts"
   ansible.builtin.package_facts:

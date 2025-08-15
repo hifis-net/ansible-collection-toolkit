@@ -7,21 +7,21 @@
 - name: "Check if fleeting-plugin-openstack is installed"
   ansible.builtin.stat:
     path: "/usr/local/bin/fleeting-plugin-openstack"
-  register: "_fleeting_plugin_openstack_stat"
+  register: "__fleeting_plugin_openstack_stat"
 
 - name: "Check version of installed fleeting plugin"
-  when: "_fleeting_plugin_openstack_stat.stat.exists"
+  when: "__fleeting_plugin_openstack_stat.stat.exists"
   ansible.builtin.shell:
     cmd: |
       set -o pipefail
       strings /usr/local/bin/fleeting-plugin-openstack | grep -oP "(?<=fleeting-plugin-openstack.Version=)(\d+\.\d+\.\d+)" | head -n 1
     executable: "/bin/bash"
-  register: "_fleeting_plugin_version_installed"
+  register: "__fleeting_plugin_version_installed"
   changed_when: false
   check_mode: false
 
 - name: "Download and install fleeting plugin"
-  when: "not _fleeting_plugin_openstack_stat.stat.exists or _fleeting_plugin_version_installed.stdout != gitlab_runner_autoscaler_binary_version"
+  when: "not __fleeting_plugin_openstack_stat.stat.exists or __fleeting_plugin_version_installed.stdout != gitlab_runner_autoscaler_binary_version"
   block:
     - name: "Create temporary directory"
       ansible.builtin.tempfile:

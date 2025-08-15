@@ -10,7 +10,7 @@ passwd:
   users:
     - name: core
       ssh_authorized_keys:
-        - {{ gitlab_runner_ssh_keypair.public_key }}
+        - {{ __gitlab_runner_ssh_keypair.public_key }}
 storage:
   files:
     - path: /etc/resolv.conf
