@@ -20,7 +20,7 @@
         url: "{{ gitlab_gpg_key_url }}"
         id: "{{ gitlab_gpg_key_id }}"
         state: "absent"
-      when: "not gitlab_is_initial_dryrun"
+      when: "not __gitlab_is_initial_dryrun"
 
     - name: "Remove GitLab APT repository from sources.list"
       ansible.builtin.apt_repository:
@@ -102,23 +102,23 @@
 - name: "Check if VERSION file exists"
   ansible.builtin.stat:
     path: "/var/opt/gitlab/gitlab-rails/VERSION"
-  register: "gitlab_version_file"
+  register: "__gitlab_version_file"
 
 - name: "Wait for background migrations on primary node"
   when:
     - "gitlab_is_primary"
-    - "gitlab_version_file.stat.exists"
-    - "gitlab_rails_binary.stat.exists"
-    - "gitlab_rails_binary.stat.executable"
+    - "__gitlab_version_file.stat.exists"
+    - "__gitlab_rails_binary.stat.exists"
+    - "__gitlab_rails_binary.stat.executable"
   block:
     - name: "Get the currently installed GitLab version"
       ansible.builtin.slurp:
         path: "/var/opt/gitlab/gitlab-rails/VERSION"
-      register: "gitlab_version_base64"
+      register: "__gitlab_version_base64"
 
     - name: "Set fact about installed GitLab version"
       ansible.builtin.set_fact:
-        gitlab_installed_version: "{{ gitlab_version_base64['content'] | b64decode }}"
+        __gitlab_installed_version: "{{ __gitlab_version_base64['content'] | b64decode }}"
       check_mode: false
 
     - name: "Wait until all previous background migrations are processed."
@@ -131,7 +131,7 @@
       delay: 10
       check_mode: false
       changed_when: false
-      when: "gitlab_version == '' or gitlab_installed_version is version(gitlab_version, operator='lt', strict=True)"
+      when: "gitlab_version == '' or __gitlab_installed_version is version(gitlab_version, operator='lt', strict=True)"
 
 - name: "Install GitLab and add helper to detect failed reconfigures"
   block:
@@ -141,9 +141,8 @@
       ansible.builtin.package:
         name: "{{ gitlab_package_name }}"
         state: "{{ 'present' if gitlab_version | length > 0 else 'latest' }}"
-      register: "gitlab_install_output"
       notify: "GitLab has been installed or upgraded"
-      when: "not gitlab_is_initial_dryrun"
+      when: "not __gitlab_is_initial_dryrun"
 
   rescue:
 

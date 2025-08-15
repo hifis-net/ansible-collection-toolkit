@@ -7,16 +7,16 @@
 - name: "Check whether gitlab-rails binary is installed"
   ansible.builtin.stat:
     path: "/usr/bin/gitlab-rails"
-  register: "gitlab_rails_binary"
+  register: "__gitlab_rails_binary"
 
 - name: "Determine if this is an initial dry-run"
   ansible.builtin.set_fact:
-    gitlab_is_initial_dryrun: "{{ ansible_check_mode and not gitlab_rails_binary.stat.exists }}"
+    __gitlab_is_initial_dryrun: "{{ ansible_check_mode and not __gitlab_rails_binary.stat.exists }}"
 
 - name: "Check if a previous reconfigure had failed"
   ansible.builtin.stat:
     path: "/etc/gitlab/reconfigure_failed"
-  register: "gitlab_reconfigure_failed"
+  register: "__gitlab_reconfigure_failed"
 
 - name: "Check if registry configuration exists"
   ansible.builtin.set_fact:
