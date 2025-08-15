@@ -10,15 +10,15 @@ description = "This collection provides production-ready Ansible roles used for 
 readme = "README.md"
 requires-python = ">=3.11"
 dependencies = [
-    "ansible>=11.3.0",
+    "ansible>=11.9.0",
 ]
 
 [dependency-groups]
 dev = [
-    "ansible-lint>=25.1.3",
-    "molecule>=25.3.1",
-    "molecule-plugins[podman]>=23.7.0",
+    "ansible-lint>=25.8.1",
+    "molecule>=25.7.0",
+    "molecule-plugins[podman]>=25.8.12",
     "netaddr>=1.3.0",
     "reuse>=5.0.2",
-    "yamllint>=1.35.1",
+    "yamllint>=1.37.1",
 ]
