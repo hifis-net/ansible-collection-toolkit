@@ -8,13 +8,13 @@
 - name: "Check if feature flag is already enabled for {{ gitlab_feature_flag.name }}"
   ansible.builtin.command:
     cmd: "gitlab-rails runner 'is_feature_enabled = Feature.enabled?(:{{ gitlab_feature_flag.name }}); puts is_feature_enabled'"
-  register: "gitlab_is_feature_enabled"
+  register: "__gitlab_is_feature_enabled"
   changed_when: false
 
 - name: "Enable or disable feature flag {{ gitlab_feature_flag.name }}"
   ansible.builtin.command:
     cmd: "gitlab-rails runner 'Feature.{{ 'enable' if gitlab_feature_flag.enabled else 'disable' }}(:{{ gitlab_feature_flag.name }})'"
   changed_when: true
-  when: "(gitlab_is_feature_enabled.stdout == 'true' and not gitlab_feature_flag.enabled) or (gitlab_is_feature_enabled.stdout == 'false' and gitlab_feature_flag.enabled)"
+  when: "(__gitlab_is_feature_enabled.stdout == 'true' and not gitlab_feature_flag.enabled) or (__gitlab_is_feature_enabled.stdout == 'false' and gitlab_feature_flag.enabled)"
 
 ...
