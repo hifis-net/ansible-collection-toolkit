@@ -28,7 +28,7 @@ gitlab_rails['redis_sentinels'] = [
 gitlab_rails['redis_sentinels_password'] = "{{ gitlab_redis_sentinel_password }}"
 {% endif %}
 {% endif %}
-gitlab_rails['monitoring_whitelist'] = ["{{ gitlab_ip_range }}"]
+gitlab_rails['monitoring_whitelist'] = ["{{ gitlab_rails_monitoring_whitelist | join('","') }}"]
 
 {% if gitlab_use_internal_gitaly %}
 {% if not __gitaly_configuration_exists %}

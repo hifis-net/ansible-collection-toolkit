@@ -392,6 +392,14 @@ gitlab_postgresql_db_password: 'changeme'
 
 **Caution: You have to use your own private and encrypted password here.**
 
+#### Configure monitoring whitelist for Gitlab rails
+
+Configure the monitoring whitelist for GitLab-Rails:
+
+```yaml
+gitlab_rails_monitoring_whitelist: ["{{ gitlab_ip_range }}"]
+```
+
 #### Configure GitLab Registry
 
 Enable GitLab container registry:
