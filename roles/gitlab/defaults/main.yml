@@ -95,6 +95,8 @@ gitlab_mattermost_only_context: "false"
 
 gitlab_feature_flags: []
 
+gitlab_rails_monitoring_whitelist: ["{{ gitlab_ip_range }}"]
+
 # Internal variable to determine whether the configuration object for Gitaly
 # is already present in gitlab_additional_configurations
 __gitaly_configuration_exists: false
