@@ -29,8 +29,8 @@
   community.crypto.openssh_keypair:  # noqa: args[module]
     path: "{{ gitlab_runner_ssh_private_key_path }}"
     type: "{{ gitlab_runner_ssh_key_type | default('ed25519') }}"
-  register: "gitlab_runner_ssh_keypair"
-  when: "not gitlab_runner_is_initial_dryrun"  # skip if run for the first time in check mode
+  register: "__gitlab_runner_ssh_keypair"
+  when: "not __gitlab_runner_is_initial_dryrun"  # skip if run for the first time in check mode
 
 - name: "Download and install container-linux-config-transpiler"
   ansible.builtin.get_url:
@@ -46,17 +46,17 @@
     owner: "root"
     group: "root"
     mode: "0644"
-  register: "flatcar_config_task"
-  when: "not gitlab_runner_is_initial_dryrun"  # skip if run for the first time in check mode
+  register: "__flatcar_config_task"
+  when: "not __gitlab_runner_is_initial_dryrun"  # skip if run for the first time in check mode
   notify:
     - "Transpile the flatcar linux configuration"
 
 - name: "Check if ignition.json is available and create it in any case"
-  when: "not flatcar_config_task.changed"  # noqa no-handler
+  when: "not __flatcar_config_task.changed"  # noqa no-handler
   ansible.builtin.stat:
     path: "/etc/gitlab-runner/ignition.json"
-  register: "ignition_exists"
-  changed_when: "not ignition_exists.stat.exists"
+  register: "__ignition_exists"
+  changed_when: "not __ignition_exists.stat.exists"
   notify:
     - "Transpile the flatcar linux configuration"
 
@@ -64,27 +64,29 @@
 # tool resulting in a different result. Also this helps to fix any kind of
 # manual manipulation.
 - name: "Check if ignition.json is up-to-date"
-  when: "not flatcar_config_task.changed and ignition_exists.stat.exists"  # noqa no-handler
+  when:
+    - "not __flatcar_config_task.changed"
+    - "__ignition_exists.stat.exists"
   block:
     - name: "Create temporary directory"
       ansible.builtin.tempfile:
         state: "directory"
         suffix: "ignition"
-      register: "temp_directory"
+      register: "__temp_directory"
       changed_when: false
       check_mode: false
 
     - name: "Dry-run of transpile the flatcar linux configuration"
-      ansible.builtin.command: "butane -o {{ (temp_directory.path, 'ignition.json') | path_join }} /etc/gitlab-runner/butane-config.bu"
+      ansible.builtin.command: "butane -o {{ (__temp_directory.path, 'ignition.json') | path_join }} /etc/gitlab-runner/butane-config.bu"
       changed_when: false
       check_mode: false
 
     - name: "Stat temporary ignition.json file"
       ansible.builtin.stat:
-        path: "{{ (temp_directory.path, 'ignition.json') | path_join }}"
-      register: "temp_ignition_stats"
+        path: "{{ (__temp_directory.path, 'ignition.json') | path_join }}"
+      register: "__temp_ignition_stats"
       changed_when:
-        - "temp_ignition_stats.stat.checksum != ignition_exists.stat.checksum"
+        - "__temp_ignition_stats.stat.checksum != __ignition_exists.stat.checksum"
       check_mode: false
       notify:
         - "Transpile the flatcar linux configuration"
@@ -92,7 +94,7 @@
   always:
     - name: "Remove temporary directory"
       ansible.builtin.file:
-        path: "{{ temp_directory.path }}"
+        path: "{{ __temp_directory.path }}"
         state: "absent"
       changed_when: false
       check_mode: false

@@ -9,21 +9,21 @@
 
 - name: "Set variable if autoscaling runner must be configured"
   ansible.builtin.set_fact:
-    gitlab_runner_install_docker_machine: "{{ gitlab_runner_list | selectattr('executor', 'equalto', 'docker+machine') | list | length > 0 }}"
-    gitlab_runner_install_autoscaler: "{{ gitlab_runner_list | selectattr('executor', 'equalto', 'docker-autoscaler') | list | length > 0 }}"
+    __gitlab_runner_install_docker_machine: "{{ gitlab_runner_list | selectattr('executor', 'equalto', 'docker+machine') | list | length > 0 }}"
+    __gitlab_runner_install_autoscaler: "{{ gitlab_runner_list | selectattr('executor', 'equalto', 'docker-autoscaler') | list | length > 0 }}"
 
 - name: "Check if directory /etc/gitlab-runner already exists"
   ansible.builtin.stat:
     path: "/etc/gitlab-runner"
-  register: "gitlab_runner_dir"
+  register: "__gitlab_runner_dir"
 
 - name: "Determine if this is an initial dry-run"
   ansible.builtin.set_fact:
-    gitlab_runner_is_initial_dryrun: "{{ ansible_check_mode and not gitlab_runner_dir.stat.exists }}"
+    __gitlab_runner_is_initial_dryrun: "{{ ansible_check_mode and not __gitlab_runner_dir.stat.exists }}"
 
 - name: "Include docker-machine tasks"
   ansible.builtin.include_tasks: "install.docker-machine.yml"
-  when: "gitlab_runner_install_docker_machine"
+  when: "__gitlab_runner_install_docker_machine"
 
 - name: "Include installation tasks for Debian-like OS"
   ansible.builtin.include_tasks: "install.debianlike.yml"
@@ -31,7 +31,7 @@
 
 - name: "Include autoscaler install tasks"
   ansible.builtin.include_tasks: "install.autoscaler-plugin.yml"
-  when: "gitlab_runner_install_autoscaler"
+  when: "__gitlab_runner_install_autoscaler"
 
 - name: "Include tasks to configure the system"
   ansible.builtin.include_tasks: "configuration.yml"
@@ -41,7 +41,7 @@
 
 - name: "Initialize docker-machine"
   ansible.builtin.include_tasks: "docker-machine-init.yml"
-  when: "gitlab_runner_install_docker_machine"
+  when: "__gitlab_runner_install_docker_machine"
   no_log: true
   loop: "{{ gitlab_runner_list }}"
   loop_control:
@@ -50,10 +50,10 @@
 - name: "Slurp ignition json"
   ansible.builtin.slurp:
     src: "/etc/gitlab-runner/ignition.json"
-  register: "ignition_json"
+  register: "__ignition_json"
   when:
-    - "gitlab_runner_install_autoscaler"
-    - "not gitlab_runner_is_initial_dryrun"
+    - "__gitlab_runner_install_autoscaler"
+    - "not __gitlab_runner_is_initial_dryrun"
 
 - name: "Template config file"
   ansible.builtin.template:
@@ -65,14 +65,13 @@
   notify: "Restart GitLab-Runner"
   no_log: true
   vars:
-    ignition_content: "{{ ignition_json['content'] | b64decode }}"
-  when: "not gitlab_runner_is_initial_dryrun"
+    __ignition_content: "{{ __ignition_json['content'] | b64decode }}"
+  when: "not __gitlab_runner_is_initial_dryrun"
 
 - name: "Start GitLab-Runner"
   ansible.builtin.service:
     name: "gitlab-runner"
     state: "started"
-  when: "not gitlab_runner_is_initial_dryrun"
-
+  when: "not __gitlab_runner_is_initial_dryrun"
 
 ...
