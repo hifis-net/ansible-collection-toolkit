@@ -8,22 +8,22 @@
 - name: "Check HAProxy configuration file"
   ansible.builtin.command:
     cmd: "{{ haproxy_executable_path }} -c -q -f {{ haproxy_conf_file_path }}"
-  register: "check_haproxy_config"
-  changed_when: "check_haproxy_config.rc != 0"
-  failed_when: "check_haproxy_config.rc != 0"
+  register: "__check_haproxy_config"
+  changed_when: false
+  failed_when: "__check_haproxy_config.rc != 0"
 
 - name: "Restart HAProxy"
   become: true
   ansible.builtin.service:
     name: "{{ haproxy_name }}"
     state: "restarted"
-  ignore_errors: "{{ ignore_errors_in_check_mode }}"  # noqa ignore-errors
+  ignore_errors: "{{ __ignore_errors_in_check_mode }}"  # noqa ignore-errors
 
 - name: "Reload HAProxy"
   become: true
   ansible.builtin.service:
     name: "{{ haproxy_name }}"
     state: "reloaded"
-  ignore_errors: "{{ ignore_errors_in_check_mode }}"  # noqa ignore-errors
+  ignore_errors: "{{ __ignore_errors_in_check_mode }}"  # noqa ignore-errors
 
 ...
