@@ -11,7 +11,7 @@
     name: "keepalived"
     state: "restarted"
     daemon_reload: true
-  when: "not initial_dry_run"
+  when: "not __initial_dry_run"
 
 - name: "Reload Keepalived"
   become: true
@@ -19,6 +19,6 @@
     name: "keepalived"
     state: "reloaded"
     daemon_reload: true
-  when: "not initial_dry_run"
+  when: "not __initial_dry_run"
 
 ...
