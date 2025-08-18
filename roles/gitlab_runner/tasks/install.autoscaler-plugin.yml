@@ -26,14 +26,14 @@
     - name: "Create temporary directory"
       ansible.builtin.tempfile:
         state: "directory"
-      register: "tempdir_fleeting_plugin"
+      register: "__tempdir_fleeting_plugin"
       check_mode: false
       changed_when: false
 
     - name: "Download fleeting-plugin-openstack"
       ansible.builtin.get_url:
         url: "{{ gitlab_runner_autoscaler_plugin_url }}"
-        dest: "{{ (tempdir_fleeting_plugin.path, 'fleeting-plugin-openstack.tar.gz') | path_join }}"
+        dest: "{{ (__tempdir_fleeting_plugin.path, 'fleeting-plugin-openstack.tar.gz') | path_join }}"
         checksum: "sha512:{{ gitlab_runner_autoscaler_plugin_checksumfile }}"
         owner: "root"
         group: "root"
@@ -42,7 +42,7 @@
 
     - name: "Extract fleeting-plugin-openstack binary"
       ansible.builtin.unarchive:
-        src: "{{ (tempdir_fleeting_plugin.path, 'fleeting-plugin-openstack.tar.gz') | path_join }}"
+        src: "{{ (__tempdir_fleeting_plugin.path, 'fleeting-plugin-openstack.tar.gz') | path_join }}"
         dest: "/usr/local/bin/"
         include:
           - "bin/fleeting-plugin-openstack"
@@ -55,7 +55,7 @@
   always:
     - name: "Remove temporary directory"
       ansible.builtin.file:
-        path: "{{ tempdir_fleeting_plugin.path }}"
+        path: "{{ __tempdir_fleeting_plugin.path }}"
         state: "absent"
       check_mode: false
       changed_when: false
