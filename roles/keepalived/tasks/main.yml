@@ -138,14 +138,8 @@
     owner: "root"
     group: "root"
     mode: "0644"
+    validate: "{{ __keepalived_binary.stat.exists | ternary(keepalived_executable_path ~ ' --config-test --use-file %s', omit) }}"
   notify: "Reload Keepalived"
-
-- name: "Verify Keepalived configuration."
-  become: true
-  ansible.builtin.command:
-    cmd: "{{ keepalived_executable_path | quote }} --config-test --use-file {{ keepalived_conf_file_path | quote }}"
-  register: "__config_check"
-  changed_when: "__config_check.rc != 0"
 
 - name: "Create Keepalived Service Unit File."
   ansible.builtin.template:
