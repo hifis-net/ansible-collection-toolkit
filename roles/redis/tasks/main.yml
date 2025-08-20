@@ -8,34 +8,34 @@
 - name: "Check whether Redis server is installed."
   ansible.builtin.stat:
     path: "{{ redis_bin }}"
-  register: "redis_server_installed"
+  register: "__redis_binary"
 
 - name: "Determine initial dry-run."
   ansible.builtin.set_fact:
-    is_initial_dryrun: "{{ ansible_check_mode and not redis_server_installed.stat.exists }}"
+    __is_initial_dryrun: "{{ ansible_check_mode and not __redis_binary.stat.exists }}"
 
 - name: "Check Redis version."
   ansible.builtin.command:
     cmd: "{{ redis_bin }} -v"
-  register: "redis_version_installed"
-  when: "redis_server_installed.stat.exists"
+  register: "__redis_version_installed"
+  when: "__redis_binary.stat.exists"
   changed_when: false
   check_mode: false
 
 - name: "Determine version."
   ansible.builtin.set_fact:
-    installed_redis_server_version: "{{ redis_version_installed.stdout | regex_search('^Redis server v=(\\d+\\.\\d+\\.\\d+)', '\\1') | first }}"
-  when: "redis_server_installed.stat.exists"
+    __installed_redis_server_version: "{{ __redis_version_installed.stdout | regex_search('^Redis server v=(\\d+\\.\\d+\\.\\d+)', '\\1') | first }}"
+  when: "__redis_binary.stat.exists"
 
 - name: "Output version strings."
   ansible.builtin.debug:
-    msg: "Installed version: {{ installed_redis_server_version }}, version to be installed: {{ redis_version }}."
-  when: "installed_redis_server_version is defined"
+    msg: "Installed version: {{ __installed_redis_server_version }}, version to be installed: {{ redis_version }}."
+  when: "__installed_redis_server_version is defined"
 
 - name: "Check if version strings are equal."
   ansible.builtin.set_fact:
-    is_redis_server_version_equal: "{{ installed_redis_server_version is version(redis_version, operator='==', strict=True) }}"
-  when: "redis_server_installed.stat.exists"
+    __is_redis_server_version_equal: "{{ __installed_redis_server_version is version(redis_version, operator='==', strict=True) }}"
+  when: "__redis_binary.stat.exists"
 
 - name: "Install dependencies."
   become: true
@@ -61,7 +61,7 @@
     create_home: false
 
 - name: "Continue if Redis is not installed or versions are not equal."
-  when: "not redis_server_installed.stat.exists or not is_redis_server_version_equal"
+  when: "not __redis_binary.stat.exists or not __is_redis_server_version_equal"
   block:
     - name: "Download and extract redis-{{ redis_version }}"
       become: true
@@ -77,14 +77,14 @@
       become: true
       community.general.make:
         chdir: "{{ redis_build_dir }}"
-      when: "not is_initial_dryrun"
+      when: "not __is_initial_dryrun"
 
     - name: "Install Redis."
       become: true
       community.general.make:
         chdir: "{{ redis_build_dir }}"
         target: "install"
-      when: "not is_initial_dryrun"
+      when: "not __is_initial_dryrun"
       notify:
         - "Restart Redis Server"
         - "Restart Redis Sentinel"
@@ -205,7 +205,7 @@
     name: "{{ redis_server_service_name }}"
     state: "started"
     enabled: true
-  when: "not is_initial_dryrun"
+  when: "not __is_initial_dryrun"
   notify: "Restart Redis Server"
 
 - name: "Register Redis Sentinel Service."
@@ -214,7 +214,7 @@
     name: "{{ redis_sentinel_service_name }}"
     state: "started"
     enabled: true
-  when: "not is_initial_dryrun"
+  when: "not __is_initial_dryrun"
   notify: "Restart Redis Sentinel"
 
 ...

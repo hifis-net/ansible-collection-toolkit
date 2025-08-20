@@ -11,7 +11,7 @@
     after: "# END ANSIBLE MANAGED BLOCK"
     regexp: "^.*$"
     replace: ""
-  when: "not is_initial_dryrun"
+  when: "not __is_initial_dryrun"
 
 - name: "Remove auto-generated Sentinel config section"
   become: true
@@ -20,20 +20,20 @@
     after: "# END ANSIBLE MANAGED BLOCK"
     regexp: "^.*$"
     replace: ""
-  when: "not is_initial_dryrun"
+  when: "not __is_initial_dryrun"
 
 - name: "Restart Redis Server"
   become: true
   ansible.builtin.service:
     name: "{{ redis_server_service_name }}"
     state: "restarted"
-  when: "not is_initial_dryrun"
+  when: "not __is_initial_dryrun"
 
 - name: "Restart Redis Sentinel"
   become: true
   ansible.builtin.service:
     name: "{{ redis_sentinel_service_name }}"
     state: "restarted"
-  when: "not is_initial_dryrun"
+  when: "not __is_initial_dryrun"
 
 ...
