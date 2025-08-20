@@ -7,7 +7,7 @@
 zammad_version: "6.5.0"
 zammad_release_channel: "stable"
 zammad_repo_url: "https://dl.packager.io/srv/deb/zammad/zammad/{{ zammad_release_channel }}/{{ ansible_facts.distribution | lower }}"
-zammad_domain_name: "{{ ansible_fqdn }}"
+zammad_domain_name: "{{ ansible_facts.fqdn }}"
 
 zammad_nginx_config_path: "/etc/nginx/sites-available/zammad.conf"
 zammad_ssl_cert_path: "/etc/ssl/certs/zammad_cert.pem"

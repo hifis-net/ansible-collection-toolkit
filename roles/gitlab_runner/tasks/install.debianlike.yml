@@ -23,8 +23,8 @@
       ansible.builtin.deb822_repository:
         name: "gitlab-runner"
         types: "deb"
-        uris: "https://packages.gitlab.com/runner/gitlab-runner/{{ ansible_distribution | lower }}/"
-        suites: "{{ ansible_distribution_release }}"
+        uris: "https://packages.gitlab.com/runner/gitlab-runner/{{ ansible_facts.distribution | lower }}/"
+        suites: "{{ ansible_facts.distribution_release }}"
         components: "main"
         signed_by: "https://packages.gitlab.com/runner/gitlab-runner/gpgkey"
         state: "present"
@@ -37,7 +37,7 @@
         owner: "root"
         group: "root"
         mode: '0644'
-      when: "ansible_distribution == 'Debian'"
+      when: "ansible_facts.distribution == 'Debian'"
 
     - name: "Install gitlab-runner-helper-images with downgrade option"
       ansible.builtin.apt:

@@ -43,7 +43,7 @@ Choose another release channel for the Zammad packages.
 Please refer to <https://packager.io/gh/zammad/zammad> for a complete list.
 
 ```yaml
-zammad_domain_name: "{{ ansible_fqdn }}"
+zammad_domain_name: "{{ ansible_facts.fqdn }}"
 ```
 
 Zammad's fully qualified domain name.

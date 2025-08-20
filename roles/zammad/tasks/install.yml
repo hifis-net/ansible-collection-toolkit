@@ -6,7 +6,7 @@
 ---
 
 - name: "Configure Zammad repository for Centos-like"
-  when: "ansible_distribution | lower == 'centos'"
+  when: "ansible_facts.distribution | lower == 'centos'"
   block:
 
     - name: "Install | Install EPEL repo"
@@ -27,7 +27,7 @@
         mode: "0644"
 
 - name: "Configure Zammad repository for Ubuntu"
-  when: "ansible_distribution | lower == 'ubuntu'"
+  when: "ansible_facts.distribution | lower == 'ubuntu'"
   block:
 
     - name: "Remove Zammad apt key from legacy trusted.gpg keyring"
@@ -37,7 +37,7 @@
 
     - name: "Remove Zammad DEB repository from sources.list"
       ansible.builtin.apt_repository:
-        repo: "deb https://dl.packager.io/srv/deb/zammad/zammad/{{ zammad_release_channel }}/ubuntu {{ ansible_distribution_version }} main"
+        repo: "deb https://dl.packager.io/srv/deb/zammad/zammad/{{ zammad_release_channel }}/ubuntu {{ ansible_facts.distribution_version }} main"
         state: "absent"
         filename: "zammad"
         update_cache: false

@@ -5,7 +5,7 @@
 
 ---
 - name: "Set OS family dependent variables"
-  ansible.builtin.include_vars: "{{ ansible_os_family | lower }}.yml"
+  ansible.builtin.include_vars: "{{ ansible_facts.os_family | lower }}.yml"
 
 - name: "Set variable if autoscaling runner must be configured"
   ansible.builtin.set_fact:
@@ -27,7 +27,7 @@
 
 - name: "Include installation tasks for Debian-like OS"
   ansible.builtin.include_tasks: "install.debianlike.yml"
-  when: "ansible_os_family == 'Debian'"
+  when: "ansible_facts.os_family == 'Debian'"
 
 - name: "Include autoscaler install tasks"
   ansible.builtin.include_tasks: "install.autoscaler-plugin.yml"

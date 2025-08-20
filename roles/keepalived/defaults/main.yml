@@ -59,11 +59,11 @@ keepalived_priority: "{{ '100' if keepalived_state == 'MASTER' else '99' }}"
 # Keepalived instance state MASTER or BACKUP
 keepalived_state: "MASTER"
 # Keepalived instance network interface
-keepalived_interface: "{{ ansible_default_ipv4.interface }}"
+keepalived_interface: "{{ ansible_facts.default_ipv4.interface }}"
 # Keepalived instance virtual IP address and network interface
 keepalived_virtual_ipaddress_config: "{{ keepalived_virtual_ip_address }} dev {{ keepalived_interface }}"
 # Keepalived instance unicast source IP address
-keepalived_unicast_src_ip: "{{ ansible_default_ipv4.address }}"
+keepalived_unicast_src_ip: "{{ ansible_facts.default_ipv4.address }}"
 
 # Enable process tracking
 keepalived_enable_process_tracking: true
