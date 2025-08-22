@@ -221,7 +221,7 @@ keepalived_weight: '0'
 Set the unicast source IP address of the Keepalived instance:
 
 ```yaml
-keepalived_unicast_src_ip: '{{ ansible_default_ipv4.address }}'
+keepalived_unicast_src_ip: '{{ ansible_facts.default_ipv4.address }}'
 ```
 
 #### Keepalived instance network interface
@@ -229,7 +229,7 @@ keepalived_unicast_src_ip: '{{ ansible_default_ipv4.address }}'
 Set network interface to which the floating IP address is associated:
 
 ```yaml
-keepalived_interface: "{{ ansible_default_ipv4.interface }}"
+keepalived_interface: "{{ ansible_facts.default_ipv4.interface }}"
 ```
 
 #### Keepalived instance virtual IP address and network interface

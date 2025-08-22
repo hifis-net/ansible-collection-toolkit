@@ -27,11 +27,11 @@
       block:
         - name: "Store actual and target network settings."
           ansible.builtin.set_fact:
-            actual_interface_name: "{{ hostvars[inventory_hostname]['ansible_default_ipv4']['interface'] }}"
+            actual_interface_name: "{{ ansible_facts.default_ipv4.interface }}"
             target_interface_name: "{{ netplan_ethernets[0]['interface_name'] }}"
-            actual_ip_addresses: "{{ hostvars[inventory_hostname]['ansible_all_ipv4_addresses'] | ansible.utils.ipaddr('address') }}"
+            actual_ip_addresses: "{{ ansible_facts.all_ipv4_addresses | ansible.utils.ipaddr('address') }}"
             target_ip_address: "{{ netplan_ethernets[0]['addresses'][0] | ansible.utils.ipaddr('address') }}"
-            actual_subnet: "{{ hostvars[inventory_hostname]['ansible_default_ipv4']['netmask'] }}"
+            actual_subnet: "{{ ansible_facts.default_ipv4.netmask }}"
             target_subnet: "{{ netplan_ethernets[0]['addresses'][0] | ansible.utils.ipaddr('netmask') }}"
 
         - name: "Check that network settings are correct."

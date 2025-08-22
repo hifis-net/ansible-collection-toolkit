@@ -8,7 +8,7 @@
   hosts: "all"
   tasks:
     - name: "Install necessary packages"
-      when: "ansible_os_family == 'Debian'"
+      when: "ansible_facts.os_family == 'Debian'"
       block:
         - name: "Install missing dependencies"
           ansible.builtin.apt:
@@ -21,7 +21,7 @@
             state: "present"
             update_cache: true
     - name: "Set up iptables"
-      when: "ansible_distribution == 'Debian'"
+      when: "ansible_facts.distribution == 'Debian'"
       block:
         - name: "Install missing dependencies"
           ansible.builtin.apt:

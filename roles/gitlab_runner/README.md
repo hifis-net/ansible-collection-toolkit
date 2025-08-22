@@ -87,7 +87,7 @@ Docker is required for the `docker` executor but not for the
 ### Docker-machine variables
 
 ```yaml
-gitlab_runner_docker_machine_binary_url: "https://gitlab.com/gitlab-org/ci-cd/docker-machine/-/releases/v0.16.2-gitlab.25/downloads/docker-machine-Linux-{{ ansible_architecture }}"
+gitlab_runner_docker_machine_binary_url: "https://gitlab.com/gitlab-org/ci-cd/docker-machine/-/releases/v0.16.2-gitlab.25/downloads/docker-machine-Linux-{{ ansible_facts.architecture }}"
 ```
 
 The URL where to download the docker-machine binary file from.
@@ -102,7 +102,7 @@ The checksum of the downloaded docker-machine binary. This must correspond to th
 ### Flatcar Linux configuration
 
 ```yaml
-gitlab_runner_transpiler_binary_url: "https://github.com/coreos/butane/releases/download/v0.23.0/butane-{{ ansible_architecture }}-unknown-linux-gnu"
+gitlab_runner_transpiler_binary_url: "https://github.com/coreos/butane/releases/download/v0.23.0/butane-{{ ansible_facts.architecture }}-unknown-linux-gnu"
 ```
 
 The URL to the configuration transpiler binary that shall be used.

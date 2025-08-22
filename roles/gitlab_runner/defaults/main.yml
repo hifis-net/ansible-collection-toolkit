@@ -10,11 +10,11 @@ gitlab_runner_pkg_version: "{{ gitlab_runner_version + '-1' if gitlab_runner_ver
 
 gitlab_runner_deb_file: ""
 
-gitlab_runner_docker_machine_binary_url: "https://gitlab.com/gitlab-org/ci-cd/docker-machine/-/releases/v0.16.2-gitlab.25/downloads/docker-machine-Linux-{{ ansible_architecture }}"
+gitlab_runner_docker_machine_binary_url: "https://gitlab.com/gitlab-org/ci-cd/docker-machine/-/releases/v0.16.2-gitlab.25/downloads/docker-machine-Linux-{{ ansible_facts.architecture }}"
 
 gitlab_runner_docker_machine_binary_checksum: "sha256:04cc18c8f6ee0d71614064fa81116f20f3a37af53eeebf19bfb832ab9c46d3a0"
 
-gitlab_runner_transpiler_binary_url: "https://github.com/coreos/butane/releases/download/v0.23.0/butane-{{ ansible_architecture }}-unknown-linux-gnu"
+gitlab_runner_transpiler_binary_url: "https://github.com/coreos/butane/releases/download/v0.23.0/butane-{{ ansible_facts.architecture }}-unknown-linux-gnu"
 
 gitlab_runner_transpiler_binary_checksum: "sha256:5833ce9f9c2932d9b02bc05821ffb6927d1e896a524c8dd53a4c9d2d90c47e2c"
 
