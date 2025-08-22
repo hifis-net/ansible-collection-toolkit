@@ -8,15 +8,15 @@
 - name: 'Test apt-daily timer expression'
   ansible.builtin.command:
     cmd: 'systemd-analyze calendar "{{ unattended_apt_daily_oncalendar }}"'
-  register: '_apt_daily'
-  changed_when: '_apt_daily.rc != 0'
+  register: '__apt_daily'
+  changed_when: '__apt_daily.rc != 0'
   check_mode: false
 
 - name: 'Test apt-daily-upgrade timer expression'
   ansible.builtin.command:
     cmd: 'systemd-analyze calendar "{{ unattended_apt_daily_upgrade_oncalendar }}"'
-  register: '_apt_daily_upgrade'
-  changed_when: '_apt_daily_upgrade.rc != 0'
+  register: '__apt_daily_upgrade'
+  changed_when: '__apt_daily_upgrade.rc != 0'
   check_mode: false
 
 - name: 'Ensure directory apt-daily.timer.d exists'
@@ -43,7 +43,7 @@
     owner: 'root'
     group: 'root'
   when:
-    - '_apt_daily.rc == 0'
+    - '__apt_daily.rc == 0'
   notify:
     - 'Restart apt-daily timer'
 
@@ -55,7 +55,7 @@
     owner: 'root'
     group: 'root'
   when:
-    - '_apt_daily_upgrade.rc == 0'
+    - '__apt_daily_upgrade.rc == 0'
   notify:
     - 'Restart apt-daily-upgrade timer'
 ...
