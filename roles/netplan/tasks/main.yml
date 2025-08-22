@@ -37,13 +37,13 @@
         file_type: "file"
         excludes:
           - "{{ netplan_configuration_file }}"
-      register: "netplan_config_files"
+      register: "__netplan_config_files"
 
     - name: "Remove netplan config files."
       ansible.builtin.file:
         path: "{{ item.path }}"
         state: "absent"
-      with_items: "{{ netplan_config_files['files'] }}"
+      with_items: "{{ __netplan_config_files['files'] }}"
 
 - name: "Create a netplan config file from template."
   ansible.builtin.template:
@@ -61,28 +61,28 @@
 - name: "Check if file ifstate exists."
   ansible.builtin.stat:
     path: "{{ ifupdown_ifstate_file }}"
-  register: "file_ifstate"
+  register: "__file_ifstate"
 
 - name: "Check whether to reboot host if file ifstate exists."
-  when: "file_ifstate.stat.exists"
+  when: "__file_ifstate.stat.exists"
   block:
     - name: "Read in ifstate file content."
       ansible.builtin.slurp:
         src: "{{ ifupdown_ifstate_file }}"
-      register: "slurped_file"
+      register: "__slurped_file"
 
     - name: "Compare ifstate file content to determine whether reboot is necessary."
       ansible.builtin.set_fact:
-        reboot_to_switch_to_netplan: "{{ slurped_file.content != 'lo=lo\n' | b64encode }}"
+        __reboot_to_switch_to_netplan: "{{ __slurped_file.content != ('lo=lo\n' | b64encode) }}"
 
     - name: "Trigger reboot to switch to netplan."
       ansible.builtin.debug:
         msg: |
           "Reboot is required to switch from ifupdown to netplan.
            Triggering the reboot handler now."
-      changed_when: "reboot_to_switch_to_netplan | bool"
+      changed_when: "__reboot_to_switch_to_netplan | bool"
       when:
-        - "reboot_to_switch_to_netplan | bool"
+        - "__reboot_to_switch_to_netplan | bool"
       notify: "Reboot managed node"
 
 ...
