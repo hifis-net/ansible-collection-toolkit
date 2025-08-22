@@ -145,9 +145,8 @@
         owner: "{{ haproxy_user }}"
         group: "{{ haproxy_group }}"
         mode: "0640"
-      notify:
-        - "Check HAProxy configuration file"
-        - "Reload HAProxy"
+        validate: "{{ __haproxy_binary.stat.exists | ternary(haproxy_executable_path ~ ' -c -q -f %s', omit) }}"
+      notify: "Reload HAProxy"
 
     - name: "Create HAProxy SSL Directory."
       become: true
