@@ -1,5 +1,18 @@
 # Changelog
 
+## [v6.2.1](https://github.com/hifis-net/ansible-collection-toolkit/tree/v6.2.1) (2025-09-03)
+
+[Full Changelog](https://github.com/hifis-net/ansible-collection-toolkit/compare/v6.2.0...v6.2.1)
+
+**Implemented enhancements:**
+
+- Ensure stable order in gitlab\_rails monitoring\_whitelist [\#482](https://github.com/hifis-net/ansible-collection-toolkit/pull/482) [[gitlab](https://github.com/hifis-net/ansible-collection-toolkit/labels/gitlab)] ([Normo](https://github.com/Normo))
+
+**Merged pull requests:**
+
+- Bump ansible-lint from 25.8.1 to 25.8.2 [\#481](https://github.com/hifis-net/ansible-collection-toolkit/pull/481) ([dependabot[bot]](https://github.com/apps/dependabot))
+- Bump ansible/ansible-lint from 25.8.1 to 25.8.2 [\#480](https://github.com/hifis-net/ansible-collection-toolkit/pull/480) ([dependabot[bot]](https://github.com/apps/dependabot))
+
 ## [v6.2.0](https://github.com/hifis-net/ansible-collection-toolkit/tree/v6.2.0) (2025-08-22)
 
 [Full Changelog](https://github.com/hifis-net/ansible-collection-toolkit/compare/v6.1.1...v6.2.0)
@@ -11,6 +24,7 @@
 
 **Merged pull requests:**
 
+- Prepare release of version 6.2.0 [\#478](https://github.com/hifis-net/ansible-collection-toolkit/pull/478) ([tobiashuste](https://github.com/tobiashuste))
 - zammad role: prefix all internal variables with two underscores [\#477](https://github.com/hifis-net/ansible-collection-toolkit/pull/477) [[zammad](https://github.com/hifis-net/ansible-collection-toolkit/labels/zammad)] ([Normo](https://github.com/Normo))
 - unattended\_upgrades role: prefix all internal variables with '\_\_' [\#476](https://github.com/hifis-net/ansible-collection-toolkit/pull/476) [[unattended_upgrades](https://github.com/hifis-net/ansible-collection-toolkit/labels/unattended_upgrades)] ([Normo](https://github.com/Normo))
 - redis role: prefix all internal variables with '\_\_' [\#475](https://github.com/hifis-net/ansible-collection-toolkit/pull/475) [[redis](https://github.com/hifis-net/ansible-collection-toolkit/labels/redis)] ([Normo](https://github.com/Normo))
