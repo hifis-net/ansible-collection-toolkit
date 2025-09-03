@@ -10,6 +10,7 @@
 
 **Merged pull requests:**
 
+- Prepare release of version 6.2.1 [\#483](https://github.com/hifis-net/ansible-collection-toolkit/pull/483) ([Normo](https://github.com/Normo))
 - Bump ansible-lint from 25.8.1 to 25.8.2 [\#481](https://github.com/hifis-net/ansible-collection-toolkit/pull/481) ([dependabot[bot]](https://github.com/apps/dependabot))
 - Bump ansible/ansible-lint from 25.8.1 to 25.8.2 [\#480](https://github.com/hifis-net/ansible-collection-toolkit/pull/480) ([dependabot[bot]](https://github.com/apps/dependabot))
 
