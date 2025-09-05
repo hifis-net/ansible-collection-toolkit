@@ -25,6 +25,6 @@ jobs:
       - name: "Check out the codebase."
         uses: "actions/checkout@v5"
 
-      - uses: "actions/labeler@v5.0.0"
+      - uses: "actions/labeler@v6.0.1"
         with:
           repo-token: "${{ secrets.GITHUB_TOKEN }}"
