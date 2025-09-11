@@ -84,6 +84,11 @@ Decide wether to install Docker via
 Docker is required for the `docker` executor but not for the
 `docker+machine` executor.
 
+```yaml
+gitlab_runner_hide_sensitive_changes: true
+```
+Do not display sensitive changes in diffs by default.
+
 ### Docker-machine variables
 
 ```yaml
