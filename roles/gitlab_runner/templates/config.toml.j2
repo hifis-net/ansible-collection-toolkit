@@ -114,7 +114,7 @@ sentry_dsn = "{{ gitlab_runner_sentry_dsn }}"
     networks = [ { uuid = "{{ runner.autoscaler_network_id }}" } ]
     security_groups = [ "{{ runner.autoscaler_security_group }}" ]
     scheduler_hints = { group = "{{ runner.autoscaler_scheduler_hint }}" }
-    user_data = '{{ __ignition_content | to_json }}'
+    user_data = '''{{ __ignition_content | trim }}'''
 
   [runners.autoscaler.connector_config]
     username = "{{ runner.autoscaler_username }}"
