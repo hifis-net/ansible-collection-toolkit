@@ -42,7 +42,7 @@
 - name: "Initialize docker-machine"
   ansible.builtin.include_tasks: "docker-machine-init.yml"
   when: "__gitlab_runner_install_docker_machine"
-  no_log: true
+  no_log: "{{ gitlab_runner_hide_sensitive_changes }}"
   loop: "{{ gitlab_runner_list }}"
   loop_control:
     loop_var: "gitlab_runner"
@@ -63,7 +63,7 @@
     group: "{{ gitlab_runner_config_group | default('root') }}"
     mode: "0600"
   notify: "Restart GitLab-Runner"
-  no_log: true
+  no_log: "{{ gitlab_runner_hide_sensitive_changes }}"
   vars:
     __ignition_content: "{{ __ignition_json['content'] | b64decode }}"
   when: "not __gitlab_runner_is_initial_dryrun"

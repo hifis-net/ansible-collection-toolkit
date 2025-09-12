@@ -67,6 +67,6 @@
     owner: "root"
     group: "root"
     mode: '0600'
-  no_log: true
+  no_log: "{{ gitlab_runner_hide_sensitive_changes }}"
 
 ...
