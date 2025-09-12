@@ -27,6 +27,8 @@ platforms:
     tty: true
 provisioner:
   name: "ansible"
+  options:
+    D: true
   playbooks:
     prepare: "prepare.yml"
     converge: "converge.yml"
@@ -35,6 +37,7 @@ provisioner:
       all:
         vars:
           gitlab_runner_concurrent: 4
+          gitlab_runner_hide_sensitive_changes: false
     host_vars:
       instancegitlabciopenstack1:
         gitlab_runner_version: "18.0.2"
