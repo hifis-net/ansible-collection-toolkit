@@ -65,7 +65,7 @@
   notify: "Restart GitLab-Runner"
   no_log: "{{ gitlab_runner_hide_sensitive_changes }}"
   vars:
-    __ignition_content: "{{ __ignition_json['content'] | b64decode }}"
+    __ignition_content: "{{ __ignition_json['content'] | b64decode | from_json }}"
   when: "not __gitlab_runner_is_initial_dryrun"
 
 - name: "Start GitLab-Runner"
