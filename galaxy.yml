@@ -5,7 +5,7 @@
 
 namespace: 'hifis'
 name: 'toolkit'
-version: '6.2.1'
+version: '6.2.2'
 readme: 'README.md'
 authors:
   - 'HIFIS Software Services <support@hifis.net>'

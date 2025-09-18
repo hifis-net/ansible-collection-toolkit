@@ -1,5 +1,19 @@
 # Changelog
 
+## [v6.2.2](https://github.com/hifis-net/ansible-collection-toolkit/tree/v6.2.2) (2025-09-18)
+
+[Full Changelog](https://github.com/hifis-net/ansible-collection-toolkit/compare/v6.2.1...v6.2.2)
+
+**Fixed bugs:**
+
+- gitlab\_runner: user\_data template issue with Ansible 2.19 [\#493](https://github.com/hifis-net/ansible-collection-toolkit/issues/493)
+
+**Merged pull requests:**
+
+- Fix user\_data template JSON encoding [\#496](https://github.com/hifis-net/ansible-collection-toolkit/pull/496) [[gitlab_runner](https://github.com/hifis-net/ansible-collection-toolkit/labels/gitlab_runner)] ([tobiashuste](https://github.com/tobiashuste))
+- gitlab\_runner: add option to hide sensitive changes in diffs [\#492](https://github.com/hifis-net/ansible-collection-toolkit/pull/492) [[gitlab_runner](https://github.com/hifis-net/ansible-collection-toolkit/labels/gitlab_runner)] ([Normo](https://github.com/Normo))
+- Bump actions/labeler from 5.0.0 to 6.0.1 [\#487](https://github.com/hifis-net/ansible-collection-toolkit/pull/487) ([dependabot[bot]](https://github.com/apps/dependabot))
+
 ## [v6.2.1](https://github.com/hifis-net/ansible-collection-toolkit/tree/v6.2.1) (2025-09-03)
 
 [Full Changelog](https://github.com/hifis-net/ansible-collection-toolkit/compare/v6.2.0...v6.2.1)
