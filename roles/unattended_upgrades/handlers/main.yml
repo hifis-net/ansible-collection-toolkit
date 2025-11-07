@@ -8,6 +8,7 @@
 # handlers file for unattended-upgrades
 
 - name: 'Restart apt-daily timer'
+  become: true
   ansible.builtin.systemd:
     daemon_reload: true
     name: 'apt-daily.timer'
@@ -15,6 +16,7 @@
     enabled: true
 
 - name: 'Restart apt-daily-upgrade timer'
+  become: true
   ansible.builtin.systemd:
     daemon_reload: true
     name: 'apt-daily-upgrade.timer'
