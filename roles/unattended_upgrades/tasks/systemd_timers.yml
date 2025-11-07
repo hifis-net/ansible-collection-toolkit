@@ -6,6 +6,7 @@
 ---
 
 - name: 'Test apt-daily timer expression'
+  become: true
   ansible.builtin.command:
     cmd: 'systemd-analyze calendar "{{ unattended_apt_daily_oncalendar }}"'
   register: '__apt_daily'
@@ -13,6 +14,7 @@
   check_mode: false
 
 - name: 'Test apt-daily-upgrade timer expression'
+  become: true
   ansible.builtin.command:
     cmd: 'systemd-analyze calendar "{{ unattended_apt_daily_upgrade_oncalendar }}"'
   register: '__apt_daily_upgrade'
@@ -20,6 +22,7 @@
   check_mode: false
 
 - name: 'Ensure directory apt-daily.timer.d exists'
+  become: true
   ansible.builtin.file:
     path: '/etc/systemd/system/apt-daily.timer.d'
     mode: '0755'
@@ -28,6 +31,7 @@
     group: 'root'
 
 - name: 'Ensure directory apt-daily-upgrade.timer.d exists'
+  become: true
   ansible.builtin.file:
     path: '/etc/systemd/system/apt-daily-upgrade.timer.d'
     mode: '0755'
@@ -36,6 +40,7 @@
     group: 'root'
 
 - name: 'Deploy apt-daily timer'
+  become: true
   ansible.builtin.template:
     src: 'apt_daily_override.conf.j2'
     dest: '/etc/systemd/system/apt-daily.timer.d/schedule_override.conf'
@@ -48,6 +53,7 @@
     - 'Restart apt-daily timer'
 
 - name: 'Deploy apt-daily-upgrade timer'
+  become: true
   ansible.builtin.template:
     src: 'apt_daily_upgrade_override.conf.j2'
     dest: '/etc/systemd/system/apt-daily-upgrade.timer.d/schedule_override.conf'
