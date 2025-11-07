@@ -16,6 +16,7 @@
         - 'vars'
 
 - name: "Install powermgmt-base"
+  become: true
   ansible.builtin.apt:
     name: "powermgmt-base"
     state: "present"
@@ -25,6 +26,7 @@
   when: "unattended_only_on_ac_power"
 
 - name: "Install unattended-upgrades"
+  become: true
   ansible.builtin.apt:
     name: "unattended-upgrades"
     state: "present"
@@ -37,6 +39,7 @@
   when: "unattended_automatic_reboot | bool"
 
 - name: "Create Apt auto-upgrades & unattended-upgrades configuration"
+  become: true
   ansible.builtin.template:
     src: "unattended-upgrades.j2"
     dest: "/etc/apt/apt.conf.d/90-ansible-unattended-upgrades"
