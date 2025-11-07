@@ -60,12 +60,14 @@
           with_items: "{{ debian_defaults }}"
 
     - name: "Dry run unattended-upgrades"
+      become: true
       ansible.builtin.command: "/usr/bin/unattended-upgrades --dry-run"
       register: "dry_run"
       failed_when: "dry_run.rc != 0"
       changed_when: false
 
     - name: "Verify custom apt-daily timers"  # noqa command-instead-of-shell
+      become: true
       when: "unattended_systemd_timer_override"
       ansible.builtin.shell:
         cmd: "{{ item }}"

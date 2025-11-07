@@ -11,14 +11,16 @@ driver:
 platforms:
   - name: "instance1"
     image: "${MOLECULE_IMAGE:-ghcr.io/hifis-net/ubuntu-systemd:24.04}"
-    pre_build_image: true
+    pre_build_image: false
+    dockerfile: "Dockerfile.j2"
     privileged: true
     override_command: false
     systemd: true
     tty: true
   - name: "instance2"
     image: "${MOLECULE_IMAGE:-ghcr.io/hifis-net/ubuntu-systemd:24.04}"
-    pre_build_image: true
+    pre_build_image: false
+    dockerfile: "Dockerfile.j2"
     privileged: true
     override_command: false
     systemd: true
@@ -31,6 +33,7 @@ provisioner:
     hosts:
       all:
         vars:
+          ansible_user: "ansible"
           ubuntu_defaults:
             - 'Unattended-Upgrade::Allowed-Origins:: "${distro_id}:${distro_codename}";'
             - 'Unattended-Upgrade::Allowed-Origins:: "${distro_id}:${distro_codename}-security";'
