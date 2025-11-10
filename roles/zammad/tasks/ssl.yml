@@ -6,6 +6,7 @@
 ---
 
 - name:  "SSL | Insert private key"
+  become: true
   ansible.builtin.blockinfile:
     path: "{{ zammad_ssl_key_path }}"
     create: true
@@ -17,6 +18,7 @@
   when: "zammad_ssl_key | default('') | length > 0"
 
 - name: "SSL | Insert certificate"
+  become: true
   ansible.builtin.blockinfile:
     path: "{{ zammad_ssl_cert_path }}"
     create: true
@@ -34,6 +36,7 @@
   ignore_errors: "{{ ansible_check_mode }}"
 
 - name: "SSL | Ensure certificate and private key match"
+  become: true
   community.crypto.openssl_privatekey_info:
     path: "{{ zammad_ssl_key_path }}"
   register: "__private_key"
