@@ -36,6 +36,7 @@ provisioner:
     hosts:
       all:
         vars:
+          ansible_user: "ansible"
           gitlab_runner_concurrent: 4
           gitlab_runner_hide_sensitive_changes: false
     host_vars:
