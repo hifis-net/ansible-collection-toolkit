@@ -30,6 +30,7 @@
     - "gitlab_is_primary"
 
 - name: "Remove file that indicates a failed reconfigure"
+  become: true
   ansible.builtin.file:
     path: "/etc/gitlab/reconfigure_failed"
     state: "absent"
