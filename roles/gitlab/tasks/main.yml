@@ -13,16 +13,13 @@
 
 - name: "Reconfigure GitLab"
   ansible.builtin.import_tasks: "reconfigure.yml"
-  become: true
   when: "__gitlab_reconfigure_failed.stat.exists"
 
 - name: "Install GitLab"
   ansible.builtin.import_tasks: "install.yml"
-  become: true
 
 - name: "Configure GitLab"
   ansible.builtin.import_tasks: "configure.yml"
-  become: true
 
 - name: "Check if GitLab is already configured"
   ansible.builtin.stat:
