@@ -6,6 +6,7 @@
 ---
 
 - name: "Nginx | Create config"
+  become: true
   ansible.builtin.template:
     src: "nginx-zammad.conf.j2"
     dest: "{{ zammad_nginx_config_path }}"

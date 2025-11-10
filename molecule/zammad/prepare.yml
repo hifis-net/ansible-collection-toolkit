@@ -6,6 +6,7 @@
 ---
 - name: "Prepare"
   hosts: "all"
+  become: true
   vars:
     # Apply suggested Elasticsearch configuration
     elasticsearch_version: "8.x"
