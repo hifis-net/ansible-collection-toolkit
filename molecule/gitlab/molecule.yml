@@ -13,7 +13,7 @@ platforms:
     image: "${MOLECULE_IMAGE:-ghcr.io/hifis-net/ubuntu-systemd:24.04}"
     pre_build_image: true
     privileged: true
-    systemd: "always"
+    systemd: true
     tty: true
     override_command: false
 provisioner:
@@ -29,6 +29,7 @@ provisioner:
   inventory:
     host_vars:
       instancegitlab:
+        ansible_user: "ansible"
         gitlab_edition: "gitlab-ce"
         gitlab_ip_range: "0.0.0.0/0"
         gitlab_additional_configurations:
