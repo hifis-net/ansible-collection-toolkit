@@ -5,16 +5,19 @@
 
 ---
 - name: "Reload nginx"
+  become: true
   ansible.builtin.service:
     name: "nginx"
     state: "reloaded"
 
 - name: "Set Elasticsearch server address"
+  become: true
   ansible.builtin.command: >-
     zammad run rails r "Setting.set('es_url', '{{ zammad_elasticsearch_url | quote }}')"
   changed_when: true
 
 - name: "Build search index"
+  become: true
   ansible.builtin.command: "zammad run rake zammad:searchindex:rebuild"
   changed_when: true
   when: "not __zammad_is_installed or zammad_force_es_searchindex_rebuild"
