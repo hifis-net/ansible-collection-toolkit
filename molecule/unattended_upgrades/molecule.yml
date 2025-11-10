@@ -11,16 +11,14 @@ driver:
 platforms:
   - name: "instance1"
     image: "${MOLECULE_IMAGE:-ghcr.io/hifis-net/ubuntu-systemd:24.04}"
-    pre_build_image: false
-    dockerfile: "Dockerfile.j2"
+    pre_build_image: true
     privileged: true
     override_command: false
     systemd: true
     tty: true
   - name: "instance2"
     image: "${MOLECULE_IMAGE:-ghcr.io/hifis-net/ubuntu-systemd:24.04}"
-    pre_build_image: false
-    dockerfile: "Dockerfile.j2"
+    pre_build_image: true
     privileged: true
     override_command: false
     systemd: true
