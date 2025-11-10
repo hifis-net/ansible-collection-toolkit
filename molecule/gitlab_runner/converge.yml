@@ -6,6 +6,7 @@
 ---
 - name: "Converge"
   hosts: "all"
+  become: false
   tasks:
     - name: "Include gitlab_runner role"
       ansible.builtin.include_role:
