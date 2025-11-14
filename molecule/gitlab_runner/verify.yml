@@ -6,6 +6,7 @@
 ---
 - name: "Verify"
   hosts: "all"
+  become: true
   tasks:
     - name: "Gather package facts"
       ansible.builtin.package_facts:
@@ -41,7 +42,6 @@
       failed_when: "'0.16.2-gitlab.25' not in machine_version.stdout"
 
     - name: "Identify installed fleeting plugins"
-      become: true
       ansible.builtin.command: "gitlab-runner fleeting list"
       register: "fleeting_cmd"
       changed_when: false
@@ -65,7 +65,6 @@
         - "gitlab_runner_version is defined"
 
     - name: "Assert that ignition.json file was created"
-      become: true
       ansible.builtin.stat:
         path: "/etc/gitlab-runner/ignition.json"
       register: "ignition"
@@ -75,14 +74,12 @@
       when: "gitlab_runner_ssh_public_key | default('') | length == 0 or gitlab_runner_ssh_public_key | default('') | length == 0"
       block:
         - name: "Assert that SSH key pair was created"
-          become: true
           ansible.builtin.stat:
             path: "/etc/gitlab-runner/gitlab_runner_key"
           register: "ssh_key"
           failed_when: "not ssh_key.stat.isreg or ssh_key.stat.mode != '0600'"
 
         - name: "Read generated SSH public key"
-          become: true
           ansible.builtin.command: "cat /etc/gitlab-runner/gitlab_runner_key.pub"
           register: "generated_pub_key"
           changed_when: false
@@ -99,7 +96,6 @@
         - "gitlab_runner_ssh_private_key | default('') | length > 0"
 
     - name: "Read flatcar linux config"
-      become: true
       ansible.builtin.command: "cat /etc/gitlab-runner/ignition.json"
       register: "flatcar_linux_config"
       changed_when: false
@@ -114,7 +110,6 @@
         gitlab_runner_authentication_token: "{{ lookup('env', 'AUTHENTICATION_TOKEN') }}"
 
     - name: "Assert that the runner was registered successfully"
-      become: true
       ansible.builtin.command: "gitlab-runner list"
       changed_when: false
       register: "runners"
@@ -123,7 +118,6 @@
       when: "gitlab_runner_authentication_token | length > 0"
 
     - name: "Assert that the verify command is successful"
-      become: true
       ansible.builtin.command: "gitlab-runner verify"
       changed_when: false
       register: "runners_verify"
@@ -138,7 +132,6 @@
       failed_when: '"# TYPE gitlab_runner_version_info" not in metrics.content'
 
     - name: "Unregister GitLab-Runner"
-      become: true
       ansible.builtin.command: "gitlab-runner unregister --all-runners"
       changed_when: false
       # Do not verify runner registration in forks

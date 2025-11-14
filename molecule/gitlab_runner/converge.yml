@@ -7,6 +7,11 @@
 - name: "Converge"
   hosts: "all"
   become: false
+  vars:
+    # Override to disable docker dependency during converge phase
+    # Docker is already installed in prepare.yml for instances that need it
+    # This allows us to test explicit become directives without the dependency interfering
+    gitlab_runner_install_docker: false
   tasks:
     - name: "Include gitlab_runner role"
       ansible.builtin.include_role:

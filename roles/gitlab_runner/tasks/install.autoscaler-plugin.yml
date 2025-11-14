@@ -31,6 +31,7 @@
       changed_when: false
 
     - name: "Download fleeting-plugin-openstack"
+      become: true
       ansible.builtin.get_url:
         url: "{{ gitlab_runner_autoscaler_plugin_url }}"
         dest: "{{ (__tempdir_fleeting_plugin.path, 'fleeting-plugin-openstack.tar.gz') | path_join }}"
@@ -41,6 +42,7 @@
       check_mode: false
 
     - name: "Extract fleeting-plugin-openstack binary"
+      become: true
       ansible.builtin.unarchive:
         src: "{{ (__tempdir_fleeting_plugin.path, 'fleeting-plugin-openstack.tar.gz') | path_join }}"
         dest: "/usr/local/bin/"
@@ -61,6 +63,7 @@
       changed_when: false
 
 - name: "Place clouds.yaml template"
+  become: true
   ansible.builtin.template:
     src: "clouds.yaml.j2"
     dest: "/etc/gitlab-runner/clouds.yaml"
