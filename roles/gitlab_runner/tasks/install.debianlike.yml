@@ -6,6 +6,7 @@
 ---
 
 - name: "Install GitLab-Runner dependencies"
+  become: true
   ansible.builtin.apt:
     pkg:
       - "debian-archive-keyring"
@@ -20,6 +21,7 @@
 
   block:
     - name: "Add packages repository packages.gitlab.com/runner/gitlab-runner"
+      become: true
       ansible.builtin.deb822_repository:
         name: "gitlab-runner"
         types: "deb"
@@ -31,6 +33,7 @@
         enabled: true
 
     - name: "Use APT pinning for Debian os"
+      become: true
       ansible.builtin.template:
         src: "pin-gitlab-runner.pref.j2"
         dest: "/etc/apt/preferences.d/pin-gitlab-runner.pref"
@@ -40,6 +43,7 @@
       when: "ansible_facts.distribution == 'Debian'"
 
     - name: "Install gitlab-runner-helper-images with downgrade option"
+      become: true
       ansible.builtin.apt:
         name: "{{ gitlab_runner_helper_images_package_name }}"
         state: "present"
@@ -50,6 +54,7 @@
         - "gitlab_runner_version is version('17.7.0', 'ge') or gitlab_runner_version | length == 0"
 
     - name: "Install gitlab-runner with downgrade option"
+      become: true
       ansible.builtin.apt:
         name: "{{ gitlab_runner_package_name }}"
         state: "present"
@@ -69,12 +74,14 @@
   block:
 
     - name: "Install gitlab-runner-helper-images from a .deb file"
+      become: true
       ansible.builtin.apt:
         deb: "{{ gitlab_runner_helper_images_deb_file }}"
         allow_downgrade: true
       when: "gitlab_runner_version is version('17.7.0', 'ge') or gitlab_runner_version | length == 0"
 
     - name: "Install gitlab-runner from a .deb file"
+      become: true
       ansible.builtin.apt:
         deb: "{{ gitlab_runner_deb_file }}"
         allow_downgrade: true

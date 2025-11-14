@@ -48,6 +48,7 @@
     loop_var: "gitlab_runner"
 
 - name: "Slurp ignition json"
+  become: true
   ansible.builtin.slurp:
     src: "/etc/gitlab-runner/ignition.json"
   register: "__ignition_json"
@@ -56,6 +57,7 @@
     - "not __gitlab_runner_is_initial_dryrun"
 
 - name: "Template config file"
+  become: true
   ansible.builtin.template:
     src: "config.toml.j2"
     dest: "{{ gitlab_runner_config_path }}"
@@ -69,6 +71,7 @@
   when: "not __gitlab_runner_is_initial_dryrun"
 
 - name: "Start GitLab-Runner"
+  become: true
   ansible.builtin.service:
     name: "gitlab-runner"
     state: "started"
