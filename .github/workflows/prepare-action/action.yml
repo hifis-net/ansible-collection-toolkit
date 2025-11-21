@@ -15,7 +15,7 @@ runs:
       working-directory: "./ansible_collections/hifis/toolkit/"
 
     - name: "Set up Python 3.x"
-      uses: "actions/setup-python@v5"
+      uses: "actions/setup-python@v6"
       with:
         python-version-file: "./ansible_collections/hifis/toolkit/.python-version"
 
