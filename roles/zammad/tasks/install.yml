@@ -10,11 +10,13 @@
   block:
 
     - name: "Install | Install EPEL repo"
+      become: true
       ansible.builtin.dnf:
         name: "epel-release"
         state: "present"
 
     - name: "Install | Add Zammad yum repository"
+      become: true
       ansible.builtin.yum_repository:
         name: "zammad"
         state: "present"
@@ -31,11 +33,13 @@
   block:
 
     - name: "Remove Zammad apt key from legacy trusted.gpg keyring"
+      become: true
       ansible.builtin.apt_key:
         url: "https://dl.packager.io/srv/zammad/zammad/key"
         state: "absent"
 
     - name: "Remove Zammad DEB repository from sources.list"
+      become: true
       ansible.builtin.apt_repository:
         repo: "deb https://dl.packager.io/srv/deb/zammad/zammad/{{ zammad_release_channel }}/ubuntu {{ ansible_facts.distribution_version }} main"
         state: "absent"
@@ -43,6 +47,7 @@
         update_cache: false
 
     - name: "Install | Add Zammad DEB repository"
+      become: true
       ansible.builtin.deb822_repository:
         name: "zammad"
         types: "deb"
@@ -56,6 +61,7 @@
         enabled: true
 
     - name: "Update apt cache"
+      become: true
       ansible.builtin.apt:
         update_cache: true
       changed_when: false
@@ -69,6 +75,7 @@
     __zammad_is_installed: "{{ 'zammad' in ansible_facts.packages }}"
 
 - name: "Install | Install Zammad package"
+  become: true
   ansible.builtin.package:
     name: "zammad={{ zammad_version }}*"
     state: "present"
@@ -78,6 +85,7 @@
     - "Build search index"
 
 - name: "Install | Start and enable services"
+  become: true
   ansible.builtin.service:
     name: "{{ item }}"
     state: "started"
