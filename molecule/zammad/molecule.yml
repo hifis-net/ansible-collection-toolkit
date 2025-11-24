@@ -26,5 +26,10 @@ provisioner:
   playbooks:
     prepare: "prepare.yml"
     converge: "converge.yml"
+  inventory:
+    hosts:
+      all:
+        vars:
+          ansible_user: "ansible"
 verifier:
   name: "ansible"

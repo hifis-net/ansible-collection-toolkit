@@ -6,9 +6,11 @@
 ---
 - name: "Converge"
   hosts: "all"
+  become: false
   tasks:
 
     - name: "Get private key content"
+      become: true
       ansible.builtin.command: "cat /etc/ssl/private/ssl-cert-snakeoil.key"
       changed_when: false
       check_mode: false
