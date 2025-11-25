@@ -1,5 +1,37 @@
 # Changelog
 
+## [v6.3.0](https://github.com/hifis-net/ansible-collection-toolkit/tree/v6.3.0) (2025-11-26)
+
+[Full Changelog](https://github.com/hifis-net/ansible-collection-toolkit/compare/v6.2.2...v6.3.0)
+
+**Fixed bugs:**
+
+- Conditional errors with Ansible 2.19 [\#511](https://github.com/hifis-net/ansible-collection-toolkit/issues/511)
+- Unattended Upgrades Fails on Ubuntu 24 [\#510](https://github.com/hifis-net/ansible-collection-toolkit/issues/510)
+
+**Merged pull requests:**
+
+- Bump ansible/ansible-lint from 25.11.0 to 25.11.1 [\#528](https://github.com/hifis-net/ansible-collection-toolkit/pull/528) ([dependabot[bot]](https://github.com/apps/dependabot))
+- Bump molecule from 25.11.0 to 25.11.1 [\#527](https://github.com/hifis-net/ansible-collection-toolkit/pull/527) ([dependabot[bot]](https://github.com/apps/dependabot))
+- Bump ansible-lint from 25.11.0 to 25.11.1 [\#526](https://github.com/hifis-net/ansible-collection-toolkit/pull/526) ([dependabot[bot]](https://github.com/apps/dependabot))
+- Bump actions/checkout from 5 to 6 [\#525](https://github.com/hifis-net/ansible-collection-toolkit/pull/525) [[unattended_upgrades](https://github.com/hifis-net/ansible-collection-toolkit/labels/unattended_upgrades)] [[zammad](https://github.com/hifis-net/ansible-collection-toolkit/labels/zammad)] [[ssh_keys](https://github.com/hifis-net/ansible-collection-toolkit/labels/ssh_keys)] [[gitlab_runner](https://github.com/hifis-net/ansible-collection-toolkit/labels/gitlab_runner)] [[keepalived](https://github.com/hifis-net/ansible-collection-toolkit/labels/keepalived)] [[haproxy](https://github.com/hifis-net/ansible-collection-toolkit/labels/haproxy)] [[netplan](https://github.com/hifis-net/ansible-collection-toolkit/labels/netplan)] [[redis](https://github.com/hifis-net/ansible-collection-toolkit/labels/redis)] [[gitlab](https://github.com/hifis-net/ansible-collection-toolkit/labels/gitlab)] ([dependabot[bot]](https://github.com/apps/dependabot))
+- Bump molecule from 25.7.0 to 25.11.0 [\#524](https://github.com/hifis-net/ansible-collection-toolkit/pull/524) ([dependabot[bot]](https://github.com/apps/dependabot))
+- Bump ansible-lint from 25.9.2 to 25.11.0 [\#523](https://github.com/hifis-net/ansible-collection-toolkit/pull/523) ([dependabot[bot]](https://github.com/apps/dependabot))
+- Bump ansible/ansible-lint from 25.9.2 to 25.11.0 [\#522](https://github.com/hifis-net/ansible-collection-toolkit/pull/522) ([dependabot[bot]](https://github.com/apps/dependabot))
+- gitlab-runner: Add explicit become directives [\#521](https://github.com/hifis-net/ansible-collection-toolkit/pull/521) [[gitlab_runner](https://github.com/hifis-net/ansible-collection-toolkit/labels/gitlab_runner)] ([Normo](https://github.com/Normo))
+- Zammad: Add explicit become directives [\#519](https://github.com/hifis-net/ansible-collection-toolkit/pull/519) [[zammad](https://github.com/hifis-net/ansible-collection-toolkit/labels/zammad)] ([Normo](https://github.com/Normo))
+- Switch back to pre built images [\#518](https://github.com/hifis-net/ansible-collection-toolkit/pull/518) [[unattended_upgrades](https://github.com/hifis-net/ansible-collection-toolkit/labels/unattended_upgrades)] ([Normo](https://github.com/Normo))
+- gitlab: Add explicit become directives [\#517](https://github.com/hifis-net/ansible-collection-toolkit/pull/517) [[gitlab](https://github.com/hifis-net/ansible-collection-toolkit/labels/gitlab)] ([Normo](https://github.com/Normo))
+- Update molecule tests to catch missing become directives [\#516](https://github.com/hifis-net/ansible-collection-toolkit/pull/516) [[unattended_upgrades](https://github.com/hifis-net/ansible-collection-toolkit/labels/unattended_upgrades)] ([Normo](https://github.com/Normo))
+- unattended\_upgrades: Add explicit become directives [\#514](https://github.com/hifis-net/ansible-collection-toolkit/pull/514) [[unattended_upgrades](https://github.com/hifis-net/ansible-collection-toolkit/labels/unattended_upgrades)] ([Normo](https://github.com/Normo))
+- Bump ansible from 11.9.0 to 12.2.0 [\#513](https://github.com/hifis-net/ansible-collection-toolkit/pull/513) ([dependabot[bot]](https://github.com/apps/dependabot))
+- Bump reuse from 5.0.2 to 6.2.0 [\#512](https://github.com/hifis-net/ansible-collection-toolkit/pull/512) ([dependabot[bot]](https://github.com/apps/dependabot))
+- Bump ansible-lint from 25.8.2 to 25.9.2 [\#509](https://github.com/hifis-net/ansible-collection-toolkit/pull/509) ([dependabot[bot]](https://github.com/apps/dependabot))
+- Bump ansible/ansible-lint from 25.8.2 to 25.9.2 [\#508](https://github.com/hifis-net/ansible-collection-toolkit/pull/508) ([dependabot[bot]](https://github.com/apps/dependabot))
+- Bump astral-sh/setup-uv from 6 to 7 in /.github/workflows/prepare-action [\#505](https://github.com/hifis-net/ansible-collection-toolkit/pull/505) ([dependabot[bot]](https://github.com/apps/dependabot))
+- Bump fsfe/reuse-action from 5.0.0 to 6.0.0 [\#503](https://github.com/hifis-net/ansible-collection-toolkit/pull/503) ([dependabot[bot]](https://github.com/apps/dependabot))
+- Bump actions/setup-python from 5 to 6 in /.github/workflows/prepare-action [\#485](https://github.com/hifis-net/ansible-collection-toolkit/pull/485) ([dependabot[bot]](https://github.com/apps/dependabot))
+
 ## [v6.2.2](https://github.com/hifis-net/ansible-collection-toolkit/tree/v6.2.2) (2025-09-18)
 
 [Full Changelog](https://github.com/hifis-net/ansible-collection-toolkit/compare/v6.2.1...v6.2.2)
@@ -10,6 +42,7 @@
 
 **Merged pull requests:**
 
+- Prepare release of version 6.2.2 [\#499](https://github.com/hifis-net/ansible-collection-toolkit/pull/499) ([tobiashuste](https://github.com/tobiashuste))
 - Fix user\_data template JSON encoding [\#496](https://github.com/hifis-net/ansible-collection-toolkit/pull/496) [[gitlab_runner](https://github.com/hifis-net/ansible-collection-toolkit/labels/gitlab_runner)] ([tobiashuste](https://github.com/tobiashuste))
 - gitlab\_runner: add option to hide sensitive changes in diffs [\#492](https://github.com/hifis-net/ansible-collection-toolkit/pull/492) [[gitlab_runner](https://github.com/hifis-net/ansible-collection-toolkit/labels/gitlab_runner)] ([Normo](https://github.com/Normo))
 - Bump actions/labeler from 5.0.0 to 6.0.1 [\#487](https://github.com/hifis-net/ansible-collection-toolkit/pull/487) ([dependabot[bot]](https://github.com/apps/dependabot))
