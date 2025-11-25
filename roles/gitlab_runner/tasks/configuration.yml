@@ -10,6 +10,7 @@
     - "gitlab_runner_ssh_private_key | default('') | length > 0"
   block:
     - name: "Place SSH public key on the host for communicating with Runners."
+      become: true
       ansible.builtin.copy:
         src: "{{ gitlab_runner_ssh_public_key }}"
         dest: "{{ gitlab_runner_ssh_public_key_path }}"
@@ -18,6 +19,7 @@
         mode: "0644"
 
     - name: "Place SSH private key on the host for communicating with Runners."
+      become: true
       ansible.builtin.copy:
         src: "{{ gitlab_runner_ssh_private_key }}"
         dest: "{{ gitlab_runner_ssh_private_key_path }}"
@@ -26,6 +28,7 @@
         mode: "0600"
 
 - name: "Create SSH key pair for communicating with Runners."
+  become: true
   community.crypto.openssh_keypair:  # noqa: args[module]
     path: "{{ gitlab_runner_ssh_private_key_path }}"
     type: "{{ gitlab_runner_ssh_key_type | default('ed25519') }}"
@@ -33,6 +36,7 @@
   when: "not __gitlab_runner_is_initial_dryrun"  # skip if run for the first time in check mode
 
 - name: "Download and install container-linux-config-transpiler"
+  become: true
   ansible.builtin.get_url:
     url: "{{ gitlab_runner_transpiler_binary_url }}"
     dest: "/usr/local/bin/butane"
@@ -40,6 +44,7 @@
     checksum: "{{ gitlab_runner_transpiler_binary_checksum }}"
 
 - name: "Place the container linux configuration on the host"
+  become: true
   ansible.builtin.template:
     src: "{{ gitlab_runner_butane_config_template }}"
     dest: "/etc/gitlab-runner/butane-config.bu"
@@ -52,6 +57,7 @@
     - "Transpile the flatcar linux configuration"
 
 - name: "Check if ignition.json is available and create it in any case"
+  become: true
   when: "not __flatcar_config_task.changed"  # noqa no-handler
   ansible.builtin.stat:
     path: "/etc/gitlab-runner/ignition.json"
@@ -77,11 +83,13 @@
       check_mode: false
 
     - name: "Dry-run of transpile the flatcar linux configuration"
+      become: true
       ansible.builtin.command: "butane -o {{ (__temp_directory.path, 'ignition.json') | path_join }} /etc/gitlab-runner/butane-config.bu"
       changed_when: false
       check_mode: false
 
     - name: "Stat temporary ignition.json file"
+      become: true
       ansible.builtin.stat:
         path: "{{ (__temp_directory.path, 'ignition.json') | path_join }}"
       register: "__temp_ignition_stats"

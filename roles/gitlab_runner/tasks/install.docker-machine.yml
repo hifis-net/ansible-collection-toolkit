@@ -5,6 +5,7 @@
 
 ---
 - name: "Download and install docker-machine binary"
+  become: true
   ansible.builtin.get_url:
     url: "{{ gitlab_runner_docker_machine_binary_url }}"
     dest: "/usr/local/bin/docker-machine"
