@@ -11,6 +11,7 @@
 
 **Merged pull requests:**
 
+- Prepare release of version 6.3.0 [\#529](https://github.com/hifis-net/ansible-collection-toolkit/pull/529) ([Normo](https://github.com/Normo))
 - Bump ansible/ansible-lint from 25.11.0 to 25.11.1 [\#528](https://github.com/hifis-net/ansible-collection-toolkit/pull/528) ([dependabot[bot]](https://github.com/apps/dependabot))
 - Bump molecule from 25.11.0 to 25.11.1 [\#527](https://github.com/hifis-net/ansible-collection-toolkit/pull/527) ([dependabot[bot]](https://github.com/apps/dependabot))
 - Bump ansible-lint from 25.11.0 to 25.11.1 [\#526](https://github.com/hifis-net/ansible-collection-toolkit/pull/526) ([dependabot[bot]](https://github.com/apps/dependabot))
