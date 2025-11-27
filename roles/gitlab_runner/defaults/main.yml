@@ -46,7 +46,7 @@ gitlab_runner_session_server_listen_address: "0.0.0.0:8093"
 gitlab_runner_session_server_advertise_address: "{{ gitlab_runner_session_server_listen_address }}"
 gitlab_runner_session_server_timeout: 1800
 
-gitlab_runner_autoscaler_plugin_version: "v0.28.0"
+gitlab_runner_autoscaler_plugin_version: "v0.33.0"
 gitlab_runner_autoscaler_binary_version: "{{ gitlab_runner_autoscaler_plugin_version | replace('v', '') }}"
 gitlab_runner_autoscaler_plugin_url: "https://github.com/sardinasystems/fleeting-plugin-openstack/releases/download/{{ gitlab_runner_autoscaler_plugin_version }}/fleeting-plugin-openstack_{{ gitlab_runner_autoscaler_binary_version }}_linux_amd64.tar.gz"
 gitlab_runner_autoscaler_plugin_checksumfile: "https://github.com/sardinasystems/fleeting-plugin-openstack/releases/download/{{ gitlab_runner_autoscaler_plugin_version }}/fleeting-plugin-openstack_{{ gitlab_runner_autoscaler_binary_version }}_sha512-checksums.txt"
