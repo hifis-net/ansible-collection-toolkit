@@ -62,7 +62,7 @@
         that:
           - "ansible_facts.packages['gitlab-runner'][0].version == gitlab_runner_version + '-1'"
       when:
-        - "gitlab_runner_version is defined"
+        - "gitlab_runner_version | default('') | length > 0"
 
     - name: "Assert that ignition.json file was created"
       ansible.builtin.stat:
