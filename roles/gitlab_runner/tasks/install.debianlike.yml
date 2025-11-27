@@ -51,7 +51,7 @@
         allow_downgrade: true
       when:
         - "not __gitlab_runner_is_initial_dryrun"  # skip if run for the first time in check mode
-        - "gitlab_runner_version is version('17.7.0', 'ge') or gitlab_runner_version | length == 0"
+        - "gitlab_runner_version | length == 0 or gitlab_runner_version is version('17.7.0', 'ge')"
 
     - name: "Install gitlab-runner with downgrade option"
       become: true
@@ -78,7 +78,7 @@
       ansible.builtin.apt:
         deb: "{{ gitlab_runner_helper_images_deb_file }}"
         allow_downgrade: true
-      when: "gitlab_runner_version is version('17.7.0', 'ge') or gitlab_runner_version | length == 0"
+      when: "gitlab_runner_version | length == 0 or gitlab_runner_version is version('17.7.0', 'ge')"
 
     - name: "Install gitlab-runner from a .deb file"
       become: true
