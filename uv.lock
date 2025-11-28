@@ -40,7 +40,7 @@ wheels = [
 
 [[package]]
 name = "ansible-collection-toolkit"
-version = "6.3.0"
+version = "6.3.1"
 source = { virtual = "." }
 dependencies = [
     { name = "ansible", version = "12.2.0", source = { registry = "https://pypi.org/simple" }, marker = "python_full_version < '3.12'" },

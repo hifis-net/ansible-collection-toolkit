@@ -1,5 +1,19 @@
 # Changelog
 
+## [v6.3.1](https://github.com/hifis-net/ansible-collection-toolkit/tree/v6.3.1) (2025-11-28)
+
+[Full Changelog](https://github.com/hifis-net/ansible-collection-toolkit/compare/v6.3.0...v6.3.1)
+
+**Closed issues:**
+
+- Check for batched background migrations to be finished [\#247](https://github.com/hifis-net/ansible-collection-toolkit/issues/247) [[gitlab](https://github.com/hifis-net/ansible-collection-toolkit/labels/gitlab)]
+
+**Merged pull requests:**
+
+- gitlab: fix check for batched background migrations [\#533](https://github.com/hifis-net/ansible-collection-toolkit/pull/533) [[gitlab](https://github.com/hifis-net/ansible-collection-toolkit/labels/gitlab)] ([Normo](https://github.com/Normo))
+- gitlab-runner: Bump fleeting-plugin-openstack to v0.33.0 [\#532](https://github.com/hifis-net/ansible-collection-toolkit/pull/532) [[gitlab_runner](https://github.com/hifis-net/ansible-collection-toolkit/labels/gitlab_runner)] ([Normo](https://github.com/Normo))
+- gitlab-runner: Fix empty gitlab\_runner\_version evaluation in version test [\#531](https://github.com/hifis-net/ansible-collection-toolkit/pull/531) [[gitlab_runner](https://github.com/hifis-net/ansible-collection-toolkit/labels/gitlab_runner)] ([Normo](https://github.com/Normo))
+
 ## [v6.3.0](https://github.com/hifis-net/ansible-collection-toolkit/tree/v6.3.0) (2025-11-26)
 
 [Full Changelog](https://github.com/hifis-net/ansible-collection-toolkit/compare/v6.2.2...v6.3.0)
