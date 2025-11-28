@@ -133,7 +133,7 @@
     - name: "Wait until all previous background migrations are processed."
       become: true
       ansible.builtin.command:
-        cmd: "gitlab-rails runner -e production 'puts Gitlab::BackgroundMigration.remaining'"
+        cmd: "gitlab-rails runner -e production 'puts Gitlab::Database::BackgroundMigration::BatchedMigration.queued.count'"
       register: "remaining"
       until: "remaining.stdout == '0'"
       retries: 10
