@@ -1,0 +1,55 @@
+# SPDX-FileCopyrightText: Helmholtz-Zentrum Dresden-Rossendorf (HZDR)
+#
+# SPDX-License-Identifier: Apache-2.0
+
+---
+argument_specs:
+  main:
+    short_description: "Add provided authorized SSH public keys to a user."
+    description:
+      - "This Ansible role distributes authorized SSH public keys to users."
+      - "It can optionally create user accounts and manages authorized_keys files."
+    author:
+      - "HIFIS Software Services"
+    options:
+      ssh_user_list:
+        description:
+          - "List of users with their SSH public keys to be authorized."
+          - "Each list entry corresponds to one user account."
+          - "Each entry must contain the 'name' of the user and a list of 'authorized_keys'."
+          - "Optionally, set 'create_user_account' to true if you want the role to create the user account."
+        type: "list"
+        elements: "dict"
+        default: []
+        required: false
+        options:
+          name:
+            description:
+              - "Name of the user account."
+            type: "str"
+            required: true
+          authorized_keys:
+            description:
+              - "List of SSH public keys to authorize for this user."
+              - "Each key should be in the standard SSH public key format."
+            type: "list"
+            elements: "str"
+            default: []
+            required: false
+          create_user_account:
+            description:
+              - "Whether to create the user account if it does not exist."
+              - "If set to false, the user account must already exist."
+            type: "bool"
+            default: false
+            required: false
+      ssh_authorized_keys_exclusive:
+        description:
+          - "Whether to remove all other non-specified keys from the authorized_keys file."
+          - "If set to true, only the keys specified in authorized_keys will remain."
+          - "If set to false, the specified keys will be added to existing keys."
+        type: "bool"
+        default: true
+        required: false
+
+...
