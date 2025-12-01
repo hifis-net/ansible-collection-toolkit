@@ -6,6 +6,7 @@
 
 **Merged pull requests:**
 
+- Prepare release version 6.3.2 [\#541](https://github.com/hifis-net/ansible-collection-toolkit/pull/541) ([Normo](https://github.com/Normo))
 - gitlab: restrict file permission for gitlab.rb [\#540](https://github.com/hifis-net/ansible-collection-toolkit/pull/540) [[gitlab](https://github.com/hifis-net/ansible-collection-toolkit/labels/gitlab)] ([Normo](https://github.com/Normo))
 - gitlab: fix sensitive information disclosure [\#539](https://github.com/hifis-net/ansible-collection-toolkit/pull/539) [[gitlab](https://github.com/hifis-net/ansible-collection-toolkit/labels/gitlab)] ([Normo](https://github.com/Normo))
 
