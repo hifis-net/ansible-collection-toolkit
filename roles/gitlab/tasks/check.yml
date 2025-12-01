@@ -23,6 +23,7 @@
     __gitlab_registry_config: "{{ item.registry }}"
   when: "item.registry is defined"
   loop: "{{ gitlab_additional_configurations }}"
+  no_log: "{{ gitlab_hide_sensitive_changes }}"
 
 - name: "Check if database key is defined in registry"
   ansible.builtin.set_fact:
