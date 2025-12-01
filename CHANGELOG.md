@@ -1,5 +1,14 @@
 # Changelog
 
+## [v6.3.2](https://github.com/hifis-net/ansible-collection-toolkit/tree/v6.3.2) (2025-12-01)
+
+[Full Changelog](https://github.com/hifis-net/ansible-collection-toolkit/compare/v6.3.1...v6.3.2)
+
+**Merged pull requests:**
+
+- gitlab: restrict file permission for gitlab.rb [\#540](https://github.com/hifis-net/ansible-collection-toolkit/pull/540) [[gitlab](https://github.com/hifis-net/ansible-collection-toolkit/labels/gitlab)] ([Normo](https://github.com/Normo))
+- gitlab: fix sensitive information disclosure [\#539](https://github.com/hifis-net/ansible-collection-toolkit/pull/539) [[gitlab](https://github.com/hifis-net/ansible-collection-toolkit/labels/gitlab)] ([Normo](https://github.com/Normo))
+
 ## [v6.3.1](https://github.com/hifis-net/ansible-collection-toolkit/tree/v6.3.1) (2025-11-28)
 
 [Full Changelog](https://github.com/hifis-net/ansible-collection-toolkit/compare/v6.3.0...v6.3.1)
