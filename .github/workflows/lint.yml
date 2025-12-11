@@ -24,4 +24,4 @@ jobs:
         uses: "actions/checkout@v6"
 
       - name: "Lint code."
-        uses: "ansible/ansible-lint@v25.11.1"
+        uses: "ansible/ansible-lint@v25.12.1"
