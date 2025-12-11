@@ -20,6 +20,7 @@ galaxy_info:
       versions:
         - "8"
         - "9"
+        - "10"
     - name: "Ubuntu"
       versions:
         - "jammy"
