@@ -1,0 +1,147 @@
+# SPDX-FileCopyrightText: Helmholtz Centre for Environmental Research (UFZ)
+# SPDX-FileCopyrightText: Helmholtz-Zentrum Dresden-Rossendorf (HZDR)
+#
+# SPDX-License-Identifier: Apache-2.0
+
+---
+argument_specs:
+  main:
+    short_description: "Install and configure Netplan for network management."
+    description:
+      - "This Ansible role installs and configures Netplan for network management."
+      - "It supports configuring ethernet interfaces with static or DHCP addressing."
+      - "The role can optionally remove pre-existing network configuration files."
+    author:
+      - "HIFIS Software Services"
+    options:
+      netplan_remove_existing_configs:
+        description:
+          - "Flag to decide whether all other pre-existing config files should be deleted before applying network settings."
+          - "If set to true, existing netplan configuration files will be removed."
+          - "If set to false, existing configuration files will be preserved."
+        type: "bool"
+        default: true
+        required: false
+      netplan_configuration_file_template:
+        description:
+          - "Name of netplan configuration file template."
+          - "This template is used to generate the netplan configuration file."
+        type: "str"
+        default: "config.yaml.j2"
+        required: false
+      netplan_configuration_dir:
+        description:
+          - "Directory containing netplan configuration file."
+          - "This is the directory where netplan looks for configuration files."
+        type: "str"
+        default: "/etc/netplan"
+        required: false
+      netplan_configuration_file:
+        description:
+          - "Name of netplan configuration file."
+          - "This is the filename that will be created in the netplan configuration directory."
+        type: "str"
+        default: "config.yaml"
+        required: false
+      netplan_configuration_file_path:
+        description:
+          - "Path of netplan configuration file."
+          - "This is the full path combining the configuration directory and filename."
+        type: "str"
+        default: "{{ (netplan_configuration_dir, netplan_configuration_file) | path_join }}"
+        required: false
+      netplan_packages:
+        description:
+          - "Packages to be installed."
+          - "List of packages required for netplan functionality."
+        type: "list"
+        elements: "str"
+        default:
+          - "netplan.io"
+        required: false
+      ifupdown_ifstate_file:
+        description:
+          - "Package ifupdown network configuration file."
+          - "Network configuration file that is present if networking is managed by package ifupdown."
+          - "This is used to detect if the legacy ifupdown package is managing networking."
+        type: "str"
+        default: "/run/network/ifstate"
+        required: false
+      netplan_ethernets:
+        description:
+          - "List of ethernet interface configurations."
+          - "Each list entry corresponds to one network interface."
+          - "Each entry must contain the 'interface_name' and configuration parameters."
+        type: "list"
+        elements: "dict"
+        required: true
+        options:
+          interface_name:
+            description:
+              - "Name of the network interface to configure."
+              - "This should match the interface name as shown by 'ip link' or similar commands."
+            type: "str"
+            required: true
+          dhcp4:
+            description:
+              - "Enable or disable DHCP for IPv4 addressing."
+              - "Set to 'yes' or 'no' to enable or disable DHCP."
+            type: "str"
+            required: false
+          gateway4:
+            description:
+              - "IPv4 gateway address (deprecated in favor of routes)."
+              - "If specified, a default route will be automatically created."
+              - "This parameter is deprecated and routes should be used instead."
+            type: "str"
+            required: false
+          routes:
+            description:
+              - "List of static routes for this interface."
+              - "Each route must specify 'to' and 'via' parameters."
+            type: "list"
+            elements: "dict"
+            required: false
+            options:
+              to:
+                description:
+                  - "Destination network or 'default' for default route."
+                  - "Can be an IP address with CIDR notation or 'default'."
+                type: "str"
+                required: true
+              via:
+                description:
+                  - "Gateway IP address for this route."
+                  - "This is the next-hop address for packets matching the route."
+                type: "str"
+                required: true
+          addresses:
+            description:
+              - "List of static IP addresses for this interface."
+              - "Each address should be in CIDR notation (e.g., '10.123.0.10/24')."
+            type: "list"
+            elements: "str"
+            required: false
+          nameservers:
+            description:
+              - "DNS nameserver configuration for this interface."
+              - "Contains addresses and optional search domains."
+            type: "dict"
+            required: false
+            options:
+              addresses:
+                description:
+                  - "List of DNS nameserver IP addresses."
+                  - "These are the DNS servers to use for name resolution."
+                type: "list"
+                elements: "str"
+                required: false
+              search:
+                description:
+                  - "List of DNS search domains."
+                  - "These domains are appended to unqualified hostnames during DNS lookups."
+                type: "list"
+                elements: "str"
+                required: false
+
+...
