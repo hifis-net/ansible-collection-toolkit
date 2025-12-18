@@ -31,6 +31,7 @@
       ansible.builtin.set_fact:
         __gitaly_item: "{{ item.gitaly }}"
       with_items: "{{ gitlab_additional_configurations }}"
+      no_log: "{{ gitlab_hide_sensitive_changes }}"
 
     - name: "Check if gitaly['configuration'] is present"
       when:
@@ -39,6 +40,7 @@
       ansible.builtin.set_fact:
         __gitaly_configuration_exists: true
       with_items: "{{ __gitaly_item | default([]) }}"
+      no_log: "{{ gitlab_hide_sensitive_changes }}"
 
     - name: "Warn if gitaly['configuration'] is already present"
       when:
@@ -53,7 +55,7 @@
     dest: "{{ gitlab_configuration_file_path }}"
     owner: "root"
     group: "root"
-    mode: "0644"
+    mode: "0600"
   no_log: "{{ gitlab_hide_sensitive_changes }}"
   notify:
     - "Reconfigure Primary GitLab"
