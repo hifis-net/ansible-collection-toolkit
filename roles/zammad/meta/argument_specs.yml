@@ -1,0 +1,108 @@
+# SPDX-FileCopyrightText: Helmholtz-Zentrum Dresden-Rossendorf (HZDR)
+#
+# SPDX-License-Identifier: MIT
+
+---
+argument_specs:
+  main:
+    short_description: "Install and configure Zammad helpdesk system."
+    description:
+      - "This Ansible role installs and configures the web-based open source user support/ticketing solution Zammad."
+      - "It manages Zammad installation, Nginx configuration, SSL/TLS certificates, and Elasticsearch integration."
+      - "Note: This role does not install Elasticsearch and PostgreSQL server, which are required dependencies."
+    author:
+      - "HIFIS Software Services"
+    options:
+      zammad_version:
+        description:
+          - "Zammad version to be installed."
+        type: "str"
+        default: "6.5.0"
+        required: false
+      zammad_release_channel:
+        description:
+          - "Release channel for the Zammad packages."
+          - "Please refer to https://packager.io/gh/zammad/zammad for a complete list of available channels."
+        type: "str"
+        default: "stable"
+        required: false
+      zammad_repo_url:
+        description:
+          - "URL to the Zammad package repository."
+          - "This is automatically constructed from the release channel and distribution."
+        type: "str"
+        default: "https://dl.packager.io/srv/deb/zammad/zammad/{{ zammad_release_channel }}/{{ ansible_facts.distribution | lower }}"
+        required: false
+      zammad_domain_name:
+        description:
+          - "Zammad's fully qualified domain name."
+          - "This is used in the Nginx configuration."
+        type: "str"
+        default: "{{ ansible_facts.fqdn }}"
+        required: false
+      zammad_nginx_config_path:
+        description:
+          - "File path to Zammad's Nginx configuration file."
+        type: "str"
+        default: "/etc/nginx/sites-available/zammad.conf"
+        required: false
+      zammad_ssl_cert_path:
+        description:
+          - "File path to the SSL/TLS certificate which is used for HTTPS."
+        type: "str"
+        default: "/etc/ssl/certs/zammad_cert.pem"
+        required: false
+      zammad_ssl_key_path:
+        description:
+          - "File path to the SSL/TLS private key which is used for HTTPS."
+        type: "str"
+        default: "/etc/ssl/private/zammad_key.pem"
+        required: false
+      zammad_ssl_cert:
+        description:
+          - "Content of SSL/TLS certificate."
+          - "This variable is required unless you previously put an SSL certificate on the host (e.g., via Let's Encrypt)."
+          - "The role will validate that a valid SSL key pair exists at the configured paths."
+        type: "str"
+        required: false
+      zammad_ssl_key:
+        description:
+          - "Content of SSL/TLS private key."
+          - "This variable is required unless you previously put an SSL private key on the host (e.g., via Let's Encrypt)."
+          - "The role will validate that a valid SSL key pair exists at the configured paths."
+        type: "str"
+        required: false
+      zammad_nginx_server_tokens:
+        description:
+          - "Enable or disable emitting nginx version information in error pages or in the Server response header field."
+          - "See nginx documentation: http://nginx.org/en/docs/http/ngx_http_core_module.html#server_tokens"
+        type: "str"
+        default: "off"
+        required: false
+      zammad_nginx_additional_server_configs:
+        description:
+          - "List of additional server directives in the Nginx configuration."
+          - "This allows implementation of more use case specific adjustments."
+          - "Examples include configuring multiple domains or redirecting outdated domains to the most recent one."
+          - "Each list entry should be a complete server block configuration."
+        type: "list"
+        elements: "str"
+        default: []
+        required: false
+      zammad_force_es_searchindex_rebuild:
+        description:
+          - "Whether to force rebuild of the Elasticsearch search index when Zammad is updated."
+          - "By default, the Elasticsearch indexes are only rebuilt during the initial installation."
+          - "Set this variable to true to trigger the rebuild on every Zammad update."
+        type: "bool"
+        default: false
+        required: false
+      zammad_elasticsearch_url:
+        description:
+          - "Elasticsearch server address."
+          - "Zammad requires Elasticsearch for search functionality."
+        type: "str"
+        default: "http://localhost:9200"
+        required: false
+
+...
