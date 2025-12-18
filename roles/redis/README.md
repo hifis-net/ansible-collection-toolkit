@@ -102,7 +102,9 @@ Redis Sentinel service file path:
 redis_sentinel_service_file: '{{ redis_systemd_dir }}/redis-sentinel.service'
 ```
 
-Password for Redis Sentinel. This is unset by default.
+Password for Redis Sentinel. This is unset by default, in which case Sentinel
+does not require authentication. Set it to enable password authentication for
+Sentinel connections, for example:
 
 ```yaml
 redis_sentinel_password: 'changeme'
