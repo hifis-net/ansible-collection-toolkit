@@ -29,6 +29,7 @@ galaxy_info:
       versions:
         - "bullseye"
         - "bookworm"
+        - "trixie"
 
   galaxy_tags:
     - "ssh"
