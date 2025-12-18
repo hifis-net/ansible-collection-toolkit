@@ -1,0 +1,227 @@
+# SPDX-FileCopyrightText: Helmholtz Centre for Environmental Research (UFZ)
+# SPDX-FileCopyrightText: Helmholtz-Zentrum Dresden-Rossendorf (HZDR)
+#
+# SPDX-License-Identifier: Apache-2.0
+
+---
+argument_specs:
+  main:
+    short_description: "Install and configure Redis server with Sentinel support."
+    description:
+      - "This Ansible role installs and configures Redis instances for high availability caching."
+      - "It supports both master and replica configurations with Redis Sentinel monitoring."
+      - "The role builds Redis from source and manages systemd services."
+    author:
+      - "HIFIS Software Services"
+    options:
+      redis_instance_type:
+        description:
+          - "Specifies whether the current node is a master or replica instance."
+          - "Valid values are 'master' or 'replica'."
+        type: "str"
+        default: "master"
+        required: false
+      redis_instance_ip:
+        description:
+          - "The IP address to bind Redis to."
+          - "This is the network interface address where Redis will listen for connections."
+        type: "str"
+        default: "127.0.0.1"
+        required: false
+      redis_cluster_name:
+        description:
+          - "The name of the Redis cluster monitored by Sentinel."
+          - "This identifier is used by Redis Sentinel to track the cluster."
+        type: "str"
+        default: "redis-cluster"
+        required: false
+      redis_master_instance_ip:
+        description:
+          - "The IP address of the Redis master instance."
+          - "For master instances, this defaults to redis_instance_ip."
+          - "For replica instances, this must be set to the master's IP address."
+        type: "str"
+        default: "{{ redis_instance_ip if redis_instance_type == 'master' else None }}"
+        required: false
+      redis_password:
+        description:
+          - "Password used to authenticate in the Redis cluster."
+          - "This password is required for clients to connect to Redis."
+          - "Should be changed from the default value for security."
+        type: "str"
+        default: "changeme"
+        required: false
+      redis_version:
+        description:
+          - "The version of Redis Server to install."
+          - "Used to download and build the specific Redis release."
+        type: "str"
+        default: "8.0.1"
+        required: false
+      redis_bin:
+        description:
+          - "File path to the Redis Server binary."
+          - "The location where the redis-server executable will be installed."
+        type: "str"
+        default: "/usr/local/bin/redis-server"
+        required: false
+      redis_dependencies:
+        description:
+          - "List of dependent packages required to build Redis Server from source."
+          - "These packages are installed before compiling Redis."
+        type: "list"
+        elements: "str"
+        default:
+          - "build-essential"
+        required: false
+      redis_download_url:
+        description:
+          - "URL from which Redis Server source tarball can be downloaded."
+          - "The redis_version variable is used to construct the download URL."
+        type: "str"
+        default: "https://download.redis.io/releases/redis-{{ redis_version }}.tar.gz"
+        required: false
+      redis_build_dir:
+        description:
+          - "File path to the directory in which Redis Server is built."
+          - "The source code is extracted and compiled in this directory."
+        type: "str"
+        default: "/usr/local/src/redis-{{ redis_version }}"
+        required: false
+      redis_systemd_dir:
+        description:
+          - "Directory into which Redis systemd service files are copied."
+          - "Both Redis Server and Sentinel service files are placed here."
+        type: "str"
+        default: "/etc/systemd/system"
+        required: false
+      redis_server_service_file:
+        description:
+          - "Full path to the Redis Server systemd service file."
+          - "This service manages the redis-server daemon."
+        type: "str"
+        default: "{{ redis_systemd_dir }}/redis-server.service"
+        required: false
+      redis_sentinel_service_file:
+        description:
+          - "Full path to the Redis Sentinel systemd service file."
+          - "This service manages the redis-sentinel daemon for high availability."
+        type: "str"
+        default: "{{ redis_systemd_dir }}/redis-sentinel.service"
+        required: false
+      redis_configuration_dir:
+        description:
+          - "Directory path for Redis configuration files."
+          - "Both redis.conf and sentinel.conf are stored in this directory."
+        type: "str"
+        default: "/etc/redis"
+        required: false
+      redis_server_configuration_file:
+        description:
+          - "Full path to the Redis Server configuration file."
+          - "This file contains all Redis server settings and parameters."
+        type: "str"
+        default: "{{ redis_configuration_dir }}/redis.conf"
+        required: false
+      redis_sentinel_configuration_file:
+        description:
+          - "Full path to the Redis Sentinel configuration file."
+          - "This file contains Sentinel-specific settings for monitoring and failover."
+        type: "str"
+        default: "{{ redis_configuration_dir }}/sentinel.conf"
+        required: false
+      redis_lib_dir:
+        description:
+          - "Redis library directory for persistent data storage."
+          - "RDB and AOF files are stored in this directory."
+        type: "str"
+        default: "/var/lib/redis"
+        required: false
+      redis_log_dir:
+        description:
+          - "Redis logging directory for both Server and Sentinel log files."
+          - "All Redis-related logs are written to this directory."
+        type: "str"
+        default: "/var/log/redis"
+        required: false
+      redis_server_log_file_path:
+        description:
+          - "Full path to the Redis Server log file."
+          - "Server activity and errors are logged to this file."
+        type: "str"
+        default: "{{ redis_log_dir }}/redis-server.log"
+        required: false
+      redis_sentinel_log_file_path:
+        description:
+          - "Full path to the Redis Sentinel log file."
+          - "Sentinel monitoring activity and failover events are logged here."
+        type: "str"
+        default: "{{ redis_log_dir }}/redis-sentinel.log"
+        required: false
+      redis_log_level:
+        description:
+          - "Redis Server log verbosity level."
+          - "Valid values are 'debug', 'verbose', 'notice', or 'warning'."
+        type: "str"
+        default: "notice"
+        required: false
+      sentinel_log_level:
+        description:
+          - "Redis Sentinel log verbosity level."
+          - "Valid values are 'debug', 'verbose', 'notice', or 'warning'."
+        type: "str"
+        default: "notice"
+        required: false
+      redis_protected_mode:
+        description:
+          - "Enable or disable Redis Server protected mode."
+          - "When enabled, Redis only accepts connections from localhost unless a password is set."
+          - "Valid values are 'yes' or 'no'."
+        type: "str"
+        default: "yes"
+        required: false
+      sentinel_protected_mode:
+        description:
+          - "Enable or disable Redis Sentinel protected mode."
+          - "When enabled, Sentinel only accepts connections from localhost."
+          - "Valid values are 'yes' or 'no'."
+        type: "str"
+        default: "yes"
+        required: false
+      redis_user:
+        description:
+          - "The system user account name for running Redis services."
+          - "This user owns Redis processes and files."
+        type: "str"
+        default: "redis"
+        required: false
+      redis_group:
+        description:
+          - "The system group name for Redis services."
+          - "This group has access to Redis files and directories."
+        type: "str"
+        default: "redis"
+        required: false
+      redis_server_service_name:
+        description:
+          - "The systemd service name for Redis Server."
+          - "Used for managing the Redis Server service via systemctl."
+        type: "str"
+        default: "redis-server"
+        required: false
+      redis_sentinel_service_name:
+        description:
+          - "The systemd service name for Redis Sentinel."
+          - "Used for managing the Redis Sentinel service via systemctl."
+        type: "str"
+        default: "redis-sentinel"
+        required: false
+      redis_sentinel_password:
+        description:
+          - "Password used to authenticate with Redis Sentinel."
+          - "If not set or undefined, Sentinel will not require authentication."
+          - "When set, it enables password authentication for Sentinel connections."
+        type: "str"
+        required: false
+
+...
