@@ -1,0 +1,252 @@
+# SPDX-FileCopyrightText: Helmholtz-Zentrum Dresden-Rossendorf (HZDR)
+#
+# SPDX-License-Identifier: GPL-2.0-or-later
+
+---
+argument_specs:
+  main:
+    short_description: "Setup unattended-upgrades on Debian-based systems."
+    description:
+      - "This Ansible role installs and configures unattended-upgrades for Ubuntu and Debian."
+      - "It enables automatic installation of security updates and system upgrades."
+      - "The role supports customization of update origins, scheduling, notifications, and reboot behavior."
+    author:
+      - "HIFIS Software Services"
+    options:
+      unattended_cache_valid_time:
+        description:
+          - "Update the apt cache if it's older than the given time in seconds."
+          - "Passed to the apt module during package installation."
+        type: "int"
+        default: 3600
+        required: false
+      unattended_origins_patterns:
+        description:
+          - "Array of origins patterns to determine whether packages can be automatically installed."
+          - "If not set, distribution-specific defaults will be used."
+          - "Debian default: ['origin=Debian,codename=${distro_codename},label=Debian-Security']"
+          - "Ubuntu default: ['origin=Ubuntu,archive=${distro_codename}-security,label=Ubuntu']"
+          - "For more details, see Origins Patterns documentation."
+        type: "list"
+        elements: "str"
+        required: false
+      unattended_package_blacklist:
+        description:
+          - "List of packages which won't be automatically upgraded."
+        type: "list"
+        elements: "str"
+        default: []
+        required: false
+      unattended_autofix_interrupted_dpkg:
+        description:
+          - "Whether on unclean dpkg exit to run 'dpkg --force-confold --configure -a'."
+          - "This ensures updates keep getting installed after interrupted dpkg operations."
+        type: "bool"
+        default: true
+        required: false
+      unattended_minimal_steps:
+        description:
+          - "Split the upgrade into the smallest possible chunks."
+          - "This allows upgrades to be interrupted with SIGUSR1."
+          - "Makes the upgrade slightly slower but enables shutdown while upgrading."
+        type: "bool"
+        default: true
+        required: false
+      unattended_install_on_shutdown:
+        description:
+          - "Install all unattended-upgrades when the machine is shutting down."
+          - "Instead of doing it in the background while the machine is running."
+          - "This will make shutdown slower."
+        type: "bool"
+        default: false
+        required: false
+      unattended_mail:
+        description:
+          - "Email address to send information about upgrades or problems."
+          - "If false or empty, no email is sent."
+          - "Requires a working mail setup with mailx installed."
+        type: "raw"
+        default: false
+        required: false
+      unattended_mail_sender:
+        description:
+          - "Use the specified value in the 'From' field of outgoing mails."
+          - "If false, defaults to root."
+        type: "raw"
+        default: false
+        required: false
+      unattended_mail_only_on_error:
+        description:
+          - "Send email only on errors."
+          - "Otherwise email will be sent every time there's a package upgrade."
+        type: "bool"
+        default: false
+        required: false
+      unattended_mail_report:
+        description:
+          - "Choose on what event to send an email."
+          - "Possible values: 'always', 'only-on-error', or 'on-change'."
+          - "If false, legacy MailOnlyOnError value is used."
+        type: "raw"
+        default: false
+        required: false
+      unattended_remove_unused_dependencies:
+        description:
+          - "Do automatic removal of all unused dependencies after the upgrade."
+          - "Equivalent to 'apt-get autoremove'."
+        type: "bool"
+        default: false
+        required: false
+      unattended_remove_new_unused_dependencies:
+        description:
+          - "Remove any new unused dependencies after the upgrade."
+        type: "bool"
+        default: true
+        required: false
+      unattended_remove_unused_kernel_packages:
+        description:
+          - "Remove unused automatically installed kernel-related packages."
+          - "Includes kernel images, kernel headers and kernel version locked tools."
+        type: "bool"
+        default: false
+        required: false
+      unattended_automatic_reboot:
+        description:
+          - "Automatically reboot *WITHOUT CONFIRMATION* if required after upgrade."
+          - "Triggers if the file /var/run/reboot-required is found after the upgrade."
+        type: "bool"
+        default: false
+        required: false
+      unattended_automatic_reboot_time:
+        description:
+          - "If automatic reboot is enabled and needed, reboot at this specific time."
+          - "Format: HH:MM (e.g., '02:00')."
+          - "If false, reboot happens immediately after the upgrade."
+        type: "raw"
+        default: false
+        required: false
+      unattended_ignore_apps_require_restart:
+        description:
+          - "Upgrade applications even if they require restart after upgrade."
+          - "Ignores the 'XB-Upgrade-Requires: app-restart' directive in debian/control."
+        type: "bool"
+        default: false
+        required: false
+      unattended_syslog_enable:
+        description:
+          - "Write events to syslog."
+          - "Useful in environments where syslog messages are sent to a central store."
+        type: "bool"
+        default: false
+        required: false
+      unattended_syslog_facility:
+        description:
+          - "Write events to the specified syslog facility."
+          - "Defaults to 'daemon' if not specified."
+          - "Requires unattended_syslog_enable to be true."
+        type: "str"
+        required: false
+      unattended_update_package_list:
+        description:
+          - "Do 'apt-get update' automatically every n-days."
+          - "Set to 0 to disable."
+        type: "int"
+        default: 1
+        required: false
+      unattended_download_upgradeable:
+        description:
+          - "Do 'apt-get upgrade --download-only' every n-days."
+          - "Set to 0 to disable."
+        type: "int"
+        required: false
+      unattended_autoclean_interval:
+        description:
+          - "Do 'apt-get autoclean' every n-days."
+          - "Set to 0 to disable."
+        type: "int"
+        default: 7
+        required: false
+      unattended_clean_interval:
+        description:
+          - "Do 'apt-get clean' every n-days."
+          - "Set to 0 to disable."
+        type: "int"
+        required: false
+      unattended_verbose:
+        description:
+          - "Define verbosity level of APT for periodic runs."
+          - "Output will be sent to root."
+          - "0: no report, 1: progress report, 2: + command outputs, 3: + trace on"
+        type: "int"
+        required: false
+      unattended_random_sleep:
+        description:
+          - "Define maximum for a random interval in seconds after which the apt job starts."
+          - "Only for systems without systemd."
+          - "Default is 1800 (30 minutes) to prevent mirror server overload."
+        type: "int"
+        required: false
+      unattended_dpkg_options:
+        description:
+          - "Array of dpkg command-line options used during unattended-upgrades runs."
+          - "Example: ['--force-confdef', '--force-confold']"
+          - "These options can help with configuration file changes that may block installation."
+        type: "list"
+        elements: "str"
+        default: []
+        required: false
+      unattended_dl_limit:
+        description:
+          - "Limit the download speed in kb/sec using apt bandwidth limit feature."
+          - "Example: 70 limits download speed to 70kb/sec."
+        type: "int"
+        required: false
+      unattended_only_on_ac_power:
+        description:
+          - "Download and install upgrades only on AC power."
+          - "Skip or gracefully stop updates on battery."
+          - "Will also install the powermgmt-base package."
+        type: "bool"
+        default: false
+        required: false
+      unattended_systemd_timer_override:
+        description:
+          - "Deploy or remove systemd timer overrides."
+          - "Set to true to customize apt-daily and apt-daily-upgrade timers."
+        type: "bool"
+        default: false
+        required: false
+      unattended_apt_daily_oncalendar:
+        description:
+          - "Systemd OnCalendar schedule for apt-daily timer (download updates)."
+          - "Uses systemd calendar event format."
+          - "Example: '*-*-* 6,18:00' runs at 6:00 and 18:00 daily."
+        type: "str"
+        default: "*-*-* 6,18:00"
+        required: false
+      unattended_apt_daily_randomizeddelaysec:
+        description:
+          - "Randomized delay for apt-daily timer."
+          - "Adds random delay up to this value after the scheduled time."
+          - "Example: '12h' adds up to 12 hours random delay."
+        type: "str"
+        default: "12h"
+        required: false
+      unattended_apt_daily_upgrade_oncalendar:
+        description:
+          - "Systemd OnCalendar schedule for apt-daily-upgrade timer (install updates)."
+          - "Uses systemd calendar event format."
+          - "Example: '*-*-* 6:00' runs at 6:00 daily."
+        type: "str"
+        default: "*-*-* 6:00"
+        required: false
+      unattended_apt_daily_upgrade_randomizeddelaysec:
+        description:
+          - "Randomized delay for apt-daily-upgrade timer."
+          - "Adds random delay up to this value after the scheduled time."
+          - "Example: '60m' adds up to 60 minutes random delay."
+        type: "str"
+        default: "60m"
+        required: false
+
+...
