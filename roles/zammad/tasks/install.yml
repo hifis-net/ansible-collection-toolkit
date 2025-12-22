@@ -79,7 +79,7 @@
   ansible.builtin.package:
     name: "zammad={{ zammad_version }}*"
     state: "present"
-    force: true
+    allow_downgrade: true
   notify:
     - "Set Elasticsearch server address"
     - "Build search index"
