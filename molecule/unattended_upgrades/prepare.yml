@@ -12,6 +12,6 @@
     - name: "Install dependencies"
       ansible.builtin.apt:
         update_cache: "yes"
-        force_apt_get: "yes"
+        force_apt_get: "{{ unattended_force_apt_get }}"
 
 ...

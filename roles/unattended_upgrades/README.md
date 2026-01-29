@@ -43,6 +43,9 @@ upgrade. You may optionally define a specific time for rebooting (`unattended_au
 * `unattended_cache_valid_time`:
   * Default: `3600`
   * Description: Update the apt cache if it's older than the given time in seconds; passed to the [apt module](https://docs.ansible.com/ansible/latest/collections/ansible/builtin/apt_module.html) during package installation.
+* `unattended_force_apt_get`:
+  * Default `false`
+  * Description: Force usage of apt-get instead of aptitude; passed to the [apt module](https://docs.ansible.com/ansible/latest/collections/ansible/builtin/apt_module.html) during package installation.
 * `unattended_origins_patterns`:
   * Default:
     * Debian: `['origin=Debian,codename=${distro_codename},label=Debian-Security']`
