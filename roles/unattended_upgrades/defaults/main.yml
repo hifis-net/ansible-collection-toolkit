@@ -8,8 +8,8 @@
 # Cache update time for apt module
 unattended_cache_valid_time: 3600
 
-# Wether to choose apt or apt-get
-unattended_force_apt_get: false
+# Whether to choose apt or apt-get
+unattended_force_apt_get: true
 
 # Unattended-Upgrade::Origins-Pattern
 # Automatically upgrade packages from these origin patterns
