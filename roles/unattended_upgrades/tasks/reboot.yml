@@ -12,5 +12,5 @@
   ansible.builtin.apt:
     name: "update-notifier-common"
     state: "present"
-    force_apt_get: "{{ unattended_force_apt_get }}"
+    force_apt_get: "{{ unattended_force_apt_get | bool }}"
   failed_when: false
