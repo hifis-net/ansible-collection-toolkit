@@ -10,7 +10,7 @@
   vars:
     # Apply suggested Elasticsearch configuration
     elasticsearch_version: "8.x"
-    elasticsearch_package: "elasticsearch=8.8.1"
+    elasticsearch_package: "elasticsearch"
     elasticsearch_heap_size_min: "256m"
     elasticsearch_heap_size_max: "256m"
     elasticsearch_extra_options: |
@@ -23,6 +23,7 @@
   tasks:
 
     - name: "Install required packages"
+      when: "ansible_facts.os_family == 'Debian'"
       ansible.builtin.apt:
         name:
           - "sudo"
@@ -33,6 +34,37 @@
           - "ssl-cert"
         state: "present"
         update_cache: true
+
+    - name: "Provide SSL/TLS certificate on AlmaLinux"
+      when: "ansible_facts.os_family == 'RedHat'"
+      block:
+        - name: "Ensure SSL/TLS directories exist"
+          ansible.builtin.file:
+            path: "{{ item }}"
+            state: "directory"
+            mode: '0755'
+          loop:
+            - "/etc/ssl/private"
+            - "/etc/ssl/certs"
+
+        - name: "Install python-cryptography"
+          ansible.builtin.pip:
+            name: "cryptography"
+
+        - name: "Create RSA private key"
+          community.crypto.openssl_privatekey:
+            path: "/etc/ssl/private/ssl-cert-snakeoil.key"
+            size: 2048
+            type: "RSA"
+            mode: '0600'
+
+        - name: "Create a snakeoil certificate"
+          community.crypto.x509_certificate:
+            path: "/etc/ssl/certs/ssl-cert-snakeoil.pem"
+            privatekey_path: "/etc/ssl/private/ssl-cert-snakeoil.key"
+            provider: "selfsigned"
+            selfsigned_not_after: "+365d"
+            mode: '0644'
 
     - name: "Include geerlingguy.elasticsearch"
       ansible.builtin.include_role:

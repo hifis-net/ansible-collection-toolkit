@@ -64,7 +64,7 @@ File path to the SSL/TLS certificate which is used for HTTPS.
 zammad_ssl_key_path: "/etc/ssl/private/zammad_key.pem"
 ```
 
-File path to the SSL/TLS private key  which is used for HTTPS.
+File path to the SSL/TLS private key which is used for HTTPS.
 
 ```yaml
 zammad_ssl_cert:
