@@ -46,6 +46,10 @@ server {
         access_log off; log_not_found off;
     }
 
+    {% for location_config in zammad_nginx_additional_locations %}
+    {{ location_config }}
+    {% endfor %}
+
     root /opt/zammad/public;
 
     access_log /var/log/nginx/zammad.access.log;

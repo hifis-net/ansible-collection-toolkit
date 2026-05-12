@@ -31,5 +31,10 @@ provisioner:
       all:
         vars:
           ansible_user: "ansible"
+          zammad_nginx_additional_locations:
+            - |
+              location ~* \\.html$$ {
+                access_log off; log_not_found off;
+              }
 verifier:
   name: "ansible"
