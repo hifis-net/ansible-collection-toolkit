@@ -4,7 +4,7 @@
 # SPDX-License-Identifier: MIT
 
 ---
-zammad_version: "6.5.0"
+zammad_version: "7.0.1"
 zammad_release_channel: "stable"
 zammad_repo_url: "https://dl.packager.io/srv/deb/zammad/zammad/{{ zammad_release_channel }}/{{ ansible_facts.distribution | lower }}"
 zammad_domain_name: "{{ ansible_facts.fqdn }}"
