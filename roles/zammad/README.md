@@ -118,6 +118,17 @@ configuring multiple domains or the redirection of outdated domains to the
 most recent one.
 
 ```yaml
+zammad_nginx_additional_locations:
+  - |
+    location ~* \.html$ {
+      root /opt/zammad/public;
+    }
+```
+
+Configure additional location directives in the Nginx server configuration.
+This allows to serve additional files from the public directory, e.g. custom HTML files.
+
+```yaml
 zammad_elasticsearch_url: "http://localhost:9200"
 ```
 
