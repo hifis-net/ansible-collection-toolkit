@@ -23,6 +23,8 @@ platforms:
       - "0.0.0.0:8443:443"
 provisioner:
   name: "ansible"
+  env:
+    ANSIBLE_ROLES_PATH: "${MOLECULE_PROJECT_DIRECTORY}/roles"
   playbooks:
     prepare: "prepare.yml"
     converge: "converge.yml"
