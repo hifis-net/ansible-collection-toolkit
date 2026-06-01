@@ -27,6 +27,8 @@ platforms:
     tty: true
 provisioner:
   name: "ansible"
+  env:
+    ANSIBLE_ROLES_PATH: "${MOLECULE_PROJECT_DIRECTORY}/roles"
   options:
     diff: true
   playbooks:
