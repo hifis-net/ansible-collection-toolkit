@@ -20,7 +20,10 @@ tags:
   - 'debian'
   - 'linux'
   - 'system'
-dependencies: {}
+dependencies:
+  ansible.posix: '>=2.1.0'
+  community.crypto: '>=3.0.0'
+  community.general: '>=11.0.0'
 repository: 'https://github.com/hifis-net/ansible-collection-toolkit'
 homepage: 'https://hifis.net/services/software-overview.html'
 issues: 'https://github.com/hifis-net/ansible-collection-toolkit/issues'
