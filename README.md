@@ -45,7 +45,7 @@ We decided to reuse the unattended_upgrades repository as a collection repo as i
 
 ## Minimum required Ansible-version
 
-* Ansible >= 2.17
+* Ansible >= 2.19
 
 ## Installation
 
