@@ -7,7 +7,6 @@
 
 collections:
   - name: "community.crypto"
-    version: "2.20.0"
 
 roles:
   - src: "geerlingguy.elasticsearch"
