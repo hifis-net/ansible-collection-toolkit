@@ -21,7 +21,7 @@ jobs:
     runs-on: "ubuntu-24.04"
     steps:
       - name: "Check out the codebase."
-        uses: "actions/checkout@v6"
+        uses: "actions/checkout@v7"
 
       - name: "Lint code."
         uses: "ansible/ansible-lint@v26.6.0"
