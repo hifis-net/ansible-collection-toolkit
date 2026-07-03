@@ -15,7 +15,7 @@ dependencies = [
 
 [dependency-groups]
 dev = [
-    "ansible-lint>=25.8.1",
+    "ansible-lint>=26.6.0",
     "molecule>=26.4.0",
     "molecule-plugins[podman]>=25.8.12",
     "netaddr>=1.3.0",
