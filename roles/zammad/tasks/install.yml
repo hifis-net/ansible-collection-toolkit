@@ -54,7 +54,7 @@
         uris: "{{ zammad_repo_url }}"
         suites: "{{ ansible_facts.distribution_version }}"
         components: "main"
-        signed_by: "https://dl.packager.io/srv/zammad/zammad/key"
+        signed_by: "https://go.packager.io/srv/deb/zammad/zammad/gpg-key.gpg"
         architectures: "amd64"
         state: "present"
         mode: "0644"
