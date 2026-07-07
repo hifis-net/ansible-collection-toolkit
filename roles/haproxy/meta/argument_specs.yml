@@ -1,0 +1,279 @@
+# SPDX-FileCopyrightText: Helmholtz-Zentrum Dresden-Rossendorf (HZDR)
+#
+# SPDX-License-Identifier: Apache-2.0
+
+---
+argument_specs:
+  main:
+    short_description: "Install and configure HAProxy as a load balancer."
+    description:
+      - "This Ansible role sets up HAProxy to be used as a load balancer in a high availability and scalability context."
+      - "It supports SSL certificate management, statistics interface, and backend server configuration."
+    author:
+      - "HIFIS Software Services"
+    options:
+      haproxy_executable_path:
+        description:
+          - "Path to the HAProxy executable binary."
+        type: "str"
+        default: "/usr/sbin/haproxy"
+        required: false
+      haproxy_ppa_version:
+        description:
+          - "HAProxy PPA repository version to use."
+          - "Used to pin the PPA version to a certain value."
+        type: "str"
+        default: "ppa:vbernat/haproxy-3.2"
+        required: false
+      haproxy_version:
+        description:
+          - "HAProxy package version to install."
+          - "Used to pin the HAProxy version to a certain value."
+        type: "str"
+        default: "3.2.*"
+        required: false
+      haproxy_user:
+        description:
+          - "System user account under which HAProxy runs."
+        type: "str"
+        default: "haproxy"
+        required: false
+      haproxy_group:
+        description:
+          - "System group under which HAProxy runs."
+        type: "str"
+        default: "haproxy"
+        required: false
+      haproxy_dependencies:
+        description:
+          - "List of package dependencies to be installed for HAProxy."
+        type: "list"
+        elements: "str"
+        default:
+          - "software-properties-common"
+          - "python3-cryptography"
+          - "python3-openssl"
+        required: false
+      haproxy_nbproc:
+        description:
+          - "Number of processes used by HAProxy."
+        type: "str"
+        default: "1"
+        required: false
+      haproxy_nbthread:
+        description:
+          - "Number of threads used by HAProxy."
+        type: "str"
+        default: "2"
+        required: false
+      haproxy_cpumap:
+        description:
+          - "CPU mapping configuration for HAProxy multithreading."
+          - "Maps threads to CPU cores for performance optimization."
+        type: "str"
+        default: "auto:1/1-2 0-1"
+        required: false
+      haproxy_name:
+        description:
+          - "Name of the HAProxy binary."
+        type: "str"
+        default: "haproxy"
+        required: false
+      haproxy_config_template:
+        description:
+          - "Path to the HAProxy configuration Jinja2 template."
+        type: "str"
+        default: "haproxy.cfg.j2"
+        required: false
+      haproxy_conf_dir:
+        description:
+          - "Directory path where HAProxy configuration files are stored."
+        type: "str"
+        default: "/etc/haproxy"
+        required: false
+      haproxy_conf_file_path:
+        description:
+          - "Full path to the HAProxy configuration file."
+        type: "str"
+        default: "{{ haproxy_conf_dir }}/{{ haproxy_name }}.cfg"
+        required: false
+      haproxy_log_socket:
+        description:
+          - "Path to the HAProxy logging socket."
+        type: "str"
+        default: "/dev/log"
+        required: false
+      haproxy_log_level:
+        description:
+          - "Log level for HAProxy logging."
+          - "Possible values are: emerg, alert, crit, err, warning, notice, info, debug."
+        type: "str"
+        default: "info"
+        required: false
+      haproxy_socket:
+        description:
+          - "Path to the HAProxy socket file for runtime API."
+        type: "str"
+        default: "/run/haproxy/admin.sock"
+        required: false
+      haproxy_ssl_certificate_dir:
+        description:
+          - "Directory path where HAProxy SSL certificates are stored."
+        type: "str"
+        default: "/etc/haproxy/ssl"
+        required: false
+      haproxy_create_self_signed_cert:
+        description:
+          - "Whether to generate a self-signed SSL certificate."
+          - "If set to false, you must provide haproxy_ssl_cert_chain_src_file_path."
+        type: "bool"
+        default: true
+        required: false
+      haproxy_country_name:
+        description:
+          - "Country name (C) for the SSL certificate."
+        type: "str"
+        default: "DE"
+        required: false
+      haproxy_state_or_province_name:
+        description:
+          - "State or province name (ST) for the SSL certificate."
+        type: "str"
+        default: "Saxony"
+        required: false
+      haproxy_locality_name:
+        description:
+          - "Locality name (L) for the SSL certificate."
+        type: "str"
+        default: "Dresden"
+        required: false
+      haproxy_organization_name:
+        description:
+          - "Organization name (O) for the SSL certificate."
+        type: "str"
+        default: "Helmholtz-Zentrum Dresden-Rossendorf (HZDR)"
+        required: false
+      haproxy_organizational_unit_name:
+        description:
+          - "Organizational unit name (OU) for the SSL certificate."
+        type: "str"
+        default: "FWCC / Computational Science"
+        required: false
+      haproxy_email_address:
+        description:
+          - "Email address for the SSL certificate."
+        type: "str"
+        default: "hifis-help@hzdr.de"
+        required: false
+      haproxy_common_name:
+        description:
+          - "Common name (CN) for the SSL certificate."
+        type: "str"
+        default: "Helmholtz Association"
+        required: false
+      haproxy_ssl_certificate_key_file:
+        description:
+          - "Path to the HAProxy SSL private key file."
+        type: "str"
+        default: "{{ haproxy_ssl_certificate_dir }}/haproxy.key"
+        required: false
+      haproxy_ssl_certificate_csr_file:
+        description:
+          - "Path to the HAProxy SSL certificate signing request file."
+        type: "str"
+        default: "{{ haproxy_ssl_certificate_dir }}/haproxy.csr"
+        required: false
+      haproxy_ssl_certificate_crt_file:
+        description:
+          - "Path to the HAProxy SSL certificate file."
+        type: "str"
+        default: "{{ haproxy_ssl_certificate_dir }}/haproxy.crt"
+        required: false
+      haproxy_ssl_certificate_pkcs12_file:
+        description:
+          - "Path to the HAProxy SSL certificate PKCS12 file."
+        type: "str"
+        default: "{{ haproxy_ssl_certificate_dir }}/haproxy.p12"
+        required: false
+      haproxy_ssl_certificate_chain_file:
+        description:
+          - "Path to the HAProxy SSL certificate chain file."
+          - "This file is used by HAProxy and should be in PEM format."
+        type: "str"
+        default: "{{ haproxy_ssl_certificate_dir }}/haproxy.pem"
+        required: false
+      haproxy_ssl_cert_chain_src_file_path:
+        description:
+          - "Path to the HAProxy certificate chain source file on the control node."
+          - "This file will be copied to the remote host."
+          - "This variable is mandatory when haproxy_create_self_signed_cert is set to false."
+          - "The file should be PEM formatted and include at least the public certificate and the private key."
+        type: "str"
+        required: false
+      haproxy_ssl_dhparam_file:
+        description:
+          - "Path to the Diffie-Hellman parameter file."
+        type: "str"
+        default: "{{ haproxy_ssl_certificate_dir }}/dhparam.pem"
+        required: false
+      haproxy_ssl_dhparam_size:
+        description:
+          - "Size in bits of the generated Diffie-Hellman parameters."
+        type: "int"
+        default: 4096
+        required: false
+      haproxy_stats_enable:
+        description:
+          - "Whether to enable or disable the HAProxy statistics interface."
+          - "Possible values are: enable, disable."
+        type: "str"
+        default: "enable"
+        required: false
+      haproxy_stats_admin_user:
+        description:
+          - "Username for the HAProxy statistics interface admin user."
+        type: "str"
+        default: "admin"
+        required: false
+      haproxy_stats_admin_user_password:
+        description:
+          - "Password for the HAProxy statistics interface admin user."
+          - "Should be changed from the default value for security."
+        type: "str"
+        default: "changeme"
+        required: false
+      haproxy_frontend_ip:
+        description:
+          - "Floating IP address for the HAProxy frontend."
+          - "This is the IP address that HAProxy will bind to."
+          - "This variable is mandatory and must be provided."
+        type: "str"
+        required: true
+      haproxy_backends:
+        description:
+          - "List of backend servers for HAProxy to load balance."
+          - "Each backend server must have a name and IP address."
+          - "Port is optional and defaults to 80 if not specified."
+          - "This variable is mandatory and must be provided."
+        type: "list"
+        elements: "dict"
+        required: true
+        options:
+          backend_name:
+            description:
+              - "Name identifier for the backend server."
+            type: "str"
+            required: true
+          backend_ip:
+            description:
+              - "IP address of the backend server."
+            type: "str"
+            required: true
+          backend_port:
+            description:
+              - "Port number on which the backend server listens."
+            type: "int"
+            default: 80
+            required: false
+
+...
