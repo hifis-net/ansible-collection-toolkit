@@ -64,7 +64,7 @@ requires-dist = [{ name = "ansible", specifier = ">=12.0.0" }]
 dev = [
     { name = "ansible-lint", specifier = ">=26.6.0" },
     { name = "molecule", specifier = ">=26.6.0" },
-    { name = "molecule-plugins", extras = ["podman"], specifier = ">=25.8.12" },
+    { name = "molecule-plugins", extras = ["podman"], specifier = ">=26.7.8" },
     { name = "netaddr", specifier = ">=1.3.0" },
     { name = "reuse", specifier = ">=5.0.2" },
     { name = "yamllint", specifier = ">=1.37.1" },
@@ -601,14 +601,14 @@ wheels = [
 
 [[package]]
 name = "molecule-plugins"
-version = "25.8.12"
+version = "26.7.8"
 source = { registry = "https://pypi.org/simple" }
 dependencies = [
     { name = "molecule" },
 ]
-sdist = { url = "https://files.pythonhosted.org/packages/65/11/b7316c96c9ecca901f3a7fd5927f3dd757e17e11a428fb83cc5349e9b063/molecule_plugins-25.8.12.tar.gz", hash = "sha256:75f32763e90275bfc24bcc0d27b9bb22ac973658bf902b2e3e8af8e2a1c32083", size = 106414, upload-time = "2025-08-12T19:57:36.628Z" }
+sdist = { url = "https://files.pythonhosted.org/packages/30/e1/ceac5351b6f747654f18ca0fcd9058599271842f66dbb5a1f866d70d9a62/molecule_plugins-26.7.8.tar.gz", hash = "sha256:e805e45a4aaad2539256553ccc243568520fd130a30056cd46c8c64267279691", size = 206511, upload-time = "2026-07-08T18:51:49.422Z" }
 wheels = [
-    { url = "https://files.pythonhosted.org/packages/a2/ee/efdf33ffb32861d9b357a4e7cff018206729703440c028b92ed64fe834b1/molecule_plugins-25.8.12-py3-none-any.whl", hash = "sha256:c5b8ceb209a5ff87326631d60408f8d08b9431b2e339dad4c620130b50279ce0", size = 76357, upload-time = "2025-08-12T19:57:35.285Z" },
+    { url = "https://files.pythonhosted.org/packages/88/58/3b03fad919f74d60f5a5f30351aa420d73ce80ad2fd387df1567e51787a8/molecule_plugins-26.7.8-py3-none-any.whl", hash = "sha256:57ba766f960856c6c10f63a9477fc14df78b6d0693c97c5ab1fc0bcdbf67d0a7", size = 78224, upload-time = "2026-07-08T18:51:47.872Z" },
 ]
 
 [[package]]
