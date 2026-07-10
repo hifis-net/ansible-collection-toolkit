@@ -8,6 +8,9 @@
 haproxy_executable_path: "/usr/sbin/haproxy"
 # HAProxy PPA version
 haproxy_ppa_version: "ppa:vbernat/haproxy-3.2"
+haproxy_use_awslc: false
+# Haproxy.com package repository
+haproxy_awslc_repository_url: "https://www.haproxy.com/download/haproxy/performance/{{ ansible_facts.distribution | lower }}/ha32"
 # HAProxy version
 haproxy_version: "3.2.*"
 # HAProxy user
@@ -27,6 +30,8 @@ haproxy_nbthread: "2"
 haproxy_cpumap: "auto:1/1-2 0-1"
 # HAProxy name
 haproxy_name: "haproxy"
+# Haproxy package name
+haproxy_package_name: "{{ haproxy_name }}"
 # HAProxy configuration template
 haproxy_config_template: "haproxy.cfg.j2"
 # HAProxy configuration directory
