@@ -9,6 +9,13 @@ dependency:
 driver:
   name: "podman"
 platforms:
+  - name: "haproxy_v3.4"
+    image: "${MOLECULE_IMAGE:-ghcr.io/hifis-net/ubuntu-systemd:24.04}"
+    pre_build_image: true
+    privileged: true
+    override_command: false
+    systemd: true
+    tty: true
   - name: "haproxy_v3.2"
     image: "${MOLECULE_IMAGE:-ghcr.io/hifis-net/ubuntu-systemd:24.04}"
     pre_build_image: true
@@ -52,6 +59,12 @@ provisioner:
         vars:
           haproxy_ssl_dhparam_size: 512
     host_vars:
+      haproxy_v3.4:
+        haproxy_create_self_signed_cert: true
+        haproxy_use_awslc: true
+        haproxy_awslc_repository_url: "https://www.haproxy.com/download/haproxy/performance/{{ ansible_facts.distribution | lower }}/ha34"
+        haproxy_package_name: "haproxy-awslc"
+        haproxy_version: "3.4.*"
       haproxy_v3.2:
         haproxy_create_self_signed_cert: true
         haproxy_ppa_version: "ppa:vbernat/haproxy-3.2"

@@ -53,7 +53,9 @@
     update_cache: true
 
 - name: "Add HAProxy Debian repository"
-  when: "ansible_facts.distribution == 'Debian'"
+  when:
+    - "ansible_facts.distribution == 'Debian'"
+    - "not haproxy_use_awslc"
   become: true
   ansible.builtin.deb822_repository:
     name: "haproxy"
@@ -70,6 +72,7 @@
   when:
     - "ansible_facts.distribution == 'Ubuntu'"
     - "haproxy_ppa_version | length > 0"
+    - "not haproxy_use_awslc"
   become: true
   ansible.builtin.apt_repository:
     repo: "{{ haproxy_ppa_version }}"
@@ -77,6 +80,20 @@
     validate_certs: true
     mode: "0644"
   register: "__ppa"
+
+- name: "Add HAProxy awslc repository"
+  when: "haproxy_use_awslc"
+  become: true
+  ansible.builtin.deb822_repository:
+    name: "haproxy"
+    types: "deb"
+    uris: "{{ haproxy_awslc_repository_url }}"
+    suites: "{{ ansible_facts.distribution_release | lower }}"
+    components: "main"
+    signed_by: "https://pks.haproxy.com/linux/community/RPM-GPG-KEY-HAProxy"
+    state: "present"
+    enabled: true
+  register: "__deb_repo_awslc"
 
 - name: "Check whether wildcard character is contained in version string."
   ansible.builtin.set_fact:
@@ -112,7 +129,7 @@
 
 - name: "Determine if errors in check mode can be ignored"
   ansible.builtin.set_fact:
-    __ignore_errors_in_check_mode: "{{ ansible_check_mode and (__ppa.changed or __deb_repo.changed) }}"
+    __ignore_errors_in_check_mode: "{{ ansible_check_mode and (__ppa.changed or __deb_repo.changed or __deb_repo_awslc.changed) }}"
 
 - name: "Install and configure HAProxy"
   ignore_errors: "{{ __ignore_errors_in_check_mode }}"  # noqa ignore-errors
@@ -121,7 +138,7 @@
     - name: "Install or upgrade haproxy package."
       become: true
       ansible.builtin.package:
-        name: "{{ haproxy_name }}={{ haproxy_version }}"
+        name: "{{ haproxy_package_name }}={{ haproxy_version }}"
         update_cache: true
       when: >-
         __version_contains_wildcard or

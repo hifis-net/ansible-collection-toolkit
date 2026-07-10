@@ -7,7 +7,7 @@
 
 - name: "Check HAProxy configuration file"
   ansible.builtin.command:
-    cmd: "{{ haproxy_executable_path }} -c -q -f {{ haproxy_conf_file_path }}"
+    cmd: "{{ haproxy_executable_path }} -c -f {{ haproxy_conf_file_path }}"
   register: "__check_haproxy_config"
   changed_when: false
   failed_when: "__check_haproxy_config.rc != 0"
