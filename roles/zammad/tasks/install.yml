@@ -32,20 +32,6 @@
   when: "ansible_facts.distribution | lower == 'ubuntu'"
   block:
 
-    - name: "Remove Zammad apt key from legacy trusted.gpg keyring"
-      become: true
-      ansible.builtin.apt_key:
-        url: "https://dl.packager.io/srv/zammad/zammad/key"
-        state: "absent"
-
-    - name: "Remove Zammad DEB repository from sources.list"
-      become: true
-      ansible.builtin.apt_repository:
-        repo: "deb https://dl.packager.io/srv/deb/zammad/zammad/{{ zammad_release_channel }}/ubuntu {{ ansible_facts.distribution_version }} main"
-        state: "absent"
-        filename: "zammad"
-        update_cache: false
-
     - name: "Install | Add Zammad DEB repository"
       become: true
       ansible.builtin.deb822_repository:
