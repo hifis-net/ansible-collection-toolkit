@@ -14,6 +14,7 @@ and scalability context.
 
 Currently [supported platforms](meta/main.yml) are:
 
+- Ubuntu 26.04 LTS
 - Ubuntu 24.04 LTS
 - Ubuntu 22.04 LTS
 - Debian 11 (Bullseye)
@@ -23,10 +24,9 @@ This role is tested against the four latest LTS versions of HAProxy.
 Currently, this results in official support for the HAProxy release series:
 
 - `3.2` (not supported on Debian 11 and Ubuntu 22.04)
-- `3.0`
-- `2.8` (not supported on Ubuntu 24.04)
-- `2.6` (not supported on Ubuntu 24.04)
-- `2.4` (not supported on Debian 12 and Ubuntu 24.04)
+- `3.0` (not supported on Ubuntu 26.04)
+- `2.8` (not supported on Ubuntu 24.04 and Ubuntu 26.04)
+- `2.6` (not supported on Ubuntu 24.04 and Ubuntu 26.04)
 
 Other versions are known to work as well but are not automatically tested.
 

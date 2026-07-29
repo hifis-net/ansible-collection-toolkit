@@ -18,7 +18,9 @@
       ansible.builtin.meta: "end_host"
       when: >-
         ansible_facts.distribution_release | lower == 'noble' and haproxy_version | regex_search('\\d+\\.\\d+') is version('2.9', '<') or
-        ansible_facts.distribution_release | lower != 'noble' and haproxy_version | regex_search('\\d+\\.\\d+') is version('3.2', '>=')
+        ansible_facts.distribution_release | lower == 'noble' and haproxy_version | regex_search('\\d+\\.\\d+') is version('3.4', '>=') or
+        ansible_facts.distribution_release | lower == 'resolute' and haproxy_version | regex_search('\\d+\\.\\d+') is version('3.2', '<') or
+        ansible_facts.distribution_release | lower not in ['noble', 'resolute'] and haproxy_version | regex_search('\\d+\\.\\d+') is version('3.2', '>=')
 
     - name: "Populate service facts."
       ansible.builtin.service_facts:
