@@ -17,7 +17,7 @@ argument_specs:
         description:
           - "Zammad version to be installed."
         type: "str"
-        default: "6.5.0"
+        default: "7.1.1"
         required: false
       zammad_release_channel:
         description:
@@ -31,7 +31,7 @@ argument_specs:
           - "URL to the Zammad package repository."
           - "This is automatically constructed from the release channel and distribution."
         type: "str"
-        default: "https://dl.packager.io/srv/deb/zammad/zammad/{{ zammad_release_channel }}/{{ ansible_facts.distribution | lower }}"
+        default: "https://go.packager.io/srv/deb/zammad/zammad/{{ zammad_release_channel }}/{{ ansible_facts.distribution | lower }}"
         required: false
       zammad_domain_name:
         description:
