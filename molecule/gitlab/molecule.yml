@@ -13,7 +13,7 @@ platforms:
     image: "${MOLECULE_IMAGE:-ghcr.io/hifis-net/ubuntu-systemd:24.04}"
     pre_build_image: true
     privileged: true
-    systemd: true
+    systemd: "true"
     tty: true
     override_command: false
 provisioner:
