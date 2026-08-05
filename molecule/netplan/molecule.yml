@@ -14,7 +14,7 @@ platforms:
     pre_build_image: true
     override_command: false
     privileged: true
-    systemd: true
+    systemd: "true"
     tty: true
     extra_opts:
       - "--network=netplan_network"

@@ -16,14 +16,14 @@ platforms:
     pre_build_image: true
     override_command: false
     privileged: true  # Required to run Docker in Podman
-    systemd: true
+    systemd: "true"
     tty: true
   - name: "instancegitlabciopenstack2"
     image: "${MOLECULE_IMAGE:-ghcr.io/hifis-net/ubuntu-systemd:24.04}"
     pre_build_image: true
     override_command: false
     privileged: true  # Required to run Docker in Podman
-    systemd: true
+    systemd: "true"
     tty: true
 provisioner:
   name: "ansible"

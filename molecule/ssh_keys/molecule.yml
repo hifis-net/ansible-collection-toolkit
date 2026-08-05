@@ -16,7 +16,7 @@ platforms:
     pre_build_image: true
     privileged: true
     override_command: false
-    systemd: true
+    systemd: "true"
     tty: true
 provisioner:
   name: "ansible"
