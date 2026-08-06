@@ -128,6 +128,28 @@ Variable to pin the PPA version to a certain value:
 haproxy_ppa_version: 'ppa:vbernat/haproxy-3.2'
 ```
 
+#### HAProxy PPA signing key
+
+The OpenPGP public key used to verify the HAProxy PPA on Ubuntu. It defaults to
+the key of the PPAs referenced by `haproxy_ppa_version`:
+
+```yaml
+haproxy_ppa_signing_key: |-
+  -----BEGIN PGP PUBLIC KEY BLOCK-----
+  ...
+  -----END PGP PUBLIC KEY BLOCK-----
+```
+
+#### HAProxy Debian signing key
+
+The OpenPGP public key used to verify the HAProxy repository on Debian. In
+contrast to the Ubuntu key this defaults to a URL, since the key is served over
+HTTPS by the repository itself:
+
+```yaml
+haproxy_debian_signing_key: 'https://haproxy.debian.net/bernat.debian.org.gpg'
+```
+
 #### HAProxy version
 
 Variable to pin the HAProxy version to a certain value:
