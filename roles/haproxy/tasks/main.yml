@@ -25,7 +25,9 @@
   ansible.builtin.meta: "end_host"
   when: >-
     ansible_facts.distribution_release | lower == 'noble' and haproxy_version | regex_search('\\d+\\.\\d+') is version('2.9', '<') or
-    ansible_facts.distribution_release | lower != 'noble' and haproxy_version | regex_search('\\d+\\.\\d+') is version('3.2', '>=')
+    ansible_facts.distribution_release | lower == 'noble' and haproxy_version | regex_search('\\d+\\.\\d+') is version('3.4', '>=') or
+    ansible_facts.distribution_release | lower == 'resolute' and haproxy_version | regex_search('\\d+\\.\\d+') is version('3.2', '<') or
+    ansible_facts.distribution_release | lower not in ['noble', 'resolute'] and haproxy_version | regex_search('\\d+\\.\\d+') is version('3.2', '>=')
 
 - name: "Enable ip_forward."
   become: true
@@ -71,11 +73,44 @@
     - "ansible_facts.distribution == 'Ubuntu'"
     - "haproxy_ppa_version | length > 0"
   become: true
-  ansible.builtin.apt_repository:
-    repo: "{{ haproxy_ppa_version }}"
+  ansible.builtin.deb822_repository:
+    name: "haproxy-ppa"
+    types: "deb"
+    uris: "https://ppa.launchpadcontent.net/{{ haproxy_ppa_version | regex_replace('^ppa:', '') }}/ubuntu"
+    suites: "{{ ansible_facts.distribution_release | lower }}"
+    components: "main"
+    signed_by: |-
+      -----BEGIN PGP PUBLIC KEY BLOCK-----
+
+      xsFNBGY0i6UBEAC8tncBBAT1d2voTJRYwoUTxQcdcjG8ZRcKoKh0VFjYnHvhjdGr
+      +8TVSdIKhROz17kyIE6VxRw/jpyysn6FUT524uhm0SejdKxFadoUYyR0Eyb2MSbN
+      C3AaVYz1XGvwpri2Zr0E3HTlXP3P8TkPT3FBwBcMdlBbzDtDs4asWFl7VaS3tciy
+      FJGYCNYDVM69fIqQZnwDq5sJIl7X1kLDNnBxtHwp0TqJcBBSbqz7lqqo4zatQyl6
+      QcdwMSYCRi3QMr7EYmpqR6a7loWmr9W+YHFpfAmFt5QBldDdRZtJYzsT6IqQV8ZZ
+      iFQzUVa3VXGl24dY6YlaVSlsgCm+33vQgOd+m+nyWwGZQUUvBF2D3aG26XRjx7SC
+      R+DhYkQxVxhwiOoDUf0glBowWx6H5nNkJlNdidmQ9Z35PNtM6P42SHPLbfFESXGV
+      crmoCBXH3WE+0KEA3e+ER/o2Vny6l+I4SygVh7tG4BlNWeQmyYHPkrJD2HFNe98F
+      sNmJxhRjCJCKLQ8mKMRy0POSTt6JOybicrj0KhCiY+QpntAQjzAVmrD5ABSJsPqE
+      Btylv62Csn5Yw974rWoxKbY28Dg7rJ/vSinQOuiDbvigXw4kWNHw6f2T2pL9WAPZ
+      aovAf5W3juvUpg02JVoa9fKySfsnEKQE7TyEwweZXSLifmDSAx8N4W7ahwARAQAB
+      zSBMYXVuY2hwYWQgUFBBIGZvciBWaW5jZW50IEJlcm5hdMLBjgQTAQoAOBYhBD1l
+      OXD7qwqJDk5Omg8U2LDPTv6WBQJmNIulAhsDBQsJCAcCBhUKCQgLAgQWAgMBAh4B
+      AheAAAoJEA8U2LDPTv6WBKgQALCcSVrRZAH6GZlwkZ0tBrv0YCL6bCMNOyIr5TaZ
+      lC2eRTYV/mPeTyc0aEBJKQ+uFT0Eiwi4fob8vaFXuvESzx1BJjLBquU5zuBy0l+Q
+      7+nui4y68ZxWm27cY7JWlzEkyvlADuNJoc3P0JsjZ0A/n04kXxw2gcGdriALU/Yy
+      o9WsW8OW+p39JUoVuZp247t3xazvbJyYvOXeSGsRQJPQlYfMuHqjI85Swsd2IHmO
+      XVV4Y19rRo4G+lD/n4f0QBguEPHbZG0zZRwQRWWHFiXjxvdjhHTzv9A7WMasEiCn
+      zszGAlYzJH3AoGUjjptxWTidjs67Am/4H0CpsXqi7uqPR3v3zJV5dZsL3kVIhR2W
+      wXYtrJ0T5lEKLvLlRNG6Hrw0DRUSGlTt6zHxZJOuBGbexs2O5RZER2JazjPWS48P
+      9ifu5xK2TECpT/Avz9j9u9svcunxLXGjfnUBCb580WXj6fULVYiJp7eWDwHlLAgX
+      pVZ4AKWO0khSjpvWUuuvWfTps9z013LyCAPwt/0GPOeN80pNpvRj6o23kssNvgf/
+      0Ak+H2HEkeixh9/lekDnUxbfujUCUC+dtjHzOZS+WNzeSDvBMrId9N5OxLY+CFNP
+      vd53n8/Ni8jq53Ide1+ZzN0uOmkWr7gznEsQDgsWsIE/oPgtcvqVrkyDyMjlSt7Y
+      fcbl
+      =3O9f
+      -----END PGP PUBLIC KEY BLOCK-----
     state: "present"
-    validate_certs: true
-    mode: "0644"
+    enabled: true
   register: "__ppa"
 
 - name: "Check whether wildcard character is contained in version string."

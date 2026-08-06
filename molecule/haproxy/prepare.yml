@@ -12,7 +12,7 @@
         name:
           - "sudo"                        # for `become` privilege escalation
           - "iproute2"                    # for gathering network facts
-          - "gnupg2"                      # for use with "apt-key export"
+          - "gnupg2"                      # for use with GPG key operations
           - "software-properties-common"  # for use with "apt-repository"
           - "python3-debian"
           - "python3-cryptography"        # for use with openssl modules
