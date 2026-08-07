@@ -15,30 +15,6 @@
 - name: "Prepare Debian GitLab installation"
   when: "ansible_facts.os_family == 'Debian'"
   block:
-    - name: "Remove GitLab APT GPG key from legacy trusted.gpg keyring"
-      become: true
-      ansible.builtin.apt_key:
-        url: "{{ gitlab_gpg_key_url }}"
-        id: "{{ gitlab_gpg_key_id }}"
-        state: "absent"
-      when: "not __gitlab_is_initial_dryrun"
-
-    - name: "Remove GitLab APT repository from sources.list"
-      become: true
-      ansible.builtin.apt_repository:
-        repo: "deb {{ gitlab_repo_url }} {{ ansible_facts.distribution_release }} main"
-        state: "absent"
-        filename: "gitlab_{{ gitlab_edition }}"
-        update_cache: false
-
-    - name: "Remove GitLab source APT repository from sources.list"
-      become: true
-      ansible.builtin.apt_repository:
-        repo: "deb-src {{ gitlab_repo_url }} {{ ansible_facts.distribution_release }} main"
-        state: "absent"
-        filename: "gitlab_{{ gitlab_edition }}"
-        update_cache: false
-
     - name: "Add GitLab APT repository"
       become: true
       ansible.builtin.deb822_repository:
