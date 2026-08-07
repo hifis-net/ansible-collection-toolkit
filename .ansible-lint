@@ -9,3 +9,5 @@ exclude_paths:
   - ".nox/"
 skip_list:
   - 'var-naming[no-role-prefix]'
+enable_list:
+  - 'role-argument-spec'
