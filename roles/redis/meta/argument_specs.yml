@@ -50,10 +50,11 @@ argument_specs:
         description:
           - "Password used to authenticate in the Redis cluster."
           - "This password is required for clients to connect to Redis."
-          - "Should be changed from the default value for security."
+          - "This password must be changed from its default value."
         type: "str"
         default: "changeme"
         required: false
+        no_log: true
       redis_version:
         description:
           - "The version of Redis Server to install."
@@ -242,5 +243,6 @@ argument_specs:
           - "When set, it enables password authentication for Sentinel connections."
         type: "str"
         required: false
+        no_log: true
 
 ...
