@@ -25,11 +25,11 @@ Currently, this results in official support for the HAProxy release series:
 
 | HAProxy | Ubuntu 22.04 | Ubuntu 24.04 | Ubuntu 26.04 | Debian 11 | Debian 12 |
 |---------|:------------:|:------------:|:------------:|:---------:|:---------:|
-| `3.4`   | ❌ | ❌ | ✅ | ❌ | ❌ |
-| `3.2`   | ❌ | ✅ | ✅ | ❌ | ❌ |
-| `3.0`   | ✅ | ✅ | ❌ | ✅ | ✅ |
-| `2.8`   | ✅ | ❌ | ❌ | ✅ | ✅ |
-| `2.6`   | ✅ | ❌ | ❌ | ✅ | ✅ |
+| `3.4` | ❌ | ❌ | ✅ | ❌ | ❌ |
+| `3.2` | ❌ | ✅ | ✅ | ❌ | ✅ |
+| `3.0` | ✅ | ✅ | ❌ | ✅ | ✅ |
+| `2.8` | ✅ | ❌ | ❌ | ✅ | ✅ |
+| `2.6` | ✅ | ❌ | ❌ | ✅ | ✅ |
 
 Other versions are known to work as well but are not automatically tested.
 
