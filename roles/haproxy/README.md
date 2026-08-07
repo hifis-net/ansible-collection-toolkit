@@ -67,7 +67,7 @@ haproxy_frontend_ip: '192.168.33.100'
 Sets number of processors used by HAProxy:
 
 ```yaml
-haproxy_nbproc: '1'
+haproxy_nbproc: 1
 ```
 
 #### Number of threads used by HAProxy
@@ -75,7 +75,7 @@ haproxy_nbproc: '1'
 Sets number of threads used by HAProxy:
 
 ```yaml
-haproxy_nbthread: '2'
+haproxy_nbthread: 2
 ```
 
 #### HAProxy CPU Map for Multithreading
