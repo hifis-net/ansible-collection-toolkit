@@ -74,14 +74,14 @@ argument_specs:
         description:
           - "Number of processes used by HAProxy."
           - "Only rendered for HAProxy versions older than 2.6, where the directive still exists."
-        type: "str"
-        default: "1"
+        type: "int"
+        default: 1
         required: false
       haproxy_nbthread:
         description:
           - "Number of threads used by HAProxy."
-        type: "str"
-        default: "2"
+        type: "int"
+        default: 2
         required: false
       haproxy_cpumap:
         description:

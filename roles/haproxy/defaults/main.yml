@@ -56,9 +56,9 @@ haproxy_dependencies:
   - "python3-cryptography"
   - "python3-openssl"
 # Number of processors used by HAProxy
-haproxy_nbproc: "1"
+haproxy_nbproc: 1
 # Number of threads used by HAProxy
-haproxy_nbthread: "2"
+haproxy_nbthread: 2
 # HAProxy CPU Map
 haproxy_cpumap: "auto:1/1-2 0-1"
 # HAProxy name
