@@ -1,0 +1,279 @@
+# SPDX-FileCopyrightText: Helmholtz-Zentrum Dresden-Rossendorf (HZDR)
+#
+# SPDX-License-Identifier: Apache-2.0
+
+---
+argument_specs:
+  main:
+    short_description: "Set up Keepalived in a high availability and scalability context."
+    description:
+      - "This Ansible role installs and configures Keepalived for high availability setups."
+      - "It supports VRRP instances with unicast mode, virtual IP addresses, and process tracking."
+      - "The role builds Keepalived from source to allow version pinning."
+    author:
+      - "HIFIS Software Services"
+    options:
+      keepalived_unicast_peers:
+        description:
+          - "List of unicast peer IP addresses for the Keepalived instance."
+          - "These are the IP addresses of other Keepalived nodes in the cluster."
+          - "Required for proper VRRP operation in unicast mode."
+        type: "list"
+        elements: "str"
+        required: true
+      keepalived_virtual_ip_address:
+        description:
+          - "The virtual IP address that will float between Keepalived nodes."
+          - "This is the primary way to configure a single virtual IP."
+          - "Either this or keepalived_virtual_ipaddress_configs must be defined."
+        type: "str"
+        required: false
+      keepalived_virtual_ipaddress_configs:
+        description:
+          - "List of virtual IP address configurations for multiple virtual IPs."
+          - "Each entry should be in the format 'IP dev INTERFACE' (e.g., '10.0.10.15 dev eth0')."
+          - "This takes precedence over keepalived_virtual_ip_address if defined."
+          - "Either this or keepalived_virtual_ip_address must be defined."
+        type: "list"
+        elements: "str"
+        required: false
+      keepalived_version:
+        description:
+          - "Version of Keepalived to install."
+          - "The role will build this specific version from source."
+        type: "str"
+        default: "2.3.2"
+        required: false
+      keepalived_download_url:
+        description:
+          - "URL from which the Keepalived source tarball will be downloaded."
+          - "Defaults to the official Keepalived website using the specified version."
+        type: "str"
+        default: "https://www.keepalived.org/software/keepalived-{{ keepalived_version }}.tar.gz"
+        required: false
+      keepalived_dependencies:
+        description:
+          - "List of system packages required to build and run Keepalived."
+          - "These dependencies will be installed before building Keepalived from source."
+        type: "list"
+        elements: "str"
+        default:
+          - "build-essential"
+          - "curl"
+          - "gcc"
+          - "libssl-dev"
+          - "libnl-3-dev"
+          - "libnl-genl-3-dev"
+          - "libsnmp-dev"
+        required: false
+      keepalived_executable_path:
+        description:
+          - "Full path to the Keepalived executable binary."
+          - "Used for version checks and configuration validation."
+        type: "str"
+        default: "/usr/local/sbin/keepalived"
+        required: false
+      keepalived_conf_template:
+        description:
+          - "Name of the Jinja2 template file for the Keepalived configuration."
+          - "Template must be located in the role's templates directory."
+        type: "str"
+        default: "keepalived.conf.j2"
+        required: false
+      keepalived_conf_dir:
+        description:
+          - "Directory path where Keepalived configuration files are stored."
+        type: "str"
+        default: "/etc/keepalived"
+        required: false
+      keepalived_conf_file_path:
+        description:
+          - "Full path to the main Keepalived configuration file."
+        type: "str"
+        default: "{{ keepalived_conf_dir }}/keepalived.conf"
+        required: false
+      keepalived_sysconfig_file_path:
+        description:
+          - "Full path to the Keepalived sysconfig file."
+          - "Contains environment variables for the Keepalived service."
+        type: "str"
+        default: "{{ keepalived_conf_dir }}/keepalived.sysconfig"
+        required: false
+      keepalived_service_template:
+        description:
+          - "Name of the Jinja2 template file for the systemd service unit."
+          - "Template must be located in the role's templates directory."
+        type: "str"
+        default: "keepalived.service.j2"
+        required: false
+      keepalived_service_file_path:
+        description:
+          - "Full path to the systemd service unit file for Keepalived."
+        type: "str"
+        default: "/etc/systemd/system/keepalived.service"
+        required: false
+      keepalived_pid_file_path:
+        description:
+          - "Full path to the Keepalived process ID file."
+          - "Used by systemd to track the Keepalived daemon process."
+        type: "str"
+        default: "/run/keepalived/keepalived.pid"
+        required: false
+      keepalived_notification_emails:
+        description:
+          - "List of email addresses that will receive Keepalived notifications."
+          - "Notifications are sent when the VRRP state changes (MASTER/BACKUP)."
+        type: "list"
+        elements: "str"
+        default:
+          - "root@localhost"
+        required: false
+      keepalived_notification_email_from:
+        description:
+          - "Email address used as the sender for Keepalived notification emails."
+        type: "str"
+        default: "keepalived@localhost"
+        required: false
+      keepalived_smtp_server:
+        description:
+          - "IP address or FQDN of the SMTP server used to send notification emails."
+        type: "str"
+        default: "127.0.0.1"
+        required: false
+      keepalived_auth_pass:
+        description:
+          - "Authentication password for the VRRP instance."
+          - "Used to authenticate VRRP packets between Keepalived peers."
+          - "This password must be changed from its default value."
+        type: "str"
+        default: "changeme"
+        required: false
+        no_log: true
+      keepalived_virtual_router_id:
+        description:
+          - "Virtual router ID for the VRRP instance."
+          - "Must be unique per VRRP instance and same across all peers."
+          - "Valid range is 1-255."
+        type: "str"
+        default: "51"
+        required: false
+      keepalived_priority:
+        description:
+          - "Priority value for this Keepalived instance."
+          - "Higher priority nodes become MASTER. Valid range is 0-255."
+          - "Defaults to 100 for MASTER and 99 for BACKUP based on keepalived_state."
+        type: "str"
+        default: "{{ '100' if keepalived_state == 'MASTER' else '99' }}"
+        required: false
+      keepalived_state:
+        description:
+          - "Initial state of the Keepalived instance."
+          - "Only one instance in a cluster should be configured as MASTER."
+        type: "str"
+        default: "MASTER"
+        required: false
+        choices:
+          - "MASTER"
+          - "BACKUP"
+      keepalived_interface:
+        description:
+          - "Network interface to which the virtual IP address will be bound."
+          - "Defaults to the system's default IPv4 interface."
+        type: "str"
+        default: "{{ ansible_facts.default_ipv4.interface }}"
+        required: false
+      keepalived_virtual_ipaddress_config:
+        description:
+          - "Configuration string for the virtual IP address and interface."
+          - "Format: 'IP dev INTERFACE'."
+          - "Used when keepalived_virtual_ipaddress_configs is not defined."
+        type: "str"
+        default: "{{ keepalived_virtual_ip_address }} dev {{ keepalived_interface }}"
+        required: false
+      keepalived_unicast_src_ip:
+        description:
+          - "Source IP address for unicast VRRP packets."
+          - "Should be the primary IP address of this node."
+          - "Defaults to the system's default IPv4 address."
+        type: "str"
+        default: "{{ ansible_facts.default_ipv4.address }}"
+        required: false
+      keepalived_enable_process_tracking:
+        description:
+          - "Enable tracking of a specific process."
+          - "If the tracked process fails, this node's priority will be reduced."
+        type: "bool"
+        default: true
+        required: false
+      keepalived_track_process:
+        description:
+          - "Name of the process to track when process tracking is enabled."
+          - "Commonly used to track HAProxy or other load balancer processes."
+        type: "str"
+        default: "haproxy"
+        required: false
+      keepalived_activate_script:
+        description:
+          - "Enable execution of a custom check script."
+          - "The script can be used for custom health checks."
+        type: "bool"
+        default: false
+        required: false
+      keepalived_script_user:
+        description:
+          - "Username under which the Keepalived check script will run."
+          - "Only used when keepalived_activate_script is enabled."
+        type: "str"
+        default: "haproxy"
+        required: false
+      keepalived_script_group:
+        description:
+          - "Group name under which the Keepalived check script will run."
+          - "Only used when keepalived_activate_script is enabled."
+        type: "str"
+        default: "haproxy"
+        required: false
+      keepalived_script_name:
+        description:
+          - "Name identifier for the Keepalived check script."
+          - "Used to reference the script in the VRRP instance configuration."
+        type: "str"
+        default: "chk_haproxy_process"
+        required: false
+      keepalived_script_command:
+        description:
+          - "Command to execute for the Keepalived check script."
+          - "Should return exit code 0 for success, non-zero for failure."
+        type: "str"
+        default: "/usr/bin/killall -0 haproxy"
+        required: false
+      keepalived_set_script_security_flag:
+        description:
+          - "Enable script security to prevent scripts from running as root."
+          - "When enabled, scripts won't run if any part of the path is writable by non-root users."
+        type: "bool"
+        default: true
+        required: false
+      keepalived_router_id:
+        description:
+          - "Unique identifier for the Keepalived router."
+          - "Used in the global_defs section of the configuration."
+          - "Optional parameter that can be used to identify the router in logs."
+        type: "str"
+        required: false
+      keepalived_max_auto_priority:
+        description:
+          - "Maximum priority to which Keepalived can automatically increase."
+          - "Valid values are 0-99 or -1 to disable automatic priority adjustment."
+          - "Used in the global_defs section of the configuration."
+        type: "str"
+        required: false
+      keepalived_weight:
+        description:
+          - "Weight value used to adjust priority when tracked processes or scripts fail."
+          - "Positive values increase priority, negative values decrease it."
+          - "Applied to both process tracking and script tracking when configured."
+        type: "str"
+        required: false
+
+...
