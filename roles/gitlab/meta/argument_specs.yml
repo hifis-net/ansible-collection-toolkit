@@ -1,0 +1,357 @@
+# SPDX-FileCopyrightText: Helmholtz Centre for Environmental Research (UFZ)
+# SPDX-FileCopyrightText: Helmholtz-Zentrum Dresden-Rossendorf (HZDR)
+#
+# SPDX-License-Identifier: Apache-2.0
+
+---
+argument_specs:
+  main:
+    short_description: "Install and configure official GitLab Omnibus package."
+    description:
+      - "This Ansible role installs and configures the official GitLab Omnibus package."
+      - "It supports both Community Edition (CE) and Enterprise Edition (EE)."
+      - "The role can configure GitLab with internal or external Redis, PostgreSQL, and Gitaly instances."
+    author:
+      - "HIFIS Software Services"
+    options:
+      gitlab_edition:
+        description:
+          - "The GitLab edition to install."
+          - "Use 'gitlab-ce' for Community Edition or 'gitlab-ee' for Enterprise Edition."
+        type: "str"
+        default: "gitlab-ee"
+        required: false
+        choices:
+          - "gitlab-ce"
+          - "gitlab-ee"
+      gitlab_version:
+        description:
+          - "Specific GitLab version to install, e.g. '17.4.2'."
+          - "Only takes effect if gitlab_release is set as well.
+             Otherwise the latest available version is installed."
+        type: "str"
+        default: ""
+        required: false
+      gitlab_release:
+        description:
+          - "Package release identifier matching gitlab_edition and the target platform."
+          - "Examples: 'ce.0' / 'ee.0' for Ubuntu and Debian,
+             'ce.0.el9' / 'ee.0.el9' for RHEL/AlmaLinux 9."
+          - "Only takes effect if gitlab_version is set as well."
+        type: "str"
+        default: ""
+        required: false
+      gitlab_gpg_key_url:
+        description:
+          - "URL to the GPG key used to sign GitLab packages."
+        type: "str"
+        default: "https://packages.gitlab.com/gitlab/{{ gitlab_edition }}/gpgkey"
+        required: false
+      gitlab_hide_sensitive_changes:
+        description:
+          - "Whether to hide sensitive changes in diffs."
+          - "Set to false to display sensitive configuration changes during playbook runs."
+        type: "bool"
+        default: true
+        required: false
+      gitlab_is_primary:
+        description:
+          - "Whether this is the GitLab primary node."
+          - "Set to true when configuring a primary GitLab instance in a multi-node setup."
+        type: "bool"
+        default: false
+        required: false
+      gitlab_configuration_file_template:
+        description:
+          - "Name of the Jinja2 template for GitLab's configuration file."
+        type: "str"
+        default: "gitlab.rb.j2"
+        required: false
+      gitlab_configuration_file_path:
+        description:
+          - "Path to GitLab's configuration file on the target system."
+        type: "str"
+        default: "/etc/gitlab/gitlab.rb"
+        required: false
+      gitlab_secrets_file:
+        description:
+          - "Path on the Ansible controller to a gitlab-secrets.json file which is
+             copied to /etc/gitlab/gitlab-secrets.json on the target system."
+          - "Required to share secrets between multiple GitLab nodes or to restore
+             a GitLab instance from a backup."
+          - "If undefined, the file is not managed by the role."
+        type: "str"
+        required: false
+      gitlab_external_url:
+        description:
+          - "External URL where GitLab will be accessible."
+          - "This should include the protocol (http:// or https://)."
+        type: "str"
+        default: "http://localhost"
+        required: false
+      gitlab_default_theme:
+        description:
+          - "Default navigation theme ID for new GitLab users."
+          - "See the GitLab documentation for available theme IDs.
+             Unknown IDs fall back to GitLab's default theme."
+        type: "str"
+        default: "2"
+        required: false
+      gitlab_time_zone:
+        description:
+          - "Time zone to be used by GitLab."
+          - "Use standard timezone identifiers (e.g., 'Europe/Berlin', 'America/New_York')."
+        type: "str"
+        default: "Europe/Berlin"
+        required: false
+      gitlab_backup_keep_time:
+        description:
+          - "How long to keep backups in seconds."
+          - "Default is 604800 seconds (7 days)."
+        type: "str"
+        default: "604800"
+        required: false
+      gitlab_backup_path:
+        description:
+          - "Directory path where GitLab backups are stored."
+        type: "str"
+        default: "/var/opt/gitlab/backups"
+        required: false
+      gitlab_nginx_listen_port:
+        description:
+          - "Port on which GitLab's NGINX web server listens for HTTP requests."
+        type: "int"
+        default: 80
+        required: false
+      gitlab_nginx_listen_https:
+        description:
+          - "Whether NGINX should listen for HTTPS requests."
+        type: "bool"
+        default: false
+        required: false
+      gitlab_nginx_redirect_http_to_https:
+        description:
+          - "Whether NGINX should redirect HTTP requests to HTTPS."
+        type: "bool"
+        default: false
+        required: false
+      gitlab_use_internal_redis:
+        description:
+          - "Whether to use GitLab Omnibus internal Redis instance."
+          - "Set to false to use an external Redis instance."
+        type: "bool"
+        default: true
+        required: false
+      gitlab_redis_password:
+        description:
+          - "Password for Redis authentication."
+          - "Used for both internal and external Redis instances."
+          - "Should be changed from the default value in production."
+        type: "str"
+        default: "changeme"
+        required: false
+        no_log: true
+      gitlab_redis_cluster_name:
+        description:
+          - "Name of the Redis cluster for reference."
+          - "Used when connecting to external Redis with Sentinel."
+        type: "str"
+        default: "redis-cluster"
+        required: false
+      gitlab_redis_sentinel_ips:
+        description:
+          - "List of IP addresses of Redis Sentinel instances."
+          - "Required when using external Redis with Sentinel."
+        type: "list"
+        elements: "str"
+        default: []
+        required: false
+      gitlab_redis_sentinel_port:
+        description:
+          - "Port on which Redis Sentinel instances are listening."
+        type: "int"
+        default: 26379
+        required: false
+      gitlab_redis_sentinel_password:
+        description:
+          - "Password used to authenticate against the Redis Sentinel instances."
+          - "Support for Redis Sentinel password authentication was introduced in GitLab 16.1."
+          - "If undefined, no Sentinel password is written to GitLab's configuration file."
+        type: "str"
+        required: false
+        no_log: true
+      gitlab_ip_range:
+        description:
+          - "IP address range allowed to access GitLab monitoring endpoints."
+          - "Default uses the Ansible fact for the default IPv4 address with /24 subnet."
+        type: "str"
+        default: "{{ ansible_facts.default_ipv4.address }}/24"
+        required: false
+      gitlab_use_internal_gitaly:
+        description:
+          - "Whether to use GitLab Omnibus internal Gitaly instance."
+          - "Set to false to use an external Gitaly instance."
+        type: "bool"
+        default: true
+        required: false
+      gitlab_git_data_dir:
+        description:
+          - "Directory path where GitLab stores Git repository data."
+        type: "str"
+        default: "/var/opt/gitlab/git-data"
+        required: false
+      gitlab_gitaly_token:
+        description:
+          - "Authentication token for Gitaly service."
+          - "Should be changed from the default value in production."
+        type: "str"
+        default: "changeme"
+        required: false
+        no_log: true
+      gitlab_secret_token:
+        description:
+          - "GitLab Shell secret token for authentication."
+          - "Should be changed from the default value in production."
+        type: "str"
+        default: "changeme"
+        required: false
+        no_log: true
+      gitlab_gitaly_instance_ip:
+        description:
+          - "IP address of the Gitaly instance."
+          - "Use '127.0.0.1' for internal Gitaly or the external IP for external Gitaly."
+        type: "str"
+        default: "127.0.0.1"
+        required: false
+      gitlab_gitaly_instance_port:
+        description:
+          - "Port on which the Gitaly instance is listening."
+        type: "int"
+        default: 8075
+        required: false
+      gitlab_use_default_repositories_storages:
+        description:
+          - "Whether to use the default repositories storages configuration."
+          - "Set to false to define gitlab_rails['repositories_storages'] manually."
+          - "Useful when configuring multiple Gitaly instances."
+        type: "bool"
+        default: true
+        required: false
+      gitlab_use_internal_postgresql:
+        description:
+          - "Whether to use GitLab Omnibus internal PostgreSQL database."
+          - "Set to false to use an external PostgreSQL database."
+        type: "bool"
+        default: true
+        required: false
+      gitlab_postgresql_db_host:
+        description:
+          - "Hostname or IP address of the external PostgreSQL database."
+        type: "str"
+        default: "127.0.0.1"
+        required: false
+      gitlab_postgresql_db_port:
+        description:
+          - "Port on which the external PostgreSQL database is listening."
+        type: "int"
+        default: 5432
+        required: false
+      gitlab_postgresql_db_password:
+        description:
+          - "Password for the external PostgreSQL database."
+          - "Should be changed from the default value in production."
+        type: "str"
+        default: "changeme"
+        required: false
+        no_log: true
+      gitlab_email_enabled:
+        description:
+          - "Whether to enable email functionality in GitLab."
+        type: "bool"
+        default: false
+        required: false
+      gitlab_ldap_enabled:
+        description:
+          - "Whether to enable LDAP authentication in GitLab."
+        type: "bool"
+        default: false
+        required: false
+      gitlab_smtp_enable:
+        description:
+          - "Whether to enable SMTP for sending emails."
+        type: "bool"
+        default: false
+        required: false
+      gitlab_registry_enable:
+        description:
+          - "Whether to enable GitLab Container Registry."
+        type: "bool"
+        default: false
+        required: false
+      gitlab_mattermost_only_context:
+        description:
+          - "Whether GitLab Omnibus is used to run Mattermost only without GitLab."
+          - "Set to true to prevent reloading unnecessary GitLab services."
+        type: "bool"
+        default: false
+        required: false
+      gitlab_feature_flags:
+        description:
+          - "List of GitLab feature flags to enable or disable."
+          - "Each entry should contain 'name' and 'enabled' fields."
+        type: "list"
+        elements: "dict"
+        default: []
+        required: false
+        options:
+          name:
+            description:
+              - "Name of the feature flag."
+            type: "str"
+            required: true
+          enabled:
+            description:
+              - "Whether the feature flag is enabled."
+            type: "bool"
+            required: true
+      gitlab_rails_monitoring_whitelist:
+        description:
+          - "List of IP addresses or IP ranges allowed to access GitLab monitoring endpoints."
+        type: "list"
+        elements: "str"
+        default:
+          - "{{ gitlab_ip_range }}"
+        required: false
+      gitlab_additional_configurations:
+        description:
+          - "Generic way to add custom key-value pairs to GitLab's configuration file."
+          - "Each list entry maps a GitLab configuration object (e.g. 'gitlab_rails', 'nginx')
+             to a list of key-value pairs."
+          - "By default values are rendered as quoted strings. Set 'type' to 'plain' to render
+             the value verbatim, for example to emit numbers or booleans."
+        type: "list"
+        elements: "dict"
+        default: []
+        required: false
+      gitlab_ruby_configuration_calls:
+        description:
+          - "Generic way to add Ruby function calls to GitLab's configuration file."
+          - "Each entry is rendered as 'key \"value\"', for example
+             'pages_external_url \"https://pages.example.com\"'."
+        type: "list"
+        elements: "dict"
+        default: []
+        required: false
+        options:
+          key:
+            description:
+              - "Name of the Ruby function to call."
+            type: "str"
+            required: true
+          value:
+            description:
+              - "Argument passed to the Ruby function call."
+            type: "str"
+            required: true
+
+...
