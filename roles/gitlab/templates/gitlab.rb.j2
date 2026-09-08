@@ -11,8 +11,8 @@ gitlab_rails['backup_keep_time'] = "{{ gitlab_backup_keep_time }}"
 gitlab_rails['backup_path'] = "{{ gitlab_backup_path }}"
 
 nginx['listen_port'] = "{{ gitlab_nginx_listen_port }}"
-nginx['listen_https'] = {{ gitlab_nginx_listen_https }}
-nginx['redirect_http_to_https'] = {{ gitlab_nginx_redirect_http_to_https }}
+nginx['listen_https'] = {{ gitlab_nginx_listen_https | bool | lower }}
+nginx['redirect_http_to_https'] = {{ gitlab_nginx_redirect_http_to_https | bool | lower }}
 
 {% if not gitlab_use_internal_redis %}
 redis['enable'] = false
@@ -54,11 +54,11 @@ gitlab_rails['repositories_storages'] = {
 {% endif %}
 {% endif %}
 
-gitlab_rails['gitlab_email_enabled'] = {{ gitlab_email_enabled }}
-gitlab_rails['ldap_enabled'] = {{ gitlab_ldap_enabled }}
-gitlab_rails['smtp_enable'] = {{ gitlab_smtp_enable }}
+gitlab_rails['gitlab_email_enabled'] = {{ gitlab_email_enabled | bool | lower }}
+gitlab_rails['ldap_enabled'] = {{ gitlab_ldap_enabled | bool | lower }}
+gitlab_rails['smtp_enable'] = {{ gitlab_smtp_enable | bool | lower }}
 
-registry['enable'] = {{ gitlab_registry_enable }}
+registry['enable'] = {{ gitlab_registry_enable | bool | lower }}
 
 {% if not gitlab_use_internal_postgresql %}
 # Disable the bundled Omnibus provided PostgreSQL
