@@ -6,7 +6,7 @@
 ---
 gitlab_runner_version: ""
 
-gitlab_runner_pkg_version: "{{ gitlab_runner_version + '-1' if gitlab_runner_version | length > 0 and gitlab_runner_version is version('16.9.0', 'ge') else gitlab_runner_version }}"
+gitlab_runner_pkg_version: "{{ gitlab_runner_version + '-1' if gitlab_runner_version | length > 0 else gitlab_runner_version }}"
 
 gitlab_runner_deb_file: ""
 

@@ -5,6 +5,6 @@ SPDX-FileCopyrightText: Helmholtz-Zentrum Dresden - Rossendorf (HZDR)
 SPDX-License-Identifier: Apache-2.0
 #}
 Explanation: Prefer GitLab provided packages over the Debian native ones
-Package: gitlab-runner
+Package: gitlab-runner gitlab-runner-helper-images
 Pin: origin packages.gitlab.com{% if gitlab_runner_version | length > 0 %}, version {{ gitlab_runner_pkg_version }}{% endif +%}
 Pin-Priority: 1001
