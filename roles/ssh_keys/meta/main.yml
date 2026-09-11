@@ -27,7 +27,6 @@ galaxy_info:
         - "resolute"
     - name: "Debian"
       versions:
-        - "bullseye"
         - "bookworm"
         - "trixie"
 

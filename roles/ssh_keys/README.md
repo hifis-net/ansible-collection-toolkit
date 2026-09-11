@@ -19,7 +19,6 @@ Currently [supported platforms](meta/main.yml) are:
 - Ubuntu 22.04 LTS
 - Ubuntu 24.04 LTS
 - Ubuntu 26.04 LTS
-- Debian 11 Bullseye
 - Debian 12 Bookworm
 - Debian 13 Trixie
 
