@@ -23,9 +23,6 @@ galaxy_info:
         - "jammy"
         - "noble"
         - "resolute"
-    - name: "Debian"
-      versions:
-        - "bullseye"
     - name: "EL"
       versions:
         - "9"

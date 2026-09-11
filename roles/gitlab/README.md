@@ -14,7 +14,6 @@ A role to install and configure official GitLab Omnibus package.
 Currently [supported platforms](meta/main.yml) are:
 
 - AlmaLinux 9
-- Debian 11 (Bullseye)
 - Ubuntu 22.04 LTS (Jemmy Jellyfish)
 - Ubuntu 24.04 LTS (Noble Numbat)
 - Ubuntu 26.04 LTS (Resolute)
