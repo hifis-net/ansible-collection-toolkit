@@ -1,0 +1,669 @@
+# SPDX-FileCopyrightText: Helmholtz-Zentrum Dresden - Rossendorf (HZDR)
+#
+# SPDX-License-Identifier: Apache-2.0
+
+---
+argument_specs:
+  main:
+    short_description: "Install and configure GitLab Runner with OpenStack autoscaling support."
+    description:
+      - "This Ansible role installs and registers GitLab Runner instances."
+      - "It supports the docker, docker+machine and docker-autoscaler executors."
+      - "For autoscaling executors it provisions docker-machine or the OpenStack fleeting plugin."
+    author:
+      - "HIFIS Software Services"
+    options:
+      gitlab_runner_version:
+        description:
+          - "The version of GitLab Runner to install."
+          - "If left empty, the latest available version from the package repository is installed."
+        type: "str"
+        default: ""
+        required: false
+      gitlab_runner_pkg_version:
+        description:
+          - "The package version used to determine the GitLab Runner package to install."
+          - "By default this is derived from gitlab_runner_version by appending the package revision."
+        type: "str"
+        default: "{{ gitlab_runner_version + '-1' if gitlab_runner_version | length > 0 else gitlab_runner_version }}"
+        required: false
+      gitlab_runner_deb_file:
+        description:
+          - "Path or URL to a .deb file the GitLab Runner package is installed from."
+          - "If the value contains '://', Ansible downloads the package before installing it."
+          - "If left empty, the package is installed from the configured package repository."
+        type: "str"
+        default: ""
+        required: false
+      gitlab_runner_helper_images_deb_file:
+        description:
+          - "Path or URL to a .deb file the gitlab-runner-helper-images package is installed from."
+          - "Only used when gitlab_runner_deb_file is set."
+        type: "str"
+        required: false
+      gitlab_runner_concurrent:
+        description:
+          - "Limits how many jobs can run concurrently across all defined runners."
+          - "A value of 0 does not mean unlimited."
+        type: "int"
+        required: true
+      gitlab_runner_check_interval:
+        description:
+          - "Number of seconds between new job checks against the GitLab instance."
+          - "A value of 0 makes GitLab Runner fall back to its own default interval."
+        type: "int"
+        default: 0
+        required: false
+      gitlab_runner_shutdown_timeout:
+        description:
+          - "Number of seconds until the GitLab Runner process is forcefully terminated on shutdown."
+          - "A value of 0 makes GitLab Runner fall back to its own default timeout."
+        type: "int"
+        default: 0
+        required: false
+      gitlab_runner_listen_address:
+        description:
+          - "Address (host:port) the Prometheus metrics HTTP server listens on."
+          - "If left empty, no metrics server is configured."
+        type: "str"
+        default: ""
+        required: false
+      gitlab_runner_sentry_dsn:
+        description:
+          - "Sentry DSN enabling tracking of all system level errors to Sentry."
+          - "If left empty, Sentry tracking is not configured."
+        type: "str"
+        default: ""
+        required: false
+        no_log: true
+      gitlab_runner_config_path:
+        description:
+          - "Path to the GitLab Runner configuration file on the runner host."
+        type: "str"
+        default: "/etc/gitlab-runner/config.toml"
+        required: false
+      gitlab_runner_config_owner:
+        description:
+          - "Owner of the GitLab Runner configuration file."
+        type: "str"
+        default: "root"
+        required: false
+      gitlab_runner_config_group:
+        description:
+          - "Group of the GitLab Runner configuration file."
+        type: "str"
+        default: "root"
+        required: false
+      gitlab_runner_hide_sensitive_changes:
+        description:
+          - "Whether to hide sensitive changes such as tokens and keys in task diffs."
+        type: "bool"
+        default: true
+        required: false
+      gitlab_runner_install_docker:
+        description:
+          - "Whether to install Docker via the geerlingguy.docker role."
+        type: "bool"
+        default: true
+        required: false
+
+      gitlab_runner_enable_session_server:
+        description:
+          - "Whether the GitLab Runner session server should be configured."
+        type: "bool"
+        default: false
+        required: false
+      gitlab_runner_session_server_listen_address:
+        description:
+          - "The internal address (host:port) the session server listens on."
+        type: "str"
+        default: "0.0.0.0:8093"
+        required: false
+      gitlab_runner_session_server_advertise_address:
+        description:
+          - "The address (host:port) used to access the session server."
+          - "GitLab Runner exposes this address to the GitLab instance."
+        type: "str"
+        default: "{{ gitlab_runner_session_server_listen_address }}"
+        required: false
+      gitlab_runner_session_server_timeout:
+        description:
+          - "Number of seconds the session can stay active after the job completes."
+        type: "int"
+        default: 1800
+        required: false
+
+      gitlab_runner_docker_machine_binary_url:
+        description:
+          - "The URL the docker-machine binary is downloaded from."
+          - "Only used when at least one runner uses the 'docker+machine' executor."
+        type: "str"
+        default: "https://gitlab.com/gitlab-org/ci-cd/docker-machine/-/releases/v0.16.2-gitlab.25/downloads/docker-machine-Linux-{{ ansible_facts.architecture }}"
+        required: false
+      gitlab_runner_docker_machine_binary_checksum:
+        description:
+          - "The checksum of the downloaded docker-machine binary."
+          - "This must correspond to the file downloaded via gitlab_runner_docker_machine_binary_url."
+        type: "str"
+        default: "sha256:04cc18c8f6ee0d71614064fa81116f20f3a37af53eeebf19bfb832ab9c46d3a0"
+        required: false
+
+      gitlab_runner_transpiler_binary_url:
+        description:
+          - "The URL the Butane configuration transpiler binary is downloaded from."
+          - "The transpiler renders the Flatcar Linux ignition configuration."
+        type: "str"
+        default: "https://github.com/coreos/butane/releases/download/v0.23.0/butane-{{ ansible_facts.architecture }}-unknown-linux-gnu"
+        required: false
+      gitlab_runner_transpiler_binary_checksum:
+        description:
+          - "The checksum of the downloaded transpiler binary."
+          - "This must correspond to the file downloaded via gitlab_runner_transpiler_binary_url."
+        type: "str"
+        default: "sha256:5833ce9f9c2932d9b02bc05821ffb6927d1e896a524c8dd53a4c9d2d90c47e2c"
+        required: false
+      gitlab_runner_butane_config_template:
+        description:
+          - "Name of the Butane template used to render the Flatcar Linux configuration."
+        type: "str"
+        default: "butane-config.bu.j2"
+        required: false
+      gitlab_runner_nameservers:
+        description:
+          - "List of DNS servers configured in the Flatcar Linux worker configuration."
+        type: "list"
+        elements: "str"
+        default:
+          - "9.9.9.9"
+          - "149.112.112.112"
+        required: false
+      gitlab_runner_mtu:
+        description:
+          - "The MTU (Maximum Transmission Unit) configured for the Docker daemon in Flatcar Linux."
+          - "A custom MTU is required in some environments such as VMs in OpenStack."
+        type: "int"
+        default: 1450
+        required: false
+      gitlab_runner_set_default_network_opts:
+        description:
+          - "Whether to declare default network options for the Docker daemon in Flatcar Linux."
+        type: "bool"
+        default: false
+        required: false
+      gitlab_runner_registry_mirrors:
+        description:
+          - "List of Docker registry mirrors to be used."
+          - "Takes precedence over gitlab_runner_registry_mirror."
+        type: "list"
+        elements: "str"
+        required: false
+      gitlab_runner_registry_mirror:
+        description:
+          - "A single Docker registry mirror to be used."
+          - "Ignored if gitlab_runner_registry_mirrors is defined."
+        type: "str"
+        required: false
+      gitlab_runner_insecure_registries:
+        description:
+          - "List of Docker registries that may be accessed without TLS verification."
+        type: "list"
+        elements: "str"
+        default: []
+        required: false
+
+      gitlab_runner_ssh_public_key:
+        description:
+          - "File path to the SSH public key on the Ansible controller."
+          - "If both key paths are left unset, the role generates a key pair on the runner host."
+        type: "str"
+        required: false
+      gitlab_runner_ssh_private_key:
+        description:
+          - "File path to the SSH private key on the Ansible controller."
+          - "If both key paths are left unset, the role generates a key pair on the runner host."
+        type: "str"
+        required: false
+      gitlab_runner_ssh_key_type:
+        description:
+          - "The type of SSH key to create when the role generates the key pair."
+        type: "str"
+        choices:
+          - "ed25519"
+          - "ecdsa"
+          - "rsa"
+        default: "ed25519"
+        required: false
+      gitlab_runner_ssh_public_key_path:
+        description:
+          - "File path to the SSH public key on the runner host."
+        type: "str"
+        default: "/etc/gitlab-runner/gitlab_runner_key.pub"
+        required: false
+      gitlab_runner_ssh_private_key_path:
+        description:
+          - "File path to the SSH private key on the runner host."
+        type: "str"
+        default: "/etc/gitlab-runner/gitlab_runner_key"
+        required: false
+
+      gitlab_runner_autoscaler_plugin_version:
+        description:
+          - "Version of the OpenStack fleeting plugin to install."
+          - "Only used when at least one runner uses the 'docker-autoscaler' executor."
+        type: "str"
+        default: "v0.33.0"
+        required: false
+      gitlab_runner_autoscaler_binary_version:
+        description:
+          - "Version string of the fleeting plugin binary without the leading 'v'."
+          - "By default this is derived from gitlab_runner_autoscaler_plugin_version."
+        type: "str"
+        default: "{{ gitlab_runner_autoscaler_plugin_version | replace('v', '') }}"
+        required: false
+      gitlab_runner_autoscaler_plugin_url:
+        description:
+          - "The URL the OpenStack fleeting plugin archive is downloaded from."
+        type: "str"
+        default: "https://github.com/sardinasystems/fleeting-plugin-openstack/releases/download/{{ gitlab_runner_autoscaler_plugin_version }}/fleeting-plugin-openstack_{{ gitlab_runner_autoscaler_binary_version }}_linux_amd64.tar.gz"
+        required: false
+      gitlab_runner_autoscaler_plugin_checksumfile:
+        description:
+          - "The URL of the checksum file corresponding to the fleeting plugin archive."
+        type: "str"
+        default: "https://github.com/sardinasystems/fleeting-plugin-openstack/releases/download/{{ gitlab_runner_autoscaler_plugin_version }}/fleeting-plugin-openstack_{{ gitlab_runner_autoscaler_binary_version }}_sha512-checksums.txt"
+        required: false
+      gitlab_runner_autoscaler_openstack_auth_url:
+        description:
+          - "The OpenStack identity endpoint the fleeting plugin authenticates against."
+          - "Required when at least one runner uses the 'docker-autoscaler' executor."
+        type: "str"
+        required: false
+      gitlab_runner_autoscaler_openstack_username:
+        description:
+          - "The username of the OpenStack user interacting with the API."
+        type: "str"
+        required: false
+      gitlab_runner_autoscaler_openstack_password:
+        description:
+          - "The password of the OpenStack user interacting with the API."
+        type: "str"
+        required: false
+        no_log: true
+      gitlab_runner_autoscaler_openstack_project_id:
+        description:
+          - "The ID of the OpenStack project the worker instances are created in."
+        type: "str"
+        required: false
+      gitlab_runner_autoscaler_openstack_project_name:
+        description:
+          - "The name of the OpenStack project the worker instances are created in."
+        type: "str"
+        required: false
+      gitlab_runner_autoscaler_openstack_user_domain_name:
+        description:
+          - "The domain name of the user authenticating with OpenStack."
+        type: "str"
+        required: false
+      gitlab_runner_autoscaler_openstack_region_name:
+        description:
+          - "The region name of the OpenStack cluster."
+        type: "str"
+        required: false
+
+      gitlab_runner_list:
+        description:
+          - "List of GitLab Runners to register on the host."
+          - "Each list entry corresponds to one registered GitLab Runner."
+        type: "list"
+        elements: "dict"
+        default: []
+        required: false
+        options:
+          name:
+            description:
+              - "The name of the registered runner."
+            type: "str"
+            required: true
+          url:
+            description:
+              - "The URL of the GitLab instance to register the runner with."
+            type: "str"
+            required: true
+          description:
+            description:
+              - "Description of the runner shown in the GitLab UI."
+            type: "str"
+            required: false
+          authentication_token:
+            description:
+              - "The runner authentication token required to register the runner."
+            type: "str"
+            required: true
+            no_log: true
+          executor:
+            description:
+              - "The executor used to run the jobs of this runner."
+            type: "str"
+            choices:
+              - "docker"
+              - "docker+machine"
+              - "docker-autoscaler"
+            default: "docker"
+            required: false
+          limit:
+            description:
+              - "Limits how many jobs can be handled concurrently by this token."
+              - "A value of 0 means no limit."
+            type: "int"
+            default: 0
+            required: false
+          output_limit:
+            description:
+              - "Maximum build log size in kilobytes."
+            type: "int"
+            default: 4096
+            required: false
+          environment:
+            description:
+              - "Environment variables appended to or overwriting the job environment."
+              - "Each entry uses the 'KEY=value' format."
+            type: "list"
+            elements: "str"
+            default: []
+            required: false
+
+          docker_image:
+            description:
+              - "The default Docker image used for jobs of this runner."
+              - "Required for the 'docker', 'docker+machine' and 'docker-autoscaler' executors."
+            type: "str"
+            required: false
+          docker_host:
+            description:
+              - "Custom Docker endpoint used by this runner."
+              - "If unset, the Docker daemon default endpoint is used."
+            type: "str"
+            required: false
+          docker_tls_verify:
+            description:
+              - "Whether TLS connections to the Docker daemon are verified."
+            type: "bool"
+            default: false
+            required: false
+          docker_privileged:
+            description:
+              - "Whether the job container runs in privileged mode."
+              - "Enabling this is insecure and should be limited to trusted workloads."
+            type: "bool"
+            default: false
+            required: false
+          docker_disable_cache:
+            description:
+              - "Whether to disable the automatically created Docker volumes used for caching."
+            type: "bool"
+            default: false
+            required: false
+          docker_volumes:
+            description:
+              - "Additional volumes mounted into the job container."
+              - "Uses the same syntax as the Docker -v flag."
+            type: "list"
+            elements: "str"
+            default: []
+            required: false
+          docker_devices:
+            description:
+              - "Host devices added to the job container."
+              - "Uses the same syntax as the Docker --device flag."
+            type: "list"
+            elements: "str"
+            required: false
+          docker_security_opts:
+            description:
+              - "Docker security options applied to the job container."
+            type: "list"
+            elements: "str"
+            required: false
+          docker_shm_size:
+            description:
+              - "Shared memory size for job containers in bytes."
+              - "A value of 0 falls back to the Docker default."
+            type: "int"
+            default: 0
+            required: false
+          docker_cpus:
+            description:
+              - "Number of CPUs available to the job container."
+            type: "str"
+            required: false
+          docker_memory:
+            description:
+              - "Memory limit of the job container, for example '2g'."
+            type: "str"
+            required: false
+          docker_gpus:
+            description:
+              - "GPUs made available in the job container, for example 'all'."
+            type: "str"
+            required: false
+          docker_network_mtu:
+            description:
+              - "Custom MTU for the Docker network of the job container."
+              - "Requires GitLab Runner 16.5 or later."
+            type: "int"
+            required: false
+
+          machine_driver:
+            description:
+              - "The driver used when creating the machine via docker-machine."
+              - "Required for the 'docker+machine' executor."
+            type: "str"
+            required: false
+          machine_name:
+            description:
+              - "The machine name template, which must include '%s'."
+              - "Required for the 'docker+machine' executor."
+            type: "str"
+            required: false
+          machine_options:
+            description:
+              - "Additional machine creation options passed to docker-machine."
+              - "Each entry uses the 'option=value' format."
+            type: "list"
+            elements: "str"
+            default: []
+            required: false
+          machine_idle_count:
+            description:
+              - "Number of machines created and waiting in Idle state."
+            type: "int"
+            default: 0
+            required: false
+          machine_idle_scale_factor:
+            description:
+              - "Number of Idle machines as a factor of the machines currently in use."
+              - "This option is experimental."
+            type: "float"
+            default: 0.0
+            required: false
+          machine_idle_count_min:
+            description:
+              - "Minimal number of Idle machines when machine_idle_scale_factor is in use."
+            type: "int"
+            default: 0
+            required: false
+          machine_idle_time:
+            description:
+              - "Time in seconds a machine stays in Idle state before it is removed."
+            type: "int"
+            default: 0
+            required: false
+          machine_max_growth_rate:
+            description:
+              - "Maximum number of machines added to the runner in parallel."
+              - "A value of 0 means no limit."
+            type: "int"
+            default: 0
+            required: false
+          machine_max_builds:
+            description:
+              - "Maximum job count before a machine is removed."
+            type: "int"
+            default: 0
+            required: false
+
+          autoscaler_max_instances:
+            description:
+              - "Maximum number of worker instances managed by the autoscaler."
+              - "Required for the 'docker-autoscaler' executor."
+            type: "int"
+            required: false
+          autoscaler_max_builds:
+            description:
+              - "Maximum job count before a worker instance is removed."
+            type: "int"
+            default: 0
+            required: false
+          autoscaler_cloud_name:
+            description:
+              - "Name of the cloud entry in the clouds configuration used by the fleeting plugin."
+              - "Required for the 'docker-autoscaler' executor."
+            type: "str"
+            required: false
+          autoscaler_clouds_config:
+            description:
+              - "Path to the OpenStack clouds configuration file on the runner host."
+              - "Required for the 'docker-autoscaler' executor."
+            type: "str"
+            required: false
+          autoscaler_group_name:
+            description:
+              - "Name of the instance group managed by the fleeting plugin."
+            type: "str"
+            default: "autoscaler-runners"
+            required: false
+          autoscaler_boot_time:
+            description:
+              - "Expected boot time of a worker instance, for example '5m'."
+            type: "str"
+            default: "3m"
+            required: false
+          autoscaler_use_ignition:
+            description:
+              - "Whether the worker instances are provisioned via an ignition configuration."
+            type: "bool"
+            default: false
+            required: false
+          autoscaler_image_ref:
+            description:
+              - "The OpenStack image ID used for the worker instances."
+              - "Required for the 'docker-autoscaler' executor."
+            type: "str"
+            required: false
+          autoscaler_flavor_ref:
+            description:
+              - "The OpenStack flavor ID used for the worker instances."
+              - "Required for the 'docker-autoscaler' executor."
+            type: "str"
+            required: false
+          autoscaler_network_id:
+            description:
+              - "The OpenStack network ID the worker instances are attached to."
+              - "Required for the 'docker-autoscaler' executor."
+            type: "str"
+            required: false
+          autoscaler_security_group:
+            description:
+              - "The OpenStack security group assigned to the worker instances."
+              - "Required for the 'docker-autoscaler' executor."
+            type: "str"
+            required: false
+          autoscaler_scheduler_hint:
+            description:
+              - "The OpenStack server group ID passed as scheduler hint."
+              - "Required for the 'docker-autoscaler' executor."
+            type: "str"
+            required: false
+          autoscaler_keyname:
+            description:
+              - "The OpenStack key pair name injected into the worker instances."
+              - "Required for the 'docker-autoscaler' executor."
+            type: "str"
+            required: false
+          autoscaler_username:
+            description:
+              - "The username used to connect to the worker instances via SSH."
+              - "Required for the 'docker-autoscaler' executor."
+            type: "str"
+            required: false
+          autoscaler_idle_count:
+            description:
+              - "Number of worker instances kept in Idle state."
+            type: "int"
+            default: 0
+            required: false
+          autoscaler_idle_time:
+            description:
+              - "Time a worker instance stays in Idle state before it is removed, for example '30m0s'."
+            type: "str"
+            default: "30m0s"
+            required: false
+          autoscaler_scale_factor:
+            description:
+              - "Number of Idle worker instances as a factor of the instances currently in use."
+            type: "float"
+            default: 0.0
+            required: false
+          autoscaler_scale_factor_limit:
+            description:
+              - "Upper limit of Idle worker instances when autoscaler_scale_factor is in use."
+            type: "int"
+            default: 0
+            required: false
+
+          cache_type:
+            description:
+              - "Type of caching to use."
+              - "Currently only 's3' is supported by this role."
+            type: "str"
+            choices:
+              - "s3"
+            required: false
+          cache_server_address:
+            description:
+              - "The address (host:port) of the S3-compatible server."
+              - "Required when cache_type is set to 's3'."
+            type: "str"
+            required: false
+          cache_access_key:
+            description:
+              - "The access key of the S3-compatible instance."
+              - "Required when cache_type is set to 's3'."
+            type: "str"
+            required: false
+            no_log: true
+          cache_secret_key:
+            description:
+              - "The secret key of the S3-compatible instance."
+              - "Required when cache_type is set to 's3'."
+            type: "str"
+            required: false
+            no_log: true
+          cache_bucket_name:
+            description:
+              - "Name of the storage bucket the cache is stored in."
+              - "Required when cache_type is set to 's3'."
+            type: "str"
+            required: false
+          cache_bucket_location:
+            description:
+              - "Name of the S3 region the storage bucket is located in."
+            type: "str"
+            required: false
+          cache_insecure:
+            description:
+              - "Whether the S3 service is available via plain HTTP."
+            type: "bool"
+            default: false
+            required: false
+...
