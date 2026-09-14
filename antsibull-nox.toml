@@ -1,0 +1,11 @@
+# SPDX-FileCopyrightText: Helmholtz-Zentrum Dresden-Rossendorf (HZDR)
+#
+# SPDX-License-Identifier: Apache-2.0
+
+version = 1
+
+[sessions]
+
+[sessions.build_import_check]
+run_galaxy_importer = true
+galaxy_importer_always_show_logs = true

@@ -1,0 +1,37 @@
+# SPDX-FileCopyrightText: Helmholtz-Zentrum Dresden-Rossendorf (HZDR)
+#
+# SPDX-License-Identifier: Apache-2.0
+
+---
+name: "Test importing collection"
+
+on:
+  pull_request:
+  push:
+    branches:
+      - "main"
+
+env:
+  PY_COLORS: 1
+  ANSIBLE_FORCE_COLOR: 1
+
+jobs:
+
+  nox:
+    permissions:
+      contents: "read"
+    name: "Import collection with Galaxy importer."
+    runs-on: "ubuntu-26.04"
+    steps:
+      - name: "Check out the codebase."
+        uses: "actions/checkout@v7"
+        with:
+          persist-credentials: false
+
+      - name: "Install collection dependencies."
+        run: "ansible-galaxy install -r requirements.yml"
+
+      - name: "Run nox."
+        uses: "ansible-community/antsibull-nox@1.9.1"
+        with:
+          sessions: "build-import-check"
