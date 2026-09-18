@@ -123,7 +123,7 @@
   ansible.builtin.set_fact:
     __ignore_errors_in_check_mode: "{{ ansible_check_mode and (__ppa.changed or __deb_repo.changed) }}"
 
-- name: "Install and configure HAProxy"
+- name: "Install HAProxy"
   ignore_errors: "{{ __ignore_errors_in_check_mode }}"  # noqa ignore-errors
   block:
 
@@ -145,17 +145,6 @@
         owner: "{{ haproxy_user }}"
         group: "{{ haproxy_group }}"
         mode: "0750"
-
-    - name: "Create HAProxy Configuration File."
-      become: true
-      ansible.builtin.template:
-        src: "{{ haproxy_config_template }}"
-        dest: "{{ haproxy_conf_file_path }}"
-        owner: "{{ haproxy_user }}"
-        group: "{{ haproxy_group }}"
-        mode: "0640"
-        validate: "{{ __haproxy_binary.stat.exists | ternary(haproxy_executable_path ~ ' -c -q -f %s', omit) }}"
-      notify: "Reload HAProxy"
 
     - name: "Create HAProxy SSL Directory."
       become: true
@@ -249,5 +238,17 @@
   notify:
     - "Check HAProxy configuration file"
     - "Reload HAProxy"
+
+- name: "Create HAProxy Configuration File."
+  ignore_errors: "{{ __ignore_errors_in_check_mode }}"  # noqa ignore-errors
+  become: true
+  ansible.builtin.template:
+    src: "{{ haproxy_config_template }}"
+    dest: "{{ haproxy_conf_file_path }}"
+    owner: "{{ haproxy_user }}"
+    group: "{{ haproxy_group }}"
+    mode: "0640"
+    validate: "{{ __haproxy_binary.stat.exists | ternary(haproxy_executable_path ~ ' -c -q -f %s', omit) }}"
+  notify: "Reload HAProxy"
 
 ...
