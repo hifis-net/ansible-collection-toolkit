@@ -138,7 +138,7 @@
     owner: "root"
     group: "root"
     mode: "0644"
-    validate: "{{ __keepalived_binary.stat.exists | ternary(keepalived_executable_path ~ ' --config-test --use-file %s', omit) }}"
+    validate: "{{ keepalived_executable_path }} --config-test --use-file %s"
   notify: "Reload Keepalived"
 
 - name: "Create Keepalived Service Unit File."

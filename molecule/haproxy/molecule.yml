@@ -46,6 +46,9 @@ platforms:
     tty: true
 provisioner:
   name: "ansible"
+  config_options:
+    defaults:
+      result_format: "yaml"
   inventory:
     hosts:
       all:
