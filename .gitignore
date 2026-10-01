@@ -11,3 +11,5 @@
 .venv/
 .vscode/
 .ansible/
+.nox/
+__pycache__/
