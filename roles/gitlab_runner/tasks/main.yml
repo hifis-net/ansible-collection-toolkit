@@ -4,6 +4,15 @@
 # SPDX-License-Identifier: Apache-2.0
 
 ---
+- name: "Fail if the removed variable gitlab_runner_namerservers is still set"
+  ansible.builtin.assert:
+    that:
+      - "gitlab_runner_namerservers is not defined"
+    fail_msg: >-
+      'gitlab_runner_namerservers' has been renamed to 'gitlab_runner_nameservers'.
+      Please update your inventory.
+    quiet: true
+
 - name: "Set OS family dependent variables"
   ansible.builtin.include_vars: "{{ ansible_facts.os_family | lower }}.yml"
 
