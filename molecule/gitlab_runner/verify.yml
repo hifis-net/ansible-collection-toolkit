@@ -105,6 +105,19 @@
         that:
           - "flatcar_linux_config.stdout.find(gitlab_runner_ssh_key) != -1"
 
+    - name: "Read butane config"
+      ansible.builtin.command: "cat /etc/gitlab-runner/butane-config.bu"
+      register: "butane_config"
+      changed_when: false
+
+    - name: "Assert that nameservers exist in butane config"
+      ansible.builtin.assert:
+        that:
+          - "('nameserver ' ~ item) in (butane_config.stdout_lines | map('trim') | list)"
+        fail_msg: "Nameserver {{ item }} is missing in /etc/gitlab-runner/butane-config.bu."
+        quiet: true
+      loop: "{{ gitlab_runner_nameservers }}"
+
     - name: "Store authentication token environment variable as Ansible fact."
       ansible.builtin.set_fact:
         gitlab_runner_authentication_token: "{{ lookup('env', 'AUTHENTICATION_TOKEN') }}"
