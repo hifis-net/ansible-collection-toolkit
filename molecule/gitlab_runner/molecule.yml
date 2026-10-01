@@ -74,8 +74,6 @@ provisioner:
             docker_memory: "2g"
             docker_image: "python:3.8"
             docker_network_mtu: 1442
-            tags: ["docker", "hifis"]
-            locked: true
             limit: 10
       instancegitlabciopenstack2:
         gitlab_runner_version: ""
@@ -103,8 +101,6 @@ provisioner:
             docker_image: "python:3.8"
             docker_shm_size: 2147483648
             docker_disable_cache: true
-            tags: ["docker", "hifis"]
-            locked: true
             limit: 10
             autoscaler_max_builds: 1
             autoscaler_idle_count: 5
