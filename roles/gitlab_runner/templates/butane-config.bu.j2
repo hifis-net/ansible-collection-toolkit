@@ -18,7 +18,7 @@ storage:
       mode: 0644
       contents:
         inline: |
-{% for nameserver in gitlab_runner_namerservers %}
+{% for nameserver in gitlab_runner_nameservers %}
           nameserver {{ nameserver }}
 {% endfor %}
     - path: /opt/docker/daemon.json
