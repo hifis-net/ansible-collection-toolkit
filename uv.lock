@@ -153,7 +153,7 @@ wheels = [
 
 [[package]]
 name = "antsibull-nox"
-version = "1.9.1"
+version = "1.9.3"
 source = { registry = "https://pypi.org/simple" }
 dependencies = [
     { name = "antsibull-fileutils" },
@@ -164,9 +164,9 @@ dependencies = [
     { name = "pyyaml", version = "6.0.3", source = { registry = "https://pypi.org/simple" }, marker = "python_full_version >= '3.14'" },
     { name = "semantic-version" },
 ]
-sdist = { url = "https://files.pythonhosted.org/packages/e5/50/2b8049ff613841c1386cfbef9225185358a5db922752c56685e64c35a330/antsibull_nox-1.9.1.tar.gz", hash = "sha256:45a5290b98be0b15c724284c95ce7549dc9f70ed864b4a101a8e9027ca892818", size = 251119, upload-time = "2026-08-30T12:33:26.508Z" }
+sdist = { url = "https://files.pythonhosted.org/packages/44/a3/7eae3e8c1831e05e3133ee6525e8380a05364b40900d669e97696fd4ed45/antsibull_nox-1.9.3.tar.gz", hash = "sha256:a713a35cd1686d16bb350dae214514104e803062c03a6cf968ef5187c461de1e", size = 252391, upload-time = "2026-09-19T16:41:59.108Z" }
 wheels = [
-    { url = "https://files.pythonhosted.org/packages/b3/6d/d285afcc93f95d9c0ea7f0bdefd4c94a19e597050e65a23bdd31341df9eb/antsibull_nox-1.9.1-py3-none-any.whl", hash = "sha256:966096c3bd128e15e15611d37a05ae269b66abde6c8d7c010c3a634cdb020f3b", size = 177556, upload-time = "2026-08-30T12:33:28.088Z" },
+    { url = "https://files.pythonhosted.org/packages/47/9f/c5e3a5feb4767b90746a1746b4fb9464743b9e47644e540425b06bc8d786/antsibull_nox-1.9.3-py3-none-any.whl", hash = "sha256:68732e03e10540b0e890f26a10978d9978dd5c913c90a0cfcf3b8ca740be474b", size = 178190, upload-time = "2026-09-19T16:41:57.479Z" },
 ]
 
 [[package]]
