@@ -41,6 +41,9 @@ provisioner:
           ansible_user: "ansible"
           gitlab_runner_concurrent: 4
           gitlab_runner_hide_sensitive_changes: false
+          gitlab_runner_nameservers:
+            - "9.9.9.9"
+            - "5.9.164.112"  # dns3.digitalcourage.de
     host_vars:
       instancegitlabciopenstack1:
         gitlab_runner_version: "18.6.2"

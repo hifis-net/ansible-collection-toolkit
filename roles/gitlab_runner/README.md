@@ -120,12 +120,15 @@ The checksum of the download transpiler binary. This must correspond to the file
 downloaded via the `gitlab_runner_transpiler_binary_url` variable.
 
 ```yaml
-gitlab_runner_namerservers:
+gitlab_runner_nameservers:
     - 9.9.9.9
     - 149.112.112.112
 ```
 
 The DNS nameservers to be used by the Openstack Flatcar virtual machine.
+
+Note: This variable was previously named `gitlab_runner_namerservers` (sic)
+and is no longer supported.
 
 ```yaml
 gitlab_runner_registry_mirrors:
