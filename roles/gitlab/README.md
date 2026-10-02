@@ -187,7 +187,7 @@ gitlab_nginx_listen_port: '80'
 Choose whether GitLab's web-server Nginx accepts HTTPS requests:
 
 ```yaml
-gitlab_nginx_listen_https: 'false'
+gitlab_nginx_listen_https: false
 ```
 
 #### Does Web-Server Nginx Redirect HTTP Requests to HTTPS?
@@ -195,7 +195,7 @@ gitlab_nginx_listen_https: 'false'
 Choose whether GitLab's web-server Nginx redirects HTTP requests to HTTPS:
 
 ```yaml
-gitlab_nginx_redirect_http_to_https: 'false'
+gitlab_nginx_redirect_http_to_https: false
 ```
 
 #### Set GitLab feature flags
@@ -233,7 +233,7 @@ scenario services like *sidekiq* or *puma* are not required. Set to `true` to
 prevent the role from reloading those services:
 
 ```yaml
-gitlab_mattermost_only_context: 'false'
+gitlab_mattermost_only_context: false
 ```
 
 ### Variables to be Set if External Redis is Used
@@ -243,7 +243,7 @@ gitlab_mattermost_only_context: 'false'
 Set switch to `false` to enable external Redis instance:
 
 ```yaml
-gitlab_use_internal_redis: 'false'
+gitlab_use_internal_redis: false
 ```
 
 #### Password to Authenticate Redis Services within Cluster
@@ -363,7 +363,7 @@ gitlab_gitaly_instance_port: '8075'
 Set switch to `false` to enable external PostgreSQL Database instance:
 
 ```yaml
-gitlab_use_internal_postgresql: 'false'
+gitlab_use_internal_postgresql: false
 ```
 
 #### IP Address of External PostgreSQL Database Instance
@@ -406,7 +406,7 @@ gitlab_rails_monitoring_whitelist:
 Enable GitLab container registry:
 
 ```yaml
-gitlab_registry_enable: "true"
+gitlab_registry_enable: true
 ```
 
 **Please note**: If you do not run a load balancer in front of GitLab and let

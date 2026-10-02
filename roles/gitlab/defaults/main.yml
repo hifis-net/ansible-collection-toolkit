@@ -35,12 +35,12 @@ gitlab_backup_path: "/var/opt/gitlab/backups"
 # Port for web-requests
 gitlab_nginx_listen_port: "80"
 # Whether to use https
-gitlab_nginx_listen_https: "false"
+gitlab_nginx_listen_https: false
 # Whether to redirect to https
-gitlab_nginx_redirect_http_to_https: "false"
+gitlab_nginx_redirect_http_to_https: false
 
 # Whether to use GitLab Omnibus internal Redis
-gitlab_use_internal_redis: "true"
+gitlab_use_internal_redis: true
 # Password for authentication
 gitlab_redis_password: "changeme"
 # Name of the Redis cluster
@@ -68,7 +68,7 @@ gitlab_gitaly_instance_port: "8075"
 gitlab_use_default_repositories_storages: true
 
 # Whether to use GitLab Omnibus internal PostgreSQL database
-gitlab_use_internal_postgresql: "true"
+gitlab_use_internal_postgresql: true
 # External PostgreSQL database host IP / domain
 gitlab_postgresql_db_host: "127.0.0.1"
 # External PostgreSQL database port
@@ -77,21 +77,21 @@ gitlab_postgresql_db_port: 5432
 gitlab_postgresql_db_password: "changeme"
 
 # Whether to enable email
-gitlab_email_enabled: "false"
+gitlab_email_enabled: false
 # Whether to enable LDAP
-gitlab_ldap_enabled: "false"
+gitlab_ldap_enabled: false
 # Whether to enable SMTP
-gitlab_smtp_enable: "false"
+gitlab_smtp_enable: false
 
 # Registry configuration
 # Whether to enable GitLab Registry
-gitlab_registry_enable: "false"
+gitlab_registry_enable: false
 # External URL for the container registry
 gitlab_registry_external_url: "http://localhost:5005"
 
 # Mattermost configuration
 # Whether GitLab Omnibus is used to run Mattermost only without GitLab
-gitlab_mattermost_only_context: "false"
+gitlab_mattermost_only_context: false
 
 gitlab_feature_flags: []
 
