@@ -318,6 +318,13 @@ argument_specs:
         elements: "dict"
         default: []
         required: false
+        required_if:
+          - ["executor", "docker+machine", ["machine_driver", "machine_name"]]
+          - ["executor", "docker-autoscaler", ["description", "autoscaler_max_instances", "autoscaler_cloud_name",
+                                               "autoscaler_clouds_config", "autoscaler_image_ref", "autoscaler_flavor_ref",
+                                               "autoscaler_network_id", "autoscaler_security_group",
+                                               "autoscaler_scheduler_hint", "autoscaler_keyname", "autoscaler_username"]]
+          - ["cache_type", "s3", ["cache_server_address", "cache_access_key", "cache_secret_key", "cache_bucket_name"]]
         options:
           name:
             description:
@@ -348,8 +355,7 @@ argument_specs:
               - "docker"
               - "docker+machine"
               - "docker-autoscaler"
-            default: "docker"
-            required: false
+            required: true
           limit:
             description:
               - "Limits how many jobs can be handled concurrently by this token."
@@ -375,9 +381,8 @@ argument_specs:
           docker_image:
             description:
               - "The default Docker image used for jobs of this runner."
-              - "Required for the 'docker', 'docker+machine' and 'docker-autoscaler' executors."
             type: "str"
-            required: false
+            required: true
           docker_host:
             description:
               - "Custom Docker endpoint used by this runner."
