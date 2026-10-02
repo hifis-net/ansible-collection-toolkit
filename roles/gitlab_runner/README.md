@@ -425,9 +425,6 @@ gitlab_runner_list:
     docker_shm_size: 2147483648
     docker_privileged: true
     docker_network_mtu: "{{ gitlab_runner_mtu }}"
-    locked: false
-    tags: "{{ gitlab_runner_tags | default([]) }}"
-    run_untagged: "{{ gitlab_runner_run_untagged | default(false) }}"
     cache_insecure: "false"
     autoscaler_max_builds: 1
     autoscaler_idle_count: 4
