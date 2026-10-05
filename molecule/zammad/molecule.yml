@@ -33,6 +33,9 @@ provisioner:
       all:
         vars:
           ansible_user: "ansible"
+          # Do not depend on the FQDN of the CI host, which may exceed
+          # nginx' default server_names_hash_bucket_size.
+          zammad_domain_name: "zammad.example.org"
           zammad_nginx_additional_locations:
             - |
               location ~* \\.html$$ {
