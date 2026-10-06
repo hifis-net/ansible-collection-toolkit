@@ -72,6 +72,14 @@ argument_specs:
           - "The role will validate that a valid SSL key pair exists at the configured paths."
         type: "str"
         required: false
+        no_log: true
+      zammad_hide_sensitive_changes:
+        description:
+          - "Whether to hide sensitive changes such as private keys in task output and diffs."
+          - "Set to false to display sensitive configuration changes during playbook runs."
+        type: "bool"
+        default: true
+        required: false
       zammad_nginx_server_tokens:
         description:
           - "Enable or disable emitting nginx version information in error pages or in the Server response header field."

@@ -52,6 +52,8 @@ keepalived_notification_email_from: "keepalived@localhost"
 keepalived_smtp_server: "127.0.0.1"
 # Keepalived instance authentication password
 keepalived_auth_pass: "changeme"
+# Do not display sensitive changes in diffs by default
+keepalived_hide_sensitive_changes: true
 # Keepalived instance virtual router ID
 keepalived_virtual_router_id: "51"
 # Keepalived instance priority

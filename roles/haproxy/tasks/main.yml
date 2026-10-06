@@ -249,6 +249,7 @@
     group: "{{ haproxy_group }}"
     mode: "0640"
     validate: "{{ haproxy_executable_path }} -c -q -f %s"
+  no_log: "{{ haproxy_hide_sensitive_changes }}"
   notify: "Reload HAProxy"
 
 ...

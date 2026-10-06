@@ -60,6 +60,12 @@ Password used to authenticate in the Redis cluster:
 redis_password: 'changeme'
 ```
 
+Do not display sensitive changes in diffs by default:
+
+```yaml
+redis_hide_sensitive_changes: true
+```
+
 List of dependent packages required by Redis Server:
 
 ```yaml

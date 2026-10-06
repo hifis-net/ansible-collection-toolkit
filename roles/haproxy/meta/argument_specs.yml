@@ -273,6 +273,13 @@ argument_specs:
         default: "changeme"
         required: false
         no_log: true
+      haproxy_hide_sensitive_changes:
+        description:
+          - "Whether to hide sensitive changes such as passwords in task output and diffs."
+          - "Set to false to display sensitive configuration changes and validation errors during playbook runs."
+        type: "bool"
+        default: true
+        required: false
       haproxy_frontend_ip:
         description:
           - "Floating IP address for the HAProxy frontend."

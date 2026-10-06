@@ -109,6 +109,12 @@ Variable to hold the stats admin user password:
 haproxy_stats_admin_user_password: 'changeme'
 ```
 
+Do not display sensitive changes in diffs by default:
+
+```yaml
+haproxy_hide_sensitive_changes: true
+```
+
 ### All other default variables
 
 #### Path to the executable of HAProxy

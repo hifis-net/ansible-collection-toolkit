@@ -55,6 +55,13 @@ argument_specs:
         default: "changeme"
         required: false
         no_log: true
+      redis_hide_sensitive_changes:
+        description:
+          - "Whether to hide sensitive changes such as passwords in task output and diffs."
+          - "Set to false to display sensitive configuration changes and validation errors during playbook runs."
+        type: "bool"
+        default: true
+        required: false
       redis_version:
         description:
           - "The version of Redis Server to install."

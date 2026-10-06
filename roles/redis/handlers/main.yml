@@ -12,6 +12,7 @@
     regexp: "^.*$"
     replace: ""
   when: "not __is_initial_dryrun"
+  no_log: "{{ redis_hide_sensitive_changes }}"
 
 - name: "Remove auto-generated Sentinel config section"
   become: true
@@ -21,6 +22,7 @@
     regexp: "^.*$"
     replace: ""
   when: "not __is_initial_dryrun"
+  no_log: "{{ redis_hide_sensitive_changes }}"
 
 - name: "Restart Redis Server"
   become: true
