@@ -32,6 +32,6 @@ jobs:
         run: "ansible-galaxy install -r requirements.yml"
 
       - name: "Run nox."
-        uses: "ansible-community/antsibull-nox@1.9.1"
+        uses: "ansible-community/antsibull-nox@1.9.3"
         with:
           sessions: "build-import-check"
