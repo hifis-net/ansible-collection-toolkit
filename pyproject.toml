@@ -8,19 +8,19 @@ name = "ansible-collection-toolkit"
 version = "6.3.2"
 description = "This collection provides production-ready Ansible roles used for providing services used in research and by research software engineers, but not exclusively."
 readme = "README.md"
-requires-python = ">=3.11"
+requires-python = ">=3.14"
 dependencies = [
-    "ansible>=12.0.0",
+    "ansible>=14.4.0",
 ]
 
 [dependency-groups]
 dev = [
-    "ansible-lint>=26.6.0",
-    "antsibull-nox>=1.9.1",
-    "molecule>=26.6.0",
-    "molecule-plugins[podman]>=26.7.15",
+    "ansible-lint>=26.9.0",
+    "antsibull-nox>=1.9.3",
+    "molecule>=26.9.0",
+    "molecule-plugins[podman]>=26.9.28",
     "netaddr>=1.3.0",
     "nox>=2025.5.1",
-    "reuse>=5.0.2",
-    "yamllint>=1.37.1",
+    "reuse>=6.2.0",
+    "yamllint>=1.38.0",
 ]

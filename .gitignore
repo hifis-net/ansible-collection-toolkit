@@ -13,3 +13,5 @@
 .ansible/
 .nox/
 __pycache__/
+.ansible/
+.cache/
