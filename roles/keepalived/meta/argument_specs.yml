@@ -42,7 +42,7 @@ argument_specs:
           - "Version of Keepalived to install."
           - "The role will build this specific version from source."
         type: "str"
-        default: "2.3.2"
+        default: "2.4.3"
         required: false
       keepalived_download_url:
         description:
