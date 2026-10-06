@@ -114,5 +114,7 @@ haproxy_stats_enable: "enable"
 haproxy_stats_admin_user: "admin"
 # Stats admin user password
 haproxy_stats_admin_user_password: "changeme"
+# Do not display sensitive changes in diffs by default
+haproxy_hide_sensitive_changes: true
 
 ...

@@ -26,6 +26,7 @@
         owner: "root"
         group: "root"
         mode: "0600"
+      no_log: "{{ gitlab_runner_hide_sensitive_changes }}"
 
 - name: "Create SSH key pair for communicating with Runners."
   become: true

@@ -16,6 +16,7 @@
     - name: "Extract machine options as command line parameters"
       ansible.builtin.set_fact:
         __machine_options: "--{{ gitlab_runner.machine_options | join(' --') }}"
+      no_log: "{{ gitlab_runner_hide_sensitive_changes }}"
 
     - name: "Create a VM once via docker-machine"
       become: true
@@ -23,6 +24,7 @@
       ansible.builtin.command: "docker-machine create -d {{ gitlab_runner.machine_driver }} {{ __machine_options }} test"
       register: "__creation_cmd"
       changed_when: "__creation_cmd.rc == 0"
+      no_log: "{{ gitlab_runner_hide_sensitive_changes }}"
       tags: "notest"
 
   always:

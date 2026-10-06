@@ -139,6 +139,7 @@
     group: "root"
     mode: "0644"
     validate: "{{ keepalived_executable_path }} --config-test --use-file %s"
+  no_log: "{{ keepalived_hide_sensitive_changes }}"
   notify: "Reload Keepalived"
 
 - name: "Create Keepalived Service Unit File."

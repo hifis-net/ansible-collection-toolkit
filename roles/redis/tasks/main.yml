@@ -163,6 +163,7 @@
     mode: "0600"
     owner: "{{ redis_user }}"
     group: "{{ redis_group }}"
+  no_log: "{{ redis_hide_sensitive_changes }}"
   notify:
     - "Remove auto-generated Redis config section"
     - "Restart Redis Server"
@@ -177,6 +178,7 @@
     mode: "0600"
     owner: "{{ redis_user }}"
     group: "{{ redis_group }}"
+  no_log: "{{ redis_hide_sensitive_changes }}"
   notify:
     - "Remove auto-generated Sentinel config section"
     - "Restart Redis Sentinel"

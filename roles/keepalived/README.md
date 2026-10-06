@@ -249,6 +249,12 @@ Set the authentication password of the Keepalived instance:
 keepalived_auth_pass: 'changeme'
 ```
 
+#### Do not display sensitive changes in diffs by default
+
+```yaml
+keepalived_hide_sensitive_changes: true
+```
+
 #### Enable script security
 
 Flag to enable script security to prevent script to run by root user

@@ -86,6 +86,12 @@ validate, if the SSL key pair is given under the paths `zammad_ssl_key_path` and
 `zammad_ssl_cert_path` are valid.
 
 ```yaml
+zammad_hide_sensitive_changes: true
+```
+
+Do not display sensitive changes, such as the SSL/TLS private key, in diffs by default.
+
+```yaml
 zammad_nginx_server_tokens: "off"
 ```
 

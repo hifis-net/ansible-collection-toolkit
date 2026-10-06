@@ -15,6 +15,8 @@ redis_cluster_name: "redis-cluster"
 redis_master_instance_ip: "{{ redis_instance_ip if redis_instance_type == 'master' else None }}"
 # Password used to authenticate in the Redis cluster
 redis_password: "changeme"
+# Do not display sensitive changes in diffs by default
+redis_hide_sensitive_changes: true
 
 # Redis version
 redis_version: "8.0.1"

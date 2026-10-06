@@ -149,6 +149,13 @@ argument_specs:
         default: "changeme"
         required: false
         no_log: true
+      keepalived_hide_sensitive_changes:
+        description:
+          - "Whether to hide sensitive changes such as passwords in task output and diffs."
+          - "Set to false to display sensitive configuration changes and validation errors during playbook runs."
+        type: "bool"
+        default: true
+        required: false
       keepalived_virtual_router_id:
         description:
           - "Virtual router ID for the VRRP instance."
