@@ -17,7 +17,7 @@ argument_specs:
         description:
           - "Zammad version to be installed."
         type: "str"
-        default: "7.1.1"
+        default: "7.2.1"
         required: false
       zammad_release_channel:
         description:
