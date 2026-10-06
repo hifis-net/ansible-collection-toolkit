@@ -22,12 +22,10 @@
     - "Reconfigure Non Primary GitLab"
 
 - name: "Ensure gitaly['configuration'] is not present in gitlab_additional_configurations"
-  when: "gitlab_use_internal_gitaly"
+  when: "gitlab_use_internal_gitaly | bool"
   block:
     - name: "Check if gitaly is present"
-      when:
-        - "gitlab_additional_configurations | length > 0"
-        - "item.gitaly is defined"
+      when: "item.gitaly is defined"
       ansible.builtin.set_fact:
         __gitaly_item: "{{ item.gitaly }}"
       with_items: "{{ gitlab_additional_configurations }}"
@@ -71,7 +69,7 @@
     owner: "root"
     group: "root"
     mode: "0644"
-  when: "gitlab_is_primary"
+  when: "gitlab_is_primary | bool"
 
 - name: "Create file to prevent Gitlab to backup database"
   become: true
@@ -82,6 +80,6 @@
     owner: "root"
     group: "root"
     mode: "0644"
-  when: "not gitlab_is_primary"
+  when: "not gitlab_is_primary | bool"
 
 ...

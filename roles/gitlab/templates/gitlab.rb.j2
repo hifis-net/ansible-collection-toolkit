@@ -11,10 +11,10 @@ gitlab_rails['backup_keep_time'] = "{{ gitlab_backup_keep_time }}"
 gitlab_rails['backup_path'] = "{{ gitlab_backup_path }}"
 
 nginx['listen_port'] = "{{ gitlab_nginx_listen_port }}"
-nginx['listen_https'] = {{ gitlab_nginx_listen_https }}
-nginx['redirect_http_to_https'] = {{ gitlab_nginx_redirect_http_to_https }}
+nginx['listen_https'] = {{ gitlab_nginx_listen_https | bool | lower }}
+nginx['redirect_http_to_https'] = {{ gitlab_nginx_redirect_http_to_https | bool | lower }}
 
-{% if not gitlab_use_internal_redis %}
+{% if not gitlab_use_internal_redis | bool %}
 redis['enable'] = false
 gitlab_rails['redis_password'] = "{{ gitlab_redis_password }}"
 redis['master_name'] = "{{ gitlab_redis_cluster_name }}"
@@ -30,7 +30,7 @@ gitlab_rails['redis_sentinels_password'] = "{{ gitlab_redis_sentinel_password }}
 {% endif %}
 gitlab_rails['monitoring_whitelist'] = [{{ (gitlab_rails_monitoring_whitelist | list | unique | sort) | map('to_json') | join(', ') }}]
 
-{% if gitlab_use_internal_gitaly %}
+{% if gitlab_use_internal_gitaly | bool %}
 {% if not __gitaly_configuration_exists %}
 gitaly['configuration'] = {
   "storage": [
@@ -45,7 +45,7 @@ gitaly['configuration'] = {
 gitaly['enable'] = false
 gitlab_rails['gitaly_token'] = "{{ gitlab_gitaly_token }}"
 gitlab_shell['secret_token'] = "{{ gitlab_secret_token }}"
-{% if gitlab_use_default_repositories_storages %}
+{% if gitlab_use_default_repositories_storages | bool %}
 gitlab_rails['repositories_storages'] = {
   "default" => {
     "gitaly_address" => "tcp://{{ gitlab_gitaly_instance_ip }}:{{ gitlab_gitaly_instance_port }}"
@@ -54,13 +54,13 @@ gitlab_rails['repositories_storages'] = {
 {% endif %}
 {% endif %}
 
-gitlab_rails['gitlab_email_enabled'] = {{ gitlab_email_enabled }}
-gitlab_rails['ldap_enabled'] = {{ gitlab_ldap_enabled }}
-gitlab_rails['smtp_enable'] = {{ gitlab_smtp_enable }}
+gitlab_rails['gitlab_email_enabled'] = {{ gitlab_email_enabled | bool | lower }}
+gitlab_rails['ldap_enabled'] = {{ gitlab_ldap_enabled | bool | lower }}
+gitlab_rails['smtp_enable'] = {{ gitlab_smtp_enable | bool | lower }}
 
-registry['enable'] = {{ gitlab_registry_enable }}
+registry['enable'] = {{ gitlab_registry_enable | bool | lower }}
 
-{% if not gitlab_use_internal_postgresql %}
+{% if not gitlab_use_internal_postgresql | bool %}
 # Disable the bundled Omnibus provided PostgreSQL
 postgresql['enable'] = false
 # PostgreSQL connection details
@@ -94,7 +94,6 @@ gitlab_rails['time_zone'] = 'Europe/Berlin'
 nginx['listen_port'] = 80
 nginx['listen_https'] = false
 #}
-{% if gitlab_additional_configurations is defined %}
 {% for configurations in gitlab_additional_configurations %}
 {% for config in configurations %}
 {% for kvpair in configurations[config] %}
@@ -106,7 +105,6 @@ nginx['listen_https'] = false
 {% endfor %}
 {% endfor %}
 {% endfor %}
-{% endif %}
 
 {#
 This is a generic way to add Ruby function calls to the
@@ -120,8 +118,6 @@ gitlab_ruby_configuration_calls:
   - key: "mattermost_external_url"
     value: "https://mattermost.example.com"
 #}
-{% if gitlab_ruby_configuration_calls is defined %}
 {% for kvpair in gitlab_ruby_configuration_calls %}
 {{ kvpair.key }} "{{ kvpair.value }}"
 {% endfor %}
-{% endif %}

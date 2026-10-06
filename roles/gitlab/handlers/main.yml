@@ -18,7 +18,7 @@
   environment:
     SKIP_POST_DEPLOYMENT_MIGRATIONS: true
   listen: "GitLab has been installed or upgraded"
-  when: "gitlab_is_primary"
+  when: "gitlab_is_primary | bool"
 
 - name: "Run registry metadata database migrations"
   become: true
@@ -27,7 +27,7 @@
   listen: "GitLab has been installed or upgraded"
   when:
     - "__gitlab_registry_database_used"
-    - "gitlab_is_primary"
+    - "gitlab_is_primary | bool"
 
 - name: "Reconfigure Non Primary GitLab"
   become: true
@@ -35,7 +35,7 @@
     cmd: "gitlab-ctl reconfigure || (touch /etc/gitlab/reconfigure_failed && /bin/false)"
   changed_when: true
   listen: "GitLab has been installed or upgraded"
-  when: "not gitlab_is_primary"
+  when: "not gitlab_is_primary | bool"
 
 - name: "Restart GitLab"
   become: true
@@ -48,13 +48,13 @@
   ansible.builtin.command: "gitlab-ctl hup puma"
   changed_when: true
   listen: "GitLab has been installed or upgraded"
-  when: "not gitlab_mattermost_only_context"
+  when: "not gitlab_mattermost_only_context | bool"
 
 - name: "Restart sidekiq"
   become: true
   ansible.builtin.command: "gitlab-ctl restart sidekiq"
   changed_when: true
   listen: "GitLab has been installed or upgraded"
-  when: "not gitlab_mattermost_only_context"
+  when: "not gitlab_mattermost_only_context | bool"
 
 ...

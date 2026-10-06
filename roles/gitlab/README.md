@@ -38,8 +38,8 @@ gitlab_edition: "gitlab-ee"
 #### GitLab Version and Release
 
 Set a specific GitLab version to install. Please ensure that you also specify
-the desired release. You can find the available releases
-[here](https://packages.gitlab.com/gitlab).
+the desired release. You can find the available GitLab package releases
+at the official [GitLab package repository](https://packages.gitlab.com/gitlab).
 
 ```yaml
 gitlab_version: "17.4.2"
@@ -47,12 +47,16 @@ gitlab_version: "17.4.2"
 # GitLab Release for RHEL/AlmaLinux 9
 gitlab_release: "ce.0.el9"
 
-# GitLab Release for Ubuntu
+# GitLab Release for Ubuntu/Debian
 gitlab_release: "ce.0"
 ```
 
-**Please note:** If no GitLab version is specified the role will always install
-the latest available GitLab package.
+The release has to match the GitLab edition, i.e. use `ee.0` or `ee.0.el9`
+for `gitlab-ee`.
+
+**Please note:** The version only takes effect if both `gitlab_version` and
+`gitlab_release` are set. Otherwise the role will always install the latest
+available GitLab package.
 
 #### Do not display sensitive changes in diffs by default
 
@@ -66,14 +70,6 @@ URL to the GPG key that was used to sign the packages.
 
 ```yaml
 gitlab_gpg_key_url: "https://packages.gitlab.com/gitlab/{{ gitlab_edition }}/gpgkey"
-```
-
-#### GPG Key ID
-
-Identifier of GPG key that was used to sign the packages.
-
-```yaml
-gitlab_gpg_key_id: "F6403F6544A38863DAA0B6E03F01618A51312F3F"
 ```
 
 #### Package Repository URL
@@ -140,6 +136,21 @@ gitlab_backup_keep_time: '604800'
 
 ### Optional Role Variables
 
+#### Primary Node in a Multi-Node Setup
+
+Specify whether this host is the primary GitLab node:
+
+```yaml
+gitlab_is_primary: false
+```
+
+The primary node runs the database migrations: it waits for background
+migrations before an upgrade, reconfigures GitLab with post-deployment
+migrations skipped and runs the registry metadata database migrations.
+All other nodes skip the automatic database backup on upgrades.
+In a multi-node setup, set this variable to `true` on exactly one node.
+For a single-node installation, set it to `true` as well.
+
 #### Name of Template for GitLab's Configuration File
 
 Specify the name of the template for GitLab's configuration file which
@@ -158,9 +169,22 @@ contains custom configurations of your GitLab instance:
 gitlab_configuration_file_path: '/etc/gitlab/gitlab.rb'
 ```
 
+#### Path to GitLab's Secrets File
+
+Specify the path on the Ansible controller to a `gitlab-secrets.json` file
+which is copied to `/etc/gitlab/gitlab-secrets.json`. This is required to share
+secrets between multiple GitLab nodes or to restore a GitLab instance from a
+backup. If undefined, the file is not managed by the role:
+
+```yaml
+gitlab_secrets_file: 'files/gitlab-secrets.json'
+```
+
 #### GitLab Theme to Be Used by Default
 
-Choose the Default Theme to be used for new GitLab users:
+Choose the default navigation theme to be used for new GitLab users.
+See the [GitLab documentation on navigation themes](https://docs.gitlab.com/user/profile/preferences/#change-the-navigation-theme)
+for the available themes. Unknown theme IDs fall back to GitLab's default theme:
 
 ```yaml
 gitlab_default_theme: '2'
@@ -179,7 +203,7 @@ gitlab_backup_path: '/var/opt/gitlab/backups'
 Set the port GitLab's web-server Nginx is listening on:
 
 ```yaml
-gitlab_nginx_listen_port: '80'
+gitlab_nginx_listen_port: 80
 ```
 
 #### Does Web-Server Nginx accept HTTPS Requests?
@@ -187,7 +211,7 @@ gitlab_nginx_listen_port: '80'
 Choose whether GitLab's web-server Nginx accepts HTTPS requests:
 
 ```yaml
-gitlab_nginx_listen_https: 'false'
+gitlab_nginx_listen_https: false
 ```
 
 #### Does Web-Server Nginx Redirect HTTP Requests to HTTPS?
@@ -195,7 +219,7 @@ gitlab_nginx_listen_https: 'false'
 Choose whether GitLab's web-server Nginx redirects HTTP requests to HTTPS:
 
 ```yaml
-gitlab_nginx_redirect_http_to_https: 'false'
+gitlab_nginx_redirect_http_to_https: false
 ```
 
 #### Set GitLab feature flags
@@ -233,7 +257,7 @@ scenario services like *sidekiq* or *puma* are not required. Set to `true` to
 prevent the role from reloading those services:
 
 ```yaml
-gitlab_mattermost_only_context: 'false'
+gitlab_mattermost_only_context: false
 ```
 
 ### Variables to be Set if External Redis is Used
@@ -243,7 +267,7 @@ gitlab_mattermost_only_context: 'false'
 Set switch to `false` to enable external Redis instance:
 
 ```yaml
-gitlab_use_internal_redis: 'false'
+gitlab_use_internal_redis: false
 ```
 
 #### Password to Authenticate Redis Services within Cluster
@@ -291,7 +315,7 @@ gitlab_redis_sentinel_ips:
 Choose port on which Redis Sentinel servers are listening:
 
 ```yaml
-gitlab_redis_sentinel_port: '26379'
+gitlab_redis_sentinel_port: 26379
 ```
 
 #### Whitelist IP Address Range for Monitoring Redis Sentinel Servers
@@ -353,7 +377,7 @@ gitlab_gitaly_instance_ip: '127.0.0.1'
 Specify port of the Gitaly instance:
 
 ```yaml
-gitlab_gitaly_instance_port: '8075'
+gitlab_gitaly_instance_port: 8075
 ```
 
 ### Variables to be Set if External PostgreSQL Database is Used
@@ -363,7 +387,7 @@ gitlab_gitaly_instance_port: '8075'
 Set switch to `false` to enable external PostgreSQL Database instance:
 
 ```yaml
-gitlab_use_internal_postgresql: 'false'
+gitlab_use_internal_postgresql: false
 ```
 
 #### IP Address of External PostgreSQL Database Instance
@@ -401,13 +425,47 @@ gitlab_rails_monitoring_whitelist:
   - "{{ gitlab_ip_range }}"
 ```
 
+#### Enable Email Functionality
+
+Enable GitLab's email functionality:
+
+```yaml
+gitlab_email_enabled: false
+```
+
+#### Enable SMTP for Sending Emails
+
+Send emails via SMTP instead of Sendmail:
+
+```yaml
+gitlab_smtp_enable: false
+```
+
+**Please note**: The SMTP server settings like `smtp_address` or `smtp_port`
+need to be configured via `gitlab_additional_configurations`.
+
+#### Enable LDAP Authentication
+
+Enable LDAP authentication:
+
+```yaml
+gitlab_ldap_enabled: false
+```
+
+**Please note**: The LDAP servers need to be configured via
+`gitlab_additional_configurations`.
+
 #### Configure GitLab Registry
 
 Enable GitLab container registry:
 
 ```yaml
-gitlab_registry_enable: "true"
+gitlab_registry_enable: true
 ```
+
+The external URL of the registry can be set via
+`gitlab_ruby_configuration_calls` with the key `registry_external_url`
+(see [Configurations via Ruby Function Calls](#configurations-via-ruby-function-calls)).
 
 **Please note**: If you do not run a load balancer in front of GitLab and let
 NGinx care about SSL encryption, please also configure

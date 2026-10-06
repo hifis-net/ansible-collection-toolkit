@@ -90,7 +90,7 @@
 
 - name: "Wait for background migrations on primary node"
   when:
-    - "gitlab_is_primary"
+    - "gitlab_is_primary | bool"
     - "__gitlab_version_file.stat.exists"
     - "__gitlab_rails_binary.stat.exists"
     - "__gitlab_rails_binary.stat.executable"
