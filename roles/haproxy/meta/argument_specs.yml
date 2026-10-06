@@ -23,7 +23,7 @@ argument_specs:
           - "HAProxy PPA repository version to use."
           - "Used to pin the PPA version to a certain value."
         type: "str"
-        default: "ppa:vbernat/haproxy-3.2"
+        default: "ppa:vbernat/haproxy-3.4"
         required: false
       haproxy_ppa_signing_key:
         description:
@@ -46,7 +46,7 @@ argument_specs:
           - "HAProxy package version to install."
           - "Used to pin the HAProxy version to a certain value."
         type: "str"
-        default: "3.2.*"
+        default: "3.4.*"
         required: false
       haproxy_user:
         description:

@@ -7,7 +7,7 @@
 # Path to the executable of HAProxy
 haproxy_executable_path: "/usr/sbin/haproxy"
 # HAProxy PPA version
-haproxy_ppa_version: "ppa:vbernat/haproxy-3.2"
+haproxy_ppa_version: "ppa:vbernat/haproxy-3.4"
 # Signing key of the HAProxy PPA on Ubuntu.
 # Fingerprint: 3D65 3970 FBAB 0A89 0E4E  4E9A 0F14 D8B0 CF4E FE96
 # https://keyserver.ubuntu.com/pks/lookup?op=get&search=0x3d653970fbab0a890e4e4e9a0f14d8b0cf4efe96
@@ -45,7 +45,7 @@ haproxy_ppa_signing_key: |-
 # Signing key of the HAProxy repository on Debian
 haproxy_debian_signing_key: "https://haproxy.debian.net/bernat.debian.org.gpg"
 # HAProxy version
-haproxy_version: "3.2.*"
+haproxy_version: "3.4.*"
 # HAProxy user
 haproxy_user: "haproxy"
 # HAProxy group
