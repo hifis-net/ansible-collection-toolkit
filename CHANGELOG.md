@@ -54,6 +54,7 @@
 
 **Merged pull requests:**
 
+- Prepare release version 7.0.0 [\#657](https://github.com/hifis-net/ansible-collection-toolkit/pull/657) ([Normo](https://github.com/Normo))
 - Bump ansible to v14.5.0 [\#655](https://github.com/hifis-net/ansible-collection-toolkit/pull/655) ([Normo](https://github.com/Normo))
 - Test GitLab-Runner 19.4.1 with molecule [\#654](https://github.com/hifis-net/ansible-collection-toolkit/pull/654) [[gitlab_runner](https://github.com/hifis-net/ansible-collection-toolkit/labels/gitlab_runner)] ([Normo](https://github.com/Normo))
 - Update Python dependencies [\#650](https://github.com/hifis-net/ansible-collection-toolkit/pull/650) ([Normo](https://github.com/Normo))
