@@ -50,6 +50,15 @@
     sysctl_set: true
     reload: true
 
+- name: "Remove legacy PPA source created by apt_repository"
+  when:
+    - "ansible_facts.distribution == 'Ubuntu'"
+    - "haproxy_ppa_version | length > 0"
+  become: true
+  ansible.builtin.file:
+    path: "/etc/apt/sources.list.d/{{ (haproxy_ppa_version ~ '_' ~ ansible_facts.distribution_release | lower) | regex_replace('[^a-zA-Z0-9]+', '_') }}.list"
+    state: "absent"
+
 - name: "Install dependencies of HAProxy."
   become: true
   ansible.builtin.package:
