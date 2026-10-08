@@ -1,5 +1,17 @@
 # Changelog
 
+## [v7.0.1](https://github.com/hifis-net/ansible-collection-toolkit/tree/v7.0.1) (2026-10-08)
+
+[Full Changelog](https://github.com/hifis-net/ansible-collection-toolkit/compare/v7.0.0...v7.0.1)
+
+**Fixed bugs:**
+
+- haproxy: Upgrading to v7.0.0 breaks apt on Ubuntu hosts that use the PPA \(conflicting Signed-By\) [\#659](https://github.com/hifis-net/ansible-collection-toolkit/issues/659) [[haproxy](https://github.com/hifis-net/ansible-collection-toolkit/labels/haproxy)]
+
+**Merged pull requests:**
+
+- haproxy: remove legacy PPA source file on Ubuntu [\#660](https://github.com/hifis-net/ansible-collection-toolkit/pull/660) [[haproxy](https://github.com/hifis-net/ansible-collection-toolkit/labels/haproxy)] ([Normo](https://github.com/Normo))
+
 ## [v7.0.0](https://github.com/hifis-net/ansible-collection-toolkit/tree/v7.0.0) (2026-10-07)
 
 [Full Changelog](https://github.com/hifis-net/ansible-collection-toolkit/compare/v6.3.2...v7.0.0)
