@@ -48,9 +48,9 @@ server {
         access_log off; log_not_found off;
     }
 
-    {% for location_config in zammad_nginx_additional_locations %}
+{% for location_config in zammad_nginx_additional_locations %}
     {{ location_config }}
-    {% endfor %}
+{% endfor %}
 
     root /opt/zammad/public;
 
@@ -79,7 +79,7 @@ server {
         proxy_pass http://zammad-websocket;
     }
 
-    {% if zammad_version is version('6.0', 'ge') +%}
+{% if zammad_version is version('6.0', 'ge') %}
     location /cable {
         proxy_http_version 1.1;
         proxy_set_header Upgrade $http_upgrade;
@@ -95,7 +95,7 @@ server {
         proxy_read_timeout 86400;
         proxy_pass http://zammad-railsserver;
     }
-    {% endif %}
+{% endif %}
 
     location / {
         proxy_http_version 1.1;
@@ -108,9 +108,9 @@ server {
         proxy_set_header X-Forwarded-Scheme "";
         proxy_set_header X-Forwarded-Ssl "";
 
-        # change this line in an SSO setup
-        proxy_set_header X-Forwarded-User "";
-        proxy_set_header Remote-User "";
+{% for header in zammad_nginx_sso_identity_headers %}
+        {{ header }}
+{% endfor %}
 
         proxy_read_timeout 180;
         proxy_pass http://zammad-railsserver;
