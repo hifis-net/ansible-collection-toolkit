@@ -14,3 +14,28 @@
         return_content: true
       register: "zammad_web"
       failed_when: "'Zammad Helpdesk' not in zammad_web.content"
+
+    - name: "Render a custom Nginx template into a scratch file"
+      vars:
+        zammad_nginx_config_template: "custom-nginx.conf.j2"
+        zammad_nginx_config_path: "/tmp/zammad-custom-nginx.conf"
+      ansible.builtin.include_role:
+        name: "hifis.toolkit.zammad"
+        tasks_from: "nginx-config"
+
+    - name: "Read the custom Nginx configuration"
+      ansible.builtin.slurp:
+        src: "/tmp/zammad-custom-nginx.conf"
+      register: "zammad_custom_nginx_config"
+      changed_when: false
+
+    - name: "Check that the operator-provided Nginx template was used"
+      vars:
+        zammad_custom_nginx_config_content: "{{ zammad_custom_nginx_config.content | b64decode }}"
+      ansible.builtin.assert:
+        that:
+          - "zammad_custom_nginx_config_content is search('This is a custom template')"
+          - "zammad_custom_nginx_config_content is not search('upstream zammad-railsserver')"
+        fail_msg: "The operator-provided Nginx template was not used."
+        success_msg: "The operator-provided Nginx template was used."
+      changed_when: false
