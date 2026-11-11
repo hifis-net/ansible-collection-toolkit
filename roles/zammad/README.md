@@ -53,7 +53,16 @@ Zammad's fully qualified domain name.
 zammad_nginx_config_path: "/etc/nginx/sites-available/zammad.conf"
 ```
 
-File path to Zammad's Nginx config.
+File path to Zammad's Nginx config Jinja2 template.
+
+```yaml
+zammad_nginx_config_template: "nginx-zammad.conf.j2"
+```
+
+Relative names are resolved from the role's `templates` directory first and
+then from the `templates` directory next to your playbook. Absolute paths are
+used as is. Do not reuse the name of a template which ships with the role,
+otherwise the role's template silently takes precedence.
 
 ```yaml
 zammad_ssl_cert_path: "/etc/ssl/certs/zammad_cert.pem"

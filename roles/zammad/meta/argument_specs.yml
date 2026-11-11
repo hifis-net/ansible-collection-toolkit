@@ -46,6 +46,14 @@ argument_specs:
         type: "str"
         default: "/etc/nginx/sites-available/zammad.conf"
         required: false
+      zammad_nginx_config_template:
+        description:
+          - "Jinja2 template used to render Zammad's Nginx configuration file."
+          - "Relative names are resolved from the role's templates directory first, then from the templates directory next to the playbook. Absolute paths are used as is."
+          - "Do not reuse a name of a template which ships with the role to avoid the role's template silently taking precedence."
+        type: "str"
+        default: "nginx-zammad.conf.j2"
+        required: false
       zammad_ssl_cert_path:
         description:
           - "File path to the SSL/TLS certificate which is used for HTTPS."
