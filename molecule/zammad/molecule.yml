@@ -43,3 +43,17 @@ provisioner:
               }
 verifier:
   name: "ansible"
+scenario:
+  name: "zammad"
+  test_sequence:
+    - "destroy"
+    - "dependency"
+    - "syntax"
+    - "create"
+    - "prepare"
+    - "check"
+    - "converge"
+    - "idempotence"
+    - "check"
+    - "verify"
+    - "destroy"
