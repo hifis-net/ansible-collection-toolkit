@@ -28,5 +28,18 @@ provisioner:
     verify: "verify.yml"
 verifier:
   name: "ansible"
+scenario:
+  name: "netplan"
+  test_sequence:
+    - "destroy"
+    - "syntax"
+    - "create"
+    - "prepare"
+    - "check"
+    - "converge"
+    - "idempotence"
+    - "check"
+    - "verify"
+    - "destroy"
 
 ...

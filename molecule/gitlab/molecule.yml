@@ -68,7 +68,6 @@ scenario:
   name: "gitlab"
   test_sequence:
     - "destroy"
-    - "dependency"
     - "syntax"
     - "create"
     - "prepare"
@@ -76,7 +75,6 @@ scenario:
     - "converge"
     - "idempotence"
     - "check"
-    - "side_effect"
     - "verify"
     - "destroy"
 
