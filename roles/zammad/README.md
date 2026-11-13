@@ -31,7 +31,7 @@ The below requirements are needed on the target host:
 ## Role Variables
 
 ```yaml
-zammad_version: "7.2.1"
+zammad_version: "7.2.3"
 ```
 
 Zammad version to be installed.
@@ -143,6 +143,23 @@ zammad_nginx_additional_locations:
 
 Configure additional location directives in the Nginx server configuration.
 This allows to serve additional files from the public directory, e.g. custom HTML files.
+
+```yaml
+zammad_nginx_sso_identity_headers:
+  - 'proxy_set_header X-Forwarded-User "";'
+  - 'proxy_set_header Remote-User "";'
+```
+
+Nginx directives which are rendered verbatim, one directive per line, into the
+`location /` block of the Nginx configuration.
+They control the SSO identity headers which reach Zammad.
+
+Zammad 7.2.3 fixed an account takeover via client-controlled identity in SSO
+authentication ([GHSA-4749-hj8h-f4jf](https://github.com/zammad/zammad/security/advisories/GHSA-4749-hj8h-f4jf))
+by clearing both headers in its shipped Nginx configuration, as described in
+the [7.2.3 release notes](https://zammad.com/en/product/releases/7-2-3#nginx-apache2-configuration-update-required).
+The default value above mirrors this behaviour, so that headers sent by clients
+are never forwarded to Zammad.
 
 ```yaml
 zammad_elasticsearch_url: "http://localhost:9200"

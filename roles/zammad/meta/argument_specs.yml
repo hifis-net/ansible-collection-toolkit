@@ -17,7 +17,7 @@ argument_specs:
         description:
           - "Zammad version to be installed."
         type: "str"
-        default: "7.2.1"
+        default: "7.2.3"
         required: false
       zammad_release_channel:
         description:
@@ -104,6 +104,18 @@ argument_specs:
         type: "list"
         elements: "str"
         default: []
+        required: false
+      zammad_nginx_sso_identity_headers:
+        description:
+          - "Nginx directives controlling the SSO identity headers which are passed to Zammad in the 'location /' block."
+          - "Entries are rendered verbatim into the Nginx configuration, one directive per line."
+          - "Zammad 7.2.3 fixed an account takeover via client-controlled identity in SSO authentication (GHSA-4749-hj8h-f4jf) by clearing the 'X-Forwarded-User' and 'Remote-User' headers."
+          - "In an SSO setup, ensure that the reverse proxy sets exactly one of the two headers and clears the other."
+        type: "list"
+        elements: "str"
+        default:
+          - 'proxy_set_header X-Forwarded-User "";'
+          - 'proxy_set_header Remote-User "";'
         required: false
       zammad_force_es_searchindex_rebuild:
         description:

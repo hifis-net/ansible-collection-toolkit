@@ -15,6 +15,24 @@
       register: "zammad_web"
       failed_when: "'Zammad Helpdesk' not in zammad_web.content"
 
+    - name: "Read the Nginx configuration"
+      become: true
+      ansible.builtin.slurp:
+        src: "{{ zammad_nginx_config_path }}"
+      register: "zammad_nginx_config"
+      changed_when: false
+
+    - name: "Check that client-controlled SSO identity headers are cleared"
+      vars:
+        zammad_nginx_config_content: "{{ zammad_nginx_config.content | b64decode }}"
+      ansible.builtin.assert:
+        that:
+          - "zammad_nginx_config_content is search('proxy_set_header X-Forwarded-User \"\";')"
+          - "zammad_nginx_config_content is search('proxy_set_header Remote-User \"\";')"
+        fail_msg: "The Nginx configuration does not clear the client-controlled SSO identity headers."
+        success_msg: "The Nginx configuration clears the client-controlled SSO identity headers."
+      changed_when: false
+
     - name: "Render a custom Nginx template into a scratch file"
       vars:
         zammad_nginx_config_template: "custom-nginx.conf.j2"
