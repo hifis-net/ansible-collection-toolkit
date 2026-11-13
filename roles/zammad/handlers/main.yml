@@ -4,6 +4,11 @@
 # SPDX-License-Identifier: MIT
 
 ---
+- name: "Validate nginx config"
+  become: true
+  ansible.builtin.command: "nginx -t"
+  changed_when: false
+
 - name: "Reload nginx"
   become: true
   ansible.builtin.service:
