@@ -13,6 +13,8 @@
     mode: "0644"
     owner: "root"
     group: "root"
-  notify: "Reload nginx"
+  notify:
+    - "Validate nginx config"
+    - "Reload nginx"
 
 ...
