@@ -52,20 +52,13 @@
         update_cache: true
       changed_when: false
 
-- name: "Gather the package facts to check wether Zammad has already been installed"
-  ansible.builtin.package_facts:
-    manager: "auto"
-
-- name: "Check if Zammad is already installed"
-  ansible.builtin.set_fact:
-    __zammad_is_installed: "{{ 'zammad' in ansible_facts.packages }}"
-
 - name: "Install | Install Zammad package"
   become: true
   ansible.builtin.package:
     name: "zammad={{ zammad_version }}*"
     state: "present"
     force: true
+  when: "not __zammad_is_initial_dry_run"
   notify:
     - "Set Elasticsearch server address"
     - "Build search index"
@@ -81,6 +74,7 @@
     - "zammad-web"
     - "zammad-worker"
     - "zammad-websocket"
+  when: "not __zammad_is_initial_dry_run"
   notify: "Build search index"
 
 ...
