@@ -14,6 +14,7 @@
   ansible.builtin.service:
     name: "nginx"
     state: "reloaded"
+  when: "not __zammad_is_initial_dry_run"
 
 - name: "Set Elasticsearch server address"
   become: true
