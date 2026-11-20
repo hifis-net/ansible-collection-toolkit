@@ -1,5 +1,30 @@
 # Changelog
 
+## [v7.1.0](https://github.com/hifis-net/ansible-collection-toolkit/tree/v7.1.0) (2026-11-20)
+
+[Full Changelog](https://github.com/hifis-net/ansible-collection-toolkit/compare/v7.0.1...v7.1.0)
+
+**Implemented enhancements:**
+
+- zammad: validate nginx config before reload [\#679](https://github.com/hifis-net/ansible-collection-toolkit/pull/679) [[zammad](https://github.com/hifis-net/ansible-collection-toolkit/labels/zammad)] ([Normo](https://github.com/Normo))
+- zammad: align Nginx config with the 7.2.3 sample configuration [\#678](https://github.com/hifis-net/ansible-collection-toolkit/pull/678) [[zammad](https://github.com/hifis-net/ansible-collection-toolkit/labels/zammad)] ([Normo](https://github.com/Normo))
+- zammad: allow overriding the Nginx configuration template [\#675](https://github.com/hifis-net/ansible-collection-toolkit/pull/675) [[zammad](https://github.com/hifis-net/ansible-collection-toolkit/labels/zammad)] ([Normo](https://github.com/Normo))
+
+**Merged pull requests:**
+
+- build\(deps\): bump ansible from 14.5.0 to 14.6.0 [\#681](https://github.com/hifis-net/ansible-collection-toolkit/pull/681) ([dependabot[bot]](https://github.com/apps/dependabot))
+- build\(deps-dev\): bump ansible-lint from 26.9.0 to 26.11.0 [\#677](https://github.com/hifis-net/ansible-collection-toolkit/pull/677) ([dependabot[bot]](https://github.com/apps/dependabot))
+- build\(deps-dev\): bump molecule from 26.10.0 to 26.11.0 [\#676](https://github.com/hifis-net/ansible-collection-toolkit/pull/676) ([dependabot[bot]](https://github.com/apps/dependabot))
+- build\(deps\): bump ansible/ansible-lint from 26.9.0 to 26.11.0 [\#674](https://github.com/hifis-net/ansible-collection-toolkit/pull/674) ([dependabot[bot]](https://github.com/apps/dependabot))
+- build\(deps-dev\): bump antsibull-nox from 1.9.3 to 1.10.0 [\#673](https://github.com/hifis-net/ansible-collection-toolkit/pull/673) ([dependabot[bot]](https://github.com/apps/dependabot))
+- build\(deps-dev\): bump reuse from 6.2.0 to 6.3.0 [\#672](https://github.com/hifis-net/ansible-collection-toolkit/pull/672) ([dependabot[bot]](https://github.com/apps/dependabot))
+- build\(deps\): bump filelock from 3.32.6 to 4.2.1 [\#671](https://github.com/hifis-net/ansible-collection-toolkit/pull/671) ([dependabot[bot]](https://github.com/apps/dependabot))
+- build\(deps\): bump ansible-community/antsibull-nox from 1.9.3 to 1.10.0 [\#670](https://github.com/hifis-net/ansible-collection-toolkit/pull/670) ([dependabot[bot]](https://github.com/apps/dependabot))
+- build\(deps\): bump black from 26.3.1 to 26.10.1 [\#669](https://github.com/hifis-net/ansible-collection-toolkit/pull/669) ([dependabot[bot]](https://github.com/apps/dependabot))
+- build\(deps-dev\): bump nox from 2026.8.17 to 2026.10.20 [\#668](https://github.com/hifis-net/ansible-collection-toolkit/pull/668) ([dependabot[bot]](https://github.com/apps/dependabot))
+- build\(deps\): bump virtualenv from 21.7.13 to 21.14.13 [\#667](https://github.com/hifis-net/ansible-collection-toolkit/pull/667) ([dependabot[bot]](https://github.com/apps/dependabot))
+- build\(deps-dev\): bump molecule from 26.9.0 to 26.10.0 [\#663](https://github.com/hifis-net/ansible-collection-toolkit/pull/663) ([dependabot[bot]](https://github.com/apps/dependabot))
+
 ## [v7.0.1](https://github.com/hifis-net/ansible-collection-toolkit/tree/v7.0.1) (2026-10-08)
 
 [Full Changelog](https://github.com/hifis-net/ansible-collection-toolkit/compare/v7.0.0...v7.0.1)
