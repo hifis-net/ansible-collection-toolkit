@@ -64,9 +64,9 @@ provisioner:
 verifier:
   name: "ansible"
 scenario:
+  name: "unattended_upgrades"
   test_sequence:
     - "destroy"
-    - "dependency"
     - "syntax"
     - "create"
     - "prepare"
@@ -74,7 +74,6 @@ scenario:
     - "converge"
     - "idempotence"
     - "check"
-    - "side_effect"
     - "verify"
     - "destroy"
 
