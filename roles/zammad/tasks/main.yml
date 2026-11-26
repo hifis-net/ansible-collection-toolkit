@@ -4,7 +4,7 @@
 # SPDX-License-Identifier: MIT
 
 ---
-- name: "Gather the package facts to check wether Zammad has already been installed"
+- name: "Gather the package facts to check whether Zammad has already been installed"
   ansible.builtin.package_facts:
     manager: "auto"
 
