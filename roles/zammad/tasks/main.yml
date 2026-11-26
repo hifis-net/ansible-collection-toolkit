@@ -4,6 +4,17 @@
 # SPDX-License-Identifier: MIT
 
 ---
+- name: "Gather the package facts to check whether Zammad has already been installed"
+  ansible.builtin.package_facts:
+    manager: "auto"
+
+- name: "Check if Zammad is already installed"
+  ansible.builtin.set_fact:
+    __zammad_is_installed: "{{ 'zammad' in ansible_facts.packages }}"
+
+- name: "Determine if this is an initial dry-run"
+  ansible.builtin.set_fact:
+    __zammad_is_initial_dry_run: "{{ ansible_check_mode and not __zammad_is_installed }}"
 
 - name: "Install zammad"
   ansible.builtin.import_tasks: "install.yml"

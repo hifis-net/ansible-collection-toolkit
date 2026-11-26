@@ -49,5 +49,6 @@
     that:
       - "not __certificate.expired"
       - "__certificate.public_key == __private_key.public_key"
+  when: "not __zammad_is_initial_dry_run"
 
 ...
