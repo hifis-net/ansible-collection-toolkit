@@ -10,6 +10,12 @@ gitlab_runner:
           - "roles/gitlab_runner/**"
           - "molecule/gitlab_runner/**"
           - ".github/workflows/gitlab_runner.yml"
+docker_compose:
+  - changed-files:
+      - any-glob-to-any-file:
+          - "roles/docker_compose/**"
+          - "molecule/docker_compose/**"
+          - ".github/workflows/docker_compose.yml"
 gitlab:
   - changed-files:
       - any-glob-to-any-file:

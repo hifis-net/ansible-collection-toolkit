@@ -1,0 +1,58 @@
+# SPDX-FileCopyrightText: Helmholtz-Zentrum Dresden-Rossendorf (HZDR)
+#
+# SPDX-License-Identifier: Apache-2.0
+
+---
+dependency:
+  name: "galaxy"
+  options:
+    requirements-file: "molecule/docker_compose/requirements.yml"
+driver:
+  name: "podman"
+platforms:
+  - name: "instance_docker_compose"
+    image: "${MOLECULE_IMAGE:-ghcr.io/hifis-net/ubuntu-systemd:26.04}"
+    pre_build_image: true
+    privileged: true
+    systemd: "always"
+    tty: true
+    override_command: false
+provisioner:
+  name: "ansible"
+  config_options:
+    defaults:
+      result_format: "yaml"
+  playbooks:
+    prepare: "prepare.yml"
+    converge: "converge.yml"
+  inventory:
+    hosts:
+      all:
+        vars:
+          docker_compose_project_name: "molecule"
+          docker_compose_dir: "/opt/molecule"
+          docker_compose_test_image: "docker.io/library/alpine:3.20"
+          docker_compose_template_files:
+            - src: "{{ playbook_dir }}/templates/docker-compose.yml.j2"
+              dest: "docker-compose.yml"
+              mode: "0640"
+          docker_compose_files:
+            - src: "{{ playbook_dir }}/files/molecule.env"
+              dest: "config/molecule.env"
+              mode: "0600"
+verifier:
+  name: "ansible"
+scenario:
+  name: "docker_compose"
+  test_sequence:
+    - "destroy"
+    - "dependency"
+    - "syntax"
+    - "create"
+    - "prepare"
+    - "check"
+    - "converge"
+    - "idempotence"
+    - "check"
+    - "verify"
+    - "destroy"

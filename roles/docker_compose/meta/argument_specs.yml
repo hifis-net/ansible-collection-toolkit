@@ -1,0 +1,116 @@
+# SPDX-FileCopyrightText: Helmholtz-Zentrum Dresden-Rossendorf (HZDR)
+#
+# SPDX-License-Identifier: Apache-2.0
+
+---
+argument_specs:
+  main:
+    short_description: "Deploy a service on a host using Docker Compose configuration files."
+    description:
+      - "This Ansible role renders templates and copies static files into a project directory."
+      - "It then runs the resulting Docker Compose project and restarts it when deployed files change."
+    author:
+      - "HIFIS Software Services"
+    options:
+      docker_compose_project_name:
+        description:
+          - "Name of the Docker Compose project."
+          - "Used as the project name for the Compose commands and, by default, for the project directory."
+        type: "str"
+        default: "docker_compose"
+        required: false
+      docker_compose_dir:
+        description:
+          - "Directory on the target host that holds the rendered templates, copied files and Compose file."
+          - "All destination paths are relative to this directory."
+        type: "str"
+        default: "{{ ('/opt', docker_compose_project_name) | path_join }}"
+        required: false
+      docker_compose_owner:
+        description:
+          - "Owner of the project directory and all deployed files."
+        type: "str"
+        default: "root"
+        required: false
+      docker_compose_group:
+        description:
+          - "Group of the project directory and all deployed files."
+        type: "str"
+        default: "root"
+        required: false
+      docker_compose_dir_mode:
+        description:
+          - "Permissions of the project directory and of the directories created for destination entries."
+        type: "str"
+        default: "0755"
+        required: false
+      docker_compose_default_file_mode:
+        description:
+          - "Default permissions of deployed files."
+          - "This can be overridden for each entry with the optional 'mode' key."
+        type: "str"
+        default: "0640"
+        required: false
+      docker_compose_template_files:
+        description:
+          - "Templates rendered into the project directory before the Compose project is started."
+          - "Missing parent directories of a destination are created."
+        type: "list"
+        elements: "dict"
+        default: []
+        required: false
+        options:
+          src:
+            description:
+              - "Template path, resolved like any ansible.builtin.template source."
+            type: "str"
+            required: true
+          dest:
+            description:
+              - "Destination path relative to 'docker_compose_dir'."
+            type: "str"
+            required: true
+          mode:
+            description:
+              - "Permissions of the rendered file."
+            type: "str"
+            default: "{{ docker_compose_default_file_mode }}"
+            required: false
+      docker_compose_files:
+        description:
+          - "Static files copied into the project directory before the Compose project is started."
+          - "Missing parent directories of a destination are created."
+        type: "list"
+        elements: "dict"
+        default: []
+        required: false
+        options:
+          src:
+            description:
+              - "File path, resolved like any ansible.builtin.copy source."
+            type: "str"
+            required: true
+          dest:
+            description:
+              - "Destination path relative to 'docker_compose_dir'."
+            type: "str"
+            required: true
+          mode:
+            description:
+              - "Permissions of the copied file."
+            type: "str"
+            default: "{{ docker_compose_default_file_mode }}"
+            required: false
+      docker_compose_pull:
+        description:
+          - "Image pull policy for 'docker compose up'."
+        type: "str"
+        choices:
+          - "always"
+          - "missing"
+          - "never"
+          - "policy"
+        default: "missing"
+        required: false
+
+...

@@ -1,0 +1,57 @@
+# SPDX-FileCopyrightText: Helmholtz-Zentrum Dresden-Rossendorf (HZDR)
+#
+# SPDX-License-Identifier: Apache-2.0
+
+---
+- name: "Verify"
+  hosts: "all"
+  tasks:
+    - name: "Check the rendered Compose file"
+      ansible.builtin.stat:
+        path: "{{ (docker_compose_dir, 'docker-compose.yml') | path_join }}"
+      register: "compose_file"
+
+    - name: "Assert that the rendered Compose file exists with the expected permissions"
+      ansible.builtin.assert:
+        that:
+          - "compose_file.stat.exists"
+          - "compose_file.stat.isreg"
+          - "compose_file.stat.mode == '0640'"
+
+    - name: "Check the copied static file"
+      ansible.builtin.stat:
+        path: "{{ (docker_compose_dir, 'config', 'molecule.env') | path_join }}"
+      register: "static_file"
+
+    - name: "Assert that the copied static file exists with the expected permissions"
+      ansible.builtin.assert:
+        that:
+          - "static_file.stat.exists"
+          - "static_file.stat.isreg"
+          - "static_file.stat.mode == '0600'"
+
+    - name: "Get running Compose services"
+      become: true
+      ansible.builtin.command:
+        cmd: "docker compose -p {{ docker_compose_project_name }} ps --status running --services"
+        chdir: "{{ docker_compose_dir }}"
+      register: "running_services"
+      changed_when: false
+
+    - name: "Assert that the service is running"
+      ansible.builtin.assert:
+        that:
+          - "'app' in running_services.stdout_lines"
+
+    - name: "Read the environment variable provided by the copied file"
+      become: true
+      ansible.builtin.command:
+        cmd: "docker compose -p {{ docker_compose_project_name }} exec -T app printenv MOLECULE_TEST"
+        chdir: "{{ docker_compose_dir }}"
+      register: "container_env"
+      changed_when: false
+
+    - name: "Assert that the copied file is used as environment file"
+      ansible.builtin.assert:
+        that:
+          - "container_env.stdout | trim == 'true'"
