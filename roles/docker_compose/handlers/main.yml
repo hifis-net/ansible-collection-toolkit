@@ -12,4 +12,4 @@
     state: "restarted"
   # During an initial check-mode run the project has not been created yet, so
   # there is nothing to restart.
-  when: "not (docker_compose_initial_dryrun | default(false))"
+  when: "not (__docker_compose_initial_dryrun | default(false))"

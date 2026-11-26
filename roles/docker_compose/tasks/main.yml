@@ -8,12 +8,12 @@
   become: true
   ansible.builtin.stat:
     path: "{{ docker_compose_dir }}"
-  register: "docker_compose_directory"
+  register: "__docker_compose_directory"
   check_mode: false
 
 - name: "Determine whether this is an initial dry-run"
   ansible.builtin.set_fact:
-    docker_compose_initial_dryrun: "{{ ansible_check_mode and not docker_compose_directory.stat.exists }}"
+    __docker_compose_initial_dryrun: "{{ ansible_check_mode and not __docker_compose_directory.stat.exists }}"
 
 - name: "Create the project directory"
   become: true
@@ -69,4 +69,4 @@
     project_src: "{{ docker_compose_dir }}"
     state: "present"
     pull: "{{ docker_compose_pull }}"
-  when: "not docker_compose_initial_dryrun"
+  when: "not __docker_compose_initial_dryrun"

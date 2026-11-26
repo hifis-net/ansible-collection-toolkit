@@ -31,7 +31,7 @@ provisioner:
         vars:
           docker_compose_project_name: "molecule"
           docker_compose_dir: "/opt/molecule"
-          docker_compose_test_image: "docker.io/library/alpine:3.20"
+          docker_compose_test_image: "docker.io/library/alpine:latest"
           docker_compose_template_files:
             - src: "{{ playbook_dir }}/templates/docker-compose.yml.j2"
               dest: "docker-compose.yml"
