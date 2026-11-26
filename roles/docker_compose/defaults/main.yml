@@ -1,0 +1,55 @@
+# SPDX-FileCopyrightText: Helmholtz-Zentrum Dresden-Rossendorf (HZDR)
+#
+# SPDX-License-Identifier: Apache-2.0
+
+---
+# Name of the Docker Compose project. Used as `project_name` for the Compose
+# commands and, by default, for the project directory in `docker_compose_dir`.
+docker_compose_project_name: "docker_compose"
+
+# Directory on the remote host that holds the rendered templates, the copied
+# files and the Compose file. It is created if it does not exist. All `dest`
+# entries of `docker_compose_template_files` and `docker_compose_files` are
+# relative to this path.
+docker_compose_dir: "{{ ('/opt', docker_compose_project_name) | path_join }}"
+
+# Owner and group of the project directory and all deployed files.
+docker_compose_owner: "root"
+docker_compose_group: "root"
+
+# Permissions of the project directory and the directories created for `dest`
+# entries.
+docker_compose_dir_mode: "0755"
+
+# Default permissions for deployed files. This can be overridden per entry with
+# the optional `mode` key.
+docker_compose_default_file_mode: "0640"
+
+# Templates rendered into the project directory before the Compose setup is
+# started. Each entry needs a `src` (template path, resolved like any
+# `ansible.builtin.template` source) and a `dest` (path relative to
+# `docker_compose_dir`; missing parent directories are created). The optional
+# `mode` defaults to `docker_compose_default_file_mode`.
+#
+# docker_compose_template_files:
+#   - src: "docker-compose.yml.j2"
+#     dest: "docker-compose.yml"
+#     mode: "0640"
+docker_compose_template_files: []
+
+# Static files copied into the project directory before the Compose setup is
+# started. Each entry needs a `src` (file path, resolved like any
+# `ansible.builtin.copy` source) and a `dest` (path relative to
+# `docker_compose_dir`; missing parent directories are created). The optional
+# `mode` defaults to `docker_compose_default_file_mode`.
+#
+# docker_compose_files:
+#   - src: "some_file.env"
+#     dest: "some_file.env"
+#     mode: "0640"
+docker_compose_files: []
+
+# Image pull policy for `docker compose up`, see
+# `community.docker.docker_compose_v2`. One of `always`, `missing`, `never` or
+# `policy`.
+docker_compose_pull: "missing"

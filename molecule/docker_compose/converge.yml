@@ -1,0 +1,11 @@
+# SPDX-FileCopyrightText: Helmholtz-Zentrum Dresden-Rossendorf (HZDR)
+#
+# SPDX-License-Identifier: Apache-2.0
+
+---
+- name: "Converge"
+  hosts: "all"
+  tasks:
+    - name: "Include docker_compose role"
+      ansible.builtin.include_role:
+        name: "hifis.toolkit.docker_compose"

@@ -1,0 +1,72 @@
+# SPDX-FileCopyrightText: Helmholtz-Zentrum Dresden-Rossendorf (HZDR)
+#
+# SPDX-License-Identifier: Apache-2.0
+
+---
+
+- name: "Check whether the project directory exists"
+  become: true
+  ansible.builtin.stat:
+    path: "{{ docker_compose_dir }}"
+  register: "__docker_compose_directory"
+  check_mode: false
+
+- name: "Determine whether this is an initial dry-run"
+  ansible.builtin.set_fact:
+    __docker_compose_initial_dryrun: "{{ ansible_check_mode and not __docker_compose_directory.stat.exists }}"
+
+- name: "Create the project directory"
+  become: true
+  ansible.builtin.file:
+    path: "{{ docker_compose_dir }}"
+    owner: "{{ docker_compose_owner }}"
+    group: "{{ docker_compose_group }}"
+    state: "directory"
+    mode: "{{ docker_compose_dir_mode }}"
+
+- name: "Create destination directories"
+  become: true
+  ansible.builtin.file:
+    path: "{{ (docker_compose_dir, item) | path_join }}"
+    owner: "{{ docker_compose_owner }}"
+    group: "{{ docker_compose_group }}"
+    state: "directory"
+    mode: "{{ docker_compose_dir_mode }}"
+  loop: >-
+    {{ (docker_compose_template_files + docker_compose_files) |
+       map(attribute='dest') |
+       map('dirname') |
+       reject('equalto', '') |
+       reject('equalto', '.') |
+       unique }}
+
+- name: "Render template files"
+  become: true
+  ansible.builtin.template:
+    src: "{{ item.src }}"
+    dest: "{{ (docker_compose_dir, item.dest) | path_join }}"
+    owner: "{{ docker_compose_owner }}"
+    group: "{{ docker_compose_group }}"
+    mode: "{{ item.mode | default(docker_compose_default_file_mode) }}"
+  loop: "{{ docker_compose_template_files }}"
+  notify: "Restart the Docker Compose project"
+
+- name: "Copy static files"
+  become: true
+  ansible.builtin.copy:
+    src: "{{ item.src }}"
+    dest: "{{ (docker_compose_dir, item.dest) | path_join }}"
+    owner: "{{ docker_compose_owner }}"
+    group: "{{ docker_compose_group }}"
+    mode: "{{ item.mode | default(docker_compose_default_file_mode) }}"
+  loop: "{{ docker_compose_files }}"
+  notify: "Restart the Docker Compose project"
+
+- name: "Run the Docker Compose project"
+  become: true
+  community.docker.docker_compose_v2:
+    project_name: "{{ docker_compose_project_name }}"
+    project_src: "{{ docker_compose_dir }}"
+    state: "present"
+    pull: "{{ docker_compose_pull }}"
+  when: "not __docker_compose_initial_dryrun"

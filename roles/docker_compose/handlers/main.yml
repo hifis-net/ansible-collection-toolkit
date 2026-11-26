@@ -1,0 +1,15 @@
+# SPDX-FileCopyrightText: Helmholtz-Zentrum Dresden-Rossendorf (HZDR)
+#
+# SPDX-License-Identifier: Apache-2.0
+
+---
+
+- name: "Restart the Docker Compose project"
+  become: true
+  community.docker.docker_compose_v2:
+    project_name: "{{ docker_compose_project_name }}"
+    project_src: "{{ docker_compose_dir }}"
+    state: "restarted"
+  # During an initial check-mode run the project has not been created yet, so
+  # there is nothing to restart.
+  when: "not (__docker_compose_initial_dryrun | default(false))"

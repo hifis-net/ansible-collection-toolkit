@@ -10,6 +10,7 @@ SPDX-License-Identifier: Apache-2.0
 [![Latest release](https://img.shields.io/github/v/release/hifis-net/ansible-collection-toolkit)](https://github.com/hifis-net/ansible-collection-toolkit/releases)
 [![hifis.gitlab_runner](https://github.com/hifis-net/ansible-collection-toolkit/actions/workflows/gitlab_runner.yml/badge.svg)](https://github.com/hifis-net/ansible-collection-toolkit/actions/workflows/gitlab_runner.yml)
 [![hifis.gitlab](https://github.com/hifis-net/ansible-collection-toolkit/actions/workflows/gitlab.yml/badge.svg)](https://github.com/hifis-net/ansible-collection-toolkit/actions/workflows/gitlab.yml)
+[![hifis.docker_compose](https://github.com/hifis-net/ansible-collection-toolkit/actions/workflows/docker_compose.yml/badge.svg)](https://github.com/hifis-net/ansible-collection-toolkit/actions/workflows/docker_compose.yml)
 [![hifis.haproxy](https://github.com/hifis-net/ansible-collection-toolkit/actions/workflows/haproxy.yml/badge.svg)](https://github.com/hifis-net/ansible-collection-toolkit/actions/workflows/haproxy.yml)
 [![hifis.keepalived](https://github.com/hifis-net/ansible-collection-toolkit/actions/workflows/keepalived.yml/badge.svg)](https://github.com/hifis-net/ansible-collection-toolkit/actions/workflows/keepalived.yml)
 [![hifis.netplan](https://github.com/hifis-net/ansible-collection-toolkit/actions/workflows/netplan.yml/badge.svg)](https://github.com/hifis-net/ansible-collection-toolkit/actions/workflows/netplan.yml)
@@ -26,6 +27,8 @@ software engineers, but not exclusively. The following use cases are supported:
     * [GitLab](roles/gitlab)
     * deploy [GitLab-Runner](roles/gitlab_runner) with a focus, but not limited, on Openstack autoscaling
     * [Redis](roles/redis)
+* **Containerized services:**
+    * [Docker Compose](roles/docker_compose) - deploy a service defined via Docker Compose configuration files
 * **Help desk:**
     * [Zammad](roles/zammad)
 * **High Availability (HA) / Load Balancing:**

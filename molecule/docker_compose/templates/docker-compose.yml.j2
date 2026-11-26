@@ -1,0 +1,14 @@
+# SPDX-FileCopyrightText: Helmholtz-Zentrum Dresden-Rossendorf (HZDR)
+#
+# SPDX-License-Identifier: Apache-2.0
+
+---
+services:
+  app:
+    image: "{{ docker_compose_test_image }}"
+    command:
+      - "sleep"
+      - "infinity"
+    restart: "unless-stopped"
+    env_file:
+      - "config/molecule.env"

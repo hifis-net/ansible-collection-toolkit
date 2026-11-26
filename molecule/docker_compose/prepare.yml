@@ -1,0 +1,38 @@
+# SPDX-FileCopyrightText: Helmholtz-Zentrum Dresden-Rossendorf (HZDR)
+#
+# SPDX-License-Identifier: Apache-2.0
+
+---
+- name: "Prepare"
+  hosts: "all"
+  tasks:
+    - name: "Install dependencies"
+      ansible.builtin.apt:
+        name:
+          - "ca-certificates"
+          - "curl"
+          - "gnupg"
+          - "iptables"
+          - "sudo"  # for `become` privilege escalation
+        update_cache: true
+        state: "present"
+
+    - name: "Install Docker with the Compose plugin"
+      ansible.builtin.include_role:
+        name: "geerlingguy.docker"
+      vars:
+        docker_install_compose_plugin: true
+        # Docker runs inside a privileged container during Molecule tests.
+        # The overlay2 storage driver does not support an overlay backing
+        # filesystem, so use vfs there.
+        docker_daemon_options:
+          storage-driver: "vfs"
+
+    - name: "Wait for the Docker daemon"
+      ansible.builtin.command:
+        cmd: "docker info"
+      register: "docker_info"
+      until: "docker_info.rc == 0"
+      retries: 30
+      delay: 2
+      changed_when: false

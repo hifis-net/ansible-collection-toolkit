@@ -1,0 +1,35 @@
+# SPDX-FileCopyrightText: Helmholtz-Zentrum Dresden-Rossendorf (HZDR)
+#
+# SPDX-License-Identifier: Apache-2.0
+
+---
+galaxy_info:
+  role_name: "docker_compose"
+  namespace: "hifis"
+  author: "HIFIS Software Team"
+  description: "Deploy a service on a host using Docker Compose configuration files."
+  company: "Helmholtz Association"
+
+  issue_tracker_url: "https://github.com/hifis-net/ansible-collection-toolkit/issues"
+
+  license: "Apache-2.0"
+
+  min_ansible_version: "2.19"
+
+  platforms:
+    - name: "Ubuntu"
+      versions:
+        - "jammy"
+        - "noble"
+        - "resolute"
+
+  galaxy_tags:
+    - "docker"
+    - "compose"
+    - "container"
+    - "deployment"
+
+collections:
+  - "community.docker"
+
+dependencies: []
